@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-  
 '''
 Created on Sep 16, 2016
-
-@author: euk
 '''
 
 # Functions
@@ -24,13 +22,13 @@ def extract(str_html, starting_text, ending_text):
 
 # Procedure
 
-# this is called by any main application
+# this is called by any main application, now client is located in my local 
 def print_data(basic_url):
     import os
     import urllib.request
     
     file_name  = 'hot.csv'
-    # file 있는경우 
+    # check file 
     if os.path.exists(file_name):
         my_file     = open(file_name,'r')
         data_list   = my_file.readlines()
@@ -45,7 +43,7 @@ def print_data(basic_url):
             #print(url)
             ### f?        
             urllib_common = urllib.request
-            # utf8때문에 아래 헤더 필요
+            # coz of utf8, this need header #but c# is fine
             req = urllib_common.Request(url, headers={'User-Agent' : "Magic Browser"})
             try:
                 raw_html = urllib_common.urlopen( req ).read()
@@ -54,7 +52,7 @@ def print_data(basic_url):
                 print('잘못된주소? or Internet 안됨')
                 quit()
                 
-            # UTF-8 방식의 byte code → Unicode:
+            # UTF-8 style byte code → Unicode:
             unicode_html = str(raw_html.decode("utf-8"))
             ###~
             title = extract(unicode_html,'title>','</title>')
