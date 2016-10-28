@@ -49,7 +49,7 @@ def print_data(basic_url):
                 raw_html = urllib_common.urlopen( req ).read()
             except: 
                 print('error!')
-                print('잘못된주소? or Internet 안됨')
+                print('Wrong Addres? or Internet Erorr')
                 quit()
                 
             # UTF-8 style byte code → Unicode:
