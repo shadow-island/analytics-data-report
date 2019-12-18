@@ -3,14 +3,12 @@
 
 '''
 Note:
-Youtube보다 offline이좋음, internet안될때도되고,
-일단 곡별로 가중치를 줄수있음
+곡별로 가중치를 줄수있음
 
-# 완료:media파일만만하기,메뉴표시하자,실행후 28/x 나오기, 마지막 status궁금
+# 완료:media파일만만하기, 메뉴표시하자
 python3 in windows -> convert for linux file folder
 #Todo.
     #기능
-        LINE수 표시하기
         copy batch file만들기 -> cp도 자동으로?
         python 3를 linux에 설치?
          0. setup openpyxl in linux
