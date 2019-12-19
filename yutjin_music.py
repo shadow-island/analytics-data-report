@@ -3,12 +3,13 @@
 
 '''
 Note:
-곡별로 가중치를 줄수있음
+Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
 
-# 완료:media파일만만하기, 메뉴표시하자
+# 완료:media파일만만하기,메뉴표시하자,실행후 28/x 나오기, 마지막 status궁금
 python3 in windows -> convert for linux file folder
 #Todo.
     #기능
+        LINE수 표시하기
         copy batch file만들기 -> cp도 자동으로?
         python 3를 linux에 설치?
          0. setup openpyxl in linux
@@ -20,6 +21,7 @@ python3 in windows -> convert for linux file folder
 
 import os
 import sys
+import datetime
 
 def read_file(file_name):
     return_flag = True
@@ -58,27 +60,20 @@ def total_sec_2_readable(total_secs):
     
     return text
 
-def check_update():
-    print('menu_song_time_check')
-    import datetime
-    
-    # D가 없는경우  
-    #datetime_old_time   = datetime.datetime(2014, 8, 3, 0,0,0)   
-    datetime_old_time   = datetime.datetime.now()  
-    int_old_sec_gap     = 0        
+def get_last(local_file_name, bar):
+    # File이 없는경우 대비
+    #datetime_old_time   = datetime.datetime(2014, 8, 3, 0,0,0)
+    datetime_old_time   = datetime.datetime.now()
+    int_old_sec_gap     = 0
 
-    # for both read and save
-    local_file_name = 'eukM2.log' # and save
-    bar     = '~'
-    
     (return_flag, data_list)   = read_file(local_file_name)
-        
+
     if return_flag == True:
-        for line in data_list:               
-            #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로            
+        for line in data_list:
+            #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로
             item_list = line.split(bar)
             s_old   = item_list[0]
-            
+
             if s_old[:4].isdigit():
                 print('OK')
                 #code 정리
@@ -88,10 +83,20 @@ def check_update():
                 h       = int(s_old[11:13])
                 minutes = int(s_old[14:16])
                 s       = int(s_old[17:19])
-                datetime_old_time = datetime.datetime(y,mo,d,h,minutes,s)                            
-                int_old_sec_gap     = int(item_list[2])
-    else:        
+                datetime_old_time = datetime.datetime(y,mo,d,h,minutes,s)
+                int_old_sec_gap   = int(item_list[2])
+    else:
         print ('file error')
+    #file reading end
+    return (datetime_old_time, int_old_sec_gap)
+
+def check_update():
+    print('menu_song_time_check')
+    import datetime
+    # for both read and save
+    local_file_name = 'eukM2.log'
+    bar             = '~'
+    (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
     
     print ("이전 체크 시간: " + str(datetime_old_time))
     print ('이전 평균 주기:', total_sec_2_readable(int_old_sec_gap))
@@ -103,23 +108,20 @@ def check_update():
                             str(datetime_new)[11:13]    + ":" +  \
                             str(datetime_new)[14:16]    + ":" +  \
                             str(datetime_new)[17:19]
-    datetime_new        =   datetime.datetime(int(str_date[:4]), 
-                                              int(str_date[5:7]), 
-                                              int(str_date[8:10]), 
-                                              int(str_date[11:13]), 
-                                              int(str_date[14:16]),
-                                              int(str_date[17:19]))    
+
     datetime_gap_new    =   datetime_new - datetime_old_time
     
     print ("\n현재 체크 시간: " + str_date)
-    #print ('이번 듣기 주기: ' + str(datetime_gap_new))
     
     int_new_gap = int(datetime_gap_new.days * 60*60*24 + (datetime_new - datetime_old_time).seconds)
     print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))
     
     next_gap_average = int( (int_new_gap + int_old_sec_gap)/2 )    
     #print ('next gap average = ' + str(next_gap_average) )             
-    print ('\n다음 평균 주기: ' + total_sec_2_readable(next_gap_average) + '\n')
+    print ('\n다음 평균 주기: ' + total_sec_2_readable(next_gap_average))
+    next_gap_timedelta = datetime.timedelta(0,next_gap_average)
+    print ('다음 목표 시간: ' + str(datetime_new + next_gap_timedelta) + '\n')
+
     
     if (int_old_sec_gap <= int_new_gap):
         b_text = 'increased'
@@ -145,98 +147,21 @@ def check_update():
     my_file = open(local_file_name,"w")    
     my_file.write(
         str_date + bar +
-        str(datetime_gap_new) + bar +
+        str("datetime_gap_new") + bar +
         str(next_gap_average) + bar +
         b_text )          
     my_file.close()    
     
     if b_text == 'reduced':
-        input('ready?')        
+        pass #input('ready?')
     return
-    '''
-    import datetime
-    
-    log_file    = 'eukM2.log'
-    bar         = '~'
-    
-    # D0
-    datetime_old_time   = datetime.datetime(2014, 8, 3, 0,0,0)
-    str_old_gap         = ''
-    int_old_gap         = 0
-    # D1
-    if os.path.exists(log_file):
-        my_file     = open(log_file,'r')
-        data_list   = my_file.readlines()
-        my_file.close()
 
-        for line in data_list:      
-            print (line)
-            
-            #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로
-            item_list = line.split(bar)
-            s_old   = item_list[0]
-            
-            if s_old[:4].isdigit():
-                print ('OK')
-                #code 정리
-                datetime_old_time = datetime.datetime(int(s_old[:4]),int(s_old[5:7]),int(s_old[8:10]),int(s_old[11:13]),int(s_old[14:16]),int(s_old[17:19]))
-                str_old_gap     = item_list[1]            
-                int_old_gap     = int(item_list[2])
-            else:
-                print('<%s>' % s_old)
-                print ('file error')
-                return
-            
-    # end of D        
-    
-    print ("old date=>" + str(datetime_old_time))
-    print ("old gap =>" + str_old_gap)
-    print ("old gap num =>" + str(int_old_gap))
-    
-    my_file = open(log_file,"w")
-    
-    datetime_new        =   datetime.datetime.now()  
-    str_date            =   str(datetime_new)[:4]       + "-" +  \
-                            str(datetime_new)[5:7]      + "-" +  \
-                            str(datetime_new)[8:10]     + " " +  \
-                            str(datetime_new)[11:13]    + ":" +  \
-                            str(datetime_new)[14:16]    + ":" +  \
-                            str(datetime_new)[17:19]
-    datetime_new        =   datetime.datetime(int(str_date[:4]), 
-                                              int(str_date[5:7]), 
-                                              int(str_date[8:10]), 
-                                              int(str_date[11:13]), 
-                                              int(str_date[14:16]),
-                                              int(str_date[17:19]))    
-    datetime_gap_new    =   datetime_new - datetime_old_time
-    
-    print ("new date=>" + str_date)
-    print ('new gap = ' + str(datetime_gap_new))
-    int_new_gap = int(datetime_gap_new.days * 60*60*24 + (datetime_new - datetime_old_time).seconds)    
-    print ('new gap num = ' + str(int_new_gap))
-    print ('next gap average = ' + str( int((int_new_gap + int_old_gap)/2)) )
-         
-    if (int_old_gap <= int_new_gap):
-        b_text = 'increased'        
-        print ("same or increased => change priority => go 4")
-    else:
-        b_text = 'reduced'
-        print ("less  => 1. add new music(check folder first)")
-        # 다운받은것있네
-    print()
-    
-    my_file.write(
-        str_date + bar +
-        str(datetime_gap_new) + bar +
-        str(int((int_new_gap + int_old_gap)/2)) + bar +
-        b_text)      
-    my_file.close()
-    '''
 
 
 def create_db():
+    #여기 두는것은 시간체크용으로만 쓰는경우도 있어서
     import openpyxl
-    from openpyxl import Workbook #쓸때 필요
+    from openpyxl import Workbook
         
     old_dict = {}
     if (os.path.exists(db_xls)):
@@ -277,7 +202,7 @@ def create_db():
                     pass                
                 file_path_name_list.append(text)
                       
-            if text.find('mp4') != -1 or text.find('mp3') != -1 or text.find('avi') != -1 or text.find('webm') != -1  or text.find('mkv') != -1:
+            if text.find('mp4') != -1 or text.find('mp3') != -1 or text.find('avi') != -1 or text.find('webm') != -1  or text.find('mkv') != -1 or text.find('wav') != -1:
                 print_and_append(text)
                 
     i_len = len(file_path_name_list)
@@ -316,6 +241,9 @@ def create_db_N_create_selected_playlist():
     return 
 
 def create_selected_playlist():
+    import openpyxl
+    from openpyxl import Workbook
+    #쓸때 필요
     #pre location for error
     import random
     import shutil
@@ -382,12 +310,11 @@ if __name__ == '__main__':
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
     
     ##
-    work = 482
-    ##
+    work = 504     ##
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
-    source_file = codecs.open('euk_music_2p3.py', 'r','utf-8')
+    source_file = codecs.open('yutjin_music.py', 'r','utf-8')
     line_list   = source_file.readlines()    
     source_file.close()
     
@@ -395,8 +322,7 @@ if __name__ == '__main__':
     for _ in line_list:
         count += 1
     print('Version: L' + str(count) + ' H' + str(work) + '\n')
-         
-         
+
     ##global
     b_windows_or_linux = True
     
@@ -410,13 +336,21 @@ if __name__ == '__main__':
         
     
     if b_windows_or_linux:
-        mp3_folder_no_endslash = 'C:\\my\\kojin\\m'
+        mp3_folder_no_endslash = 'D:\\my\\public_data\\music\\0.rank'
     else:    
         mp3_folder_no_endslash = '\\\\VBOXSVR\\my\\ongaku'
     
     db_xls = 'db.xlsx'    
     ##
-    
+
+    # for both read and save
+    # egk
+    local_file_name = 'eukM2.log'
+    bar             = '~'
+    (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
+    next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
+    print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
+
     while True:    
         function_map = {
           1:check_update,
@@ -428,10 +362,17 @@ if __name__ == '__main__':
         print ('[Menu]')
         print ('''
     1:check time
-    2:After new songs create 
+    2:After new songs create, create new DB 
     3:After new songs,and create_selected_playlist
     4:Create new playlist
     ''')
-        function_map.get(int(input('?')))()
+        #숫자를 받아들일때까지 물음 
+        while True:
+            input_v = input('?')            
+            if input_v.isdigit() == False:
+                continue
+            else:
+                break
+        function_map.get(int(input_v))()
     
     print ('End')
