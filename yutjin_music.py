@@ -310,7 +310,7 @@ if __name__ == '__main__':
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
     
     ##
-    work = 504     ##
+    work = 505     ##
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -366,13 +366,17 @@ if __name__ == '__main__':
     3:After new songs,and create_selected_playlist
     4:Create new playlist
     ''')
-        #숫자를 받아들일때까지 물음 
+        #숫자를 받아들일때까지 물음
+        input_int = 0
         while True:
             input_v = input('?')            
             if input_v.isdigit() == False:
                 continue
             else:
+                input_int = int(input_v)
+                if input_int > 4:
+                    continue
                 break
-        function_map.get(int(input_v))()
+        function_map.get(input_int)()
     
     print ('End')
