@@ -1,22 +1,15 @@
 # -*- coding: utf-8 -*-
 # python 3X
-
 '''
 Note:
 Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
-
-# 완료:media파일만만하기,메뉴표시하자,실행후 28/x 나오기, 마지막 status궁금
-python3 in windows -> convert for linux file folder
-#Todo.
-    #기능
-        LINE수 표시하기
-        copy batch file만들기 -> cp도 자동으로?
-        python 3를 linux에 설치?
-         0. setup openpyxl in linux
-         0.0  sitecustomize.py
-     #UI
-         version_info
-    #code    
+Next:
+Release note
+#기능
+    media파일만만하기,
+#UI
+    입력 숫자 error handling, 메뉴표시하자,마지막 status표시
+    version_info
 '''
 
 import os
@@ -310,7 +303,7 @@ if __name__ == '__main__':
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
     
     ##
-    work = 505     ##
+    work = 506
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -344,7 +337,6 @@ if __name__ == '__main__':
     ##
 
     # for both read and save
-    # egk
     local_file_name = 'eukM2.log'
     bar             = '~'
     (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
@@ -374,7 +366,7 @@ if __name__ == '__main__':
                 continue
             else:
                 input_int = int(input_v)
-                if input_int > 4:
+                if input_int == 0 or 4 < input_int:
                     continue
                 break
         function_map.get(input_int)()
