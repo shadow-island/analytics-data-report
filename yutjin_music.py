@@ -10,6 +10,14 @@ Release note
 #UI
     입력 숫자 error handling, 메뉴표시하자,마지막 status표시
     version_info
+
+call def #즉 4줄이상이 2번나올때(총8줄) refactoring하면 옳다
+call def
+def func
+    sen 1
+    sen 2
+    sen 3
+    return sen4
 '''
 
 import os
@@ -22,7 +30,7 @@ def read_file(file_name):
             
     if os.path.exists(file_name):
         #euk
-        my_file     = open(file_name,'r')
+        my_file = open(file_name,'r')
         return_data   = my_file.readlines()
         my_file.close()
     else:
@@ -171,7 +179,7 @@ def create_db():
             old_dict[key] = sheet.cell(row = i, column = 2).value
     #endif    
 
-    print ('[saving]')
+    print ('[creating DB]')
     #
     if os.path.exists(db_xls):
         if os.path.exists('backup_db.xlsx'):
@@ -303,7 +311,7 @@ if __name__ == '__main__':
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
     
     ##
-    work = 506
+    work = 512
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -342,6 +350,7 @@ if __name__ == '__main__':
     (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
     next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
     print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
+    #~
 
     while True:    
         function_map = {
