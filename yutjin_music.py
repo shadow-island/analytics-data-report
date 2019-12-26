@@ -31,7 +31,7 @@ def read_file(file_name):
     if os.path.exists(file_name):
         #euk
         my_file = open(file_name,'r')
-        return_data   = my_file.readlines()
+        return_data  = my_file.readlines()
         my_file.close()
     else:
         return_flag = False
@@ -160,7 +160,7 @@ def check_update():
 
 
 def create_db():
-    #여기 두는것은 시간체크용으로만 쓰는경우도 있어서
+    #여기 두는것은 전체 플로그램을 그냥 시간체크용으로만 쓰는경우도 있어서
     import openpyxl
     from openpyxl import Workbook
         
@@ -168,7 +168,7 @@ def create_db():
     if (os.path.exists(db_xls)):
         wb = openpyxl.load_workbook(db_xls)
         sheet_list = wb.get_sheet_names()
-        print (sheet_list)
+        #print (sheet_list)
         sheet = wb.get_sheet_by_name(sheet_list[0])        
         for i in range(1,sheet.max_row + 1):
             key = sheet.cell(row = i, column = 1).value     
@@ -311,7 +311,7 @@ if __name__ == '__main__':
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
     
     ##
-    work = 512
+    work = 514
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -334,7 +334,6 @@ if __name__ == '__main__':
     else:
         b_windows_or_linux = True
         print ('Home windows Mode')
-        
     
     if b_windows_or_linux:
         mp3_folder_no_endslash = 'D:\\my\\public_data\\music\\0.rank'
