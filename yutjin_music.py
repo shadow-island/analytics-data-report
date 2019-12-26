@@ -158,7 +158,6 @@ def check_update():
     return
 
 
-
 def create_db():
     #여기 두는것은 전체 플로그램을 그냥 시간체크용으로만 쓰는경우도 있어서
     import openpyxl
@@ -322,7 +321,7 @@ if __name__ == '__main__':
     count = 0
     for _ in line_list:
         count += 1
-    print('Version: L' + str(count) + ' H' + str(work) + '\n')
+    print('Version: ' + str(work) + '.' + str(count) + '\n')
 
     ##global
     b_windows_or_linux = True
