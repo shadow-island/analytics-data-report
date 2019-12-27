@@ -289,7 +289,17 @@ def create_selected_playlist():
     if b_windows_or_linux == False:
         shutil.copy('eukM2.m3u', '\\\\VBOXSVR\\my\\')
         print('복사')
-   
+
+def print_time():
+    # for both read and save
+    local_file_name = 'eukM2.log'
+    bar             = '~'
+    (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
+    next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
+    print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
+    #~
+    return
+
 ##main    
 '''
 main
@@ -310,7 +320,7 @@ if __name__ == '__main__':
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
     
     ##
-    work = 514
+    work = 517
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -323,9 +333,10 @@ if __name__ == '__main__':
         count += 1
     print('Version: ' + str(work) + '.' + str(count) + '\n')
 
-    ##global
+    ## global
     b_windows_or_linux = True
-    
+    db_xls = 'db.xlsx'
+
     # 무슨 모드인지 나타내기
     if os.path.exists('euk_music_2p3.linux'):
         b_windows_or_linux = False
@@ -338,33 +349,26 @@ if __name__ == '__main__':
         mp3_folder_no_endslash = 'D:\\my\\public_data\\music\\0.rank'
     else:    
         mp3_folder_no_endslash = '\\\\VBOXSVR\\my\\ongaku'
-    
-    db_xls = 'db.xlsx'    
-    ##
-
-    # for both read and save
-    local_file_name = 'eukM2.log'
-    bar             = '~'
-    (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
-    next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
-    print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
     #~
+    ##~ end of global
 
     while True:    
         function_map = {
-          1:check_update,
-          2:create_db,
-          3:create_db_N_create_selected_playlist,
-          4:create_selected_playlist
+            1:check_update,
+            2:create_db,
+            3:create_db_N_create_selected_playlist,
+            4:create_selected_playlist,
+            5:print_time
         }
     
         print ('[Menu]')
         print ('''
-    1:check time
-    2:After new songs create, create new DB 
-    3:After new songs,and create_selected_playlist
-    4:Create new playlist
-    ''')
+            1:check time
+            2:After new songs create, create new DB 
+            3:After new songs,and create_selected_playlist
+            4:Create new playlist
+            5:print_time
+            ''')
         #숫자를 받아들일때까지 물음
         input_int = 0
         while True:
@@ -373,7 +377,7 @@ if __name__ == '__main__':
                 continue
             else:
                 input_int = int(input_v)
-                if input_int == 0 or 4 < input_int:
+                if input_int == 0 or 5 < input_int:
                     continue
                 break
         function_map.get(input_int)()
