@@ -4,6 +4,7 @@
 Note:
 Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
 Next:
+    실행횟수? force new?
 Release note
 #기능
     media파일만만하기,
@@ -85,7 +86,7 @@ def get_last(local_file_name, bar):
                 minutes = int(s_old[14:16])
                 s       = int(s_old[17:19])
                 datetime_old_time = datetime.datetime(y,mo,d,h,minutes,s)
-                int_old_sec_gap   = int(item_list[2])
+                int_old_sec_gap   = int(item_list[1])
     else:
         print ('file error')
     #file reading end
@@ -148,7 +149,7 @@ def check_update():
     my_file = open(local_file_name,"w")    
     my_file.write(
         str_date + bar +
-        str("datetime_gap_new") + bar +
+        str(next_gap_average) + bar +
         str(next_gap_average) + bar +
         b_text )          
     my_file.close()    
@@ -320,7 +321,7 @@ if __name__ == '__main__':
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
     
     ##
-    work = 517
+    work = 520
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -360,7 +361,7 @@ if __name__ == '__main__':
             4:create_selected_playlist,
             5:print_time
         }
-    
+        print (len(function_map))
         print ('[Menu]')
         print ('''
             1:check time
