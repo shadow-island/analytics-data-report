@@ -4,7 +4,6 @@
 Note:
 Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
 Next:
-    실행횟수? force new?
 Release note
 #기능
     media파일만만하기,
@@ -321,7 +320,7 @@ if __name__ == '__main__':
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
     
     ##
-    work = 520
+    work = 517
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -361,7 +360,7 @@ if __name__ == '__main__':
             4:create_selected_playlist,
             5:print_time
         }
-        print (len(function_map))
+    
         print ('[Menu]')
         print ('''
             1:check time
