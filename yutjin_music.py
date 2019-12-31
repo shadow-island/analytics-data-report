@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 # python 3X
 '''
-Note:
-Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
+본 app 장점:
+    Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
 Next:
-    1 debug on/off또는
-    2 print time을 강화?
-    3 또는 체크타임 결과를 어디에 저장?
+    12/31일용은 그대로 git에 올려도된다
+
+    scroll이 불편해: print time 보강작업:프로그램 재실행시도 보기 가능하니, 일단 메모리후 file화로
+        1 print time을 강화?=>
+        2 또는 체크타임 결과를 어디에 저장?
     0. 궁극적으로는 c# window style
     실행횟수? force new?
+
 Release note
 #기능
     media파일만만하기,
@@ -311,7 +314,8 @@ main
 '''
 if __name__ == '__main__':
     import codecs
-    
+
+    # Python Version
     def find_num(text,finding_text):
         index       = text.find(finding_text)
         size        = len(finding_text)
@@ -321,11 +325,11 @@ if __name__ == '__main__':
     major = find_num(str(sys.version_info),'major=')
     minor = find_num(str(sys.version_info),'minor=')
     micro = find_num(str(sys.version_info),'micro=')
-    
     print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
+    #~
     
     ##
-    work = 531
+    work = 536
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
