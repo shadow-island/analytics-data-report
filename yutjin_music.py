@@ -4,8 +4,6 @@
 본 app 장점:
     Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
 Next:
-    12/31일용은 그대로 git에 올려도된다
-
     scroll이 불편해: print time 보강작업:프로그램 재실행시도 보기 가능하니, 일단 메모리후 file화로
         1 print time을 강화?=>
         2 또는 체크타임 결과를 어디에 저장?
@@ -99,6 +97,10 @@ def get_last(local_file_name, bar):
     #file reading end
     return (datetime_old_time, int_old_sec_gap)
 
+def common_next(datetime_old_time, int_old_sec_gap):
+    next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
+    print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
+
 def check_update():
     print('menu_song_time_check')
     import datetime
@@ -124,12 +126,14 @@ def check_update():
     
     int_new_gap = int(datetime_gap_new.days * 60*60*24 + (datetime_new - datetime_old_time).seconds)
     print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))
-    
-    next_gap_average = int( (int_new_gap + int_old_sec_gap)/2 )    
+
+    int_old_sec_gap = int( (int_new_gap + int_old_sec_gap)/2 )
     #print ('next gap average = ' + str(next_gap_average) )             
-    print ('\n다음 평균 주기: ' + total_sec_2_readable(next_gap_average))
-    next_gap_timedelta = datetime.timedelta(0,next_gap_average)
-    print ('다음 목표 시간: ' + str(datetime_new + next_gap_timedelta) + '\n')
+    print ('\n다음 평균 주기: ' + total_sec_2_readable(int_old_sec_gap))
+
+    common_next(datetime_old_time, int_old_sec_gap)
+    #next_gap_timedelta = datetime.timedelta(0,next_gap_average)
+    #print ('다음 목표 시간: ' + str(datetime_new + next_gap_timedelta) + '\n')
 
     
     if (int_old_sec_gap <= int_new_gap):
@@ -156,8 +160,8 @@ def check_update():
     my_file = open(local_file_name,"w")    
     my_file.write(
         str_date + bar +
-        str(next_gap_average) + bar +
-        str(next_gap_average) + bar +
+        str(int_old_sec_gap) + bar +
+        str(int_old_sec_gap) + bar +
         b_text )          
     my_file.close()    
     
@@ -303,8 +307,8 @@ def print_time():
     local_file_name = 'eukM2.log'
     bar             = '~'
     (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
-    next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
-    print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
+
+    common_next(datetime_old_time, int_old_sec_gap)
     #~
     return
 
@@ -329,7 +333,7 @@ if __name__ == '__main__':
     #~
     
     ##
-    work = 536
+    work = 546
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -346,14 +350,13 @@ if __name__ == '__main__':
     b_windows_or_linux = True
     db_xls = 'db.xlsx'
 
-    # 무슨 모드인지 나타내기
+    # 무슨 모드인지 따라 folder 정함
     if os.path.exists('euk_music_2p3.linux'):
         b_windows_or_linux = False
         print ('Office Mode')
     else:
         b_windows_or_linux = True
         print ('Home windows Mode')
-    
     if b_windows_or_linux:
         mp3_folder_no_endslash = 'D:\\my\\public_data\\music\\0.rank'
     else:    
