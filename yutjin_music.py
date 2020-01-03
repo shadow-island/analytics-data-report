@@ -4,15 +4,15 @@
 본 app 장점:
     Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
 Next:
+    git연동완료
     scroll이 불편해: print time 보강작업:프로그램 재실행시도 보기 가능하니, 일단 메모리후 file화로
         1 print time을 강화?=>
         2 또는 체크타임 결과를 어디에 저장?
     0. 궁극적으로는 c# window style
-    실행횟수? force new?
-
+    실행횟수? force new?    
 Release note
 #기능
-    media파일만만하기,
+    media파일만 하기
 #UI
     입력 숫자 error handling, 메뉴표시하자,마지막 status표시
     version_info
