@@ -20,10 +20,10 @@ Release note
 call def #즉 4줄이상이 2번나올때(총8줄) refactoring하면 옳다
 call def
 def func
-    sen 1
-    sen 2
-    sen 3
-    return sen4
+    sentence 1
+    sentence 2
+    sentence 3
+    return sentence 4
 '''
 
 import os
