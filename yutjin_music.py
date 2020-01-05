@@ -2,7 +2,7 @@
 # python 3X
 '''
 본 app 장점:
-    Youtube보다 offline이좋음, internet안될때도되고, 일단 곡별로 가중치를 줄수있음
+    Youtube보다 offline이 좋은점: internet안될때도되고, 일단 곡별로 가중치를 줄수있음
 Next:
     git연동완료
     scroll이 불편해: print time 보강작업:프로그램 재실행시도 보기 가능하니, 일단 메모리후 file화로
