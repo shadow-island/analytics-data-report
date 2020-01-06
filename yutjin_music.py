@@ -97,7 +97,7 @@ def get_last(local_file_name, bar):
     #file reading end
     return (datetime_old_time, int_old_sec_gap)
 
-def common_next(datetime_old_time, int_old_sec_gap):
+def common_print_next(datetime_old_time, int_old_sec_gap):
     next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
     print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
 
@@ -131,10 +131,7 @@ def check_update():
     #print ('next gap average = ' + str(next_gap_average) )             
     print ('\n다음 평균 주기: ' + total_sec_2_readable(int_old_sec_gap))
 
-    common_next(datetime_old_time, int_old_sec_gap)
-    #next_gap_timedelta = datetime.timedelta(0,next_gap_average)
-    #print ('다음 목표 시간: ' + str(datetime_new + next_gap_timedelta) + '\n')
-
+    common_print_next(datetime_old_time, int_old_sec_gap)
     
     if (int_old_sec_gap <= int_new_gap):
         b_text = 'increased'
@@ -308,7 +305,7 @@ def print_time():
     bar             = '~'
     (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
 
-    common_next(datetime_old_time, int_old_sec_gap)
+    common_print_next(datetime_old_time, int_old_sec_gap)
     #~
     return
 
