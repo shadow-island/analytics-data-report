@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # python 3X
 '''
-본 app 장점:
+본 App 장점:
     Youtube보다 offline이 좋은점: internet안될때도되고, 일단 곡별로 가중치를 줄수있음
 Next:
     git연동완료,email이 중요
