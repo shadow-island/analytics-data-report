@@ -105,9 +105,12 @@ def common_print_next(datetime_old_time, int_old_sec_gap):
 def check_update():
     print('menu_song_time_check')
     import datetime
+    
     # for both read and save
     local_file_name = 'eukM2.log'
     bar             = '~'
+    #~
+    
     (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
     
     print ("이전 체크 시간: " + str(datetime_old_time))
@@ -126,9 +129,9 @@ def check_update():
     print ("\n현재 체크 시간: " + str_date)
     
     int_new_gap = int(datetime_gap_new.days * 60*60*24 + (datetime_new - datetime_old_time).seconds)
-    print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))
-
     int_old_sec_gap = int( (int_new_gap + int_old_sec_gap)/2 )
+    
+    print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))
     common_print_next(datetime_old_time, int_old_sec_gap)
     
     if (int_old_sec_gap <= int_new_gap):
@@ -162,7 +165,7 @@ def check_update():
     
     if b_text == 'reduced':
         pass #input('ready?')
-    return
+    return int_new_gap
 
 
 def create_db():
@@ -315,7 +318,7 @@ if __name__ == '__main__':
     ##
     import codecs
     
-    work = 546
+    work = 561
     work = round(work/60 * 1.1,1)
     
     #source file 이름찾기?
@@ -343,8 +346,7 @@ if __name__ == '__main__':
 
     ## global
     b_windows_or_linux = True
-    db_xls = 'db.xlsx'
-    int_new_gap = 0
+    db_xls = 'db.xlsx'    
 
     # 무슨 모드인지 따라 folder 정함
     if os.path.exists('euk_music_2p3.linux'):
@@ -360,16 +362,19 @@ if __name__ == '__main__':
     #~
     ##~ end of global
 
-    while True:    
-        function_map = {
+    #init
+    int_new_gap = 0
+    while True:            
+        function_map = {            
             1:check_update,
             2:create_db,
             3:create_db_N_create_selected_playlist,
             4:create_selected_playlist,
-            5:print_time
+            5:print_time,
+            0:quit,
         }
-        print (len(function_map))
         print ('[Menu]')
+        print('print(int_new_gap)',int_new_gap)
         print ('''
             1:check time
             2:After new songs create, create new DB 
@@ -377,17 +382,23 @@ if __name__ == '__main__':
             4:Create new playlist
             5:print_time
             ''')
+        
         #숫자를 받아들일때까지 물음
-        input_int = 0
         while True:
             input_v = input('?')            
             if input_v.isdigit() == False:
                 continue
             else:
                 input_int = int(input_v)
-                if input_int == 0 or 5 < input_int:
+                if input_int < 0 or 5 < input_int:
                     continue
                 break
-        function_map.get(input_int)()
+                
+        if input_int == 1:
+            int_new_gap = check_update()            
+        elif input_int == 0:
+            quit()
+        else:
+            function_map.get(input_int)()
     
     print ('End')
