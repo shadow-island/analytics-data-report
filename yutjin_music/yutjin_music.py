@@ -98,6 +98,7 @@ def get_last(local_file_name, bar):
     return (datetime_old_time, int_old_sec_gap)
 
 def common_print_next(datetime_old_time, int_old_sec_gap):
+    print ('\n다음 평균 주기: ' + total_sec_2_readable(int_old_sec_gap))
     next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
     print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
 
@@ -128,9 +129,6 @@ def check_update():
     print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))
 
     int_old_sec_gap = int( (int_new_gap + int_old_sec_gap)/2 )
-    #print ('next gap average = ' + str(next_gap_average) )             
-    print ('\n다음 평균 주기: ' + total_sec_2_readable(int_old_sec_gap))
-
     common_print_next(datetime_old_time, int_old_sec_gap)
     
     if (int_old_sec_gap <= int_new_gap):
@@ -314,22 +312,9 @@ def print_time():
 main
 '''
 if __name__ == '__main__':
-    import codecs
-
-    # Python Version
-    def find_num(text,finding_text):
-        index       = text.find(finding_text)
-        size        = len(finding_text)
-        location    = index + size
-        return text[location:location + 1]    
-
-    major = find_num(str(sys.version_info),'major=')
-    minor = find_num(str(sys.version_info),'minor=')
-    micro = find_num(str(sys.version_info),'micro=')
-    print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
-    #~
-    
     ##
+    import codecs
+    
     work = 546
     work = round(work/60 * 1.1,1)
     
@@ -342,10 +327,24 @@ if __name__ == '__main__':
     for _ in line_list:
         count += 1
     print('Yutjin Music Version: ' + str(work) + 'H ' + str(count) + '\n')
+    
+    # Python Version
+    def find_num(text,finding_text):
+        index       = text.find(finding_text)
+        size        = len(finding_text)
+        location    = index + size
+        return text[location:location + 1]    
+
+    major = find_num(str(sys.version_info),'major=')
+    minor = find_num(str(sys.version_info),'minor=')
+    micro = find_num(str(sys.version_info),'micro=')
+    print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
+    #~
 
     ## global
     b_windows_or_linux = True
     db_xls = 'db.xlsx'
+    int_new_gap = 0
 
     # 무슨 모드인지 따라 folder 정함
     if os.path.exists('euk_music_2p3.linux'):
