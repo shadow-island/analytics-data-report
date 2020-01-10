@@ -17,8 +17,8 @@ Release note
     입력 숫자 error handling, 메뉴표시하자,마지막 status표시
     version_info
 
-call def #즉 4줄이상이 2번나올때(총8줄) refactoring하면 옳다
-call def
+call func 즉 4줄이상이 2번나올때(총8줄) refactoring하면 옳다
+call func
 def func
     sentence 1
     sentence 2
@@ -82,7 +82,7 @@ def get_last(local_file_name, bar):
             s_old   = item_list[0]
 
             if s_old[:4].isdigit():
-                print('OK')
+                print('Proper File Format')
                 #code 정리
                 y       = int(s_old[:4])
                 mo      = int(s_old[5:7])
@@ -97,7 +97,9 @@ def get_last(local_file_name, bar):
     #file reading end
     return (datetime_old_time, int_old_sec_gap)
 
-def common_print_next(datetime_old_time, int_old_sec_gap):
+def common_print_next(int_new_gap, datetime_old_time, int_old_sec_gap):
+    print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))
+    
     print ('\n다음 평균 주기: ' + total_sec_2_readable(int_old_sec_gap))
     next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
     print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
@@ -130,9 +132,8 @@ def check_update():
     
     int_new_gap = int(datetime_gap_new.days * 60*60*24 + (datetime_new - datetime_old_time).seconds)
     int_old_sec_gap = int( (int_new_gap + int_old_sec_gap)/2 )
-    
-    print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))
-    common_print_next(datetime_old_time, int_old_sec_gap)
+        
+    common_print_next(int_new_gap, datetime_old_time, int_old_sec_gap)
     
     if (int_old_sec_gap <= int_new_gap):
         b_text = 'increased'
@@ -301,12 +302,12 @@ def create_selected_playlist():
         print('복사')
 
 def print_time():
-    # for both read and save
+    # for both read and save    
     local_file_name = 'eukM2.log'
     bar             = '~'
     (datetime_old_time, int_old_sec_gap) =  get_last(local_file_name, bar)
 
-    common_print_next(datetime_old_time, int_old_sec_gap)
+    common_print_next(int_new_gap, datetime_old_time, int_old_sec_gap)
     #~
     return
 
@@ -374,7 +375,7 @@ if __name__ == '__main__':
             0:quit,
         }
         print ('[Menu]')
-        print('print(int_new_gap)',int_new_gap)
+        
         print ('''
             1:check time
             2:After new songs create, create new DB 
@@ -396,6 +397,7 @@ if __name__ == '__main__':
                 
         if input_int == 1:
             int_new_gap = check_update()            
+            print('(int_new_gap)',int_new_gap)
         elif input_int == 0:
             quit()
         else:
