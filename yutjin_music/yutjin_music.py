@@ -316,13 +316,10 @@ def print_time():
 main
 '''
 if __name__ == '__main__':
-    ##
-    import codecs
-    
-    work = 561
+    work = 566
     work = round(work/60 * 1.1,1)
-    
     #source file 이름찾기?
+    import codecs
     source_file = codecs.open('yutjin_music.py', 'r','utf-8')
     line_list   = source_file.readlines()    
     source_file.close()
@@ -371,11 +368,10 @@ if __name__ == '__main__':
             2:create_db,
             3:create_db_N_create_selected_playlist,
             4:create_selected_playlist,
-            5:print_time,
-            0:quit,
+            5:print_time
         }
+
         print ('[Menu]')
-        
         print ('''
             1:check time
             2:After new songs create, create new DB 
@@ -402,5 +398,4 @@ if __name__ == '__main__':
             quit()
         else:
             function_map.get(input_int)()
-    
     print ('End')
