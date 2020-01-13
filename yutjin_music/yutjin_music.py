@@ -316,13 +316,10 @@ def print_time():
 main
 '''
 if __name__ == '__main__':
-    ##
-    import codecs
-    
-    work = 563
+    work = 566
     work = round(work/60 * 1.1,1)
-    
     #source file 이름찾기?
+    import codecs
     source_file = codecs.open('yutjin_music.py', 'r','utf-8')
     line_list   = source_file.readlines()    
     source_file.close()
@@ -401,5 +398,4 @@ if __name__ == '__main__':
             quit()
         else:
             function_map.get(input_int)()
-    
     print ('End')
