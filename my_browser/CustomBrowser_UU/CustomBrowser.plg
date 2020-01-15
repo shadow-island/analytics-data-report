@@ -1,0 +1,55 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: CustomBrowser - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "D:\Users\mirinae\AppData\Local\Temp\RSP488E.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/CustomBrowser.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp"
+]
+Creating command line "cl.exe @D:\Users\mirinae\AppData\Local\Temp\RSP488E.tmp" 
+Creating temporary file "D:\Users\mirinae\AppData\Local\Temp\RSP488F.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/CustomBrowser.pdb" /debug /machine:I386 /out:"Debug/CustomBrowser.exe" /pdbtype:sept 
+.\Debug\CustomBrowser.obj
+.\Debug\CustomBrowserDlg.obj
+.\Debug\CustomModalDialog.obj
+.\Debug\CustomModelessDialog.obj
+.\Debug\CustomWindow.obj
+.\Debug\Custsite.obj
+.\Debug\Idispimp.obj
+.\Debug\StdAfx.obj
+.\Debug\webbrowser2.obj
+.\Debug\CustomBrowser.res
+]
+Creating command line "link.exe @D:\Users\mirinae\AppData\Local\Temp\RSP488F.tmp"
+<h3>Output Window</h3>
+Compiling...
+CustomBrowserDlg.cpp
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(448) : error C2065: 'm_b_run_mode' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(454) : error C2065: 'm_window_text' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(454) : error C2228: left of '.Format' must have class/struct/union type
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(455) : error C2065: '_MainFrame' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(455) : error C2059: syntax error : ')'
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(458) : error C2065: 'TIMER_END' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(463) : error C2065: 'm_video_sec' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(468) : error C2065: 'm_start_time' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(468) : error C2679: binary '=' : no operator defined which takes a right-hand operand of type 'class CTime' (or there is no acceptable conversion)
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(469) : error C2065: 'TIMER_PROGRESS' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(473) : error C2065: 'm_b_auto_mode' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(473) : warning C4805: '==' : unsafe mix of type 'int' and type 'const bool' in operation
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(474) : error C2065: 'm_start_js' : undeclared identifier
+E:\my\eugene\now\code\web\uu_movie\CustomBrowser_UU\CustomBrowserDlg.cpp(494) : error C2065: '_exe_path' : undeclared identifier
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+CustomBrowser.exe - 13 error(s), 1 warning(s)
+</pre>
+</body>
+</html>

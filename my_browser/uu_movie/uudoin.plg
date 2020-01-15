@@ -1,0 +1,44 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: uudoin - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\Eugene\AppData\Local\Temp\RSP6976.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/uudoin.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"E:\my\eugene\now\code\uu_movie\uu_movie\uudoinView.cpp"
+]
+Creating command line "cl.exe @C:\Users\Eugene\AppData\Local\Temp\RSP6976.tmp" 
+Creating temporary file "C:\Users\Eugene\AppData\Local\Temp\RSP6977.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/uumovie.pdb" /debug /machine:I386 /out:"exe/uumovie.exe" /pdbtype:sept 
+.\Debug\_Dialog_Control.obj
+.\Debug\Custsite.obj
+.\Debug\Idispimp.obj
+.\Debug\MainFrm.obj
+.\Debug\StdAfx.obj
+.\Debug\uudoin.obj
+.\Debug\uudoinDoc.obj
+.\Debug\uudoinView.obj
+.\Debug\webbrowser2.obj
+.\Debug\uudoin.res
+]
+Creating command line "link.exe @C:\Users\Eugene\AppData\Local\Temp\RSP6977.tmp"
+<h3>Output Window</h3>
+Compiling...
+uudoinView.cpp
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/uudoin.bsc"  .\Debug\StdAfx.sbr .\Debug\_Dialog_Control.sbr .\Debug\Custsite.sbr .\Debug\Idispimp.sbr .\Debug\MainFrm.sbr .\Debug\uudoin.sbr .\Debug\uudoinDoc.sbr .\Debug\uudoinView.sbr .\Debug\webbrowser2.sbr"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+uumovie.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
