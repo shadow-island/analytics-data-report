@@ -1,8 +1,11 @@
 # analytics-data-report
 single application
 one of them is 
-1. analytics-data-report with title from URL
+1. browser control
 2. Yutjin Music 
-3. app kill timer
-4. just timer
-5. browser control
+3. just timer
+4. app kill timer
+5. analytics-data-report with title from URL
+
+
+
