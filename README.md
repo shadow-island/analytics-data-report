@@ -5,3 +5,4 @@ one of them is
 2. Yutjin Music 
 3. app kill timer
 4. just timer
+5. browser control
