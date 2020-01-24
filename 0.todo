@@ -1,6 +1,9 @@
 Kaisha deha: 
 1. custom webbrowser <- VS studio?, (캡쳐후.url변경으로 종료가능) Visual Studio Community가 여전히 유효하다 
- 1)custom의 문제: 빨간줄없을 가능성, 다른page로 인증가능, ichiou, test hitsuyou.
+ 1)custom의 문제: 빨간줄없을 가능성, 
+    인증1- 다른page로 가능,
+       2- hokano browser de.
+    ichiou, test hitsuyou.
  2).net deha, IE kawarini, hokano browser noseru no ga dekirutte.. 
 2. browser add on (캡쳐가 의문)
 3. youtube api 
