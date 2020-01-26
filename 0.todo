@@ -1,4 +1,5 @@
 Kaisha deha: 
+brower alarm 연동하기
 1. custom webbrowser <- VS studio?, (캡쳐후.url변경으로 종료가능) Visual Studio Community가 여전히 유효하다 
  1)custom의 문제: 빨간줄없을 가능성, 
     인증1- 다른page로 가능,
