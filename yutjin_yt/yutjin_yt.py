@@ -7,8 +7,8 @@ import urllib.request
 import json
 
 #idn=input("Enter username: ")
-idn = "UC0Fq24M32ruKPcMH2TrRing"
-idn = "UCgOLQwRv1r2m9mhE1tfsn3Q"
+idn = ""
+idn = ""
 #name=input("Enter username: ")
 
 key = "개인이 발급 받은 구글API키"
