@@ -12,7 +12,7 @@ idn = "UCgOLQwRv1r2m9mhE1tfsn3Q"
 #name=input("Enter username: ")
 
 key = "개인이 발급 받은 구글API키"
-key = "AIzaSyAreBjg7JSnHVq3vsNvBrwuRi0Zr7gYACkEgm"
+key = "xxxxxxxxx"
  
 data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id="+idn+"&key="+key).read()
  
