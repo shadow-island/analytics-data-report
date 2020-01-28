@@ -259,47 +259,49 @@ def create_selected_playlist():
     import random
     import shutil
     
-    wb = openpyxl.load_workbook(db_xls)    
-
-    #txt_file = open("eukM2.m3u","w")
-    txt_file = open("eukM2.m3u","w",encoding="utf-8")
-    
-    count = 0
-    
-    sheet_list = wb.get_sheet_names()
-    #print sheet_list
-    sheet = wb.get_sheet_by_name(sheet_list[0])
+    if os.path.isfile(db_xls) == True:                
+        wb = openpyxl.load_workbook(db_xls)
+        #txt_file = open("eukM2.m3u","w")
+        txt_file = open("eukM2.m3u","w",encoding="utf-8")
         
-    for i in range(1,sheet.max_row + 1):
-        i_value = int(sheet.cell(row = i, column = 2).value)                
-
-        print_text = sheet.cell(row = i, column = 1).value + ':' + str(sheet.cell(row = i, column = 2).value)
-        random_num = random.randrange(1,i_value + 1)
-        if (random_num == 1):                         
-            try:
-                print (str(i_value) + '-' + str(random_num) + ':' + print_text + ' Ok')                 
-            except:
-                pass
+        count = 0
+        
+        sheet_list = wb.get_sheet_names()
+        #print sheet_list
+        sheet = wb.get_sheet_by_name(sheet_list[0])
             
-            out_txt = sheet.cell(row = i, column = 1).value + '\n'
-            if b_windows_or_linux == False:                
-                out_txt = out_txt.replace(mp3_folder_no_endslash + '\\','/my/ongaku/')
-                out_txt = out_txt.replace('\\','/')
-            txt_file.write(out_txt)
-            count = count + 1
-        else:
-            try :
-                print (print_text + ' X')                
-            except:
-                pass
-        
-    print (str(count) + '/' + str(sheet.max_row))  
-        
-    #복사하기전에 close
-    txt_file.close()    
-    if b_windows_or_linux == False:
-        shutil.copy('eukM2.m3u', '\\\\VBOXSVR\\my\\')
-        print('복사')
+        for i in range(1,sheet.max_row + 1):
+            i_value = int(sheet.cell(row = i, column = 2).value)                
+
+            print_text = sheet.cell(row = i, column = 1).value + ':' + str(sheet.cell(row = i, column = 2).value)
+            random_num = random.randrange(1,i_value + 1)
+            if (random_num == 1):                         
+                try:
+                    print (str(i_value) + '-' + str(random_num) + ':' + print_text + ' Ok')                 
+                except:
+                    pass
+                
+                out_txt = sheet.cell(row = i, column = 1).value + '\n'
+                if b_windows_or_linux == False:                
+                    out_txt = out_txt.replace(mp3_folder_no_endslash + '\\','/my/ongaku/')
+                    out_txt = out_txt.replace('\\','/')
+                txt_file.write(out_txt)
+                count = count + 1
+            else:
+                try :
+                    print (print_text + ' X')                
+                except:
+                    pass
+            
+        print (str(count) + '/' + str(sheet.max_row))  
+            
+        #복사하기전에 close
+        txt_file.close()    
+        if b_windows_or_linux == False:
+            shutil.copy('eukM2.m3u', '\\\\VBOXSVR\\my\\')
+            print('복사')        
+    else:
+        print(db_xls + " 없음")
 
 def print_time():
     # for both read and save    
@@ -316,7 +318,7 @@ def print_time():
 main
 '''
 if __name__ == '__main__':
-    work = 566
+    work = 567
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
