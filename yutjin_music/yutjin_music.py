@@ -97,11 +97,16 @@ def get_last(local_file_name, bar):
     #file reading end
     return (datetime_old_time, int_old_sec_gap)
 
-def common_print_next(int_new_gap, datetime_old_time, int_old_sec_gap):
-    print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))
+def common_print_next(int_new_gap, datetime_old_time, int_next_sec_gap):
+    print ('이번 듣기 주기: ' + total_sec_2_readable(int_new_gap))    
+    print ('\n다음 평균 주기: ' + total_sec_2_readable(int_next_sec_gap))
+    print ('\n')
+    if int_new_gap > int_next_sec_gap:
+        print ('천천히 들으셨어요')
+    else:
+        print ('빨리 들으셨어요')
+    next_gap_timedelta = datetime.timedelta(0,int_next_sec_gap)
     
-    print ('\n다음 평균 주기: ' + total_sec_2_readable(int_old_sec_gap))
-    next_gap_timedelta = datetime.timedelta(0,int_old_sec_gap)
     print ('다음 목표 시간: ' + str(datetime_old_time + next_gap_timedelta) + '\n')
 
 def check_update():
@@ -318,7 +323,7 @@ def print_time():
 main
 '''
 if __name__ == '__main__':
-    work = 567
+    work = 571
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
