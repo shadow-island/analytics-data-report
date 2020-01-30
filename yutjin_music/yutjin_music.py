@@ -323,7 +323,7 @@ def print_time():
 main
 '''
 if __name__ == '__main__':
-    work = 571
+    work = 573
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -380,11 +380,11 @@ if __name__ == '__main__':
 
         print ('[Menu]')
         print ('''
-            1:check time
-            2:After new songs create, create new DB 
+            1:Check time
+            2:After new songs create, create new rate DB 
             3:After new songs,and create_selected_playlist
-            4:Create new playlist
-            5:print_time
+            4:Create new playlist using the current rate
+            5:Print time
             ''')
         
         #숫자를 받아들일때까지 물음
