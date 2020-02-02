@@ -36,13 +36,13 @@ else:
 import urllib.request
 import json
 
-for d in data:
-    value = d[1] 
+for i in range(0,len(data)):
+    value = data[i][1] 
     if len(value) > 8:
         channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
     else:
         channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
     subs = json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"]
      
-    print(str(d[0]) + '의 구독자 수는 '+ '{:,d}'.format(int(subs))+' 입니다.')
+    print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ '{:,d}'.format(int(subs))+' 입니다.')
 exit(0)
