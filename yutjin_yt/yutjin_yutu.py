@@ -41,7 +41,9 @@ else:
 import urllib.request
 import json
 
+
 list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
+list_id = input('list?')
 base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
 nextPageToken = ""
 
@@ -94,6 +96,7 @@ for n in range(2):
     else:
         break
 print(datetime_total)
+input('pause')
 exit(0)
 
 
