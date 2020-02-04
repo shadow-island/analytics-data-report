@@ -41,8 +41,8 @@ else:
 import urllib.request
 import json
 
-
-base_url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=??????????&key=" + key
+list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
+base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
 nextPageToken = ""
 
 
