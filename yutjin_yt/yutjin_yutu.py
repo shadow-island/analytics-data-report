@@ -3,7 +3,31 @@
 # python 3X
 '''
 '''
+work = 3
+work = round(work/60 * 1.1,1)
+#source file 이름찾기?
+import codecs
+source_file = codecs.open('yutjin_yutu.py', 'r','utf-8')
+line_list   = source_file.readlines()    
+source_file.close()
 
+count = 0
+for _ in line_list:
+    count += 1
+print('Yutjin Youtube Version: ' + str(work) + 'H ' + str(count) + '\n')
+
+# Python Version
+def find_num(text,finding_text):
+    index       = text.find(finding_text)
+    size        = len(finding_text)
+    location    = index + size
+    return text[location:location + 1]    
+import sys
+major = find_num(str(sys.version_info),'major=')
+minor = find_num(str(sys.version_info),'minor=')
+micro = find_num(str(sys.version_info),'micro=')
+print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
+#~
 
 
 db_xls = "db.xlsx"
@@ -32,15 +56,17 @@ if os.path.isfile(db_xls) == True:
 else:
     print(db_xls + " 없음")
     
-    
-
-
-
 
 
 import urllib.request
 import json
 
+'''
+print('1)list\n')
+print('2)sub\n')
+input_menu = input('?')
+if input_menu 
+'''
 
 list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
 list_id = input('list?')
