@@ -3,7 +3,7 @@
 # python 3X
 '''
 '''
-work = 6
+work = 10
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -128,6 +128,10 @@ else:
         subs = json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"]
          
         print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ '{:,d}'.format(int(subs))+' 입니다.')
+        
+        subs = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
+        print(subs)
+        break
 
 input('pause')
 exit(0)
