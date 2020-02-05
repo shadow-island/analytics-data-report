@@ -3,7 +3,7 @@
 # python 3X
 '''
 '''
-work = 3
+work = 6
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -61,83 +61,73 @@ else:
 import urllib.request
 import json
 
-'''
+
 print('1)list\n')
 print('2)sub\n')
 input_menu = input('?')
-if input_menu 
-'''
+if input_menu == '1':
+    list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
+    list_id = input('list?')
+    base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
+    nextPageToken = ""
 
-list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
-list_id = input('list?')
-base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
-nextPageToken = ""
+    total_n = 1
+    import datetime
+    datetime_total = datetime.datetime(1,1,1,0,0,0)
+    for n in range(2):
+        this_url = base_url + "&pageToken=" + nextPageToken
+        json_data = urllib.request.urlopen(this_url).read()     
 
-
-total_n = 1
-import datetime
-datetime_total = datetime.datetime(1,1,1,0,0,0)
-for n in range(2):
-    this_url = base_url + "&pageToken=" + nextPageToken
-    json_data = urllib.request.urlopen(this_url).read()     
-
-    item_data = json.loads(json_data)["items"]
-    print(len(item_data))
-    for i in range(len(item_data)):
-        item_data = json.loads(json_data)["items"][i]['snippet']['title']
-        print(str(total_n) + ":"+ item_data)        
-        videoId = json.loads(json_data)["items"][i]['snippet']['resourceId']['videoId']
-        print(videoId)
-                 
-        v_json_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?id=" + str(videoId) + "&part=contentDetails&key=" + key).read()
-        v_item_data = json.loads(v_json_data)["items"][0]["contentDetails"]['duration']
-        #debug print(v_item_data)
-        v_item_data = v_item_data.replace('PT','')        
-        m = s = 0
-        if v_item_data.find('M') == -1:
-            v_item_data = '0:' + v_item_data
-        else:
-            v_item_data = v_item_data.replace('M',':')        
+        item_data = json.loads(json_data)["items"]
+        print(len(item_data))
+        for i in range(len(item_data)):
+            item_data = json.loads(json_data)["items"][i]['snippet']['title']
+            print(str(total_n) + ":"+ item_data)        
+            videoId = json.loads(json_data)["items"][i]['snippet']['resourceId']['videoId']
+            print(videoId)
+                     
+            v_json_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?id=" + str(videoId) + "&part=contentDetails&key=" + key).read()
+            v_item_data = json.loads(v_json_data)["items"][0]["contentDetails"]['duration']
+            #debug print(v_item_data)
+            v_item_data = v_item_data.replace('PT','')        
+            m = s = 0
+            if v_item_data.find('M') == -1:
+                v_item_data = '0:' + v_item_data
+            else:
+                v_item_data = v_item_data.replace('M',':')        
+                
+            if v_item_data.find('S') == -1:
+                v_item_data = v_item_data + '0'
+            else:
+                v_item_data = v_item_data.replace('S','')        
             
-        if v_item_data.find('S') == -1:
-            v_item_data = v_item_data + '0'
+            #print(v_item_data)        
+            date_time_obj = datetime.datetime.strptime(v_item_data, '%M:%S')        
+            datetime_now = datetime.timedelta(minutes = date_time_obj.minute, seconds = date_time_obj.second)
+            
+            datetime_total += datetime_now
+            print(datetime_now)
+            
+            print()
+            total_n += 1        
+            
+        if "nextPageToken" in json.loads(json_data):
+            nextPageToken = json.loads(json_data)["nextPageToken"]
+            print(nextPageToken)
+            n += 1
         else:
-            v_item_data = v_item_data.replace('S','')        
-        
-        #print(v_item_data)        
-        date_time_obj = datetime.datetime.strptime(v_item_data, '%M:%S')        
-        datetime_now = datetime.timedelta(minutes = date_time_obj.minute, seconds = date_time_obj.second)
-        
-        datetime_total += datetime_now
-        print(datetime_now)
-        
-        print()
-        total_n += 1
-        
-        
-    if "nextPageToken" in json.loads(json_data):
-        nextPageToken = json.loads(json_data)["nextPageToken"]
-        print(nextPageToken)
-        n += 1
-    else:
-        break
-print(datetime_total)
+            break
+    print(datetime_total)
+else:
+    for i in range(0,len(data)):
+        value = data[i][1] 
+        if len(value) > 8:
+            channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
+        else:
+            channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
+        subs = json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"]
+         
+        print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ '{:,d}'.format(int(subs))+' 입니다.')
+
 input('pause')
-exit(0)
-
-
-
-
-
-
-
-for i in range(0,len(data)):
-    value = data[i][1] 
-    if len(value) > 8:
-        channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
-    else:
-        channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
-    subs = json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"]
-     
-    print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ '{:,d}'.format(int(subs))+' 입니다.')
 exit(0)
