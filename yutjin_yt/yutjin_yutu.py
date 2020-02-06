@@ -3,7 +3,7 @@
 # python 3X
 '''
 '''
-work = 10
+work = 19
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -67,14 +67,16 @@ print('2)sub\n')
 input_menu = input('?')
 if input_menu == '1':
     list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
+    list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
     list_id = input('list?')
+    
     base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
     nextPageToken = ""
 
     total_n = 1
     import datetime
     datetime_total = datetime.datetime(1,1,1,0,0,0)
-    for n in range(2):
+    for n in range(3):
         this_url = base_url + "&pageToken=" + nextPageToken
         json_data = urllib.request.urlopen(this_url).read()     
 
