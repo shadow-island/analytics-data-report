@@ -3,7 +3,7 @@
 # python 3X
 '''
 '''
-work = 19
+work = 22
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -111,7 +111,13 @@ if input_menu == '1':
             print(datetime_now)
             
             print()
+            '''
+            if total_n == 13:
+                print(datetime_total)
+                break
+            '''
             total_n += 1        
+            
             
         if "nextPageToken" in json.loads(json_data):
             nextPageToken = json.loads(json_data)["nextPageToken"]
