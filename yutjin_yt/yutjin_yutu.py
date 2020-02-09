@@ -129,17 +129,17 @@ if input_menu == '1':
 else:
     for i in range(0,len(data)):
         value = data[i][1] 
-        if len(value) > 8:
-            channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
-        else:
+        if len(value) <= 9:
+            print('--name style')
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
-        subs = json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"]
-         
-        print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ '{:,d}'.format(int(subs))+' 입니다.')
-        
-        subs = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
-        print(subs)
-        break
+        else:
+            channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
+            
+        #print(channel_data)
+        subs = json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"]         
+        view = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
+        print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ subs +' 입니다.' + view)
+        #break
 
 input('pause')
 exit(0)
