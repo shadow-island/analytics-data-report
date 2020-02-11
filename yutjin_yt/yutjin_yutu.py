@@ -128,9 +128,11 @@ if input_menu == '1':
     print(datetime_total)
 else:
     for i in range(0,len(data)):
-        value = data[i][1] 
-        if len(value) <= 9:
-            print('--name style')
+        value = data[i][1]
+        le = len(value)
+        #print(le)
+        if le <= 10:
+            #print('--name style')
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
         else:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
