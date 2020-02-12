@@ -8,6 +8,7 @@ Kaisha deha:
      -api time- average!, hitsuyou?
    2 구독자수 api만들기(motto benri ni?)
    3. comment finder
+3. chat bot으로 실시간 대화저장기능?
 3.brower alarm 연동하기
   1. custom webbrowser <- VS studio?, (캡쳐후.url변경으로 종료가능) Visual Studio Community가 여전히 유효하다 
    1)custom의 문제: 빨간줄없을 가능성, 
