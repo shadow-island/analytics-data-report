@@ -77,6 +77,7 @@ if input_menu == '1':
     import datetime
     datetime_total = datetime.datetime(1,1,1,0,0,0)
     for n in range(3):
+        is_breaker = False
         this_url = base_url + "&pageToken=" + nextPageToken
         json_data = urllib.request.urlopen(this_url).read()     
 
@@ -111,13 +112,15 @@ if input_menu == '1':
             print(datetime_now)
             
             print()
-            '''
-            if total_n == 13:
-                print(datetime_total)
-                break
-            '''
-            total_n += 1        
             
+            if total_n == 17:
+                print(datetime_total)
+                is_breaker = True
+                break
+            
+            total_n += 1        
+        if is_breaker == True:
+            break
             
         if "nextPageToken" in json.loads(json_data):
             nextPageToken = json.loads(json_data)["nextPageToken"]
@@ -145,3 +148,4 @@ else:
 
 input('pause')
 exit(0)
+
