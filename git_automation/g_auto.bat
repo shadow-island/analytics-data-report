@@ -1,4 +1,6 @@
 py g.py
-rem timeout /t 2
+:_loop
+timeout /t 1
 git commit --all -m "ga"
 git push
+goto _loop
