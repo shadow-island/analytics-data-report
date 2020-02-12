@@ -3,7 +3,7 @@
 # python 3X
 '''
 '''
-work = 31
+work = 32
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -76,6 +76,7 @@ if input_menu == '1':
     total_n = 1
     import datetime
     datetime_total = datetime.datetime(1,1,1,0,0,0)
+    part_mode = False
     for n in range(3):
         is_breaker = False
         this_url = base_url + "&pageToken=" + nextPageToken
@@ -109,11 +110,10 @@ if input_menu == '1':
             datetime_now = datetime.timedelta(minutes = date_time_obj.minute, seconds = date_time_obj.second)
             
             datetime_total += datetime_now
-            print(datetime_now)
-            
+            print(datetime_now)           
             print()
             
-            if total_n == 17:
+            if part_mode == True and total_n == 17:
                 print(datetime_total)
                 is_breaker = True
                 break
