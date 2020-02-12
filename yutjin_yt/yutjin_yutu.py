@@ -3,7 +3,7 @@
 # python 3X
 '''
 '''
-work = 22
+work = 31
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
