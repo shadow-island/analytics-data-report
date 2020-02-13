@@ -68,7 +68,6 @@ def get_last(local_file_name, bar):
     return count
 
 def check_update():
-    print('menu_song_time_check')
     import datetime
     
     # for both read and save
