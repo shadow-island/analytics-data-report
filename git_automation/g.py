@@ -163,7 +163,9 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     check_update()
+    
+    import time
     print("timer start...")
-    sleep(1)
+    time.sleep(1)
     print("timer end")
     
