@@ -1,2 +1,2 @@
-timeout /t 120 /nobreak
+timeout /t 240 /nobreak
 taskkill /im tor.exe /F

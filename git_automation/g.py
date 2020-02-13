@@ -166,6 +166,6 @@ if __name__ == '__main__':
     
     import time
     print("timer start...")
-    time.sleep(1)
+    time.sleep(960)
     print("timer end")
     
