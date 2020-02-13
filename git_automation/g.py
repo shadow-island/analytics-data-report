@@ -247,4 +247,3 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     check_update()
-    print ('End')
