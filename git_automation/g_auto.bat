@@ -4,5 +4,5 @@ del eukM2.log
 	py g.py
 	git commit --all -m "ga3m"
 	git push	
-	timeout /t 180
+	timeout /t 240
 goto _loop
