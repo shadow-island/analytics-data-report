@@ -26,29 +26,6 @@ def read_file(file_name):
                             
     return (return_flag, return_data)
 
-def total_sec_2_readable(total_secs):
-    text = ''
-    remained_sec = total_secs
-    h               = int(remained_sec / 3600)    
-    if h >= 24:
-        d = (int)(h / 24)
-        text = str(d) + '일'
-        h = h % 24 
-    
-    remained_sec    = total_secs % 3600         
-    print_mi        = int(remained_sec / 60)
-    remained_sec    = remained_sec % 60
-
-    if h > 0:
-        text += str(h)+'시간 '
-    
-    if print_mi > 0:
-        text += str(print_mi) + '분 '
-         
-    text += str(remained_sec) + '초'
-    
-    return text
-
 def get_last(local_file_name, bar):
     # File이 없는경우 대비
     #datetime_old_time   = datetime.datetime(2014, 8, 3, 0,0,0)
@@ -63,7 +40,7 @@ def get_last(local_file_name, bar):
             #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로
             count = int(line)
     else:
-        print ('file error')
+        print ('No file and clean Mode')
     #file reading end
     return count
 
@@ -228,7 +205,7 @@ def create_selected_playlist():
 main
 '''
 if __name__ == '__main__':
-    work = 7
+    work = 8
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
