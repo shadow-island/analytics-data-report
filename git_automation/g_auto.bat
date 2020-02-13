@@ -1,6 +1,6 @@
 chcp 949
-:_loop
 del eukM2.log
+:_loop
 py g.py
 timeout /t 13
 git commit --all -m "ga"
