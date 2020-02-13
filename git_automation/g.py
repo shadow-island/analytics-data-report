@@ -139,14 +139,6 @@ def create_db():
     wb.save(filename = db_xls)   
     return True
     
-def create_db_N_create_selected_playlist():
-    # create_db 자체를 실패하면 작업취소
-    if create_db() == False:        
-        return
-            
-    create_selected_playlist()
-    return 
-
 def create_selected_playlist():
     import openpyxl
     from openpyxl import Workbook
@@ -205,7 +197,7 @@ def create_selected_playlist():
 main
 '''
 if __name__ == '__main__':
-    work = 10
+    work = 11
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
