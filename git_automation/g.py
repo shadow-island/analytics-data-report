@@ -63,81 +63,6 @@ def check_update():
     my_file.close()    
     
     return int_new_gap
-
-
-def create_db():
-    #여기 두는것은 전체 플로그램을 그냥 시간체크용으로만 쓰는경우도 있어서
-    import openpyxl
-    from openpyxl import Workbook
-        
-    old_dict = {}
-    if (os.path.exists(db_xls)):
-        wb = openpyxl.load_workbook(db_xls)
-        sheet_list = wb.get_sheet_names()
-        #print (sheet_list)
-        sheet = wb.get_sheet_by_name(sheet_list[0])        
-        for i in range(1,sheet.max_row + 1):
-            key = sheet.cell(row = i, column = 1).value     
-            b_debug = True
-            b_debug = False        
-            if (b_debug == True):
-                print (key + ':' + str(sheet.cell(row = i, column = 2).value))
-            old_dict[key] = sheet.cell(row = i, column = 2).value
-    #endif    
-
-    print ('[creating DB]')
-    #
-    if os.path.exists(db_xls):
-        if os.path.exists('backup_db.xlsx'):
-            os.remove('backup_db.xlsx')
-        try:    
-            os.rename(db_xls,'backup_db.xlsx')
-        except :
-            print ('e')
-            return False
-                
-    
-    file_path_name_list = []
-    
-    for root, dirs, files in os.walk(mp3_folder_no_endslash):
-        for file in files:
-            text = os.path.join(root, file)    
-            def print_and_append(text):
-                try:                
-                    print(text)
-                except:
-                    pass                
-                file_path_name_list.append(text)
-                      
-            if text.find('mp4') != -1 or text.find('mp3') != -1 or text.find('avi') != -1 or text.find('webm') != -1  or text.find('mkv') != -1 or text.find('wav') != -1:
-                print_and_append(text)
-                
-    i_len = len(file_path_name_list)
-    print  ('file_path_name_list len:' + str(i_len))
-    #for linux
-    file_path_name_list.sort();     
-
-    wb = Workbook()
-    sheet = wb.active
-
-    row_num = 0;
-    for file_path_name in file_path_name_list:
-        key = file_path_name	
-        row_num += 1
-        sheet.cell(row=row_num,column=1).value=key
-        
-	#for k in old_dict.keys():
-	#print 'keys~'
-	#print old_dict.keys()
-        if key in old_dict.keys():
-            sheet.cell(row = row_num,column = 2).value = old_dict[file_path_name]
-        else:
-            sheet.cell(row = row_num,column = 2).value = '1'
-        #print file_path_name+ ':' + str(sheet.cell(row = row_num,column = 2).value)
-                
-    print ('exist:row_num:' + str(row_num))                
-    wb.save(filename = db_xls)   
-    return True
     
 def create_selected_playlist():
     import openpyxl
@@ -197,7 +122,7 @@ def create_selected_playlist():
 main
 '''
 if __name__ == '__main__':
-    work = 11
+    work = 12
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
