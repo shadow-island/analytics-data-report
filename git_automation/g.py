@@ -122,7 +122,7 @@ def create_selected_playlist():
 main
 '''
 if __name__ == '__main__':
-    work = 12
+    work = 13
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -163,3 +163,7 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     check_update()
+    print("timer start...")
+    sleep(1)
+    print("timer end")
+    

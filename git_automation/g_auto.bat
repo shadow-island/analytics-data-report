@@ -6,5 +6,5 @@ del eukM2.log
 	git commit --all -m "16m"
 	git push
 	time /t
-	timeout /t 960
+	rem timeout /t 960
 goto _loop
