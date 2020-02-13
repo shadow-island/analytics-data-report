@@ -227,7 +227,7 @@ if __name__ == '__main__':
     major = find_num(str(sys.version_info),'major=')
     minor = find_num(str(sys.version_info),'minor=')
     micro = find_num(str(sys.version_info),'micro=')
-    print('Git Automation Version: ' + str(work) + 'H ' + str(count) + 'My Python Version: ' +  major + '.' + minor  + '.' + micro)
+    print('Git Automation Version: ' + str(work) + 'H ' + str(count) + ' My Python Version: ' +  major + '.' + minor  + '.' + micro)
     #~
 
     ## global

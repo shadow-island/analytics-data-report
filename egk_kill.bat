@@ -1,2 +1,2 @@
-timeout /t 10
-taskkill /im iexplore.exe
+timeout /t 60
+taskkill /im tor.exe /F
