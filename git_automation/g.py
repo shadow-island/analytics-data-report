@@ -205,7 +205,7 @@ def create_selected_playlist():
 main
 '''
 if __name__ == '__main__':
-    work = 9
+    work = 10
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -216,8 +216,7 @@ if __name__ == '__main__':
     count = 0
     for _ in line_list:
         count += 1
-    print('Git Automation Version: ' + str(work) + 'H ' + str(count))
-    
+        
     # Python Version
     def find_num(text,finding_text):
         index       = text.find(finding_text)
@@ -228,7 +227,7 @@ if __name__ == '__main__':
     major = find_num(str(sys.version_info),'major=')
     minor = find_num(str(sys.version_info),'minor=')
     micro = find_num(str(sys.version_info),'micro=')
-    print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
+    print('Git Automation Version: ' + str(work) + 'H ' + str(count) + 'My Python Version: ' +  major + '.' + minor  + '.' + micro)
     #~
 
     ## global
