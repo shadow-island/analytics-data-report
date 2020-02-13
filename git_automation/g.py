@@ -228,7 +228,7 @@ def create_selected_playlist():
 main
 '''
 if __name__ == '__main__':
-    work = 6
+    work = 7
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -239,7 +239,7 @@ if __name__ == '__main__':
     count = 0
     for _ in line_list:
         count += 1
-    print('Yutjin Music Version: ' + str(work) + 'H ' + str(count) + '\n')
+    print('Git Automation Version: ' + str(work) + 'H ' + str(count) + '\n')
     
     # Python Version
     def find_num(text,finding_text):
@@ -264,12 +264,7 @@ if __name__ == '__main__':
         print ('Office Mode')
     else:
         b_windows_or_linux = True
-        print ('Home windows Mode')
-    if b_windows_or_linux:
-        mp3_folder_no_endslash = 'D:\\my\\public_data\\music\\0.rank'
-    else:    
-        mp3_folder_no_endslash = '\\\\VBOXSVR\\my\\ongaku'
-    #~
+        #print ('Home windows Mode')
     ##~ end of global
 
     #init
