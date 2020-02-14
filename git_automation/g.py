@@ -116,7 +116,7 @@ if __name__ == '__main__':
     # 3 기능추가
     
     import random
-    maxx = 27
+    maxx = 28
     random_num = random.randrange(2, maxx + 1) #17
     print(random_num, '/',maxx)
     print("timer start...")
