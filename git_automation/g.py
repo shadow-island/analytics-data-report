@@ -69,15 +69,13 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 20
+    work = 21
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
     source_file = codecs.open('g.py', 'r','utf-8')
     line_list   = source_file.readlines()    
-    source_file.close()
-    
-    count = 0
+    source_file.close()    
     le = len(line_list)
         
     # Python Version
@@ -112,11 +110,10 @@ if __name__ == '__main__':
     check_update()
         
     import random
-    random_num = random.randrange(1, 4 + 1)
+    random_num = random.randrange(1, 5 + 1)
     print(random_num)
     print("timer start...")
     import time
     time.sleep(random_num*60)
     #17
     print("timer end")
-    
