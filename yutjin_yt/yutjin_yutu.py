@@ -69,66 +69,67 @@ if input_menu == '1':
     list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
     list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
     list_id = input('list?')
-    
-    base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
-    nextPageToken = ""
+    while(True):    
+        base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
+        nextPageToken = ""
 
-    total_n = 1
-    import datetime
-    datetime_total = datetime.datetime(1,1,1,0,0,0)
-    part_mode = False
-    for n in range(3):
-        is_breaker = False
-        this_url = base_url + "&pageToken=" + nextPageToken
-        json_data = urllib.request.urlopen(this_url).read()     
+        total_n = 1
+        import datetime
+        datetime_total = datetime.datetime(1,1,1,0,0,0)
+        part_mode = False
+        for n in range(3):
+            is_breaker = False
+            this_url = base_url + "&pageToken=" + nextPageToken
+            json_data = urllib.request.urlopen(this_url).read()     
 
-        item_data = json.loads(json_data)["items"]
-        print(len(item_data))
-        for i in range(len(item_data)):
-            item_data = json.loads(json_data)["items"][i]['snippet']['title']
-            print(str(total_n) + ":"+ item_data)        
-            videoId = json.loads(json_data)["items"][i]['snippet']['resourceId']['videoId']
-            print(videoId)
-                     
-            v_json_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?id=" + str(videoId) + "&part=contentDetails&key=" + key).read()
-            v_item_data = json.loads(v_json_data)["items"][0]["contentDetails"]['duration']
-            #debug print(v_item_data)
-            v_item_data = v_item_data.replace('PT','')        
-            m = s = 0
-            if v_item_data.find('M') == -1:
-                v_item_data = '0:' + v_item_data
-            else:
-                v_item_data = v_item_data.replace('M',':')        
+            item_data = json.loads(json_data)["items"]
+            print(len(item_data))
+            for i in range(len(item_data)):
+                item_data = json.loads(json_data)["items"][i]['snippet']['title']
+                print(str(total_n) + ":"+ item_data)        
+                videoId = json.loads(json_data)["items"][i]['snippet']['resourceId']['videoId']
+                print(videoId)
+                         
+                v_json_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?id=" + str(videoId) + "&part=contentDetails&key=" + key).read()
+                v_item_data = json.loads(v_json_data)["items"][0]["contentDetails"]['duration']
+                #debug print(v_item_data)
+                v_item_data = v_item_data.replace('PT','')        
+                m = s = 0
+                if v_item_data.find('M') == -1:
+                    v_item_data = '0:' + v_item_data
+                else:
+                    v_item_data = v_item_data.replace('M',':')        
+                    
+                if v_item_data.find('S') == -1:
+                    v_item_data = v_item_data + '0'
+                else:
+                    v_item_data = v_item_data.replace('S','')        
                 
-            if v_item_data.find('S') == -1:
-                v_item_data = v_item_data + '0'
-            else:
-                v_item_data = v_item_data.replace('S','')        
-            
-            #print(v_item_data)        
-            date_time_obj = datetime.datetime.strptime(v_item_data, '%M:%S')        
-            datetime_now = datetime.timedelta(minutes = date_time_obj.minute, seconds = date_time_obj.second)
-            
-            datetime_total += datetime_now
-            print(datetime_now)           
-            print()
-            
-            if part_mode == True and total_n == 17:
-                print(datetime_total)
-                is_breaker = True
+                #print(v_item_data)        
+                date_time_obj = datetime.datetime.strptime(v_item_data, '%M:%S')        
+                datetime_now = datetime.timedelta(minutes = date_time_obj.minute, seconds = date_time_obj.second)
+                
+                datetime_total += datetime_now
+                print(datetime_now)           
+                print()
+                
+                if part_mode == True and total_n == 17:
+                    print(datetime_total)
+                    is_breaker = True
+                    break
+                
+                total_n += 1        
+            if is_breaker == True:
                 break
-            
-            total_n += 1        
-        if is_breaker == True:
-            break
-            
-        if "nextPageToken" in json.loads(json_data):
-            nextPageToken = json.loads(json_data)["nextPageToken"]
-            print(nextPageToken)
-            n += 1
-        else:
-            break
-    print(datetime_total)
+                
+            if "nextPageToken" in json.loads(json_data):
+                nextPageToken = json.loads(json_data)["nextPageToken"]
+                print(nextPageToken)
+                n += 1
+            else:
+                break
+        print(datetime_total)
+        input("do you want to check this list again?")
 else:
     for i in range(0,len(data)):
         value = data[i][1]
