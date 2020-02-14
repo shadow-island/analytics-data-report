@@ -37,8 +37,7 @@ def get_last(local_file_name, bar):
     if return_flag == True:
         for line in data_list:
             #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로
-            count = int(line)
-        print ('Will be committed!!!!!!!!!!!!!!!!')
+            count = int(line)        
     else:
         print ('No file and clean Mode')
     #file reading end
@@ -52,10 +51,9 @@ def check_update():
     bar             = '~'
     #~
     
-    count =  get_last(local_file_name, bar)
-    
-    print ("previous value: " + str(count))
+    count =  get_last(local_file_name, bar)    
     count += 1
+    print ("new value: " + str(count))
         
     my_file = open(local_file_name,"w")    
     my_file.write(str(count))
@@ -68,7 +66,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 48
+    work = 49
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -103,9 +101,12 @@ if __name__ == '__main__':
 
     #init
     int_new_gap = 0
-    if check_update() == 1:
+    this_count = check_update()
+    if this_count == 1:
         print("first commit")
         exit(0)
+    if this_count >= 2:
+        print ('Committed at least once!!!!!!!!!!!!!!!!')
 
     # 숫자만 늘림
     # 1/3 작업모드  previous value가 있을때 확실히 표시    
@@ -123,7 +124,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 36
+    maxx = 37
     random_num = random.randrange(2, maxx + 1)
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
