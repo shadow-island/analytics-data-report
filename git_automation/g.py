@@ -69,21 +69,18 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 14
+    work = 33
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
     source_file = codecs.open('g.py', 'r','utf-8')
-    line_list   = source_file.readlines()    
+    line_list   = source_file.readlines()
+    le = len(line_list)
     source_file.close()
-    
-    count = 0
-    for _ in line_list:
-        count += 1
         
     # Python Version
     def find_num(text,finding_text):
-        index       = text.find(finding_text)
+        index = text.find(finding_text)
         size        = len(finding_text)
         location    = index + size
         return text[location:location + 1]    
@@ -91,7 +88,8 @@ if __name__ == '__main__':
     major = find_num(str(sys.version_info),'major=')
     minor = find_num(str(sys.version_info),'minor=')
     micro = find_num(str(sys.version_info),'micro=')
-    print('Git Automation Version: ' + str(work) + 'H ' + str(count) + ' My Python Version: ' +  major + '.' + minor  + '.' + micro)
+    print('----')
+    print('Git Automation Version: ' + str(work) + 'H ' + str(le) + ' My Python Version: ' +  major + '.' + minor  + '.' + micro)
     #~
 
     ## global
@@ -110,9 +108,18 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     check_update()
+    print(datetime.datetime.now())
+    # 숫자만 늘림
+    # 1/3 작업모드    
+    # 1 코드 정리 + 작업숫자만
+    # 2 git 정리 + 작업숫자만
+    # 3 기능추가
     
-    import time
+    import random
+    maxx = 28
+    random_num = random.randrange(2, maxx + 1) #17
+    print(random_num, '/',maxx)
     print("timer start...")
-    time.sleep(17*60)
+    import time
+    time.sleep(random_num*60)    
     print("timer end")
-    
