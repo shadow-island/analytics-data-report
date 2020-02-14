@@ -69,18 +69,17 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 21
+    work = 22
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
     source_file = codecs.open('g.py', 'r','utf-8')
-    line_list   = source_file.readlines()    
-    source_file.close()    
+    line_list   = source_file.readlines()
     le = len(line_list)
+    source_file.close()
         
     # Python Version
-    def find_num(text,finding_text):
-        index       = text.find(finding_text)
+    def find_num(text,finding_text):text.find(finding_text)
         size        = len(finding_text)
         location    = index + size
         return text[location:location + 1]    
@@ -110,10 +109,9 @@ if __name__ == '__main__':
     check_update()
         
     import random
-    random_num = random.randrange(1, 5 + 1)
+    random_num = random.randrange(1, 6 + 1) #17
     print(random_num)
     print("timer start...")
     import time
-    time.sleep(random_num*60)
-    #17
+    time.sleep(random_num*60)    
     print("timer end")
