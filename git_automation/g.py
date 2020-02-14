@@ -69,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 36
+    work = 37
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -117,9 +117,10 @@ if __name__ == '__main__':
     # 3 기능추가
     
     import random
-    maxx = 30
+    maxx = 31
     random_num = random.randrange(2, maxx + 1) #17
     print(random_num, '/',maxx)
+    next_gap_timedelta = datetime.timedelta(minutes = random_num)
     print("timer start...")
     import time
     time.sleep(random_num*60)    
