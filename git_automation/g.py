@@ -111,7 +111,7 @@ if __name__ == '__main__':
     # 1/3 작업모드  previous value가 있을때 확실히 표시    
     # 1 코드 정리
     # 2 git 정리 + 작업숫자만
-    # 3 기능추가,뒤에소수점?
+    # 3 기능향상
     
     #1
     datetime_now = datetime.datetime.now()
