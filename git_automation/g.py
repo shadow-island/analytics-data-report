@@ -69,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 19
+    work = 20
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -78,8 +78,7 @@ if __name__ == '__main__':
     source_file.close()
     
     count = 0
-    for _ in line_list:
-        count += 1
+    le = len(line_list)
         
     # Python Version
     def find_num(text,finding_text):
@@ -91,8 +90,8 @@ if __name__ == '__main__':
     major = find_num(str(sys.version_info),'major=')
     minor = find_num(str(sys.version_info),'minor=')
     micro = find_num(str(sys.version_info),'micro=')
-    print('--')
-    print('Git Automation Version: ' + str(work) + 'H ' + str(count) + ' My Python Version: ' +  major + '.' + minor  + '.' + micro)
+    print('----')
+    print('Git Automation Version: ' + str(work) + 'H ' + str(le) + ' My Python Version: ' +  major + '.' + minor  + '.' + micro)
     #~
 
     ## global
@@ -111,10 +110,9 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     check_update()
-    
-    
+        
     import random
-    random_num = random.randrange(1,3 + 1)
+    random_num = random.randrange(1, 4 + 1)
     print(random_num)
     print("timer start...")
     import time
