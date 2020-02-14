@@ -53,7 +53,7 @@ def check_update():
     
     count =  get_last(local_file_name, bar)    
     count += 1
-    print ("new value: " + str(count))
+    print ("Round " + str(count))
         
     my_file = open(local_file_name,"w")    
     my_file.write(str(count))
@@ -101,11 +101,11 @@ if __name__ == '__main__':
 
     #init
     int_new_gap = 0
-    this_count = check_update()
-    if this_count == 1:
+    next_round = check_update()
+    if next_round == 1:
         print("first commit")
         exit(0)
-    if this_count >= 3:
+    if next_round >= 3:
         print ('Committed at least once!!!!!!!!!!!!!!!!')
 
     # 숫자만 늘림
