@@ -105,7 +105,7 @@ if __name__ == '__main__':
     if this_count == 1:
         print("first commit")
         exit(0)
-    if this_count >= 2:
+    if this_count >= 3:
         print ('Committed at least once!!!!!!!!!!!!!!!!')
 
     # 숫자만 늘림
