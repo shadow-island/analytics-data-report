@@ -66,7 +66,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 49
+    work = 51
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -112,7 +112,9 @@ if __name__ == '__main__':
     # 1/3 작업모드  previous value가 있을때 확실히 표시    
     # 1 코드 정리
     # 2 git 정리 + 작업숫자만
-    # 3 기능향상
+    # 3 기능향상,commit 회수줄여보기 bat바꿔야할듯
+    # 최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다,(사용자에게 선택권을 줘야함)
+    # 2nd round는 무조건 커밋 
     
     #1
     datetime_now = datetime.datetime.now()
