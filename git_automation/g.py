@@ -69,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 40
+    work = 41
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     check_update()
 
     # 숫자만 늘림
-    # 1/3 작업모드    
+    # 1/2 작업모드  previous value가 있을때 확실히 표시    
     # 1 코드 정리,뒤에소수점?
     # 2 git 정리 + 작업숫자만
     # 3 기능추가
@@ -120,8 +120,8 @@ if __name__ == '__main__':
     print(datetime_now)
     #2
     import random
-    maxx = 33
-    random_num = random.randrange(2, maxx + 1) #17
+    maxx = 34
+    random_num = random.randrange(2, maxx + 1)
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     #3
