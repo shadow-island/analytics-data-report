@@ -69,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 22
+    work = 23
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -79,7 +79,8 @@ if __name__ == '__main__':
     source_file.close()
         
     # Python Version
-    def find_num(text,finding_text):text.find(finding_text)
+    def find_num(text,finding_text):
+        index = text.find(finding_text)
         size        = len(finding_text)
         location    = index + size
         return text[location:location + 1]    
