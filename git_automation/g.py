@@ -69,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 18
+    work = 19
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -91,6 +91,7 @@ if __name__ == '__main__':
     major = find_num(str(sys.version_info),'major=')
     minor = find_num(str(sys.version_info),'minor=')
     micro = find_num(str(sys.version_info),'micro=')
+    print('--')
     print('Git Automation Version: ' + str(work) + 'H ' + str(count) + ' My Python Version: ' +  major + '.' + minor  + '.' + micro)
     #~
 
@@ -113,7 +114,7 @@ if __name__ == '__main__':
     
     
     import random
-    random_num = random.randrange(1,2 + 1)
+    random_num = random.randrange(1,3 + 1)
     print(random_num)
     print("timer start...")
     import time
