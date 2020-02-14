@@ -111,22 +111,31 @@ if __name__ == '__main__':
         exit(0)
 
     # 숫자만 늘림
-    # 1/2 작업모드  previous value가 있을때 확실히 표시    
-    # 1 코드 정리,뒤에소수점?
+    # 1/3 작업모드  previous value가 있을때 확실히 표시    
+    # 1 코드 정리
     # 2 git 정리 + 작업숫자만
-    # 3 기능추가
+    # 3 기능추가,뒤에소수점?
     
     #1
     datetime_now = datetime.datetime.now()
-    print(datetime_now)
+    ##    
+    txt = str(datetime_now)
+    index = txt.find('.')
+    print(txt[:index])
+    #~
+        
     #2
     import random
-    maxx = 35
+    maxx = 36
     random_num = random.randrange(2, maxx + 1)
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     #3
-    print(datetime_now + next_gap_timedelta)
+    ##    
+    txt = str(datetime_now + next_gap_timedelta)
+    index = txt.find('.')
+    print(txt[:index])
+    #~
     
     print("timer start...")
     import time
