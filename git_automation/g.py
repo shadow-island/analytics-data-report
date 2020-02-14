@@ -69,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 26
+    work = 27
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     check_update()
         
     import random
-    maxx = 9
+    maxx = 10
     random_num = random.randrange(1, maxx + 1) #17
     print(random_num, maxx)
     print("timer start...")
