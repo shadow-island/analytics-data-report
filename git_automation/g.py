@@ -68,7 +68,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 45
+    work = 48
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -92,9 +92,6 @@ if __name__ == '__main__':
     #~
 
     ## global
-    b_windows_or_linux = True
-    db_xls = 'db.xlsx'    
-
     # 무슨 모드인지 따라 folder 정함
     if os.path.exists('euk_music_2p3.linux'):
         b_windows_or_linux = False
