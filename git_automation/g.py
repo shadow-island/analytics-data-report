@@ -28,7 +28,6 @@ def read_file(file_name):
 
 def get_last(local_file_name, bar):
     # File이 없는경우 대비
-    #datetime_old_time   = datetime.datetime(2014, 8, 3, 0,0,0)
     datetime_old_time   = datetime.datetime.now()
     int_old_sec_gap     = 0
 
@@ -39,6 +38,7 @@ def get_last(local_file_name, bar):
         for line in data_list:
             #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로
             count = int(line)
+        print ('Will be committed!!!!!!!!!!!!!!!!')
     else:
         print ('No file and clean Mode')
     #file reading end
@@ -56,20 +56,19 @@ def check_update():
     
     print ("previous value: " + str(count))
     count += 1
-
         
     my_file = open(local_file_name,"w")    
     my_file.write(str(count))
     my_file.close()    
     
-    return int_new_gap
+    return count
 
 ##main    
 '''
 main
 '''
 if __name__ == '__main__':
-    work = 41
+    work = 45
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -107,7 +106,9 @@ if __name__ == '__main__':
 
     #init
     int_new_gap = 0
-    check_update()
+    if check_update() == 1:
+        print("first commit")
+        exit(0)
 
     # 숫자만 늘림
     # 1/2 작업모드  previous value가 있을때 확실히 표시    
@@ -120,7 +121,7 @@ if __name__ == '__main__':
     print(datetime_now)
     #2
     import random
-    maxx = 34
+    maxx = 35
     random_num = random.randrange(2, maxx + 1)
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
