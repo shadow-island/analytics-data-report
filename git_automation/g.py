@@ -69,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 29
+    work = 30
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -108,9 +108,15 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     check_update()
-        
+    print(datetime.datetime.now())
+    #1/3은 일단 무조건 패스=재실행,숫자도 안늘림
+    # 숫자만 늘림
+    # 기능추가
+    # 코드 정리
+    # git 정리
+    
     import random
-    maxx = 11
+    maxx = 12
     random_num = random.randrange(2, maxx + 1) #17
     print(random_num, '/',maxx)
     print("timer start...")
