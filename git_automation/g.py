@@ -69,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 37
+    work = 39
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -108,19 +108,25 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     check_update()
-    datetime_now = datetime.datetime.now()
-    print(datetime_now)
+
     # 숫자만 늘림
     # 1/2 작업모드    
     # 1 코드 정리 + 작업숫자만
     # 2 git 정리 + 작업숫자만
     # 3 기능추가
     
+    #1
+    datetime_now = datetime.datetime.now()
+    print(datetime_now)
+    #2
     import random
-    maxx = 31
+    maxx = 32
     random_num = random.randrange(2, maxx + 1) #17
-    print(random_num, '/',maxx)
+    print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
+    #3
+    print(datetime_now + next_gap_timedelta)
+    
     print("timer start...")
     import time
     time.sleep(random_num*60)    
