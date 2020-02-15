@@ -8,6 +8,15 @@ Next:
 Release note
 #기능
 #UI
+Todo:
+    # 1.암것도안함(이것도테스트필요) 
+    # 2 
+    - 1숫자만늘림 
+      2개선?
+    # -1 코드 정리
+    # -3 git 정리 + 작업숫자만
+    # -4 기능향상, 처음시간도 소숫점없애기, previous value가 있을때 확실히 표시    
+    
 '''
 
 import os
@@ -69,7 +78,20 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 60
+    import sys
+    if len(sys.argv) == 1:
+        print('normmal mode:no argv')
+    else:
+        #1
+        datetime_now = datetime.datetime.now()
+        ##    
+        txt = str(datetime_now)
+        index = txt.find('.')
+        print(txt[:index])
+        #~
+        exit(0)
+        
+    work = 61
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -104,12 +126,6 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
 
-    # 1.암것도안함(이것도테스트필요) 2숫자만늘림 3개선?
-    # 1 previous value가 있을때 확실히 표시    
-    # 1 코드 정리
-    # 2 git 정리 + 작업숫자만
-    # 3 기능향상, 처음시간도 소숫점없애기
-    
     
     #1
     datetime_now = datetime.datetime.now()
@@ -121,7 +137,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 45
+    maxx = 46
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
