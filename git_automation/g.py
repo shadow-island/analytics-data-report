@@ -37,7 +37,8 @@ def get_last(local_file_name, bar):
     if return_flag == True:
         for line in data_list:
             #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로
-            count = int(line)        
+            if line.isdigit() == True:
+                count = int(line)
     else:
         print ('No file and clean Mode')
     #file reading end
@@ -66,7 +67,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 54
+    work = 56
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -101,14 +102,8 @@ if __name__ == '__main__':
 
     #init
     int_new_gap = 0
-    next_round = check_update()
-    if next_round == 1:
-        print("first commit")
-        exit(0)
-    if next_round >= 3:
-        print ('Committed at least once!!!!!!!!!!!!!!!!')
 
-    # 숫자만 늘림
+    # 1.암것도안함(이것도테스트필요) 2숫자만 늘림 3개선?
     # 1/2 작업모드  previous value가 있을때 확실히 표시    
     # 1 코드 정리
     # 2 git 정리 + 작업숫자만
@@ -126,10 +121,11 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 40
-    random_num = random.randrange(2, maxx + 1)
+    maxx = 42
+    random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
+    
     #3
     ##    
     txt = str(datetime_now + next_gap_timedelta)
@@ -140,4 +136,11 @@ if __name__ == '__main__':
     print("timer start...")
     import time
     time.sleep(random_num*60)    
+    #time.sleep(20)    #debug
     print("timer end")
+    
+    #update
+    next_round = check_update()
+    if next_round >= 3:
+        print ('Committed at least once!!!!!!!!!!!!!!!!')
+
