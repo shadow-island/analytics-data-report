@@ -122,7 +122,7 @@ if __name__ == '__main__':
     import random
     maxx = 41
     random_num = random.randrange(2, maxx + 1)
-    random_num = 1 #debug
+    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     #3
@@ -134,7 +134,8 @@ if __name__ == '__main__':
     
     print("timer start...")
     import time
-    time.sleep(random_num*60)    
+    #time.sleep(random_num*60)    
+    time.sleep(30)    #debug
     print("timer end")
     
     #update
