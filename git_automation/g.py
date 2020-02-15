@@ -135,17 +135,12 @@ if __name__ == '__main__':
     
     print("timer start...")
     import time
-    #time.sleep(random_num*60)    
-    time.sleep(20)    #debug
+    time.sleep(random_num*60)    
+    #time.sleep(20)    #debug
     print("timer end")
     
     #update
     next_round = check_update()
-    '''
-    if next_round == 1:
-        print("first commit")
-        exit(0)
-    '''
     if next_round >= 3:
         print ('Committed at least once!!!!!!!!!!!!!!!!')
 
