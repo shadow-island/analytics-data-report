@@ -17,6 +17,7 @@ Todo:
         git rebase HEAD~6 -i
         git push --force
     # -4 기능향상, 처음시간도 소숫점없애기, previous value가 있을때 확실히 표시    
+    # -5 다른 application
     
 '''
 
