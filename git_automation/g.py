@@ -101,14 +101,6 @@ if __name__ == '__main__':
 
     #init
     int_new_gap = 0
-    next_round = check_update()
-    '''
-    if next_round == 1:
-        print("first commit")
-        exit(0)
-    '''
-    if next_round >= 3:
-        print ('Committed at least once!!!!!!!!!!!!!!!!')
 
     # 숫자만 늘림
     # 1/2 작업모드  previous value가 있을때 확실히 표시    
@@ -143,3 +135,14 @@ if __name__ == '__main__':
     import time
     time.sleep(random_num*60)    
     print("timer end")
+    
+    #update
+    next_round = check_update()
+    '''
+    if next_round == 1:
+        print("first commit")
+        exit(0)
+    '''
+    if next_round >= 3:
+        print ('Committed at least once!!!!!!!!!!!!!!!!')
+
