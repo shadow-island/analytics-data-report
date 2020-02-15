@@ -102,9 +102,11 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     next_round = check_update()
+    '''
     if next_round == 1:
         print("first commit")
         exit(0)
+    '''
     if next_round >= 3:
         print ('Committed at least once!!!!!!!!!!!!!!!!')
 
