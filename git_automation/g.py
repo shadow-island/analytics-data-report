@@ -67,7 +67,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 55
+    work = 56
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -121,11 +121,11 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 41
-    random_num = random.randrange(2, maxx + 1)
-    
+    maxx = 42
+    random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
+    
     #3
     ##    
     txt = str(datetime_now + next_gap_timedelta)
