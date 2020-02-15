@@ -120,8 +120,9 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 2#41
+    maxx = 41
     random_num = random.randrange(2, maxx + 1)
+    random_num = 1 #debug
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     #3
