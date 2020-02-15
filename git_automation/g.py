@@ -2,6 +2,8 @@
 # python 3X
 '''
 본 App 장점:
+# 최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다,(사용자에게 선택권을 줘야함)
+# 2nd round는 무조건 커밋 
 Next:
 Release note
 #기능
@@ -54,7 +56,7 @@ def check_update():
     
     count =  get_last(local_file_name, bar)    
     count += 1
-    print ("Round " + str(count))
+    print ("saved value:" + str(count))
         
     my_file = open(local_file_name,"w")    
     my_file.write(str(count))
@@ -67,7 +69,7 @@ def check_update():
 main
 '''
 if __name__ == '__main__':
-    work = 58
+    work = 60
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -97,19 +99,17 @@ if __name__ == '__main__':
         print ('Office Mode')
     else:
         b_windows_or_linux = True
-        #print ('Home windows Mode')
     ##~ end of global
 
     #init
     int_new_gap = 0
 
-    # 1.암것도안함(이것도테스트필요) 2숫자만 늘림 3개선?
-    # 1/2 작업모드  previous value가 있을때 확실히 표시    
+    # 1.암것도안함(이것도테스트필요) 2숫자만늘림 3개선?
+    # 1 previous value가 있을때 확실히 표시    
     # 1 코드 정리
     # 2 git 정리 + 작업숫자만
-    # 3 기능향상,commit 회수줄여보기 bat바꿔야할듯
-    # 최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다,(사용자에게 선택권을 줘야함)
-    # 2nd round는 무조건 커밋 
+    # 3 기능향상
+    
     
     #1
     datetime_now = datetime.datetime.now()
@@ -121,7 +121,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 44
+    maxx = 45
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
