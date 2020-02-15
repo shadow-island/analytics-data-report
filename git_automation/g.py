@@ -14,7 +14,7 @@ Todo:
     - 1숫자만늘림 
       2개선?
     # -1 코드 정리
-    # -3 git 정리 + 작업숫자만
+    # -2 git 정리 + 작업숫자만
     # -4 기능향상, 처음시간도 소숫점없애기, previous value가 있을때 확실히 표시    
     
 '''
@@ -91,7 +91,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 61
+    work = 62
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -137,7 +137,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 46
+    maxx = 47
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
