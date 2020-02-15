@@ -136,7 +136,7 @@ if __name__ == '__main__':
     print("timer start...")
     import time
     #time.sleep(random_num*60)    
-    time.sleep(30)    #debug
+    time.sleep(20)    #debug
     print("timer end")
     
     #update
