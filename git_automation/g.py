@@ -10,10 +10,9 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 2 
+    # 1/3만작업?
     - 1숫자만늘림 
-      2개선?
-    # -1 코드 정리
+    # -2 코드 정리
     # -2 git 정리 + 작업숫자만
     # -4 기능향상, 처음시간도 소숫점없애기, previous value가 있을때 확실히 표시    
     
@@ -24,8 +23,8 @@ import sys
 import datetime
 
 def read_file(file_name):
-    return_flag = True
-    return_data = None
+    return_flag = True #error code
+    return_data = None #payload
             
     if os.path.exists(file_name):
         #euk
@@ -91,7 +90,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 62
+    work = 63
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -137,7 +136,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 47
+    maxx = 48
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)

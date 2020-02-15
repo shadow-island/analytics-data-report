@@ -1,8 +1,8 @@
 chcp 949
-;del eukM2.log , echo %time%
+rem ----------
 :_loop	
 	py g.py time
-	git commit --all -m "v6"
+	git commit --all -m "v7"
 	git push
 	py g.py	
 goto _loop
