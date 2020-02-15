@@ -37,7 +37,8 @@ def get_last(local_file_name, bar):
     if return_flag == True:
         for line in data_list:
             #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로
-            count = int(line)        
+            if line.isdigit() == True:
+                count = int(line)
     else:
         print ('No file and clean Mode')
     #file reading end
