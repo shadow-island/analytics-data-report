@@ -10,7 +10,7 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/2만작업?(일단 오늘 영상완료까지는)
+    # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가)
     - 1 숫자만늘림 
      -2 코드 정리
      -3 git 정리 + 작업숫자만
@@ -150,11 +150,13 @@ if __name__ == '__main__':
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     
     #3
+    print("종료예상시간:")
     ##    
     txt = str(datetime_now + next_gap_timedelta)
     index = txt.find('.')
     print(txt[:index])
     #~
+    
     #os.system('dir')
     
     import time
