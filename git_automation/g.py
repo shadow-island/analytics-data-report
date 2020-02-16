@@ -78,7 +78,15 @@ def check_update():
     
     return count
 
+import gobject
+def _timer():  
+	count = 1
+	print(str(count))	
+	# Repeat timer by returning True	
+	return True
+    
 ##main    
+
 '''
 main
 '''
@@ -156,6 +164,9 @@ if __name__ == '__main__':
     os.system('dir')
     
     print("timer start...")
+    
+    gobject.timeout_add(1000, _timer)
+    
     import time
     time.sleep(random_num*60)    
     #time.sleep(20)    #debug
