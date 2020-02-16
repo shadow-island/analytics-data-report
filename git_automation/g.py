@@ -10,14 +10,14 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/2만작업?
+    # 1/3만작업?(일단 오늘 영상완료까지는)
     - 1숫자만늘림 
      -2 코드 정리
      -3 git 정리 + 작업숫자만
         git rebase HEAD~6 -i
         git push --force
      -4 기능향상
-     -5 다른 application
+     -5 다른 application PL2efNl7MkFIC_egRbKPmX4oRr_tPs5uyc
     
 '''
 
