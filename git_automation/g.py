@@ -95,7 +95,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 65
+    work = 66
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -141,7 +141,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 50
+    maxx = 51
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
