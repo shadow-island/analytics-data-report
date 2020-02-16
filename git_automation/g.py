@@ -152,6 +152,7 @@ if __name__ == '__main__':
     index = txt.find('.')
     print(txt[:index])
     #~
+    os.system('dir')
     
     print("timer start...")
     import time
@@ -159,7 +160,7 @@ if __name__ == '__main__':
     #time.sleep(20)    #debug
     print("timer end")
     
-    os.system('dir')
+    
     
     #update
     next_round = check_update()
