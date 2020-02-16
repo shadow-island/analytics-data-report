@@ -10,8 +10,8 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/2만작업?(일단 오늘 영상완료까지는)
-    - 1숫자만늘림 
+    # 1/3만작업?(일단 오늘 영상완료까지는)
+    - 1 숫자만늘림 
      -2 코드 정리
      -3 git 정리 + 작업숫자만
         git rebase HEAD~6 -i
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 68
+    work = 69
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -145,7 +145,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 53
+    maxx = 54
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
