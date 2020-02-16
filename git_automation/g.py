@@ -18,6 +18,7 @@ Todo:
         git push --force
      -4 기능향상
      -5 다른 application PL2efNl7MkFIC_egRbKPmX4oRr_tPs5uyc
+        카톡채팅 - 시간조정기능(일단 숨기기가쉬움)
     
 '''
 
