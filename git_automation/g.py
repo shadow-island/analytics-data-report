@@ -12,12 +12,12 @@ Todo:
     # 1.암것도안함(이것도테스트필요) 
     # 1/2만작업?
     - 1숫자만늘림 
-    # -2 코드 정리
-    # -2 git 정리 + 작업숫자만
+     -2 코드 정리
+     -3 git 정리 + 작업숫자만
         git rebase HEAD~6 -i
         git push --force
-    # -4 기능향상, 처음시간도 소숫점없애기, previous value가 있을때 확실히 표시    
-    # -5 다른 application
+     -4 기능향상
+     -5 다른 application
     
 '''
 
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 64
+    work = 65
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -139,7 +139,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 49
+    maxx = 50
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
