@@ -10,7 +10,7 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/3만작업?(일단 오늘 영상완료까지는)
+    # 1/4만작업?(일단 오늘 영상완료까지는)
     - 1숫자만늘림 
      -2 코드 정리
      -3 git 정리 + 작업숫자만
@@ -21,8 +21,10 @@ Todo:
     
 '''
 
-import os
+#version용으로 기본 공통
 import sys
+#~
+import os
 import datetime
 
 def read_file(file_name):
@@ -156,6 +158,8 @@ if __name__ == '__main__':
     time.sleep(random_num*60)    
     #time.sleep(20)    #debug
     print("timer end")
+    
+    os.system('dir')
     
     #update
     next_round = check_update()
