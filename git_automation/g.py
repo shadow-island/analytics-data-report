@@ -145,7 +145,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 68
+    maxx = 69
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
