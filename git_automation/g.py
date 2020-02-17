@@ -10,7 +10,7 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가)
+    # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가)
     - 1 숫자만늘림 
      -2 코드 정리
      -3 git 정리 + 작업숫자만
@@ -18,8 +18,7 @@ Todo:
         git push --force
      -4 기능향상,batch file도
      -5 다른 application PL2efNl7MkFIC_egRbKPmX4oRr_tPs5uyc
-        카톡채팅 - 시간조정기능(일단 숨기기가쉬움)
-    
+        카톡채팅 - 시간조정기능(일단 숨기기가쉬움)    
 '''
 
 #version용으로 기본 공통
@@ -134,17 +133,18 @@ if __name__ == '__main__':
     #init
     int_new_gap = 0
     
+    def print_time(datetime_value):
+        txt = str(datetime_value)
+        index = txt.find('.')
+        return txt[:index]
+        
     #1
     datetime_now = datetime.datetime.now()
-    ##    
-    txt = str(datetime_now)
-    index = txt.find('.')
-    print(txt[:index])
-    #~
+    print(print_time(datetime_now))
         
     #2
     import random
-    maxx = 63
+    maxx = 65
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
