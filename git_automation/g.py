@@ -144,7 +144,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 62
+    maxx = 63
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -175,5 +175,5 @@ if __name__ == '__main__':
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
         
     
-    os.system('git commit --all -m "v9"')
+    os.system('git commit --all -m "v10"')
 
