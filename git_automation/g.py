@@ -144,18 +144,15 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 65
+    maxx = 66
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     
     #3
     print("종료예상시간:")
-    ##    
     txt = str(datetime_now + next_gap_timedelta)
-    index = txt.find('.')
-    print(txt[:index])
-    #~
+    print(print_time(txt))
     
     import time
     #random_num = 0  #debug
