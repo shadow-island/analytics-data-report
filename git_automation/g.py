@@ -17,7 +17,7 @@ Todo:
         git rebase HEAD~6 -i
         git push --force
      -4 기능향상,batch file도
-     -5 다른 application PL2efNl7MkFIC_egRbKPmX4oRr_tPs5uyc
+     -5 다른 application 
         카톡채팅 - 시간조정기능(일단 숨기기가쉬움)    
 '''
 
@@ -86,8 +86,9 @@ main
 '''
 if __name__ == '__main__':
     import sys
-    if len(sys.argv) == 1:
-        print('normmal mode:no argv')
+    if len(sys.argv) == 1:        
+        #print('normmal mode:no argv')
+        pass
     else:
         #1
         datetime_now = datetime.datetime.now()
@@ -144,7 +145,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 67
+    maxx = 68
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
