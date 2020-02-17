@@ -10,7 +10,7 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가)
+    # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가)
     - 1 숫자만늘림 
      -2 코드 정리
      -3 git 정리 + 작업숫자만
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 71
+    work = 72
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -160,16 +160,20 @@ if __name__ == '__main__':
     #os.system('dir')
     
     import time
+    random_num = 0  #debug
     for i in range(random_num,-1,-1):        
         print(i)
         if i != 0:
             time.sleep(60)
         
-    #time.sleep(20)    #debug
+    #time.sleep(20)   
     print("timer end")
     
     #update
     next_round = check_update()
     if next_round >= 3:
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
+        
+    
+    os.system('git commit --all -m "v9"')
 
