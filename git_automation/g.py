@@ -157,10 +157,8 @@ if __name__ == '__main__':
     print(txt[:index])
     #~
     
-    #os.system('dir')
-    
     import time
-    random_num = 0  #debug
+    #random_num = 0  #debug
     for i in range(random_num,-1,-1):        
         print(i)
         if i != 0:
@@ -175,5 +173,5 @@ if __name__ == '__main__':
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
         
     
-    os.system('git commit --all -m "v10"')
+    os.system('git commit --all -m "v11"')
 
