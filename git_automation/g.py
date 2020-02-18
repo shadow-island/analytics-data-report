@@ -131,12 +131,13 @@ if __name__ == '__main__':
         b_windows_or_linux = True
     ##~ end of global
 
-    #init
-    print('commit')
-    os.system('git commit --all -m "v 13"')
-    print('git push')
-    os.system('git push')
+    
     for _ in range(0,1):
+        print('[commit]')
+        os.system('git commit --all -m "v 13"')
+        print('[git push]')
+        os.system('git push')
+    
         def print_time(datetime_value):
             txt = str(datetime_value)
             index = txt.find('.')
