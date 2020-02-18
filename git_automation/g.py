@@ -155,7 +155,7 @@ if __name__ == '__main__':
     print("종료예상시간:" + print_time(txt))
     
     import time
-    random_num = 0  #debug
+    #random_num = 0  #debug
     for i in range(random_num,-1,-1):        
         print(i)
         if i != 0:
