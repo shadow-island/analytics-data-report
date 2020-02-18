@@ -19,6 +19,7 @@ Todo:
      -4 기능향상,batch file도
      -5 다른 application 
         카톡채팅 - 시간조정기능(일단 숨기기가쉬움)    
+        구독자 update
 '''
 
 #version용으로 기본 공통
@@ -132,9 +133,9 @@ if __name__ == '__main__':
     ##~ end of global
 
     
-    for _ in range(0,1+1):
+    for _ in range(0,2+1):
         print('[commit]')
-        os.system('git commit --all -m "v 13"')
+        os.system('git commit --all -m "v ' + str(14) + '"')
         print('[git push]')
         os.system('git push')
     
@@ -149,7 +150,7 @@ if __name__ == '__main__':
             
         #2
         import random
-        maxx = 77
+        maxx = 78
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
