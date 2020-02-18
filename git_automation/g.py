@@ -165,7 +165,7 @@ if __name__ == '__main__':
         for i in range(random_num,-1,-1):        
             print(str(i) + ' ', end='' )
             if i != 0:
-                time.sleep(60)
+                time.sleep(1)
             
         #time.sleep(20)   
         print("timer end")
