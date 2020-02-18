@@ -99,7 +99,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 73
+    work = 74
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -132,43 +132,41 @@ if __name__ == '__main__':
     ##~ end of global
 
     #init
-    int_new_gap = 0
-    
-    def print_time(datetime_value):
-        txt = str(datetime_value)
-        index = txt.find('.')
-        return txt[:index]
-        
-    #1
-    datetime_now = datetime.datetime.now()
-    print(print_time(datetime_now))
-        
-    #2
-    import random
-    maxx = 75
-    random_num = random.randrange(2, maxx + 1)    
-    print(random_num, '/',maxx)      
-    next_gap_timedelta = datetime.timedelta(minutes = random_num)
-    
-    #3    
-    txt = str(datetime_now + next_gap_timedelta)
-    print("종료예상시간:" + print_time(txt))
-    
-    import time
-    #random_num = 0  #debug
-    for i in range(random_num,-1,-1):        
-        print(i)
-        if i != 0:
-            time.sleep(60)
-        
-    #time.sleep(20)   
-    print("timer end")
-    
-    #update
-    next_round = check_update()
-    if next_round >= 3:
-        print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
-        
-    
-    os.system('git commit --all -m "v12"')
+    print('commit')
+    os.system('git commit --all -m "v 13"')
+    print('git push')
     os.system('git push')
+    for _ in range(0,1):
+        def print_time(datetime_value):
+            txt = str(datetime_value)
+            index = txt.find('.')
+            return txt[:index]
+            
+        #1
+        datetime_now = datetime.datetime.now()
+        print(print_time(datetime_now))
+            
+        #2
+        import random
+        maxx = 76
+        random_num = random.randrange(2, maxx + 1)    
+        print(random_num, '/',maxx)      
+        next_gap_timedelta = datetime.timedelta(minutes = random_num)
+        
+        #3    
+        txt = str(datetime_now + next_gap_timedelta)
+        print("종료예상시간:" + print_time(txt))
+        
+        import time
+        #random_num = 0  #debug
+        for i in range(random_num,-1,-1):        
+            print(i)
+            if i != 0:
+                time.sleep(60)
+            
+        #time.sleep(20)   
+        print("timer end")
+        
+        #update
+        next_round = check_update()        
+        print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
