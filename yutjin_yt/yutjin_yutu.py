@@ -5,7 +5,7 @@
 최소한 오후 6:03 2020-02-15 이전에 개발 
 '''
 
-work = 58
+work = 74
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -134,8 +134,20 @@ if input_menu == '1':
         print(datetime_total)
         input("do you want to check this list again?")
 else:
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    #글꼴 50,너비61
     prev_subs = 0
-    for i in range(0,len(data)):        
+    total = len(data)
+    for i in range(total -1 ,-1, -1):
         value = data[i][1]
         le = len(value)
         #print(le)
@@ -144,14 +156,17 @@ else:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
         else:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
-            
+        
+        import time
+        time.sleep(2)
+        
         #print(channel_data)
         subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])
-        if prev_subs < subs:
+        if prev_subs > subs:
             print('역전?')
         prev_subs = subs
         view = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
-        print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ str(subs) +' 명 조회수는' + view  +'입니다.')
+        print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ str(subs) +'명,조회수는 ' + view  +'입니다')
         #break
 
 input('pause')
