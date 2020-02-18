@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 # python 3X
 '''
+최소한 오후 6:03 2020-02-15 이전에 개발 
 '''
-work = 32
+
+work = 58
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -111,17 +113,18 @@ if input_menu == '1':
                 
                 datetime_total += datetime_now
                 print(datetime_now)           
+                print(str(datetime_total.hour) + ":" + str(datetime_total.minute))
                 print()
                 
                 if part_mode == True and total_n == 17:
                     print(datetime_total)
                     is_breaker = True
-                    break
+                    break                
+                total_n += 1
                 
-                total_n += 1        
             if is_breaker == True:
                 break
-                
+            
             if "nextPageToken" in json.loads(json_data):
                 nextPageToken = json.loads(json_data)["nextPageToken"]
                 print(nextPageToken)
@@ -131,7 +134,8 @@ if input_menu == '1':
         print(datetime_total)
         input("do you want to check this list again?")
 else:
-    for i in range(0,len(data)):
+    prev_subs = 0
+    for i in range(0,len(data)):        
         value = data[i][1]
         le = len(value)
         #print(le)
@@ -142,9 +146,12 @@ else:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
             
         #print(channel_data)
-        subs = json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"]         
+        subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])
+        if prev_subs < subs:
+            print('역전?')
+        prev_subs = subs
         view = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
-        print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ subs +' 입니다.' + view)
+        print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ str(subs) +' 명 조회수는' + view  +'입니다.')
         #break
 
 input('pause')

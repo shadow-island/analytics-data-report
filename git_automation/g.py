@@ -10,7 +10,7 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가)
+    # 1/2만작업?(일단 오늘 영상완료까지는 늘리다가)
     - 1 숫자만늘림 
      -2 코드 정리
      -3 git 정리 + 작업숫자만
@@ -145,7 +145,7 @@ if __name__ == '__main__':
         
     #2
     import random
-    maxx = 72
+    maxx = 75
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     print("종료예상시간:" + print_time(txt))
     
     import time
-    #random_num = 0  #debug
+    random_num = 0  #debug
     for i in range(random_num,-1,-1):        
         print(i)
         if i != 0:
@@ -170,5 +170,5 @@ if __name__ == '__main__':
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
         
     
-    os.system('git commit --all -m "v11"')
-
+    os.system('git commit --all -m "v12"')
+    os.system('git push')
