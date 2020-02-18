@@ -143,17 +143,17 @@ if __name__ == '__main__':
             txt = str(datetime_value)
             index = txt.find('.')
             return txt[:index]
-            
-        #1
-        datetime_now = datetime.datetime.now()
-        print(print_time(datetime_now))
-            
-        #2
+                
+        #0
         import random
         maxx = 60 + 20
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
+        
+        #1
+        datetime_now = datetime.datetime.now()
+        print(print_time(datetime_now))
         
         #3    
         txt = str(datetime_now + next_gap_timedelta)
