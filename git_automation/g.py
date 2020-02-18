@@ -163,7 +163,7 @@ if __name__ == '__main__':
         import time
         #random_num = 0  #debug
         for i in range(random_num,-1,-1):       
-            print(str(i))
+            #print(str(i))
             print(str(i) + ' ', end='' )
             if i != 0:
                 time.sleep(1)
