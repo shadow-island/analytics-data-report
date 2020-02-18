@@ -133,7 +133,7 @@ if __name__ == '__main__':
 
     
     random_num = 0
-    for r in range(0,4+1):
+    for r in range(0,5+1):
         print('[commit]')
         os.system('git commit --all -m "' + str(r+1) + ' Round ' + str(random_num) + 'min"')
         print('[git push]')
@@ -146,7 +146,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 60 + 21
+        maxx = 60 + 22
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -163,7 +163,7 @@ if __name__ == '__main__':
         import time
         #random_num = 0  #debug
         for i in range(random_num,-1,-1):        
-            print(i)
+            print(str(i) + ' ', end='' )
             if i != 0:
                 time.sleep(60)
             
