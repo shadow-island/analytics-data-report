@@ -133,9 +133,9 @@ if __name__ == '__main__':
     ##~ end of global
 
     
-    for _ in range(0,3+1):
+    for r in range(0,3+1):
         print('[commit]')
-        os.system('git commit --all -m "v ' + str(14) + '"')
+        os.system('git commit --all -m "Round' + str(r+1) + '"')
         print('[git push]')
         os.system('git push')
     
