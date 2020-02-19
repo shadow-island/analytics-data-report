@@ -99,7 +99,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 78
+    work = 79
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -133,9 +133,9 @@ if __name__ == '__main__':
 
     
     random_num = 0
-    for r in range(0,5+1):
+    for r in range(1,5+1):
         print('[commit]')
-        os.system('git commit --all -m "' + str(r+1) + ' Round ' + str(random_num) + 'min"')
+        os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
         print('[git push]')
         os.system('git push')
     
@@ -146,7 +146,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 60 + 22
+        maxx = 60 + 23
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
