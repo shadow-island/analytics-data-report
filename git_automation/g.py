@@ -166,8 +166,9 @@ if __name__ == '__main__':
         unit = 60
         total = 60*random_num
         while summ <= total:
-            #for i in range(random_num * 60/unit,-1,-1):            
-            print(str(total - summ) + ' ', end='' , flush = True)
+            text = str(datetime.timedelta(seconds=(total - summ)))
+            #'0:11:06'
+            print(text + ' ', end='' , flush = True)
             time.sleep(unit)
             summ += unit
             
