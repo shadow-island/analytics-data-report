@@ -10,7 +10,7 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/5만작업?(일단 오늘 영상완료까지는 늘리다가)
+    # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가)
     - 1 숫자만늘림 
      -2 코드 정리
      -3 git 정리 + 작업숫자만
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 82
+    work = 83
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -133,7 +133,7 @@ if __name__ == '__main__':
 
     
     random_num = 0
-    for r in range(1,8 + 1):
+    for r in range(1,9 + 1):
         print('[commit]')
         os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
         print('[git push]')
@@ -146,7 +146,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 60 + 29
+        maxx = 60 + 30
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -163,7 +163,7 @@ if __name__ == '__main__':
         import time
         #random_num = 0  #debug
         summ = 0 
-        unit = 10
+        unit = 6
         total = 60*random_num
         while summ <= total:
             text = str(datetime.timedelta(seconds=(total - summ)))
