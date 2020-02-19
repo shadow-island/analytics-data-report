@@ -162,10 +162,14 @@ if __name__ == '__main__':
         
         import time
         #random_num = 0  #debug
-        for i in range(random_num,-1,-1):       
-            print(str(i) + ' ', end='' , flush = True)
-            if i != 0:
-                time.sleep(60)
+        summ = 0 
+        unit = 60
+        total = 60*random_num
+        while summ <= total:
+            #for i in range(random_num * 60/unit,-1,-1):            
+            print(str(total - summ) + ' ', end='' , flush = True)
+            time.sleep(unit)
+            summ += unit
             
         #time.sleep(20)   
         print("timer end")
