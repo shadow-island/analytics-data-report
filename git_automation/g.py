@@ -75,8 +75,7 @@ def check_update():
     my_file.write(str(count))
     my_file.close()    
     
-    return count
-    
+    return count  
 
 
 ##main    
@@ -99,7 +98,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 84
+    work = 87
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -130,10 +129,9 @@ if __name__ == '__main__':
     else:
         b_windows_or_linux = True
     ##~ end of global
-
     
     random_num = 0
-    for r in range(1,3 + 1):
+    for r in range(1,4 + 1):
         print('[commit]')
         os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
         print('[git push]')
@@ -146,7 +144,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 60 + 33
+        maxx = 60 + 36
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
