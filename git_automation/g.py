@@ -17,7 +17,7 @@ Todo:
      -3 git 정리 + 작업숫자만
         git rebase HEAD~6 -i
         git push --force
-     -4 기능향상(딱히?)
+     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?
      -5 다른 application 
         구독자 update
 '''
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 95
+    work = 96
     work = round(work/60 * 1.1,1)
     #source file 이름찾기?
     import codecs
@@ -145,7 +145,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 60 + 47
+        maxx = 60 + 48
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
