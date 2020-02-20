@@ -144,7 +144,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 60 + 41
+        maxx = 60 + 42
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -161,7 +161,7 @@ if __name__ == '__main__':
         import time
         #random_num = 0  #debug
         summ = 0 
-        unit = 1
+        unit = 2
         total = 60*random_num
         while summ <= total:
             text = str(datetime.timedelta(seconds=(total - summ)))
