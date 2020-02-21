@@ -67,7 +67,7 @@ import json
 print('1)list\n')
 print('2)sub\n')
 input_menu = input('?')
-if input_menu == '1':
+if input_menu != '2':
     list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
     list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
     list_id = input('list?')
