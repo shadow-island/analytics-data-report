@@ -118,9 +118,6 @@ is_subs_mode = False
 import sys
 if len(sys.argv) == 1:        
     #print('normmal mode:no argv')
-    is_subs_mode = True
-    runSubs()
-else:
     print('1)list\n')
     print('2)sub\n')
     input_menu = input('?')
@@ -198,4 +195,9 @@ else:
     else:
        runSubs()
 
+  
+else:
+    is_subs_mode = True
+    runSubs()
+    
 exit(0)
