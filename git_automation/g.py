@@ -132,7 +132,7 @@ if __name__ == '__main__':
     ##~ end of global
     
     random_num = 0
-    for r in range(1, 7 + 1):
+    for r in range(1, 7 + 1): #아침에도는가보고,멈추면늘림 
         print('[commit]')
         os.system('git status')
         os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
