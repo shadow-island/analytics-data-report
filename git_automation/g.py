@@ -100,7 +100,7 @@ if __name__ == '__main__':
         exit(0)
         
     work = 147
-    work = round(work/60 * 1.1,1)
+    work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
     source_file = codecs.open('g.py', 'r','utf-8')
