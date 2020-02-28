@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 # python 3X
 '''
-최소한 오후 6:03 2020-02-15 이전에 개발 
+
 '''
 
 def runSubs():
-    is_debug_mode = True
+    is_debug_mode = False
     print()
     print()
     print()
@@ -18,9 +18,9 @@ def runSubs():
     print()
     print()
     #글꼴 50,너비61
-    prev_subs = 0
     total = len(data)
     out_table = []
+    print('Getting real time data')
     for i in range(total -1 ,-1, -1):
         value = data[i][1]
         le = len(value)
@@ -28,19 +28,13 @@ def runSubs():
         if le <= 17:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
         else:
-            channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()     
-        
-        if is_debug_mode != True:
-            import time
-            time.sleep(2)
-        
-        print(json.loads(channel_data)["items"]) #for debug
-        subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])
-        if prev_subs > subs:
-            print('역전?')
-        prev_subs = subs
+            channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()             
+        if is_debug_mode == True:
+            print(json.loads(channel_data)["items"]) #for debug
+            
+        subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])        
         view = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
-        print(str(i+1) + ':' + str(data[i][0]) + '의 구독자 수는 '+ str(subs) +'명,조회수는 ' + view  +'입니다')
+    
         
         one_record = []
         one_record.append(data[i][0])
@@ -48,15 +42,22 @@ def runSubs():
         one_record.append(int(view))
         out_table.append(one_record)
         #break
- 
-    print('after sorting')
-    out_table = sorted(out_table, key=lambda item: item[1], reverse=True)
+    print('Getting real time data-end')
+    #print('after sorting')
+    #out_table = sorted(out_table, key=lambda item: item[1], reverse=True)
+    out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
+    total = len(out_table)
     for i in range(0,len(out_table)):
-        print(i+1)
-        print(out_table[i])
+        if is_debug_mode != True:
+            import time
+            time.sleep(2)
+        #print(out_table[i])
+        print(str(total - i) + ':' + str(out_table[i][0]) + '의 구독자 수는 '+ str(out_table[i][1]) +'명,조회수는 ' + str(out_table[i][2])  +'입니다')
+        print()
     return
 
-work = 74
+#최소한 2020-02-14 이전에 개발 
+work = 75
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -99,7 +100,8 @@ if os.path.isfile(db_xls) == True:
     s_value = sheet.cell(row = 1, column = 1).value
     print(s_value)
     key = s_value
-    sheet = wb.get_sheet_by_name('c_l')
+    sheet = wb.get_sheet_by_name('c')
+    #sheet = wb.get_sheet_by_name('c_l')
     
     for i in range(1,sheet.max_row + 1):
         record = []

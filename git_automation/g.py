@@ -17,9 +17,8 @@ Todo:
      -3 git 정리 + 작업숫자만
         git rebase HEAD~6 -i
         git push --force
-     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?
-     -5 다른 application 
-        구독자 update
+     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?, C#화?(한번더 멈춘현상발생시)
+     -5 다른 application (구독자 update,)
 '''
 
 #version용으로 기본 공통
