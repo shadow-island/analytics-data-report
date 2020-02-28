@@ -127,6 +127,8 @@ if len(sys.argv) == 1:
     if input_menu != '2':
         list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
         list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
+        #list_id = 'PL2efNl7MkFICURkXwsmymaFGg-NIwzj49'
+        
         if len(input_menu) == 1:
             list_id = input('list?')
         else:
@@ -155,22 +157,31 @@ if len(sys.argv) == 1:
                              
                     v_json_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?id=" + str(videoId) + "&part=contentDetails&key=" + key).read()
                     v_item_data = json.loads(v_json_data)["items"][0]["contentDetails"]['duration']
-                    #debug print(v_item_data)
-                    v_item_data = v_item_data.replace('PT','')        
-                    m = s = 0
-                    if v_item_data.find('M') == -1:
-                        v_item_data = '0:' + v_item_data
-                    else:
-                        v_item_data = v_item_data.replace('M',':')        
-                        
-                    if v_item_data.find('S') == -1:
-                        v_item_data = v_item_data + '0'
-                    else:
-                        v_item_data = v_item_data.replace('S','')        
                     
-                    #print(v_item_data)        
-                    date_time_obj = datetime.datetime.strptime(v_item_data, '%M:%S')        
-                    datetime_now = datetime.timedelta(minutes = date_time_obj.minute, seconds = date_time_obj.second)
+                    v_item_data = v_item_data.replace('PT','')        
+                    #debug 
+                    print(v_item_data)
+                    h = m = s = 0
+                    i = v_item_data.find('H')
+                    if i != -1:
+                        h = v_item_data[:i]
+                    print(h)
+                    v_item_data = v_item_data[i+1:]
+                    
+                    i = v_item_data.find('M')
+                    if i != -1:
+                        m = v_item_data[:i]
+                    print(m)
+                    v_item_data = v_item_data[i+1:]
+                    
+                    i = v_item_data.find('S')
+                    if i != -1:
+                        s = v_item_data[:i]
+                    print(s)
+                    
+                    date_time_obj = datetime.datetime(1,1,1,int(h),int(m),int(s))
+                
+                    datetime_now = datetime.timedelta(hours = date_time_obj.hour, minutes = date_time_obj.minute, seconds = date_time_obj.second)
                     
                     datetime_total += datetime_now
                     print(datetime_now)           
