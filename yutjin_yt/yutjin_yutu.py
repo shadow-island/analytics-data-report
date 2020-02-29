@@ -7,16 +7,8 @@
 
 def runSubs():
     is_debug_mode = False
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
+    #is_debug_mode = True
+
     #글꼴 50,너비61
     total = len(data)
     out_table = []
@@ -42,8 +34,23 @@ def runSubs():
         one_record.append(int(view))
         out_table.append(one_record)
         #break
-    print('Getting real time data-end')
-    #print('after sorting')
+    print('real time data!')
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()    
+    print()    
+    import datetime
+    print("시작시간:" + str(datetime.datetime.now())) 
+    print()
     #out_table = sorted(out_table, key=lambda item: item[1], reverse=True)
     out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
     total = len(out_table)
@@ -52,8 +59,10 @@ def runSubs():
             import time
             time.sleep(2)
         #print(out_table[i])
-        print(str(total - i) + ':' + str(out_table[i][0]) + '의 구독자 수는 '+ str(out_table[i][1]) +'명,조회수는 ' + str(out_table[i][2])  +'입니다')
+        print(str(total - i) + ':' + str(out_table[i][0]) + '의 구독자 수는 '+ str(out_table[i][1]) +'명,조회수는 ' + str(out_table[i][2])  +'뷰')
         print()
+    print()    
+    time.sleep(4)
     return
 
 #최소한 2020-02-14 이전에 개발 
@@ -100,8 +109,11 @@ if os.path.isfile(db_xls) == True:
     s_value = sheet.cell(row = 1, column = 1).value
     print(s_value)
     key = s_value
-    sheet = wb.get_sheet_by_name('c')
-    #sheet = wb.get_sheet_by_name('c_l')
+    is_right = True
+    if is_right == True:
+        sheet = wb.get_sheet_by_name('c')
+    else:
+        sheet = wb.get_sheet_by_name('c_l')
     
     for i in range(1,sheet.max_row + 1):
         record = []
