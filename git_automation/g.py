@@ -10,14 +10,13 @@ Release note
 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/2작업?
-    - 1 숫자만늘림 
+    # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/2작업?
+    - 1 다른 application (구독자 update,)
      -2 코드 정리
      -3 git 정리 + 작업숫자만
         git rebase HEAD~6 -i
         git push --force
      -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?, C#화?(한번더 멈춘현상발생시)
-     -5 다른 application (구독자 update,)
 '''
 
 #version용으로 기본 공통
@@ -94,7 +93,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 166
+    work = 167
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
@@ -146,7 +145,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 3*60 + 0
+        maxx = 3*60 + 1
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
