@@ -62,12 +62,9 @@ def get_last(local_file_name, bar):
 def check_update():
     import datetime
     
-    # for both read and save
-    local_file_name = 'eukM2.log'
-    bar             = '~'
-    #~
+  
     
-    count =  get_last(local_file_name, bar)    
+    count =  get_last(local_file_name, bar)
     count += 1
     print ("saved value:" + str(count))
         
@@ -130,6 +127,11 @@ if __name__ == '__main__':
         b_windows_or_linux = True
     ##~ end of global
     
+    # for both read and save
+    local_file_name = 'eukM2.log'
+    bar             = '~'
+    #~
+    print(get_last(local_file_name, bar))
     random_num = 0
     for r in range(1, 7 + 1): #아침에도는가보고,멈추면늘림 
         print('[commit]')
