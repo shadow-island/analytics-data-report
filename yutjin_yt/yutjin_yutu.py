@@ -219,10 +219,10 @@ if len(sys.argv) == 1:
             input("do you want to check this list again?")
     else:
        runSubs()
-
-  
 else:
     is_subs_mode = True
-    runSubs()
+    #sys.argv
+    print(sys.argv[1])    
+    #runSubs()
     
 exit(0)
