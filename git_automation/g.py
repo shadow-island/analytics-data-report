@@ -11,8 +11,8 @@ Todo:
     # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/2작업?
     - 1 다른 application (구독자 update)
      -2 코드 정리
-     -3 git 정리 + 작업숫자만
-        git rebase HEAD~6 -i
+     -3 git 정리 + 작업숫자만        
+        git rebase HEAD~6 -i 
         git push --force
      -4 기능향상(딱히?) commit이름 바꾸기 ver file이용->  EMAIL?, C#화?(한번더 멈춘현상발생시)
 '''
@@ -90,7 +90,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 172
+    work = 173
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     #~
     print(get_last(local_file_name, bar))
     random_num = 0
-    for r in range(1, 7 + 1): #아침에도는가보고,멈추면늘림 
+    for r in range(1, 7 + 1): #아침에 도는가보고, 멈추면늘림
         print('[commit]')
         os.system('git status')
         os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
@@ -142,7 +142,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 3*60 + 6
+        maxx = 3*60 + 7
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)

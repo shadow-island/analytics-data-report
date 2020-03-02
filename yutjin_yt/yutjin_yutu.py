@@ -49,7 +49,11 @@ def runSubs():
     print()    
     print()    
     import datetime
-    print("시작시간:" + str(datetime.datetime.now())) 
+    def time2text(datetime_value):
+            txt = str(datetime_value)
+            index = txt.find('.')
+            return txt[:index]
+    print("실시간:" + time2text(datetime.datetime.now()))
     print()
     #out_table = sorted(out_table, key=lambda item: item[1], reverse=True)
     out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
