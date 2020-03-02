@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 # python 3X
 '''
-본 App 장점:
-# 최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다,(사용자에게 선택권을 줘야함)
+본 App 동작설명
+    최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다(사용자에게 선택권을 줘야함)
 # 2nd round는 무조건 커밋 
-Next:
-Release note
-#기능
-#UI
+Next: Release note
+#기능 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
     # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/2작업?
@@ -74,7 +72,6 @@ def check_update():
 
 
 ##main    
-
 '''
 main
 '''
@@ -93,7 +90,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 169
+    work = 170
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
@@ -145,7 +142,7 @@ if __name__ == '__main__':
                 
         #0
         import random
-        maxx = 3*60 + 3
+        maxx = 3*60 + 4
         random_num = random.randrange(2, maxx + 1)    
         print(random_num, '/',maxx)      
         next_gap_timedelta = datetime.timedelta(minutes = random_num)
