@@ -14,7 +14,7 @@ Todo:
      -3 git 정리 + 작업숫자만
         git rebase HEAD~6 -i
         git push --force
-     -4 기능향상(딱히?) EMAIL? commit이름 바꾸기 ver file이용?, C#화?(한번더 멈춘현상발생시)
+     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용->  EMAIL?, C#화?(한번더 멈춘현상발생시)
 '''
 
 #version용으로 기본 공통
