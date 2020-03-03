@@ -63,7 +63,9 @@ def runSubs():
             import time
             time.sleep(2)
         #print(out_table[i])
-        print(str(total - i) + ':' + str(out_table[i][0]) + '의 구독자 수는 '+ str(out_table[i][1]) +'명,조회수는 ' + str(out_table[i][2])  +'뷰')
+        
+        
+        print(str(total - i) + ':' + str(out_table[i][0]) + '의 구독자 수는 '+ str(format(out_table[i][1], ',')) +'명,조회수는 ' + str(out_table[i][2])  +'뷰')
         print()
     print()    
     time.sleep(4)
