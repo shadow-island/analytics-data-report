@@ -125,7 +125,7 @@ if __name__ == '__main__':
     #~
     print(get_last(local_file_name, bar))
     random_num = 0
-    for r in range(1, 7 + 1): #아침에 도는가보고, 멈추면늘림
+    for r in range(1, 8 + 1): #아침에 도는가보고, 끝까지가면늘림
         print('[commit]')
         os.system('git status')
         os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
