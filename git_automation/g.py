@@ -14,7 +14,7 @@ Todo:
      -3 git 정리 + 작업숫자만        
         git rebase HEAD~7 -i 
         git push --force
-     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용->  EMAIL?, C#화?(한번더 멈춘현상발생시)
+     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?->  EMAIL?, C#화?(한번더 멈춘현상발생시)
 '''
 
 #version용으로 기본 공통
@@ -24,7 +24,6 @@ import os
 import datetime
 
 def read_file(file_name):
-    return_flag = True #error code
     return_data = None #payload
             
     if os.path.exists(file_name):
@@ -32,20 +31,18 @@ def read_file(file_name):
         my_file = open(file_name,'r')
         return_data  = my_file.readlines()
         my_file.close()
-    else:
-        return_flag = False
                             
-    return (return_flag, return_data)
+    return return_data
 
 def get_last(local_file_name, bar):
     # File이 없는경우 대비
     datetime_old_time   = datetime.datetime.now()
     int_old_sec_gap     = 0
 
-    (return_flag, data_list)   = read_file(local_file_name)
+    data_list   = read_file(local_file_name)
 
     count = 0
-    if return_flag == True:
+    if data_list != None:
         for line in data_list:
             #item_list값을 밖에서 쓸수없음 bc)file이 없을경우가 잇으므로
             if line.isdigit() == True:
@@ -90,7 +87,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 175
+    work = 176
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
