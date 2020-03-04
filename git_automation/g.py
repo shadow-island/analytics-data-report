@@ -8,8 +8,8 @@ Next: Release note
 #기능 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/3작업?
-    - 1 다른 application (구독자 update)
+    # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/2작업?
+    - 1 다른 application 1 .playlist batch (구독자 update)
      -2 코드 정리
      -3 git 정리 + 작업숫자만        
         git rebase HEAD~7 -i 
