@@ -66,9 +66,10 @@ def check_update():
     return count  
 
 
-g_end = False
-import  threading
+
 count = 0
+total = 0
+import  threading
 def timer_start():  
     global count 
     count -= 1
@@ -99,9 +100,9 @@ def run():
     #0
     
     import random
-    maxx = 3*60 + 16
+    #maxx = 3*60 + 16
+    maxx = 3
     random_num = random.randrange(2, maxx + 1)    
-    random_num = 1
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     
@@ -120,11 +121,10 @@ def run():
     #random_num = 0  #debug
     summ = 0 
     unit = 30
+    global total
     total = 60*random_num
     
     #
-    maxx = 5#sec
-    random_num = random.randrange(2, maxx + 1)  
     print('random_num',random_num)
     global count
     count = random_num * 60
