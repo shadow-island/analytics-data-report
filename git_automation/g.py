@@ -111,7 +111,7 @@ def run():
     
     import random
     #maxx = 3*60 + 16
-    maxx = 5
+    maxx = 6
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
