@@ -89,7 +89,8 @@ def timer_start():
     print(print_time(datetime_now))
     #print(text + ' ', end='' , flush = True)
     timer = threading.Timer(2,timer_start)
-    if count > 0:
+    #if count > 0:
+    if datetime_now > datetime_target:
         timer.start()
     else:
         run()
@@ -116,6 +117,7 @@ def run():
     #maxx = 3*60 + 16
     maxx = 4
     random_num = random.randrange(2, maxx + 1)    
+    random_num = 1
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     
