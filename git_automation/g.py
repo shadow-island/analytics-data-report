@@ -72,7 +72,8 @@ count = 0
 def timer_start():  
     global count 
     count -= 1
-    print(str(count))
+    text = str(count)
+    print(text + ' ', end='' , flush = True)
     timer = threading.Timer(1,timer_start)
     if count > 0:
         timer.start()
@@ -111,7 +112,7 @@ def run():
     txt = str(datetime_now + next_gap_timedelta)
     print("종료예상시간:" + print_time(txt))
     #3
-    #print("\n\nRound:" + str(r))        
+    print("\n\nRound:" + str(r))        
     if r >= 2:
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
     
@@ -122,7 +123,7 @@ def run():
     total = 60*random_num
     
     #
-    maxx = 6#sec
+    maxx = 5#sec
     random_num = random.randrange(2, maxx + 1)  
     print('random_num',random_num)
     global count
