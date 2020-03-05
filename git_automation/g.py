@@ -197,7 +197,6 @@ if __name__ == '__main__':
     bar             = '~'
     #~
     print(get_last(local_file_name, bar))
-    random_num = 0
 
     #global count
     run()
