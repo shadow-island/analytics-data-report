@@ -111,7 +111,7 @@ def run():
     
     import random
     #maxx = 3*60 + 16
-    maxx = 6
+    maxx = 7
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -128,17 +128,7 @@ def run():
     
     if step_round >= 2:
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
-    
-    import time
-    #random_num = 0  #debug
-    summ = 0 
-    unit = 30
-    global total
-    total = 60*random_num
-    
-    #
-    print('random_num',random_num)
-    
+            
     '''
     for r in range(1, 9 + 1): #아침에 도는가보고, 끝까지가면늘림  ,4~9      
     ''' 
