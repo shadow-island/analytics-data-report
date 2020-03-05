@@ -83,6 +83,7 @@ def timer_start():
 
     text = str(datetime.timedelta(seconds=count))
     datetime_now = datetime.datetime.now()
+    print(datetime_target)
     text = "현재시간:" + print_time(datetime_now)
     print(text + ' ', end='' , flush = True)
     timer = threading.Timer(2,timer_start)
