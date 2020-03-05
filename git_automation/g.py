@@ -115,7 +115,7 @@ def run():
     print("종료예상시간:" + print_time(txt))
     #3
     print("\n\nRound:" + str(step_round))        
-    if r >= 2:
+    if step_round >= 2:
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
     
     import time
