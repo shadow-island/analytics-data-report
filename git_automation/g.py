@@ -76,7 +76,7 @@ def timer_start():
 
     text = str(datetime.timedelta(seconds=count))
     print(text + ' ', end='' , flush = True)
-    timer = threading.Timer(1,timer_start)
+    timer = threading.Timer(2,timer_start)
     if count > 0:
         timer.start()
     else:
