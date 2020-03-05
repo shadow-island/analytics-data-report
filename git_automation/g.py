@@ -106,7 +106,7 @@ def run():
     
     import random
     #maxx = 3*60 + 16
-    maxx = 2
+    maxx = 3
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -132,12 +132,12 @@ def run():
     #
     print('random_num',random_num)
     global count
-    count = random_num * 31#60
+    count = random_num * 32#60
     
     '''
     for r in range(1, 9 + 1): #아침에 도는가보고, 끝까지가면늘림        
     ''' 
-    if step_round <= 2:
+    if step_round <= 3:
         timer_start()
     else:
         print('step_round end')
