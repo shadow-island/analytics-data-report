@@ -93,7 +93,7 @@ def run():
     
     print('[commit]')
     os.system('git status')
-    os.system('git commit --all -m "' + ' Round ' + str(step_round) + 'min"')
+    os.system('git commit --all -m "' + 'v0 Round ' + str(step_round) + 'min"')
     print('[git push]')
     os.system('git push')
 
