@@ -66,14 +66,67 @@ def check_update():
     return count  
 
 
+g_end = False
 import  threading
+count = 0
 def timer_start():  
-	#count = 1	
-    print('1')
+    global count 
+    count -= 1
+    print(str(count))
     timer = threading.Timer(1,timer_start)
-    timer.start();
-	
-	
+    if count > 0:
+        timer.start()
+    else:
+        #update
+        pass
+    return
+        
+def run():
+    next_round = check_update()        
+    r = 1
+    random_num = 0
+    print('[commit]')
+    os.system('git status')
+    os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
+    print('[git push]')
+    os.system('git push')
+
+    def print_time(datetime_value):
+        txt = str(datetime_value)
+        index = txt.find('.')
+        return txt[:index]
+            
+    #0
+    
+    import random
+    maxx = 3*60 + 16
+    random_num = random.randrange(2, maxx + 1)    
+    random_num = 1
+    print(random_num, '/',maxx)      
+    next_gap_timedelta = datetime.timedelta(minutes = random_num)
+    
+    #1
+    datetime_now = datetime.datetime.now()
+    print("시작시간:" + print_time(datetime_now))        
+    #2    
+    txt = str(datetime_now + next_gap_timedelta)
+    print("종료예상시간:" + print_time(txt))
+    #3
+    #print("\n\nRound:" + str(r))        
+    if r >= 2:
+        print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
+    
+    import time
+    #random_num = 0  #debug
+    summ = 0 
+    unit = 30
+    total = 60*random_num
+    
+    #
+    maxx = 4#sec
+    random_num = random.randrange(2, maxx + 1)  
+    count = random_num
+    timer_start()
     
 ##main    
 '''
@@ -132,57 +185,10 @@ if __name__ == '__main__':
     #~
     print(get_last(local_file_name, bar))
     random_num = 0
+    '''
     for r in range(1, 9 + 1): #아침에 도는가보고, 끝까지가면늘림
-        print('[commit]')
-        os.system('git status')
-        os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
-        print('[git push]')
-        os.system('git push')
-    
-        def print_time(datetime_value):
-            txt = str(datetime_value)
-            index = txt.find('.')
-            return txt[:index]
-                
-        #0
-        import random
-        maxx = 3*60 + 16
-        random_num = random.randrange(2, maxx + 1)    
-        print(random_num, '/',maxx)      
-        next_gap_timedelta = datetime.timedelta(minutes = random_num)
         
-        #1
-        datetime_now = datetime.datetime.now()
-        print("시작시간:" + print_time(datetime_now))        
-        #2    
-        txt = str(datetime_now + next_gap_timedelta)
-        print("종료예상시간:" + print_time(txt))
-        #3
-        print("\n\nRound:" + str(r))        
-        if r >= 2:
-            print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
-        
-        import time
-        #random_num = 0  #debug
-        summ = 0 
-        unit = 30
-        total = 60*random_num
-        
-        
-        timer_start()
-        
-        '''
-        while summ <= total:
-            text = str(datetime.timedelta(seconds=(total - summ)))
-            #'0:11:06'
-            print(text + ' ', end='' , flush = True)
-            time.sleep(unit)
-            summ += unit
-            
-        print("timer end")
-        '''
-        
-        #update
-        #next_round = check_update()        
-    
-    print('end')
+    ''' 
+    #global count
+    run()
+    print('main end')
