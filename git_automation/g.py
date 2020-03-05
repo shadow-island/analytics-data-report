@@ -86,11 +86,10 @@ def timer_start():
         
 def run():
     next_round = check_update()        
-    r = 1
-    random_num = 0
+    global step_round
     print('[commit]')
     os.system('git status')
-    os.system('git commit --all -m "' + str(r) + ' Round ' + str(random_num) + 'min"')
+    os.system('git commit --all -m "' + ' Round ' + str(step_round) + 'min"')
     print('[git push]')
     os.system('git push')
 
@@ -115,7 +114,7 @@ def run():
     txt = str(datetime_now + next_gap_timedelta)
     print("종료예상시간:" + print_time(txt))
     #3
-    print("\n\nRound:" + str(r))        
+    print("\n\nRound:" + str(step_round))        
     if r >= 2:
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
     
@@ -131,7 +130,7 @@ def run():
     global count
     count = random_num * 60
     
-    global step_round
+    
     step_round += 1
     if step_round < 2:
         timer_start()
