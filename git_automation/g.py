@@ -82,9 +82,9 @@ def timer_start():
     count -= 1
     
     datetime_now = datetime.datetime.now()    
-    print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))
-    
-    #print(text + ' ', end='' , flush = True)
+    #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))
+    text = " 현재시간:" + print_time(datetime_now)    
+    print(text + ' ', end='' , flush = True)
     timer = threading.Timer(2,timer_start)
     #if count > 0:
     #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
@@ -111,7 +111,7 @@ def run():
     
     import random
     #maxx = 3*60 + 16
-    maxx = 3
+    maxx = 4
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
