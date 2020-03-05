@@ -55,8 +55,6 @@ def get_last(local_file_name, bar):
 def check_update():
     import datetime
     
-  
-    
     count =  get_last(local_file_name, bar)
     count += 1
     print ("saved value:" + str(count))
@@ -67,7 +65,14 @@ def check_update():
     
     return count  
 
-
+ 
+def _timer():  
+	count = 1
+	print(str(count))
+	
+	# Repeat timer by returning True	
+	return True
+    
 ##main    
 '''
 main
@@ -160,6 +165,12 @@ if __name__ == '__main__':
         summ = 0 
         unit = 30
         total = 60*random_num
+        
+        import gobject
+        import gtk
+        gobject.timeout_add(1000, _timer)
+        gtk.main()
+    
         while summ <= total:
             text = str(datetime.timedelta(seconds=(total - summ)))
             #'0:11:06'
