@@ -108,12 +108,10 @@ def run():
     os.system('git push')
 
 
-            
-    #0
     
     import random
     #maxx = 3*60 + 16
-    maxx = 2
+    maxx = 3
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -140,8 +138,6 @@ def run():
     
     #
     print('random_num',random_num)
-    global count
-    count = random_num * 33#60
     
     '''
     for r in range(1, 9 + 1): #아침에 도는가보고, 끝까지가면늘림        
@@ -170,7 +166,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 184
+    work = 185
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
