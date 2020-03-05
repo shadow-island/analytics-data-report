@@ -80,13 +80,11 @@ import  threading
 def timer_start():  
     global count 
     count -= 1
-
-    text = str(datetime.timedelta(seconds=count))
     
-    print(datetime_target)
     datetime_now = datetime.datetime.now()
-    text = "현재시간:" + print_time(datetime_now)
-    print(print_time(datetime_now))
+    
+    print('목표' + datetime_target + "현재시간:" + print_time(datetime_now))
+    
     #print(text + ' ', end='' , flush = True)
     timer = threading.Timer(2,timer_start)
     #if count > 0:
