@@ -69,10 +69,13 @@ def print_time(datetime_value):
     txt = str(datetime_value)
     index = txt.find('.')
     return txt[:index]
-    
+
+#global    
 step_round = 0
 count = 0
 total = 0
+datetime_target = datetime.datetime.now()
+
 import  threading
 def timer_start():  
     global count 
@@ -117,7 +120,7 @@ def run():
     datetime_now = datetime.datetime.now()
     print("시작시간:" + print_time(datetime_now))        
     #2 
-    datetime_target = datetime.datetime.now()
+    global datetime_target
     datetime_target = datetime_now + next_gap_timedelta
     txt = str(datetime_now + next_gap_timedelta)
     print("종료예상시간:" + print_time(txt))
