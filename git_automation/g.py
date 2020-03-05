@@ -81,9 +81,8 @@ def timer_start():
     global count 
     count -= 1
     
-    datetime_now = datetime.datetime.now()
-    
-    print('목표' + datetime_target + "현재시간:" + print_time(datetime_now))
+    datetime_now = datetime.datetime.now()    
+    print('목표' + print_time(datetime_target) + "현재시간:" + print_time(datetime_now))
     
     #print(text + ' ', end='' , flush = True)
     timer = threading.Timer(2,timer_start)
