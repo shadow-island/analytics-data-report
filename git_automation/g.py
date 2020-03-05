@@ -77,8 +77,7 @@ def timer_start():
     if count > 0:
         timer.start()
     else:
-        #update
-        pass
+        run()
     return
         
 def run():
@@ -123,7 +122,7 @@ def run():
     total = 60*random_num
     
     #
-    maxx = 4#sec
+    maxx = 5#sec
     random_num = random.randrange(2, maxx + 1)  
     print('random_num',random_num)
     global count
