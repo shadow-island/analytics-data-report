@@ -65,7 +65,11 @@ def check_update():
     
     return count  
 
-
+def print_time(datetime_value):
+    txt = str(datetime_value)
+    index = txt.find('.')
+    return txt[:index]
+    
 step_round = 0
 count = 0
 total = 0
@@ -75,6 +79,8 @@ def timer_start():
     count -= 1
 
     text = str(datetime.timedelta(seconds=count))
+    datetime_now = datetime.datetime.now()
+    print("현재시간:" + print_time(datetime_now)) 
     print(text + ' ', end='' , flush = True)
     timer = threading.Timer(2,timer_start)
     if count > 0:
@@ -96,10 +102,7 @@ def run():
     print('[git push]')
     os.system('git push')
 
-    def print_time(datetime_value):
-        txt = str(datetime_value)
-        index = txt.find('.')
-        return txt[:index]
+
             
     #0
     
