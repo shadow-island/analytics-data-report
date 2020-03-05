@@ -65,13 +65,14 @@ def check_update():
     
     return count  
 
- 
-def _timer():  
-	count = 1
-	print(str(count))
+
+import  threading
+def timer_start():  
+	#count = 1	
+    timer = threading.Timer(1,timer_start)
+    timer.start();
 	
-	# Repeat timer by returning True	
-	return True
+	
     
 ##main    
 '''
@@ -166,10 +167,9 @@ if __name__ == '__main__':
         unit = 30
         total = 60*random_num
         
-        import gobject
-        import gtk
-        gobject.timeout_add(1000, _timer)
-        gtk.main()
+        
+        timer_start()
+        
     
         while summ <= total:
             text = str(datetime.timedelta(seconds=(total - summ)))
