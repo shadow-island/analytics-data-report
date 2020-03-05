@@ -122,11 +122,11 @@ def run():
     total = 60*random_num
     
     #
-    maxx = 5#sec
+    maxx = 6#sec
     random_num = random.randrange(2, maxx + 1)  
     print('random_num',random_num)
     global count
-    count = random_num
+    count = random_num * 60
     timer_start()
     
 ##main    
