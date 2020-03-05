@@ -104,6 +104,7 @@ def run():
     #maxx = 3*60 + 16
     maxx = 3
     random_num = random.randrange(2, maxx + 1)    
+    random_num = 1
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     
