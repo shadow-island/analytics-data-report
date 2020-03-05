@@ -87,6 +87,8 @@ def timer_start():
 def run():
     next_round = check_update()        
     global step_round
+    step_round += 1
+    
     print('[commit]')
     os.system('git status')
     os.system('git commit --all -m "' + ' Round ' + str(step_round) + 'min"')
@@ -129,12 +131,12 @@ def run():
     #
     print('random_num',random_num)
     global count
-    count = random_num * 60
+    count = random_num * 30#60
     
-    
-    step_round += 1
-    if step_round < 2:
+    if step_round <= 2:
         timer_start()
+    else:
+        print('step_round end')
     
 ##main    
 '''
