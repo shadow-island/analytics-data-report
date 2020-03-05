@@ -170,7 +170,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 183
+    work = 184
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
