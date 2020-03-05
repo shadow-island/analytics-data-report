@@ -69,6 +69,7 @@ def check_update():
 import  threading
 def timer_start():  
 	#count = 1	
+    print('1')
     timer = threading.Timer(1,timer_start)
     timer.start();
 	
@@ -170,7 +171,7 @@ if __name__ == '__main__':
         
         timer_start()
         
-    
+        '''
         while summ <= total:
             text = str(datetime.timedelta(seconds=(total - summ)))
             #'0:11:06'
@@ -179,6 +180,7 @@ if __name__ == '__main__':
             summ += unit
             
         print("timer end")
+        '''
         
         #update
         next_round = check_update()        
