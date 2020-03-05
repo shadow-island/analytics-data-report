@@ -125,6 +125,7 @@ def run():
     #
     maxx = 4#sec
     random_num = random.randrange(2, maxx + 1)  
+    print(random_num)
     count = random_num
     timer_start()
     
