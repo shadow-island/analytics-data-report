@@ -90,7 +90,8 @@ def timer_start():
     #print(text + ' ', end='' , flush = True)
     timer = threading.Timer(2,timer_start)
     #if count > 0:
-    if datetime_now > datetime_target:
+    #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
+    if datetime_now < datetime_target:
         timer.start()
     else:
         run()
