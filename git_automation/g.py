@@ -66,7 +66,7 @@ def check_update():
     return count  
 
 
-
+round = 0
 count = 0
 total = 0
 import  threading
@@ -130,7 +130,11 @@ def run():
     print('random_num',random_num)
     global count
     count = random_num * 60
-    timer_start()
+    
+    global round
+    round += 1
+    if round < 2:
+        timer_start()
     
 ##main    
 '''
