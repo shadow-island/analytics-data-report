@@ -68,7 +68,12 @@ def check_update():
 def print_time(datetime_value):
     txt = str(datetime_value)
     index = txt.find('.')
-    return txt[:index]
+    txt = txt[:index]
+    
+    index = txt.find(' ')
+    txt = txt[index:]
+    
+    return txt
 
 #global    
 step_round = 0
