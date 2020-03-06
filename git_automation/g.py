@@ -83,7 +83,7 @@ def timer_start():
     
     datetime_now = datetime.datetime.now()    
     #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))
-    text = " 현재시간:" + print_time(datetime_now)    
+    text = print_time(datetime_now)
     print(text + ' ', end='' , flush = True)
     timer = threading.Timer(3,timer_start)
     #if count > 0:
