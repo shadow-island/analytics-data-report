@@ -135,7 +135,7 @@ def run():
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
             
     '''
-    for r in range(1, 9 + 1): #아침에 도는가보고, 끝까지가면늘림  ,4~9      
+    #아침에 도는가보고, 끝까지가면늘림  ,4~9      
     ''' 
     print("\n\nRound:" + str(step_round) + ' timer start')
     if step_round <= 9:
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 187
+    work = 188
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
@@ -202,4 +202,3 @@ if __name__ == '__main__':
 
     #global count
     run()
-    print('main end')
