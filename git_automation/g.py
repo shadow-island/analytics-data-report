@@ -85,7 +85,7 @@ def timer_start():
     #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))
     text = " 현재시간:" + print_time(datetime_now)    
     print(text + ' ', end='' , flush = True)
-    timer = threading.Timer(2,timer_start)
+    timer = threading.Timer(3,timer_start)
     #if count > 0:
     #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
     if datetime_now < datetime_target:
