@@ -145,9 +145,9 @@ def runList(list_id):
         input("do you want to check this list again?")
     return
     
-#main
+#main-----------------------------------------
 #최소한 2020-02-14 이전에 개발 
-work = 76
+work = 89
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
