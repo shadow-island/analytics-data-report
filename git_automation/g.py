@@ -133,7 +133,7 @@ def run():
     for r in range(1, 9 + 1): #아침에 도는가보고, 끝까지가면늘림  ,4~9      
     ''' 
     print("\n\nRound:" + str(step_round) + ' timer start')
-    if step_round <= 4:
+    if step_round <= 9:
         timer_start()
     else:
         print('step_round end')
