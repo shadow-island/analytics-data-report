@@ -12,6 +12,7 @@ Todo:
     - 1 다른 application 1 .playlist batch (구독자 update)
      -2 코드 정리
      -3 git 정리 + 작업숫자만        
+        밑에할차례?
         git rebase HEAD~7 -i 
         git push --force
      -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?->  EMAIL?, C#화?(한번더 멈춘현상발생시)
@@ -71,7 +72,7 @@ def print_time(datetime_value):
     txt = txt[:index]
     
     index = txt.find(' ')
-    txt = txt[index:]
+    txt = txt[index + 1:]
     
     return txt
 
@@ -116,7 +117,6 @@ def run():
     
     import random
     maxx = 3*60 + 16
-    #maxx = 7
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 186
+    work = 187
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
