@@ -116,7 +116,7 @@ def run():
 
     
     import random
-    maxx = 3*60 + 16
+    maxx = 3*60 + 17
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 188
+    work = 189
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
