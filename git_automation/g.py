@@ -15,7 +15,7 @@ Todo:
         밑에할차례?
         git rebase HEAD~8 -i 
         git push --force
-     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?->  EMAIL?, C#화?(한번더 멈춘현상발생시)
+     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?->  EMAIL?, C#화?(제자리 출력? -> 한번더 멈춘현상발생시)
 '''
 
 #version용으로 기본 공통
@@ -97,12 +97,11 @@ def timer_start():
     if datetime_now < datetime_target:
         timer.start()
     else:
+        next_round = check_update()
         run()
     return
         
 def run():
-    next_round = check_update()        
-    
     global step_round
     step_round += 1
     print("\n\nRound:" + str(step_round))        
@@ -116,7 +115,7 @@ def run():
 
     
     import random
-    maxx = 3*60 + 18
+    maxx = 3*60 + 19
     random_num = random.randrange(2, maxx + 1)    
     print(random_num, '/',maxx)      
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
@@ -162,7 +161,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 194
+    work = 195
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
