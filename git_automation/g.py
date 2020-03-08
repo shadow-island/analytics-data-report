@@ -91,7 +91,7 @@ def timer_start():
     #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))
     text = print_time(datetime_now)
     print(text + ' ', end='' , flush = True)
-    timer = threading.Timer(3,timer_start)
+    timer = threading.Timer(4,timer_start)
     #if count > 0:
     #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
     if datetime_now < datetime_target:
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 190
+    work = 191
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
