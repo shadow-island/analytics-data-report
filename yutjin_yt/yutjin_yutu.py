@@ -34,7 +34,7 @@ def runSubs():
         one_record.append(int(view))
         out_table.append(one_record)
         #break
-    print('real time data!')
+    
     print()
     print()
     print()
@@ -48,12 +48,14 @@ def runSubs():
     print()
     print()    
     print()    
+    print(' Real Time Data!')
+    
     import datetime
     def time2text(datetime_value):
             txt = str(datetime_value)
             index = txt.find('.')
             return txt[:index]
-    print("실시간:" + time2text(datetime.datetime.now()))
+    #print("실시간:" + time2text(datetime.datetime.now()))
     print()
     #out_table = sorted(out_table, key=lambda item: item[1], reverse=True)
     out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
@@ -65,10 +67,10 @@ def runSubs():
         #print(out_table[i])
         
         
-        print(str(total - i) + ':' + str(out_table[i][0]) + '의 구독자 수는 '+ str(format(out_table[i][1], ',')) +'명,조회수는 ' + str(out_table[i][2])  +'뷰')
+        print(' ' + str(total - i) + '위:' + str(out_table[i][0]) + ':'+ str(format(out_table[i][1], ',')) +'구독자 (' + str(out_table[i][2])  +'조회수)')
         print()
     print()    
-    time.sleep(4)
+    time.sleep(5)
     return
 
 def runList(list_id):
@@ -190,7 +192,7 @@ if os.path.isfile(db_xls) == True:
     s_value = sheet.cell(row = 1, column = 1).value
     print(s_value)
     key = s_value
-    is_right = True
+    is_right = False
     if is_right == True:
         sheet = wb.get_sheet_by_name('c')
     else:
