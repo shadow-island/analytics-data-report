@@ -8,7 +8,7 @@ Next: Release note
 #기능 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
-    # 1/4만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/3작업?
+    # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/3작업?
     - 1 다른 application 1 .playlist batch (구독자 update)
      -2 코드 정리
      -3 git 정리 + 작업숫자만        
@@ -88,11 +88,10 @@ def timer_start():
     count -= 1
     
     datetime_now = datetime.datetime.now()    
-    #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))
-    #text = print_time(datetime_now)
+    #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))    
     text = print_time(str(datetime_target - datetime_now))
     print(text + ' ', end='' , flush = True)
-    timer = threading.Timer(4,timer_start)
+    timer = threading.Timer(5,timer_start)
     #if count > 0:
     #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
     if datetime_now < datetime_target:
@@ -163,7 +162,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 192
+    work = 194
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
