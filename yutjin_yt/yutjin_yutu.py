@@ -19,13 +19,22 @@ def runSubs():
         #print(le)
         if le <= 17:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
+            
         else:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()             
+            snippet = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=snippet&id="+value+"&key="+key).read()
+            
         if is_debug_mode == True:
             print(json.loads(channel_data)["items"]) #for debug
             
+        #print(json.loads(channel_data))
+        #print(json.loads(snippet))
+        
         subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])        
         view = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
+        date = json.loads(snippet)["items"]
+        print(date)
+        input()
     
         
         one_record = []
@@ -57,15 +66,14 @@ def runSubs():
             return txt[:index]
     #print("실시간:" + time2text(datetime.datetime.now()))
     print()
-    #out_table = sorted(out_table, key=lambda item: item[1], reverse=True)
+    #out_table = sorted(out_table, key=lambda item: item[1], reverse=True) #online?
     out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
     total = len(out_table)
     for i in range(0,len(out_table)):
         if is_debug_mode != True:
             import time
             time.sleep(2)
-        #print(out_table[i])
-        
+    
         
         print(' ' + str(total - i) + '위:' + str(out_table[i][0]) + ':'+ str(format(out_table[i][1], ',')) +'구독자 (' + str(out_table[i][2])  +'조회수)')
         print()
@@ -192,7 +200,7 @@ if os.path.isfile(db_xls) == True:
     s_value = sheet.cell(row = 1, column = 1).value
     print(s_value)
     key = s_value
-    is_right = False
+    is_right = True
     if is_right == True:
         sheet = wb.get_sheet_by_name('c')
     else:
@@ -219,7 +227,7 @@ if len(sys.argv) == 1:
     print('2)sub\n')
     input_menu = input('?')
     
-    if input_menu != '2':
+    if input_menu == '1':
         list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
         list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
         #list_id = 'PL2efNl7MkFICURkXwsmymaFGg-NIwzj49'
@@ -228,9 +236,8 @@ if len(sys.argv) == 1:
             list_id = input('list?')
         else:
             list_id = input_menu
-        runList(list_id)
-    
-    else:
+        runList(list_id)    
+    else: #enter도 가능
        runSubs()
 else:
     is_subs_mode = True
