@@ -32,15 +32,19 @@ def runSubs():
         
         subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])        
         view = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
-        date = json.loads(snippet)["items"]
-        print(date)
-        input()
-    
-        
+        date = json.loads(snippet)["items"][0]["snippet"]["publishedAt"]
+        def get_date(datetime_value):
+            txt = str(datetime_value)
+            index = txt.find('T')
+            txt = txt[:index]    
+            return txt
+                    
         one_record = []
         one_record.append(data[i][0])
         one_record.append(subs)
         one_record.append(int(view))
+        one_record.append(get_date(date))        
+        
         out_table.append(one_record)
         #break
     
@@ -69,13 +73,20 @@ def runSubs():
     #out_table = sorted(out_table, key=lambda item: item[1], reverse=True) #online?
     out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
     total = len(out_table)
+    import time
     for i in range(0,len(out_table)):
-        if is_debug_mode != True:
-            import time
-            time.sleep(2)
-    
+        is_debug_mode = True
+        if is_debug_mode != True:            
+            time.sleep(2)    
         
-        print(' ' + str(total - i) + '위:' + str(out_table[i][0]) + ':'+ str(format(out_table[i][1], ',')) +'구독자 (' + str(out_table[i][2])  +'조회수)')
+        name = str(out_table[i][0])
+        
+        if len(name) <= 3:
+            column = '\t\t'
+        else:
+            column = '\t'
+        print(' ' + str(total - i) + '위:\t' + name + column + str(format(out_table[i][1], ',')) +'구독자 (' + str(out_table[i][2])  +'조회수)') 
+        print(' \t\t\t개설일자:' + out_table[i][3])
         print()
     print()    
     time.sleep(5)
@@ -157,7 +168,7 @@ def runList(list_id):
     
 #main-----------------------------------------
 #최소한 2020-02-14 이전에 개발 
-work = 89
+work = 127
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
