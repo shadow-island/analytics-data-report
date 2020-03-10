@@ -115,7 +115,7 @@ def run():
 
     
     import random
-    maxx = 3*60 + 21
+    maxx = 3*60 + 22
     random_num = random.randrange(2, maxx + 1)    
     #random_num = 1
     print(random_num, '/',maxx)      
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 200
+    work = 201
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
