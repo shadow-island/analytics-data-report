@@ -115,7 +115,7 @@ def run():
 
     
     import random
-    maxx = 3*60 + 23
+    maxx = 3*60 + 24
     random_num = random.randrange(2, maxx + 1)    
     #random_num = 1
     print(random_num, '/',maxx)      
@@ -138,7 +138,7 @@ def run():
     #아침에 도는가보고, 끝까지가면늘림  ,4~9      
     ''' 
     print("\n\nRound:" + str(step_round) + ' timer start')
-    if step_round <= 9:
+    if step_round <= 10:
         timer_start()
     else:
         print('step_round end')
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 202
+    work = 203
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
