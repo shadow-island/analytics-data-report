@@ -91,7 +91,7 @@ def timer_start():
     #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))    
     text = print_time(str(datetime_target - datetime_now))
     print(text + ' ', end='' , flush = True)
-    timer = threading.Timer(9,timer_start)
+    timer = threading.Timer(10, timer_start)
     #if count > 0:
     #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
     if datetime_now < datetime_target:
@@ -111,8 +111,6 @@ def run():
     os.system('git commit --all -m "' + 'v0 Round ' + str(step_round) + 'min"')
     print('[git push]')
     os.system('git push')
-
-
     
     import random
     maxx = 3*60 + 24
@@ -162,7 +160,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 203
+    work = 204
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
