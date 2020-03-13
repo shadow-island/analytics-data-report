@@ -113,7 +113,7 @@ def run():
     os.system('git push')
     
     import random
-    maxx = 3*60 + 26
+    maxx = 3*60 + 27
     random_num = random.randrange(2, maxx + 1)    
     #random_num = 1
     print(random_num, '/',maxx)      
@@ -160,7 +160,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 206
+    work = 207
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs
