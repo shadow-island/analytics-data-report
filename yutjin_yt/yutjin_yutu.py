@@ -74,14 +74,14 @@ def runSubs():
     out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
     total = len(out_table)
     import time
-    for i in range(0,len(out_table)):
-        is_debug_mode = True
+    is_debug_mode = False
+    for i in range(0,len(out_table)):        
         if is_debug_mode != True:            
             time.sleep(2)    
         
         name = str(out_table[i][0])
-        
-        if len(name) <= 3:
+        size = len(name)
+        if size <= 3:
             column = '\t\t'
         else:
             column = '\t'
@@ -211,7 +211,7 @@ if os.path.isfile(db_xls) == True:
     s_value = sheet.cell(row = 1, column = 1).value
     print(s_value)
     key = s_value
-    is_right = True
+    is_right = False
     if is_right == True:
         sheet = wb.get_sheet_by_name('c')
     else:
