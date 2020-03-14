@@ -7,7 +7,11 @@
 Next: Release note
 #기능 #UI
 Todo:
+
     # 1/2만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/3작업?
+
+    # 1.암것도안함(이것도테스트필요) 
+    # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/2작업?
     - 1 다른 application 1 .playlist batch (구독자 update)
      -2 코드 정리
      -3 git 정리 + 작업숫자만        
@@ -90,7 +94,7 @@ def timer_start():
     #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))    
     text = print_time(str(datetime_target - datetime_now))
     print(text + ' ', end='' , flush = True)
-    timer = threading.Timer(9,timer_start)
+    timer = threading.Timer(10, timer_start)
     #if count > 0:
     #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
     if datetime_now < datetime_target:
@@ -110,11 +114,9 @@ def run():
     os.system('git commit --all -m "' + 'v0 Round ' + str(step_round) + 'min"')
     print('[git push]')
     os.system('git push')
-
-
     
     import random
-    maxx = 3*60 + 20
+    maxx = 3*60 + 28
     random_num = random.randrange(2, maxx + 1)    
     #random_num = 1
     print(random_num, '/',maxx)      
@@ -137,7 +139,7 @@ def run():
     #아침에 도는가보고, 끝까지가면늘림  ,4~9      
     ''' 
     print("\n\nRound:" + str(step_round) + ' timer start')
-    if step_round <= 9:
+    if step_round <= 11:
         timer_start()
     else:
         print('step_round end')
@@ -161,7 +163,7 @@ if __name__ == '__main__':
         #~
         exit(0)
         
-    work = 199
+    work = 208
     work = round(work/60 * 1.1, 1)
     #source file 이름찾기?
     import codecs

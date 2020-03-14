@@ -19,19 +19,32 @@ def runSubs():
         #print(le)
         if le <= 17:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
+            
         else:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()             
+            snippet = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=snippet&id="+value+"&key="+key).read()
+            
         if is_debug_mode == True:
             print(json.loads(channel_data)["items"]) #for debug
             
+        #print(json.loads(channel_data))
+        #print(json.loads(snippet))
+        
         subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])        
         view = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
-    
-        
+        date = json.loads(snippet)["items"][0]["snippet"]["publishedAt"]
+        def get_date(datetime_value):
+            txt = str(datetime_value)
+            index = txt.find('T')
+            txt = txt[:index]    
+            return txt
+                    
         one_record = []
         one_record.append(data[i][0])
         one_record.append(subs)
         one_record.append(int(view))
+        one_record.append(get_date(date))        
+        
         out_table.append(one_record)
         #break
     
@@ -57,23 +70,29 @@ def runSubs():
             return txt[:index]
     #print("실시간:" + time2text(datetime.datetime.now()))
     print()
-    #out_table = sorted(out_table, key=lambda item: item[1], reverse=True)
+    #out_table = sorted(out_table, key=lambda item: item[1], reverse=True) #online?
     out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
     total = len(out_table)
+    import time
     for i in range(0,len(out_table)):
-        if is_debug_mode != True:
-            import time
-            time.sleep(2)
-        #print(out_table[i])
+        is_debug_mode = True
+        if is_debug_mode != True:            
+            time.sleep(2)    
         
+        name = str(out_table[i][0])
         
-        print(' ' + str(total - i) + '위:' + str(out_table[i][0]) + ':'+ str(format(out_table[i][1], ',')) +'구독자 (' + str(out_table[i][2])  +'조회수)')
+        if len(name) <= 3:
+            column = '\t\t'
+        else:
+            column = '\t'
+        print(' ' + str(total - i) + '위:\t' + name + column + str(format(out_table[i][1], ',')) +'구독자 (' + str(out_table[i][2])  +'조회수)') 
+        print(' \t\t\t개설일자:' + out_table[i][3])
         print()
     print()    
     time.sleep(5)
     return
 
-def runList(list_id):
+def runList(list_id, key):
     while(True):    
         base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
         nextPageToken = ""
@@ -149,7 +168,7 @@ def runList(list_id):
     
 #main-----------------------------------------
 #최소한 2020-02-14 이전에 개발 
-work = 89
+work = 127
 work = round(work/60 * 1.1,1)
 #source file 이름찾기?
 import codecs
@@ -192,7 +211,7 @@ if os.path.isfile(db_xls) == True:
     s_value = sheet.cell(row = 1, column = 1).value
     print(s_value)
     key = s_value
-    is_right = False
+    is_right = True
     if is_right == True:
         sheet = wb.get_sheet_by_name('c')
     else:
@@ -219,7 +238,7 @@ if len(sys.argv) == 1:
     print('2)sub\n')
     input_menu = input('?')
     
-    if input_menu != '2':
+    if input_menu == '1' or len(input_menu) > 1:
         list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
         list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
         #list_id = 'PL2efNl7MkFICURkXwsmymaFGg-NIwzj49'
@@ -228,9 +247,8 @@ if len(sys.argv) == 1:
             list_id = input('list?')
         else:
             list_id = input_menu
-        runList(list_id)
-    
-    else:
+        runList(list_id, key)
+    else: #enter도 가능
        runSubs()
 else:
     is_subs_mode = True
