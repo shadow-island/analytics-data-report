@@ -9,7 +9,6 @@ Next: Release note
 Todo:
 
     # 1/2만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/3작업?
-
     # 1.암것도안함(이것도테스트필요) 
     # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/2작업?
     - 1 다른 application 1 .playlist batch (구독자 update)

@@ -5,9 +5,9 @@
 
 '''
 
-def runSubs():
+def runSubs(is_right):
     is_debug_mode = False
-    #is_debug_mode = True
+    is_debug_mode = True
 
     #글꼴 50,너비61
     total = len(data)
@@ -19,6 +19,7 @@ def runSubs():
         #print(le)
         if le <= 17:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
+            snippet = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=snippet&forUsername="+value+"&key="+key).read()
             
         else:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + value + "&key="+key).read()             
@@ -71,10 +72,17 @@ def runSubs():
     #print("실시간:" + time2text(datetime.datetime.now()))
     print()
     #out_table = sorted(out_table, key=lambda item: item[1], reverse=True) #online?
-    out_table = sorted(out_table, key=lambda item: item[1], reverse=False)
+    is_reverse = False
+    if is_debug_mode == True:
+        is_reverse = True
+    if is_right == True:
+        print('is_right')
+        out_table = sorted(out_table, key=lambda item: item[2], reverse=True)
+    else:
+        out_table = sorted(out_table, key=lambda item: item[1], reverse = False)
+    
     total = len(out_table)
     import time
-    is_debug_mode = False
     for i in range(0,len(out_table)):        
         if is_debug_mode != True:            
             time.sleep(2)    
@@ -82,11 +90,20 @@ def runSubs():
         name = str(out_table[i][0])
         size = len(name)
         if size <= 3:
-            column = '\t\t'
+            column = '\t\t\t\t'
         else:
             column = '\t'
-        print(' ' + str(total - i) + '위:\t' + name + column + str(format(out_table[i][1], ',')) +'구독자 (' + str(out_table[i][2])  +'조회수)') 
-        print(' \t\t\t개설일자:' + out_table[i][3])
+            
+        if is_debug_mode == True:
+            num = i + 1
+        else:
+            num = total - i
+            
+        print(' ' + str(num) + '위:\t' + name)
+        if is_right == True:
+            print(' \t' + '총조회수:' +  str(format(out_table[i][2], ',')) + ' 구독자:' + str(format(out_table[i][1], ',')) +' 개설:' + out_table[i][3])
+        else:
+            print(' \t구독자:' + str(format(out_table[i][1], ',')) +' 총조회수:' +  str(format(out_table[i][2], ','))  +' 개설:' + out_table[i][3])
         print()
     print()    
     time.sleep(5)
@@ -211,7 +228,7 @@ if os.path.isfile(db_xls) == True:
     s_value = sheet.cell(row = 1, column = 1).value
     print(s_value)
     key = s_value
-    is_right = False
+    is_right = True
     if is_right == True:
         sheet = wb.get_sheet_by_name('c')
     else:
@@ -249,7 +266,7 @@ if len(sys.argv) == 1:
             list_id = input_menu
         runList(list_id, key)
     else: #enter도 가능
-       runSubs()
+       runSubs(is_right)
 else:
     is_subs_mode = True
     #sys.argv
