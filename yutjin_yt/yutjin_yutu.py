@@ -5,7 +5,9 @@
 
 '''
 
-def runSubs(is_right):
+def runSubs():
+    is_right = False
+    (key, data) = load(is_right)
     is_debug_mode = False
     is_debug_mode = True
 
@@ -109,7 +111,9 @@ def runSubs(is_right):
     time.sleep(5)
     return
 
-def runList(list_id, key):
+def runList(list_id):
+    
+    (key,data) = load(None)
     while(True):    
         base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
         nextPageToken = ""
@@ -182,6 +186,39 @@ def runList(list_id, key):
         print(datetime_total)
         input("do you want to check this list again?")
     return
+
+def load(is_right):
+    db_xls = "db.xlsx"
+
+    import openpyxl
+    from openpyxl import Workbook
+    import os
+
+    data = []
+
+    if os.path.isfile(db_xls) == True:                
+        wb = openpyxl.load_workbook(db_xls)
+        sheet_list = wb.get_sheet_names()
+        #print sheet_list
+        sheet = wb.get_sheet_by_name('k')
+        s_value = sheet.cell(row = 1, column = 1).value
+        print(s_value)
+        key = s_value
+        
+        if is_right == True:
+            sheet = wb.get_sheet_by_name('c')
+        else:
+            sheet = wb.get_sheet_by_name('c_l')
+        
+        for i in range(1,sheet.max_row + 1):
+            record = []
+            record.append(sheet.cell(row = i, column = 1).value)
+            record.append(sheet.cell(row = i, column = 2).value)
+            data.append(record)
+    else:
+        print(db_xls + " 없음")    
+    
+    return (key, data)
     
 #main-----------------------------------------
 #최소한 2020-02-14 이전에 개발 
@@ -212,38 +249,6 @@ print ('My Python Version: ' +  major + '.' + minor  + '.' + micro)
 #~
 
 
-db_xls = "db.xlsx"
-
-import openpyxl
-from openpyxl import Workbook
-import os
-
-data = []
-
-if os.path.isfile(db_xls) == True:                
-    wb = openpyxl.load_workbook(db_xls)
-    sheet_list = wb.get_sheet_names()
-    #print sheet_list
-    sheet = wb.get_sheet_by_name('k')
-    s_value = sheet.cell(row = 1, column = 1).value
-    print(s_value)
-    key = s_value
-    is_right = True
-    if is_right == True:
-        sheet = wb.get_sheet_by_name('c')
-    else:
-        sheet = wb.get_sheet_by_name('c_l')
-    
-    for i in range(1,sheet.max_row + 1):
-        record = []
-        record.append(sheet.cell(row = i, column = 1).value)
-        record.append(sheet.cell(row = i, column = 2).value)
-        data.append(record)
-else:
-    print(db_xls + " 없음")
-    
-
-
 import urllib.request
 import json
 
@@ -256,6 +261,7 @@ if len(sys.argv) == 1:
     input_menu = input('?')
     
     if input_menu == '1' or len(input_menu) > 1:
+        
         list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
         list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
         #list_id = 'PL2efNl7MkFICURkXwsmymaFGg-NIwzj49'
@@ -264,13 +270,14 @@ if len(sys.argv) == 1:
             list_id = input('list?')
         else:
             list_id = input_menu
-        runList(list_id, key)
+        runList(list_id)
     else: #enter도 가능
-       runSubs(is_right)
+       runSubs()
 else:
     is_subs_mode = True
     #sys.argv
     print(sys.argv[1])    
     #runSubs()
+
     
 exit(0)
