@@ -93,7 +93,7 @@ def timer_start():
     #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))    
     text = print_time(str(datetime_target - datetime_now))
     print(text + ' ', end='' , flush = True)
-    timer = threading.Timer(10, timer_start)
+    timer = threading.Timer(11, timer_start)
     #if count > 0:
     #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
     if datetime_now < datetime_target:
@@ -115,7 +115,7 @@ def run():
     os.system('git push')
     
     import random
-    maxx = 3*60 + 41
+    maxx = 3*60 + 42
     random_num = random.randrange(2, maxx + 1)    
     #random_num = 1
     print(random_num, '/',maxx)      
@@ -148,7 +148,7 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work = 221
+    work = 222
     
     import sys
     if len(sys.argv) == 1:        
