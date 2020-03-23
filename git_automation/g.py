@@ -8,7 +8,7 @@ Next: Release note
 #기능 #UI
 Todo:
 
-    # 1/2만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/3작업?
+    # 1/2만작업?(일단 오늘 영상완료까지는 늘리다가) # 
     # 1.암것도안함(이것도테스트필요) 
     # 1/3만작업?(일단 오늘 영상완료까지는 늘리다가) # kaisha 1/2작업?
     - 1 다른 application 1 .playlist batch (구독자 update)
@@ -23,6 +23,7 @@ Todo:
 #version용으로 기본 공통
 import sys
 #~
+
 import os
 import datetime
 
@@ -115,7 +116,7 @@ def run():
     os.system('git push')
     
     import random
-    maxx = 3*60 + 44
+    maxx = 3*60 + 45
     random_num = random.randrange(2, maxx + 1)    
     #random_num = 1
     print(random_num, '/',maxx)      
@@ -148,7 +149,7 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work = 224
+    work = 225
     
     import sys
     if len(sys.argv) == 1:        
