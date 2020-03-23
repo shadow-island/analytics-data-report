@@ -6,7 +6,7 @@
 '''
 
 def runSubs():
-    is_right = False
+    is_right = True
     (key, data) = load(is_right)
     is_debug_mode = False
     is_debug_mode = True
@@ -76,12 +76,14 @@ def runSubs():
     #out_table = sorted(out_table, key=lambda item: item[1], reverse=True) #online?
     is_reverse = False
     if is_debug_mode == True:
-        is_reverse = True
-    if is_right == True:
-        print('is_right')
-        out_table = sorted(out_table, key=lambda item: item[2], reverse=True)
+        is_reverse = True 
+    # reverse는 감소방향 true는 감소방향 false는 증가방향 
+    is_channel_sub = True
+    if is_channel_sub == True:
+        #out_table = sorted(out_table, key=lambda item: item[1], reverse = False)       
+        out_table = sorted(out_table, key=lambda item: item[1], reverse=is_reverse)
     else:
-        out_table = sorted(out_table, key=lambda item: item[1], reverse = False)
+        out_table = sorted(out_table, key=lambda item: item[2], reverse=True)        
     
     total = len(out_table)
     import time
@@ -102,10 +104,11 @@ def runSubs():
             num = total - i
             
         print(' ' + str(num) + '위:\t' + name)
-        if is_right == True:
+        
+        if is_channel_sub == True:
+            print(' \t구독자:' + str(format(out_table[i][1], ',')) +' 총조회수:' +  str(format(out_table[i][2], ','))  +' 개설:' + out_table[i][3])            
+        else:            
             print(' \t' + '총조회수:' +  str(format(out_table[i][2], ',')) + ' 구독자:' + str(format(out_table[i][1], ',')) +' 개설:' + out_table[i][3])
-        else:
-            print(' \t구독자:' + str(format(out_table[i][1], ',')) +' 총조회수:' +  str(format(out_table[i][2], ','))  +' 개설:' + out_table[i][3])
         print()
     print()    
     time.sleep(5)
@@ -257,7 +260,7 @@ import sys
 if len(sys.argv) == 1:        
     #print('normmal mode:no argv')
     print('1)list\n')
-    print('2)sub\n')
+    print('2)channel sub\n')
     input_menu = input('?')
     
     if input_menu == '1' or len(input_menu) > 1:
