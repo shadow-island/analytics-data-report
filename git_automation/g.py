@@ -94,7 +94,7 @@ def timer_start():
     #print('목표' + print_time(datetime_target) + " 현재시간:" + print_time(datetime_now))    
     text = print_time(str(datetime_target - datetime_now))
     print(text + ' ', end='' , flush = True)
-    timer = threading.Timer(11, timer_start)
+    timer = threading.Timer(12, timer_start) #글꼴 크기는 제일작은것 즉 RDP기준으로하자 그외는 늘리지말것
     #if count > 0:
     #  	date1 is considered less than date2 when date1 precedes date2 in time. (4)
     if datetime_now < datetime_target:
@@ -149,7 +149,7 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work = 227
+    work = 228
     
     import sys
     if len(sys.argv) == 1:        
