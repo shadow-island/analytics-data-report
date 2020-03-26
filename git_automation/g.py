@@ -116,7 +116,7 @@ def run():
     os.system('git push')
     
     import random
-    maxx = 3*60 + 49
+    maxx = 3*60 + 50
     random_num = random.randrange(2, maxx + 1)    
     #random_num = 1
     print(random_num, '/',maxx)      
@@ -149,7 +149,7 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work = 230
+    work = 231
     
     import sys
     if len(sys.argv) == 1:        
