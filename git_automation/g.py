@@ -148,8 +148,8 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work    = 234
-    g_maxx  = 3*60 + 53
+    work    = 235
+    g_maxx  = 3*60 + 54
     
     import sys
     if len(sys.argv) == 1:        
