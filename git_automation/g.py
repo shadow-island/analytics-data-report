@@ -117,9 +117,8 @@ def run():
     
     import random
     
-    random_num = random.randrange(2, maxx + 1)    
-    #random_num = 1
-    print(random_num, '/',maxx)      
+    random_num = random.randrange(2, g_maxx + 1)    
+    print(random_num, '/', g_maxx)
     next_gap_timedelta = datetime.timedelta(minutes = random_num)
     
     #1
@@ -150,7 +149,7 @@ main
 '''
 if __name__ == '__main__':
     work = 233
-    maxx = 3*60 + 52
+    g_maxx = 3*60 + 52
     
     import sys
     if len(sys.argv) == 1:        
