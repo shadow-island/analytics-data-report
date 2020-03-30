@@ -148,8 +148,8 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work    = 239
-    g_maxx  = 3*60 + 58 #더이상 글꼴 안늘려도될듯(chrome RDP에 맞춤)
+    work    = 240
+    g_maxx  = 3*60 + 59 #(chrome RDP에 맞춤)
     
     import sys
     if len(sys.argv) == 1:        
