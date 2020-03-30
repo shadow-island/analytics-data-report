@@ -135,7 +135,7 @@ def run():
         print ('!!!!!!!!!!!!!!!! Committed at least once !!!!!!!!!!!!!!!!')
             
     '''
-    #아침에 도는가보고, 끝까지가면늘림  ,4~9      
+    #아침에 도는가보고, 끝까지가면늘림, 4~9      
     ''' 
     print("\n\nRound:" + str(step_round) + ' timer start')
     if step_round <= 11:
@@ -148,8 +148,8 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work    = 240
-    g_maxx  = 3*60 + 59 #(chrome RDP에 맞춤)
+    work    = 241
+    g_maxx  = 3*60 + 60 #(chrome RDP에 맞춤)
     
     import sys
     if len(sys.argv) == 1:        
