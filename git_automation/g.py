@@ -149,7 +149,7 @@ main
 '''
 if __name__ == '__main__':
     work    = 243
-    g_maxx  = 3*60 + 62 #(chrome RDP에 맞춤)
+    g_maxx  = 4*60 + 3 #(chrome RDP에 맞춤)
     
     import sys
     if len(sys.argv) == 1:        
