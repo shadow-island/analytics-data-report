@@ -138,7 +138,7 @@ def run():
     #아침에 도는가보고, 끝까지가면늘림, 4~9      
     ''' 
     print("\n\nRound:" + str(step_round) + ' timer start')
-    if step_round <= 11:
+    if step_round <= 12:
         timer_start()
     else:
         print('step_round end')
@@ -148,7 +148,7 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work    = 250
+    work    = 251
     g_maxx  = 4*60 + 10#(chrome RDP에 맞춤)0  000112221122ddd100
     
     import sys
