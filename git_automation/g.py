@@ -107,8 +107,7 @@ def timer_start():
 def run():
     global step_round
     step_round += 1
-    print("\n\nRound:" + str(step_round))        
-    
+    print("\nRound:" + str(step_round))
     print('[commit]')
     os.system('git status')
     os.system('git commit --all -m "' + 'v0 Round ' + str(step_round) + 'min"')
