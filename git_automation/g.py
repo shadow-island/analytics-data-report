@@ -137,7 +137,7 @@ def run():
     #아침에 도는가보고, 끝까지가면늘림, 4~9      
     ''' 
     print("\nRound:" + str(step_round) + ' timer start')
-    if step_round <= 12:
+    if step_round <= 13:
         timer_start()
     else:
         print('step_round end')
