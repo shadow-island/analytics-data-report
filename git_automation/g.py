@@ -147,8 +147,8 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work    =           265
-    g_maxx  = 4*60 +    25 #(chrome RDP에 맞춤)#font26이 최대 
+    work    =           266
+    g_maxx  = 4*60 +    26 #(chrome RDP에 맞춤)#font26이 최대 
     
     import sys
     if len(sys.argv) == 1:        
