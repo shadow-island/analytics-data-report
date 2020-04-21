@@ -138,7 +138,7 @@ def run():
     ''' 
     print("\nRound:" + str(step_round) + ' timer start')
     os.system('date /T')
-    if step_round <= 15:
+    if step_round <= 16:
         timer_start()
     else:
         print('step_round end')
