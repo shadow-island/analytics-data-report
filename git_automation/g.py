@@ -148,7 +148,7 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work    =           231
+    work    =           271
     g_maxx  = 4*60 +    31 #(chrome RDP에 맞춤)#font26이 최대 
     
     import sys
