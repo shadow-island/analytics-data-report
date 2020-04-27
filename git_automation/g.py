@@ -122,12 +122,11 @@ def run():
     
     #1
     datetime_now = datetime.datetime.now()
-    print("시작시간:" + print_time(datetime_now))        
     #2 
     global datetime_target
     datetime_target = datetime_now + next_gap_timedelta
     txt = str(datetime_now + next_gap_timedelta)
-    print("종료예상시간:" + print_time(txt))
+    print("시작시간:" + print_time(datetime_now) + " 종료예상시간:" + print_time(txt))
     #3
     
     if step_round >= 2:
