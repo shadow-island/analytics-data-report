@@ -20,11 +20,11 @@ namespace gitA
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
             Timer timerGit = new System.Timers.Timer();
-            timerGit.Interval = randomResult * 1000 * 9;
+            timerGit.Interval = randomResult * 1000 * 10;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
             
-            timerTick.Interval = 700; // 단위 milisec
+            timerTick.Interval = 699; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
@@ -33,6 +33,8 @@ namespace gitA
 
         static void RunGit()
         {
+            Console.WriteLine("Round {0}", round);
+
             RunCommand("git status");
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
@@ -51,7 +53,7 @@ namespace gitA
             System.IO.File.WriteAllText(path, textValue, Encoding.Default);
             Console.WriteLine("git file ={0}", textValue);
 
-            Console.WriteLine("Round {0}", round);
+            
             if (round == 6)
             {
                 Console.WriteLine("안전 종료");
