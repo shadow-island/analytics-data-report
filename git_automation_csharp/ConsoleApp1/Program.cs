@@ -31,15 +31,27 @@ namespace gitA
             Console.ReadLine();
         }
 
+
         static void RunGit()
         {
             Console.WriteLine("Round {0}", round);
+            
 
             RunCommand("git status");
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
 
+            
+            if (round == 6)
+            {
+                Console.WriteLine("안전 종료");
+                Environment.Exit(0);
+            }
+            round++;
+        }
 
+        static void Update()
+        {
             // 읽어올 text file 의 경로를 지정 합니다.
             string path = "eukm.log";
             // text file 의 전체 text 를 읽어 옵니다.
@@ -52,15 +64,8 @@ namespace gitA
             textValue = Convert.ToString(numVal);
             System.IO.File.WriteAllText(path, textValue, Encoding.Default);
             Console.WriteLine("git file ={0}", textValue);
-
-            
-            if (round == 6)
-            {
-                Console.WriteLine("안전 종료");
-                Environment.Exit(0);
-            }
-            round++;
         }
+
         static void RunCommand(string command)
         {
             System.Diagnostics.ProcessStartInfo proInfo = new System.Diagnostics.ProcessStartInfo();
@@ -99,6 +104,7 @@ namespace gitA
         static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timerTick.Stop();
+            Update();
             RunGit();
             timerTick.Start();
         }
