@@ -24,6 +24,24 @@ namespace gitA
             System.IO.File.WriteAllText(path, textValue, Encoding.Default);
             Console.WriteLine(textValue);
 
+
+            RunCommand("git status");
+            RunCommand("git commit --all -m 'csharp'");
+
+            Console.ReadLine();
+
+            // 타이머 생성 및 시작
+            Timer timer = new System.Timers.Timer();
+            timer.Interval = 17; // 단위 milisec
+            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+            timer.Start();
+
+            Console.WriteLine("Press Enter to exit");
+            Console.ReadLine();
+        }
+
+        static void RunCommand(string command)
+        {
             //--
             System.Diagnostics.ProcessStartInfo proInfo = new System.Diagnostics.ProcessStartInfo();
             System.Diagnostics.Process pro = new System.Diagnostics.Process();
@@ -42,7 +60,8 @@ namespace gitA
             pro.Start();
             // CMD 에 보낼 명령어를 입력 합니다.
             //pro.StandardInput.Write(@"git status" + Environment.NewLine);
-            pro.StandardInput.Write(@"git commit -a" + Environment.NewLine);
+
+            pro.StandardInput.Write(command + Environment.NewLine);
             pro.StandardInput.Close();
             // 결과 값을 리턴 받습니다.
             string resultValue = pro.StandardOutput.ReadToEnd();
@@ -50,18 +69,6 @@ namespace gitA
             pro.Close();
             // 결과 값을 확인 합니다.
             Console.WriteLine(resultValue);
-
-            Console.ReadLine();
-
-
-            // 타이머 생성 및 시작
-            Timer timer = new System.Timers.Timer();
-            timer.Interval = 15; // 단위 milisec
-            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
-            timer.Start();
-
-            Console.WriteLine("Press Enter to exit");
-            Console.ReadLine();
         }
 
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
