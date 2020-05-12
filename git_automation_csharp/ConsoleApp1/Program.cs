@@ -9,13 +9,13 @@ namespace gitA
         static int round = 1;        
         static readonly Timer timerTick = new System.Timers.Timer();
         static void Main()
-        {
+        {            
+            RunGit();
+            Console.WriteLine("Press Enter to exit");
+
             Random r = new Random();
             int randomResult = r.Next(1, 1 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
-
-            RunGit();
-            Console.WriteLine("Press Enter to exit");
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
@@ -24,7 +24,7 @@ namespace gitA
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
             
-            timerTick.Interval = 699; // 단위 milisec
+            timerTick.Interval = 888; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
