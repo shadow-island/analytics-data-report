@@ -48,7 +48,8 @@ namespace gitA
             timerGit.Interval = 1000 * s;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
-            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"));
+            string sTime = DateTime.Now.ToString("HH:mm:ss")
+            Console.WriteLine();
             Console.WriteLine("{0}초후...", s);
         }
 
