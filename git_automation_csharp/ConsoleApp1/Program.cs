@@ -11,7 +11,7 @@ namespace gitA
         static void Main(string[] args)
         {
             // 타이머 생성 및 시작
-            timer.Interval = 27; // 단위 milisec
+            timer.Interval = 28; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timer.Start();
 
@@ -50,7 +50,8 @@ namespace gitA
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
         static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            timer.Stop();            
+            timer.Stop();
+            Console.WriteLine("Round {0}",c);
             if (c == 3)
             {
                 Console.WriteLine("안전 종료");
