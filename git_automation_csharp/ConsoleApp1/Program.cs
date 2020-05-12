@@ -39,7 +39,7 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 2 + 1);  //
+            int randomResult = r.Next(1, 1 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
