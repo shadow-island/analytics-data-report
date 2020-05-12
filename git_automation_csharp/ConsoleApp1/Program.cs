@@ -11,7 +11,8 @@ namespace gitA
         static Timer timerGit = new System.Timers.Timer();
 
         static void Main()
-        {            
+        {
+            Console.WriteLine("작업시간 {0}", 293);
             RunGit();
             Console.WriteLine("Press Enter to exit");
                         
@@ -22,10 +23,10 @@ namespace gitA
             Console.ReadLine();
         }
 
-
         static void RunGit()
         {
-            Console.WriteLine("Round {0}-------------------------", round);
+            Console.WriteLine("Round {0}--------------------------------", 
+                round);
             
             RunCommand("git status");
             RunCommand("git commit --all -m csharp_v0");
