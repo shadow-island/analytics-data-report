@@ -7,34 +7,11 @@ namespace gitA
     class Program
     {
         static int c = 0;
+        // 타이머 생성 및 시작
+        static Timer timer = new System.Timers.Timer();
         static void Main(string[] args)
-        {
-            // 읽어올 text file 의 경로를 지정 합니다.
-            string path = "eukm.log";
-            // text file 의 전체 text 를 읽어 옵니다.
-            string textValue = System.IO.File.ReadAllText(path);            
-            int numVal = Int32.Parse(textValue);
-            // 읽어온 내용을 화면에 출력 합니다.
-            Console.WriteLine("{0}", numVal);
-
-            numVal++;
-            
-            // Text 파일 생성 및 text 를 입력 합니다.
-            textValue = Convert.ToString(numVal);
-            System.IO.File.WriteAllText(path, textValue, Encoding.Default);
-            Console.WriteLine(textValue);
-
-            Console.ReadLine();
-
-            RunCommand("git status");
-            RunCommand("git commit --all -m csharp_v0");
-            RunCommand("git push");
-
-            Console.ReadLine();
-
-            // 타이머 생성 및 시작
-            Timer timer = new System.Timers.Timer();
-            timer.Interval = 18; // 단위 milisec
+        {   
+            timer.Interval = 20; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
 
@@ -75,8 +52,33 @@ namespace gitA
 
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
         static void timer_Elapsed(object sender, ElapsedEventArgs e)
-        {            
+        {
+            timer.Stop();
+
             Console.WriteLine("{0}", c++);
+
+            // 읽어올 text file 의 경로를 지정 합니다.
+            string path = "eukm.log";
+            // text file 의 전체 text 를 읽어 옵니다.
+            string textValue = System.IO.File.ReadAllText(path);
+            int numVal = Int32.Parse(textValue);
+            // 읽어온 내용을 화면에 출력 합니다.
+            Console.WriteLine("git file ={0}", numVal);
+
+            numVal++;
+
+            // Text 파일 생성 및 text 를 입력 합니다.
+            textValue = Convert.ToString(numVal);
+            System.IO.File.WriteAllText(path, textValue, Encoding.Default);
+            Console.WriteLine("git file ={0}", textValue);
+
+            //Console.ReadLine();
+
+            RunCommand("git status");
+            RunCommand("git commit --all -m csharp_v0");
+            RunCommand("git push");
+
+            //Console.ReadLine();
         }
     }
 }
