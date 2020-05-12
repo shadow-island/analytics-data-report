@@ -41,7 +41,8 @@ namespace gitA
             pro.StartInfo = proInfo;
             pro.Start();
             // CMD 에 보낼 명령어를 입력 합니다.
-            pro.StandardInput.Write(@"git status" + Environment.NewLine);
+            //pro.StandardInput.Write(@"git status" + Environment.NewLine);
+            pro.StandardInput.Write(@"git commit -a" + Environment.NewLine);
             pro.StandardInput.Close();
             // 결과 값을 리턴 받습니다.
             string resultValue = pro.StandardOutput.ReadToEnd();
