@@ -44,7 +44,7 @@ namespace gitA
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
-            int s = 12 * randomResult;
+            int s = 13 * randomResult;
             timerGit.Interval = 1000 * s;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
