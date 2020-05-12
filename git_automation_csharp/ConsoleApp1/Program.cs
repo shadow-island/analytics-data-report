@@ -32,7 +32,7 @@ namespace gitA
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
                         
-            if (round == 6)
+            if (round == 16)
             {
                 Console.WriteLine("사고방지 안전히 종료");
                 Environment.Exit(0);
@@ -40,7 +40,7 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 4 + 1);  //
+            int randomResult = r.Next(1, 4*60 + 53 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
