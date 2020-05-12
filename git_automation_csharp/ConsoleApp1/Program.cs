@@ -24,7 +24,7 @@ namespace gitA
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
             
-            timerTick.Interval = 888; // 단위 milisec
+            timerTick.Interval = 999; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
