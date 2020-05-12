@@ -11,7 +11,7 @@ namespace gitA
         static void Main(string[] args)
         {
             // 타이머 생성 및 시작
-            timer.Interval = 30; // 단위 milisec
+            timer.Interval = 31; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timer.Start();
 
@@ -52,7 +52,7 @@ namespace gitA
         {
             timer.Stop();
             Console.WriteLine("Round {0}",round);
-            if (round == 4)
+            if (round == 5)
             {
                 Console.WriteLine("안전 종료");
                 return;
