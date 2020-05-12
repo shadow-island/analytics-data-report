@@ -6,13 +6,13 @@ namespace gitA
 {
     class Program
     {
-        static int c = 0;
-        // 타이머 생성 및 시작
+        static int c = 0;        
         static Timer timer = new System.Timers.Timer();
         static void Main(string[] args)
-        {   
-            timer.Interval = 23; // 단위 milisec
-            timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
+        {
+            // 타이머 생성 및 시작
+            timer.Interval = 24; // 단위 milisec
+            timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timer.Start();
 
             Console.WriteLine("Press Enter to exit");
@@ -21,7 +21,6 @@ namespace gitA
 
         static void RunCommand(string command)
         {
-            //--
             System.Diagnostics.ProcessStartInfo proInfo = new System.Diagnostics.ProcessStartInfo();
             System.Diagnostics.Process pro = new System.Diagnostics.Process();
             // 실행할 파일명 입력 -- cmd
@@ -38,8 +37,6 @@ namespace gitA
             pro.StartInfo = proInfo;
             pro.Start();
             // CMD 에 보낼 명령어를 입력 합니다.
-            //pro.StandardInput.Write(@"git status" + Environment.NewLine);
-
             pro.StandardInput.Write(command + Environment.NewLine);
             pro.StandardInput.Close();
             // 결과 값을 리턴 받습니다.
@@ -51,7 +48,7 @@ namespace gitA
         }
 
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
-        static void timer_Elapsed(object sender, ElapsedEventArgs e)
+        static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timer.Stop();
 
