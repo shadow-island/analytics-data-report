@@ -51,7 +51,7 @@ namespace gitA
             timerGit.Start();
             string sTime = DateTime.Now.ToString("HH:mm:ss");
             Console.WriteLine("{0}=현재시간", sTime);
-            Console.WriteLine("{0}초후...", m);
+            Console.WriteLine("{0}분후...", m);
         }
 
         static void Update()
