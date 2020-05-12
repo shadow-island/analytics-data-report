@@ -11,11 +11,11 @@ namespace gitA
         static void Main(string[] args)
         {
             Random r = new Random();
-            int randomResult = r.Next(1, 2);  //
+            int randomResult = r.Next(1, 3);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
-            timer.Interval = 400; // 단위 milisec
+            timer.Interval = 500; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timer.Start();
 
