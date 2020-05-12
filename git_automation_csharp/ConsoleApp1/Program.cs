@@ -40,12 +40,12 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 5 + 1);  //
+            int randomResult = r.Next(1, 2 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
-            int s = 15 * randomResult;
+            int s = 60 * randomResult;
             timerGit.Interval = 1000 * s;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
@@ -67,7 +67,7 @@ namespace gitA
             // Text 파일 생성 및 text 를 입력 합니다.
             textValue = Convert.ToString(numVal);
             System.IO.File.WriteAllText(path, textValue, Encoding.Default);
-            Console.WriteLine("git file ={0}", textValue);
+            Console.WriteLine("\ngit file ={0}", textValue);
         }
 
         static void RunCommand(string command)
