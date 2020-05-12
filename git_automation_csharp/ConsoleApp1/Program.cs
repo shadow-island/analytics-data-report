@@ -6,12 +6,12 @@ namespace gitA
 {
     class Program
     {
-        static int round = 0;        
-        static Timer timer = new System.Timers.Timer();
+        static int round = 1;        
+        static readonly Timer timer = new System.Timers.Timer();
         static void Main(string[] args)
         {
             // 타이머 생성 및 시작
-            timer.Interval = 32; // 단위 milisec
+            timer.Interval = 33; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timer.Start();
 
