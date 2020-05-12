@@ -7,9 +7,11 @@
 
 def runSubs():
     is_right = True
+    is_right = False
     (key, data) = load(is_right)
-    is_debug_mode = False
+    
     is_debug_mode = True
+    #is_debug_mode = False
 
     #글꼴 50,너비61
     total = len(data)
@@ -64,6 +66,15 @@ def runSubs():
     print()
     print()    
     print()    
+    print()    
+    print()    
+    print()    
+    print()    
+    print()    
+    print()    
+    print()    
+    print()    
+    print()    
     print(' Real Time Data!')
     
     import datetime
@@ -74,16 +85,20 @@ def runSubs():
     #print("실시간:" + time2text(datetime.datetime.now()))
     print()
     #out_table = sorted(out_table, key=lambda item: item[1], reverse=True) #online?
+    
     is_reverse = False
     if is_debug_mode == True:
         is_reverse = True 
-    # reverse는 감소방향 true는 감소방향 false는 증가방향 
-    is_channel_sub = True
-    if is_channel_sub == True:
+    # reverse는 감소방향 true는 감소방향(print용) false는 증가방향(real time용)
+    
+    is_sub_sort = True
+    #is_sub_sort = False
+    
+    if is_sub_sort == True:
         #out_table = sorted(out_table, key=lambda item: item[1], reverse = False)       
         out_table = sorted(out_table, key=lambda item: item[1], reverse=is_reverse)
     else:
-        out_table = sorted(out_table, key=lambda item: item[2], reverse=True)        
+        out_table = sorted(out_table, key=lambda item: item[2], reverse=is_reverse)        
     
     total = len(out_table)
     import time
@@ -105,7 +120,7 @@ def runSubs():
             
         print(' ' + str(num) + '위:\t' + name)
         
-        if is_channel_sub == True:
+        if is_sub_sort == True:
             print(' \t구독자:' + str(format(out_table[i][1], ',')) +' 총조회수:' +  str(format(out_table[i][2], ','))  +' 개설:' + out_table[i][3])            
         else:            
             print(' \t' + '총조회수:' +  str(format(out_table[i][2], ',')) + ' 구독자:' + str(format(out_table[i][1], ',')) +' 개설:' + out_table[i][3])
