@@ -25,7 +25,7 @@ namespace gitA
 
         static void RunGit()
         {
-            Console.WriteLine("Round {0}-", round);
+            Console.WriteLine("Round {0}-------------------------", round);
             
             RunCommand("git status");
             RunCommand("git commit --all -m csharp_v0");
@@ -39,12 +39,12 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 2 + 1);  //
+            int randomResult = r.Next(1, 3 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
-            int s = 11 * randomResult;
+            int s = 12 * randomResult;
             timerGit.Interval = 1000 * s;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
