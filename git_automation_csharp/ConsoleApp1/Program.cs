@@ -45,13 +45,13 @@ namespace gitA
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
-            int s = 60 * randomResult;
-            timerGit.Interval = 1000 * s;
+            int m = randomResult;
+            timerGit.Interval = 1000 * m * 60;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
             string sTime = DateTime.Now.ToString("HH:mm:ss");
             Console.WriteLine("{0}=현재시간", sTime);
-            Console.WriteLine("{0}초후...", s);
+            Console.WriteLine("{0}초후...", m);
         }
 
         static void Update()
