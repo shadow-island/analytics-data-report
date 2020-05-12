@@ -24,15 +24,17 @@ namespace gitA
             System.IO.File.WriteAllText(path, textValue, Encoding.Default);
             Console.WriteLine(textValue);
 
+            Console.ReadLine();
 
             RunCommand("git status");
-            RunCommand("git commit --all -m 'csharp'");
+            RunCommand("git commit --all -m csharp_v0");
+            RunCommand("git push");
 
             Console.ReadLine();
 
             // 타이머 생성 및 시작
             Timer timer = new System.Timers.Timer();
-            timer.Interval = 17; // 단위 milisec
+            timer.Interval = 18; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
 
