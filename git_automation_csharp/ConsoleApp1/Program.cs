@@ -31,7 +31,7 @@ namespace gitA
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
                         
-            if (round == 5)
+            if (round == 6)
             {
                 Console.WriteLine("사고방지 안전히 종료");
                 Environment.Exit(0);
@@ -48,7 +48,7 @@ namespace gitA
             timerGit.Interval = 1000 * s;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
-            string sTime = DateTime.Now.ToString("HH:mm:ss")
+            string sTime = DateTime.Now.ToString("HH:mm:ss");
             Console.WriteLine("현재시간 {0}", sTime);
             Console.WriteLine("{0}초후...", s);
         }
