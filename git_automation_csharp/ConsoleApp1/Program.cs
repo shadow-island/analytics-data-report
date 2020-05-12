@@ -12,7 +12,7 @@ namespace gitA
 
         static void Main()
         {
-            Console.WriteLine("작업시간 {0}", 294);
+            Console.WriteLine("작업시간 {0}", 295);
             RunGit();
             Console.WriteLine("Press Enter to exit");
                         
