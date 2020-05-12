@@ -7,7 +7,7 @@ namespace gitA
     class Program
     {
         static int round = 1;        
-        static readonly Timer timer = new System.Timers.Timer();
+        static readonly Timer timerTick = new System.Timers.Timer();
         static void Main(string[] args)
         {
             Random r = new Random();
@@ -15,9 +15,9 @@ namespace gitA
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
-            timer.Interval = 500; // 단위 milisec
-            timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
-            timer.Start();
+            timerTick.Interval = 600; // 단위 milisec
+            timerTick.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
+            timerTick.Start();
 
             Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
@@ -54,7 +54,7 @@ namespace gitA
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
         static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            timer.Stop();
+            timerTick.Stop();
             Console.WriteLine("Round {0}",round);
             if (round == 5)
             {
@@ -80,7 +80,7 @@ namespace gitA
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
 
-            timer.Start();
+            timerTick.Start();
         }
     }
 }
