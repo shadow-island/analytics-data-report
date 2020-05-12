@@ -6,12 +6,12 @@ namespace gitA
 {
     class Program
     {
-        static int c = 0;        
+        static int round = 0;        
         static Timer timer = new System.Timers.Timer();
         static void Main(string[] args)
         {
             // 타이머 생성 및 시작
-            timer.Interval = 28; // 단위 milisec
+            timer.Interval = 29; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timer.Start();
 
@@ -51,14 +51,13 @@ namespace gitA
         static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timer.Stop();
-            Console.WriteLine("Round {0}",c);
-            if (c == 3)
+            Console.WriteLine("Round {0}",round);
+            if (round == 4)
             {
                 Console.WriteLine("안전 종료");
                 return;
             }
-            Console.WriteLine("{0}", c++);
-
+            round++;
 
             // 읽어올 text file 의 경로를 지정 합니다.
             string path = "eukm.log";
