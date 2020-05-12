@@ -16,8 +16,14 @@ namespace gitA
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
-            timerTick.Interval = randomResult * 1000; // 단위 milisec
-            timerTick.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
+            Timer timerGit = new System.Timers.Timer();
+            timerGit.Interval = randomResult * 1000; // 단위 milisec
+            timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
+            timerGit.Start();
+
+            
+            timerTick.Interval = 700; // 단위 milisec
+            timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
             Console.WriteLine("Press Enter to exit");
@@ -52,7 +58,14 @@ namespace gitA
             Console.WriteLine(resultValue);
         }
 
+
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
+        static void Timer_Tick(object sender, ElapsedEventArgs e)
+        {
+            
+            Console.WriteLine(".");
+        }
+
         static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timerTick.Stop();
@@ -81,7 +94,7 @@ namespace gitA
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
 
-            timerTick.Start();
+            //timerGit.Start();
         }
     }
 }
