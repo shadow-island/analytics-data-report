@@ -34,14 +34,12 @@ namespace gitA
 
         static void RunGit()
         {
-            Console.WriteLine("Round {0}", round);
+            Console.WriteLine("Round {0}-", round);
             
-
             RunCommand("git status");
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
-
-            
+                        
             if (round == 6)
             {
                 Console.WriteLine("안전 종료");
@@ -97,8 +95,8 @@ namespace gitA
 
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
         static void Timer_Tick(object sender, ElapsedEventArgs e)
-        {   
-            Console.WriteLine(".");
+        {
+            Console.WriteLine(DateTime.Now.ToString("HHmmss"));
         }
 
         static void Timer_Elapsed(object sender, ElapsedEventArgs e)
