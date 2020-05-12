@@ -37,7 +37,7 @@ namespace gitA
             if (round == 5)
             {
                 Console.WriteLine("안전 종료");
-                return;
+                Environment.Exit(0);
             }
             round++;
 
