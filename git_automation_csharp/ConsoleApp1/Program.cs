@@ -14,10 +14,12 @@ namespace gitA
             int randomResult = r.Next(1, 1 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
+            RunGit();
+
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
             Timer timerGit = new System.Timers.Timer();
-            timerGit.Interval = randomResult * 1000 * 5;
+            timerGit.Interval = randomResult * 1000 * 6;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
             
@@ -29,6 +31,33 @@ namespace gitA
             Console.ReadLine();
         }
 
+        static void RunGit()
+        {
+            Console.WriteLine("Round {0}", round);
+            if (round == 5)
+            {
+                Console.WriteLine("안전 종료");
+                return;
+            }
+            round++;
+
+            // 읽어올 text file 의 경로를 지정 합니다.
+            string path = "eukm.log";
+            // text file 의 전체 text 를 읽어 옵니다.
+            string textValue = System.IO.File.ReadAllText(path);
+            int numVal = Int32.Parse(textValue);
+            // 읽어온 내용을 화면에 출력 합니다.
+            //Console.WriteLine("git file ={0}", numVal);
+            numVal++;
+            // Text 파일 생성 및 text 를 입력 합니다.
+            textValue = Convert.ToString(numVal);
+            System.IO.File.WriteAllText(path, textValue, Encoding.Default);
+            Console.WriteLine("git file ={0}", textValue);
+
+            RunCommand("git status");
+            RunCommand("git commit --all -m csharp_v0");
+            RunCommand("git push");
+        }
         static void RunCommand(string command)
         {
             System.Diagnostics.ProcessStartInfo proInfo = new System.Diagnostics.ProcessStartInfo();
@@ -67,31 +96,7 @@ namespace gitA
         static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             timerTick.Stop();
-            Console.WriteLine("Round {0}",round);
-            if (round == 5)
-            {
-                Console.WriteLine("안전 종료");
-                return;
-            }
-            round++;
-
-            // 읽어올 text file 의 경로를 지정 합니다.
-            string path = "eukm.log";
-            // text file 의 전체 text 를 읽어 옵니다.
-            string textValue = System.IO.File.ReadAllText(path);
-            int numVal = Int32.Parse(textValue);
-            // 읽어온 내용을 화면에 출력 합니다.
-            //Console.WriteLine("git file ={0}", numVal);
-            numVal++;
-            // Text 파일 생성 및 text 를 입력 합니다.
-            textValue = Convert.ToString(numVal);
-            System.IO.File.WriteAllText(path, textValue, Encoding.Default);
-            Console.WriteLine("git file ={0}", textValue);
-
-            RunCommand("git status");
-            RunCommand("git commit --all -m csharp_v0");
-            RunCommand("git push");
-
+            RunGit();
             timerTick.Start();
         }
     }
