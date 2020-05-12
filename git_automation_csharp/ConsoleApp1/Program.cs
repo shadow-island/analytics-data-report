@@ -65,22 +65,17 @@ namespace gitA
             string textValue = System.IO.File.ReadAllText(path);
             int numVal = Int32.Parse(textValue);
             // 읽어온 내용을 화면에 출력 합니다.
-            Console.WriteLine("git file ={0}", numVal);
-
+            //Console.WriteLine("git file ={0}", numVal);
             numVal++;
-
             // Text 파일 생성 및 text 를 입력 합니다.
             textValue = Convert.ToString(numVal);
             System.IO.File.WriteAllText(path, textValue, Encoding.Default);
             Console.WriteLine("git file ={0}", textValue);
 
-            //Console.ReadLine();
-
             RunCommand("git status");
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
 
-            //Console.ReadLine();
             timer.Start();
         }
     }
