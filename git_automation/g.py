@@ -40,7 +40,7 @@ def read_file(file_name):
 
 def get_last(local_file_name, bar):
     # File이 없는경우 대비
-    datetime_old_time   = datetime.datetime.now()
+    ## xxx datetime_old_time   = datetime.datetime.now()
     int_old_sec_gap     = 0
 
     data_list   = read_file(local_file_name)
@@ -148,8 +148,8 @@ def run():
 main
 '''
 if __name__ == '__main__':
-    work    =           292
-    g_maxx  = 4*60 +    52 #(chrome RDP에 맞춤)#font26이 최대 
+    work    =           293
+    g_maxx  = 4*60 +    53 #(chrome RDP에 맞춤)#font26이 최대 
     
     import sys
     if len(sys.argv) == 1:        
