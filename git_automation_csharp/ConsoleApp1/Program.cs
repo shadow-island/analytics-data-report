@@ -13,16 +13,6 @@ namespace gitA
             RunGit();
             Console.WriteLine("Press Enter to exit");
 
-            Random r = new Random();
-            int randomResult = r.Next(1, 1 + 1);  //
-            Console.WriteLine("randomResult {0}", randomResult);
-
-            // 타이머 생성 및 시작
-            //timerTick.Interval = 700; // 단위 milisec
-            Timer timerGit = new System.Timers.Timer();
-            timerGit.Interval = randomResult * 1000 * 10;
-            timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
-            timerGit.Start();
             
             timerTick.Interval = 999; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
@@ -46,6 +36,17 @@ namespace gitA
                 Environment.Exit(0);
             }
             round++;
+
+            Random r = new Random();
+            int randomResult = r.Next(1, 1 + 1);  //
+            Console.WriteLine("randomResult {0}", randomResult);
+
+            // 타이머 생성 및 시작
+            //timerTick.Interval = 700; // 단위 milisec
+            Timer timerGit = new System.Timers.Timer();
+            timerGit.Interval = randomResult * 1000 * 10;
+            timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
+            timerGit.Start();
         }
 
         static void Update()
