@@ -49,7 +49,7 @@ namespace gitA
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
             string sTime = DateTime.Now.ToString("HH:mm:ss")
-            Console.WriteLine();
+            Console.WriteLine("현재시간 {0}", sTime);
             Console.WriteLine("{0}초후...", s);
         }
 
