@@ -8,6 +8,8 @@ namespace gitA
     {
         static int round = 1;        
         static readonly Timer timerTick = new System.Timers.Timer();
+        static Timer timerGit = new System.Timers.Timer();
+
         static void Main()
         {            
             RunGit();
@@ -43,10 +45,12 @@ namespace gitA
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
-            Timer timerGit = new System.Timers.Timer();
-            timerGit.Interval = randomResult * 1000 * 10;
+            
+            timerGit.Interval = randomResult * 1000 * 11;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
+
+            Console.WriteLine("randomResult {0}", timerGit.Interval);
         }
 
         static void Update()
