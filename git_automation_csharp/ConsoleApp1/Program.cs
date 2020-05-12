@@ -11,7 +11,7 @@ namespace gitA
         static void Main(string[] args)
         {
             // 타이머 생성 및 시작
-            timer.Interval = 25; // 단위 milisec
+            timer.Interval = 26; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timer.Start();
 
@@ -53,7 +53,11 @@ namespace gitA
             timer.Stop();
             Console.WriteLine("{0}", c++);
             if (c == 2)
+            {
+                Console.WriteLine("안전 종료");
                 return;
+            }
+                
 
             // 읽어올 text file 의 경로를 지정 합니다.
             string path = "eukm.log";
