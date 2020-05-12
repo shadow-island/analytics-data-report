@@ -61,8 +61,7 @@ namespace gitA
 
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
         static void Timer_Tick(object sender, ElapsedEventArgs e)
-        {
-            
+        {   
             Console.WriteLine(".");
         }
 
