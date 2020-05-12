@@ -12,7 +12,7 @@ namespace gitA
 
         static void Main()
         {
-            Console.WriteLine("작업시간 {0}", 293);
+            Console.WriteLine("작업시간 {0}", 294);
             RunGit();
             Console.WriteLine("Press Enter to exit");
                         
@@ -40,7 +40,7 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 3 + 1);  //
+            int randomResult = r.Next(1, 4 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
