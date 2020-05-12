@@ -40,7 +40,7 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 2 + 1);  //
+            int randomResult = r.Next(1, 3 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
@@ -67,7 +67,7 @@ namespace gitA
             // Text 파일 생성 및 text 를 입력 합니다.
             textValue = Convert.ToString(numVal);
             System.IO.File.WriteAllText(path, textValue, Encoding.Default);
-            Console.WriteLine("\ngit file ={0}", textValue);
+            Console.WriteLine("\ngit file================={0}", textValue);
         }
 
         static void RunCommand(string command)
