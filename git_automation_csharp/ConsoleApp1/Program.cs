@@ -14,8 +14,7 @@ namespace gitA
         {            
             RunGit();
             Console.WriteLine("Press Enter to exit");
-
-            
+                        
             timerTick.Interval = 999; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
@@ -40,17 +39,17 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 1 + 1);  //
+            int randomResult = r.Next(1, 2 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
-            const int s = 11;
+            const int s = 12;
             timerGit.Interval = randomResult * 1000 * s;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
 
-            Console.WriteLine("randomResult {0}", s);
+            Console.WriteLine("{0}초후...", s);
         }
 
         static void Update()
