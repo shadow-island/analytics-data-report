@@ -11,7 +11,7 @@ namespace gitA
         static Timer timer = new System.Timers.Timer();
         static void Main(string[] args)
         {   
-            timer.Interval = 20; // 단위 milisec
+            timer.Interval = 21; // 단위 milisec
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             timer.Start();
 
