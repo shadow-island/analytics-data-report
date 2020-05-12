@@ -11,7 +11,7 @@ namespace gitA
         static void Main()
         {
             Random r = new Random();
-            int randomResult = r.Next(1, 3);  //
+            int randomResult = r.Next(1, 3 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
@@ -22,7 +22,7 @@ namespace gitA
             timerGit.Start();
 
             
-            timerTick.Interval = 700; // 단위 milisec
+            timerTick.Interval = 800; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
@@ -94,7 +94,7 @@ namespace gitA
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
 
-            //timerGit.Start();
+            timerTick.Start();
         }
     }
 }
