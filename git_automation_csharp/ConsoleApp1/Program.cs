@@ -40,12 +40,12 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 4 + 1);  //
+            int randomResult = r.Next(1, 5 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
             //timerTick.Interval = 700; // 단위 milisec
-            int s = 14 * randomResult;
+            int s = 15 * randomResult;
             timerGit.Interval = 1000 * s;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
