@@ -47,10 +47,10 @@ namespace gitA
             //timerTick.Interval = 700; // 단위 milisec
             const int s = 11;
             timerGit.Interval = randomResult * 1000 * s;
-            timerGit.Elapsed += new ElapsedEventHandler(s);
+            timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
 
-            Console.WriteLine("randomResult {0}", timerGit.Interval);
+            Console.WriteLine("randomResult {0}", s);
         }
 
         static void Update()
