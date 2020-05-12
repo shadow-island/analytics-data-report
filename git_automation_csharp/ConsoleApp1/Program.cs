@@ -12,11 +12,11 @@ namespace gitA
 
         static void Main()
         {
-            Console.WriteLine("작업시간 {0}", 295);
+            Console.WriteLine("작업시간 {0}", 296);
             RunGit();
             Console.WriteLine("Press Enter to exit");
                         
-            timerTick.Interval = 1000; // 단위 milisec
+            timerTick.Interval = 1000 * 2; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
