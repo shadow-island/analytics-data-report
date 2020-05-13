@@ -16,7 +16,7 @@ namespace gitA
             RunGit();
             Console.WriteLine("Press Enter to exit");
                         
-            timerTick.Interval = 1000 * 3; // 단위 milisec
+            timerTick.Interval = 1000 * 4; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
@@ -32,7 +32,7 @@ namespace gitA
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
                         
-            if (round == 16)
+            if (round == 17)
             {
                 Console.WriteLine("사고방지 안전히 종료");
                 Environment.Exit(0);
