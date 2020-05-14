@@ -30,12 +30,12 @@ namespace gitA
         {
             var info = new FileInfo(path);
             System.Console.WriteLine("수정 시간 : " + info.LastWriteTime);
-            System.Console.WriteLine("수정 시간 : " + info.LastWriteTime.Date);
+            System.Console.WriteLine("수정 시간1 : " + info.LastWriteTime.Day);
             
 
-            Console.WriteLine("Round {0}--------------------------------", 
-                round);
-            
+            Console.WriteLine("Round {0}--------------------------------",round);
+
+
             RunCommand("git status");
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
