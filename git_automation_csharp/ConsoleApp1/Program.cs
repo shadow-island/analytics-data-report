@@ -30,7 +30,7 @@ namespace gitA
         {
             var info = new FileInfo(path);
             System.Console.WriteLine("수정 시간1 : " + info.LastWriteTime.Day);
-            System.Console.WriteLine("수정 시간1 : " + DateTime.Now.ToString("d"));
+            System.Console.WriteLine("수정 시간1 : " + DateTime.Now.Day);
 
             Console.WriteLine("Round {0}--------------------------------",round);
 
