@@ -16,6 +16,12 @@ namespace gitA
         static void Main()
         {
             Console.WriteLine("작업시간 {0}", 300);
+            var info = new FileInfo(path);
+            if (info.LastWriteTime.Day != DateTime.Now.Day)
+            {
+                Console.WriteLine("하루지나");
+                Update();
+            }
             RunGit();
             Console.WriteLine("Press Enter to exit");
                         
@@ -28,12 +34,7 @@ namespace gitA
 
         static void RunGit()
         {
-            var info = new FileInfo(path);
-            System.Console.WriteLine("수정 시간1 : " + info.LastWriteTime.Day);
-            System.Console.WriteLine("수정 시간1 : " + DateTime.Now.Day);
-
             Console.WriteLine("Round {0}--------------------------------",round);
-
 
             RunCommand("git status");
             RunCommand("git commit --all -m csharp_v0");
@@ -65,7 +66,8 @@ namespace gitA
         {            
             // text file 의 전체 text 를 읽어 옵니다.
             string textValue = System.IO.File.ReadAllText(path);
-            int numVal = Int32.Parse(textValue);
+            int numVal = 0;
+            bool isTest = int.TryParse(textValue, out numVal);
             // 읽어온 내용을 화면에 출력 합니다.
             //Console.WriteLine("git file ={0}", numVal);
             numVal++;
