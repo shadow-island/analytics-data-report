@@ -15,11 +15,11 @@ namespace gitA
 
         static void Main()
         {
-            Console.WriteLine("작업시간 {0}", 300);
+            Console.WriteLine("작업분ver{0}", 301);
             var info = new FileInfo(path);
             if (info.LastWriteTime.Day != DateTime.Now.Day)
             {
-                Console.WriteLine("하루지나");
+                Console.WriteLine("하루지나!");
                 Update();
             }
             RunGit();
@@ -48,8 +48,8 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            //int randomResult = r.Next(1, 4*60 + 50 + 1);  //
-            int randomResult = r.Next(1, 3 + 1);  //
+            int randomResult = r.Next(1, 4*60 + 50 + 1);  //
+            //int randomResult = r.Next(1, 3 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 타이머 생성 및 시작
