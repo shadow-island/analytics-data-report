@@ -29,9 +29,8 @@ namespace gitA
         static void RunGit()
         {
             var info = new FileInfo(path);
-            System.Console.WriteLine("수정 시간 : " + info.LastWriteTime);
             System.Console.WriteLine("수정 시간1 : " + info.LastWriteTime.Day);
-            
+            System.Console.WriteLine("수정 시간1 : " + DateTime.Now.ToString("d"));
 
             Console.WriteLine("Round {0}--------------------------------",round);
 
