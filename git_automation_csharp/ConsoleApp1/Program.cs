@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Timers;
 
@@ -6,6 +7,8 @@ namespace gitA
 {
     class Program
     {
+        // 읽어올 text file 의 경로를 지정 합니다.
+        static readonly string path = "eukm.log";
         static int round = 1;        
         static readonly Timer timerTick = new System.Timers.Timer();
         static Timer timerGit = new System.Timers.Timer();
@@ -25,6 +28,11 @@ namespace gitA
 
         static void RunGit()
         {
+            var info = new FileInfo(path);
+            System.Console.WriteLine("파일 사이즈: " + info.Length + " Bytes");
+            System.Console.WriteLine("생성 시간 : " + info.CreationTime);
+            System.Console.WriteLine("수정 시간 : " + info.LastWriteTime);
+
             Console.WriteLine("Round {0}--------------------------------", 
                 round);
             
@@ -55,9 +63,7 @@ namespace gitA
         }
 
         static void Update()
-        {
-            // 읽어올 text file 의 경로를 지정 합니다.
-            string path = "eukm.log";
+        {            
             // text file 의 전체 text 를 읽어 옵니다.
             string textValue = System.IO.File.ReadAllText(path);
             int numVal = Int32.Parse(textValue);
