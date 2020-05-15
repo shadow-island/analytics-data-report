@@ -15,7 +15,7 @@ namespace gitA
 
         static void Main()
         {
-            Console.WriteLine("작업분ver{0}", 302);
+            Console.WriteLine("작업분ver{0}", 303);
             var info = new FileInfo(fileGit);
             if (info.LastWriteTime.Day != DateTime.Now.Day)
             {
@@ -37,7 +37,7 @@ namespace gitA
             Console.WriteLine("Round {0}--------------------------------",round);
 
             RunCommand("git status");
-            RunCommand("git commit --all -m csharp_v0");
+            RunCommand("git commit --all -m csharp_v0_r" + Convert.ToString(round));
             RunCommand("git push");
                         
             if (round == 18)
