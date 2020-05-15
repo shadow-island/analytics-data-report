@@ -48,8 +48,8 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 4*60 + 50 + 1);  //
-            //int randomResult = r.Next(1, 3 + 1);  //
+            int randomResult = r.Next(1, 4*60 + 49 + 1);  //
+            //int randomResult = r.Next(1, 3 + 1);      
             Console.WriteLine("randomResult {0}", randomResult);
 
             // 알람 타이머 생성 및 시작
