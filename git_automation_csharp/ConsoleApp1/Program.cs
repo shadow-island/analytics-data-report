@@ -8,15 +8,15 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly string path = "eukm.log";
+        static readonly string fileGit = "eukm.log";
         static int round = 1;        
         static readonly Timer timerTick = new System.Timers.Timer();
         static Timer timerGit = new System.Timers.Timer();
 
         static void Main()
         {
-            Console.WriteLine("작업분ver{0}", 301);
-            var info = new FileInfo(path);
+            Console.WriteLine("작업분ver{0}", 302);
+            var info = new FileInfo(fileGit);
             if (info.LastWriteTime.Day != DateTime.Now.Day)
             {
                 Console.WriteLine("하루지나!");
@@ -25,7 +25,7 @@ namespace gitA
             RunGit();
             Console.WriteLine("Press Enter to exit");
                         
-            timerTick.Interval = 1000 * 5; // 단위 milisec
+            timerTick.Interval = 1000 * 6; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
@@ -40,7 +40,7 @@ namespace gitA
             RunCommand("git commit --all -m csharp_v0");
             RunCommand("git push");
                         
-            if (round == 17)
+            if (round == 18)
             {
                 Console.WriteLine("사고방지 안전히 종료");
                 Environment.Exit(0);
@@ -52,7 +52,7 @@ namespace gitA
             //int randomResult = r.Next(1, 3 + 1);  //
             Console.WriteLine("randomResult {0}", randomResult);
 
-            // 타이머 생성 및 시작
+            // 알람 타이머 생성 및 시작
             int m = randomResult;
             timerGit.Interval = 1000 * m * 60;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
@@ -65,15 +65,13 @@ namespace gitA
         static void Update()
         {            
             // text file 의 전체 text 를 읽어 옵니다.
-            string textValue = System.IO.File.ReadAllText(path);
+            string textValue = System.IO.File.ReadAllText(fileGit);
             int numVal = 0;
             bool isTest = int.TryParse(textValue, out numVal);
-            // 읽어온 내용을 화면에 출력 합니다.
-            //Console.WriteLine("git file ={0}", numVal);
             numVal++;
             // Text 파일 생성 및 text 를 입력 합니다.
             textValue = Convert.ToString(numVal);
-            System.IO.File.WriteAllText(path, textValue, Encoding.Default);
+            System.IO.File.WriteAllText(fileGit, textValue, Encoding.Default);
             Console.WriteLine("\ngit file================={0}", textValue);
         }
 
