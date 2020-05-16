@@ -24,10 +24,10 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int work        = 314;
-        static readonly int tick        = 8;
+        static readonly int work        = 315;
         static readonly int roundMax    = 19;
-        static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;//real mode
+        static readonly int tick        = 9;        
+        static readonly int RANDOM_MAX  = 4 * 60 + 47 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
@@ -89,7 +89,8 @@ namespace gitA
 
             myTimer = new System.Threading.Timer(Timer_Elapsed, null, 1000 * randomResult * 60, 60*1000*3);
 
-            sTime = DateTime.Now.ToString("HH:mm:ss");
+            DateTime now = DateTime.Now;
+            sTime = now.ToString("HH:mm:ss");
             Console.WriteLine("현재시간={0}", sTime);
             Console.WriteLine("randomResult {0}/{1},{0}분후...", randomResult, RANDOM_MAX);
         }
