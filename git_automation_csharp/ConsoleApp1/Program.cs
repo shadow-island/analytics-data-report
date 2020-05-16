@@ -15,7 +15,7 @@ namespace gitA
 
         static void Main()
         {
-            Console.WriteLine("작업분ver{0}", 303);
+            Console.WriteLine("작업분ver{0}", 304);
             var info = new FileInfo(fileGit);
             if (info.LastWriteTime.Day != DateTime.Now.Day)
             {
@@ -34,21 +34,23 @@ namespace gitA
 
         static void RunGit()
         {
+            string sTime = DateTime.Now.ToString("_HH:mm:ss");
+
             Console.WriteLine("Round {0}--------------------------------",round);
 
             RunCommand("git status");
-            RunCommand("git commit --all -m csharp_v0_r" + Convert.ToString(round));
+            RunCommand("git commit --all -m csharp_v0_r" + Convert.ToString(round) + sTime);
             RunCommand("git push");
                         
-            if (round == 18)
+            if (round == 19)
             {
-                Console.WriteLine("사고방지 안전히 종료");
+                Console.WriteLine("사고방지용 안전히 종료");
                 Environment.Exit(0);
             }
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 4*60 + 49 + 1);  //
+            int randomResult = r.Next(1, 4*60 + 48 + 1);  //
             //int randomResult = r.Next(1, 3 + 1);      
             Console.WriteLine("randomResult {0}", randomResult);
 
@@ -57,7 +59,7 @@ namespace gitA
             timerGit.Interval = 1000 * m * 60;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
-            string sTime = DateTime.Now.ToString("HH:mm:ss");
+            
             Console.WriteLine("{0}=현재시간", sTime);
             Console.WriteLine("{0}분후...", m);
         }
