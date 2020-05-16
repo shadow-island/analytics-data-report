@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Timers;
-
+//1.코드개선 2.git rebase?
 namespace gitA
 {
     class Program
