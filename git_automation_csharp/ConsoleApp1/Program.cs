@@ -23,7 +23,7 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int work        = 310;
+        static readonly int work        = 311;
         static readonly int tick        = 7;
         static readonly int roundMax    = 19;
         //static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;//real mode
@@ -77,6 +77,7 @@ namespace gitA
 
             // 알람 타이머 생성 및 시작
             timerGit.Stop();
+            timerGit.Close();
             timerGit.Interval = 1000 * randomResult * 60;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
