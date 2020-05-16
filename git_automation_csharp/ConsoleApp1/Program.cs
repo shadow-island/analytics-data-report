@@ -24,7 +24,7 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int work        = 316;
+        static readonly int work        = 317;
         static readonly int roundMax    = 19;
         static readonly int tick        = 9;        
         static readonly int RANDOM_MAX  = 4 * 60 + 47 + 1;//real mode
@@ -86,9 +86,8 @@ namespace gitA
             sTime = now.ToString("HH:mm:ss");
             
             Console.WriteLine("현재시간={0}", sTime);
-            Console.WriteLine("randomResult {0}/{1},{0}분후...", randomResult, RANDOM_MAX);
             DateTime target = now.AddMinutes(randomResult);
-            Console.WriteLine("randomResult ...{0}", target);
+            Console.WriteLine("randomResult {0}/{1},{0}분후...{2}", randomResult, RANDOM_MAX, target);            
         }
 
         private static void Timer_Elapsed(object state)
