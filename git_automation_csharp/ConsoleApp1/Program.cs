@@ -8,10 +8,11 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int work        = 308;
+        static readonly int work        = 309;
         static readonly int tick        = 7;
         static readonly int roundMax    = 19;
-        static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;
+        //static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;//48
+        static readonly int RANDOM_MAX = 2 + 1;//48
 
         static readonly string fileGit = "eukm.log";
         static int round = 1;        
