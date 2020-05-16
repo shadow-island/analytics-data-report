@@ -77,7 +77,7 @@ namespace gitA
 
             // 알람 타이머 생성 및 시작
             timerGit.Stop();
-            timerGit.Close();
+            timerGit.Dispose();
             timerGit.Interval = 1000 * randomResult * 60;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
