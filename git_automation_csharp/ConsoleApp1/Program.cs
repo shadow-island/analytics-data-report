@@ -8,6 +8,11 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
+        static readonly int work        = 305;
+        static readonly int tick        = 7;
+        static readonly int roundMax    = 19;
+        static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;
+
         static readonly string fileGit = "eukm.log";
         static int round = 1;        
         static readonly Timer timerTick = new System.Timers.Timer();
@@ -15,7 +20,7 @@ namespace gitA
 
         static void Main()
         {
-            Console.WriteLine("작업분ver{0}", 304);
+            Console.WriteLine("작업분ver{0}", work);
             var info = new FileInfo(fileGit);
             if (info.LastWriteTime.Day != DateTime.Now.Day)
             {
@@ -25,7 +30,7 @@ namespace gitA
             RunGit();
             Console.WriteLine("Press Enter to exit");
                         
-            timerTick.Interval = 1000 * 6; // 단위 milisec
+            timerTick.Interval = 1000 * tick; // 단위 milisec
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
@@ -42,7 +47,7 @@ namespace gitA
             RunCommand("git commit --all -m csharp_v0_r" + Convert.ToString(round) + sTime);
             RunCommand("git push");
                         
-            if (round == 19)
+            if (round == roundMax)
             {
                 Console.WriteLine("사고방지용 안전히 종료");
                 Environment.Exit(0);
@@ -50,7 +55,7 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, 4*60 + 48 + 1);  //
+            int randomResult = r.Next(1, RANDOM_MAX);  
             //int randomResult = r.Next(1, 3 + 1);      
             Console.WriteLine("randomResult {0}", randomResult);
 
