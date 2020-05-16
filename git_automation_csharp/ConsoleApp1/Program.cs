@@ -12,6 +12,7 @@ Todo:
     # 1.암것도안함(이것도테스트필요) 
     - 1 다른 application 1 .playlist batch(구독자 update)
      -2 코드 정리
+     -3 git hub file정리
      -3 git 정리 + 작업숫자만
         밑에할차례?
         git rebase HEAD~8 -i
@@ -27,7 +28,7 @@ namespace gitA
         static readonly int tick        = 8;
         static readonly int roundMax    = 19;
         //static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;//real mode
-        static readonly int RANDOM_MAX = 2 + 1;// for test
+        static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
         static int round = 1;        
@@ -71,7 +72,7 @@ namespace gitA
             round++;
 
             Random r = new Random();
-            int randomResult = r.Next(1, RANDOM_MAX);  
+            int randomResult = r.Next(1, RANDOM_MAX + 1);  
             //int randomResult = r.Next(1, 3 + 1);      
             Console.WriteLine("randomResult {0}/{1}", randomResult, RANDOM_MAX);
 
