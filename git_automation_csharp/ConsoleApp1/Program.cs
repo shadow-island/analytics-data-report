@@ -74,7 +74,7 @@ namespace gitA
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);  
             //int randomResult = r.Next(1, 3 + 1);      
-            Console.WriteLine("randomResult {0}/{1}", randomResult, RANDOM_MAX);
+            
 
             // 알람 타이머 생성 및 시작
             /*
@@ -91,7 +91,7 @@ namespace gitA
 
             sTime = DateTime.Now.ToString("HH:mm:ss");
             Console.WriteLine("현재시간={0}", sTime);
-            Console.WriteLine("{0}분후...", randomResult);
+            Console.WriteLine("randomResult {0}/{1},{0}분후...", randomResult, RANDOM_MAX);
         }
 
         private static void Timer_Elapsed(object state)
