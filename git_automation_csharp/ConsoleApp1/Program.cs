@@ -83,7 +83,7 @@ namespace gitA
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
             */
-            myTimer.Dispose();
+            //myTimer.Dispose();
             myTimer = new System.Threading.Timer(Timer_Elapsed, null, 0, 1000 * randomResult * 60);
 
             sTime = DateTime.Now.ToString("HH:mm:ss");
