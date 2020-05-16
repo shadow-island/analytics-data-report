@@ -76,15 +76,14 @@ namespace gitA
             Console.WriteLine("randomResult {0}/{1}", randomResult, RANDOM_MAX);
 
             // 알람 타이머 생성 및 시작
-            int m = randomResult;
             timerGit.Stop();
-            timerGit.Interval = 1000 * m * 60;
+            timerGit.Interval = 1000 * randomResult * 60;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
 
             sTime = DateTime.Now.ToString("HH:mm:ss");
             Console.WriteLine("현재시간={0}", sTime);
-            Console.WriteLine("{0}분후...", m);
+            Console.WriteLine("{0}분후...", randomResult);
         }
 
         static void Update()
