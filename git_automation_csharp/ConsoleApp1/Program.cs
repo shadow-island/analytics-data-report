@@ -26,8 +26,8 @@ namespace gitA
         static readonly int work        = 310;
         static readonly int tick        = 7;
         static readonly int roundMax    = 19;
-        static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;//real mode
-        //static readonly int RANDOM_MAX = 2 + 1;// for test
+        //static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;//real mode
+        static readonly int RANDOM_MAX = 2 + 1;// for test
 
         static readonly string fileGit = "eukm.log";
         static int round = 1;        
