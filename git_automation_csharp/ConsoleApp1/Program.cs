@@ -24,7 +24,7 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int work        = 315;
+        static readonly int work        = 316;
         static readonly int roundMax    = 19;
         static readonly int tick        = 9;        
         static readonly int RANDOM_MAX  = 4 * 60 + 47 + 1;//real mode
@@ -77,13 +77,6 @@ namespace gitA
             
 
             // 알람 타이머 생성 및 시작
-            /*
-            timerGit.Stop();
-            timerGit.Dispose();
-            timerGit.Interval = 1000 * randomResult * 60;
-            timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
-            timerGit.Start();
-            */
             if (myTimer != null)
                 myTimer.Dispose();
 
@@ -91,8 +84,11 @@ namespace gitA
 
             DateTime now = DateTime.Now;
             sTime = now.ToString("HH:mm:ss");
+            
             Console.WriteLine("현재시간={0}", sTime);
             Console.WriteLine("randomResult {0}/{1},{0}분후...", randomResult, RANDOM_MAX);
+            DateTime target = now.AddMinutes(randomResult);
+            Console.WriteLine("randomResult ...{0}", target);
         }
 
         private static void Timer_Elapsed(object state)
