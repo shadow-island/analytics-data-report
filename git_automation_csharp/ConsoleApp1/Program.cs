@@ -96,7 +96,7 @@ namespace gitA
             // Text 파일 생성 및 text 를 입력 합니다.
             textValue = Convert.ToString(numVal);
             System.IO.File.WriteAllText(fileGit, textValue, Encoding.Default);
-            Console.WriteLine("\ngit file================={0}", textValue);
+            Console.WriteLine("\nUpdating git file================={0}", textValue);
         }
 
         static void RunCommand(string command)
