@@ -8,7 +8,7 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int work        = 306;
+        static readonly int work        = 307;
         static readonly int tick        = 7;
         static readonly int roundMax    = 19;
         static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;
@@ -65,8 +65,9 @@ namespace gitA
             timerGit.Interval = 1000 * m * 60;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
-            
-            Console.WriteLine("{0}=현재시간", sTime);
+
+            sTime = DateTime.Now.ToString("HH:mm:ss");
+            Console.WriteLine("현재시간={0}", sTime);
             Console.WriteLine("{0}분후...", m);
         }
 
