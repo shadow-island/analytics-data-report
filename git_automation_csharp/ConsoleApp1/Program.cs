@@ -93,7 +93,10 @@ namespace gitA
 
         private static void Timer_Elapsed(object state)
         {
-            throw new NotImplementedException();
+            timerTick.Stop();
+            Update();
+            RunGit();
+            timerTick.Start();
         }
 
         static void Update()
@@ -147,10 +150,7 @@ namespace gitA
         //static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         static void Timer_Elapsed()
         {
-            timerTick.Stop();
-            Update();
-            RunGit();
-            timerTick.Start();
+        
         }
     }
 }
