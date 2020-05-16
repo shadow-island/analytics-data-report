@@ -23,8 +23,8 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int work        = 311;
-        static readonly int tick        = 7;
+        static readonly int work        = 312;
+        static readonly int tick        = 8;
         static readonly int roundMax    = 19;
         //static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;//real mode
         static readonly int RANDOM_MAX = 2 + 1;// for test
@@ -32,7 +32,7 @@ namespace gitA
         static readonly string fileGit = "eukm.log";
         static int round = 1;        
         static readonly Timer timerTick = new System.Timers.Timer();
-        static Timer timerGit = new System.Timers.Timer();
+        static System.Threading.Timer myTimer;
 
         static void Main()
         {
@@ -76,15 +76,24 @@ namespace gitA
             Console.WriteLine("randomResult {0}/{1}", randomResult, RANDOM_MAX);
 
             // 알람 타이머 생성 및 시작
+            /*
             timerGit.Stop();
             timerGit.Dispose();
             timerGit.Interval = 1000 * randomResult * 60;
             timerGit.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
             timerGit.Start();
+            */
+            myTimer.Dispose();
+            myTimer = new System.Threading.Timer(Timer_Elapsed, null, 0, 1000 * randomResult * 60);
 
             sTime = DateTime.Now.ToString("HH:mm:ss");
             Console.WriteLine("현재시간={0}", sTime);
             Console.WriteLine("{0}분후...", randomResult);
+        }
+
+        private static void Timer_Elapsed(object state)
+        {
+            throw new NotImplementedException();
         }
 
         static void Update()
@@ -135,7 +144,8 @@ namespace gitA
             Console.Write(DateTime.Now.ToString("HH:mm:ss "));
         }
 
-        static void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        //static void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        static void Timer_Elapsed()
         {
             timerTick.Stop();
             Update();
