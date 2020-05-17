@@ -6,27 +6,29 @@ using System.Timers;
 본 App 동작설명
     최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다(사용자에게 선택권을 줘야함)
 # 2nd round는 무조건 커밋 
-Next: Release note
+
 #기능 #UI
 Todo:
     # 1.암것도안함(이것도테스트필요) 
     - 1 다른 application 1 .playlist batch(구독자 update)
-     -2 코드 정리
-     -3 git hub file정리
-     -3 git 정리 + 작업숫자만
-        밑에할차례?
+     -1 코드 정리
+     -2 git hub file정리
+     -3 git 정리 + 밑에할차례?
         git rebase HEAD~8 -i
         git push --force
-     -4 기능향상(딱히?) commit이름 바꾸기 ver file이용?->  EMAIL?, C#화?(제자리 출력? -> 한번더 멈춘현상발생시)
+     -4 기능향상(딱히?) file이용? tick간격조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
+     -5 release note
+Release note
+    C#화
 */
 namespace gitA
 {
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int work        = 317;
         static readonly int roundMax    = 19;
-        static readonly int tick        = 9;        
+        static readonly int work        = 318;        
+        static readonly int tick        = 10;        
         static readonly int RANDOM_MAX  = 4 * 60 + 47 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
@@ -87,7 +89,7 @@ namespace gitA
             
             Console.WriteLine("현재시간={0}", sTime);
             DateTime target = now.AddMinutes(randomResult);
-            Console.WriteLine("randomResult {0}/{1},{0}분후...{2}", randomResult, RANDOM_MAX, target);            
+            Console.WriteLine("randomResult {0}/{1},{0}분후=>{2}", randomResult, RANDOM_MAX, target);            
         }
 
         private static void Timer_Elapsed(object state)

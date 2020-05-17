@@ -7,13 +7,13 @@
 
 def runSubs():
     is_right = True
-    is_right = False
+    #is_right = False
     (key, data) = load(is_right)
     
     is_debug_mode = True
-    #is_debug_mode = False
+    is_debug_mode = False
 
-    #글꼴 50,너비61
+    #글꼴 38로 했을때 7개 까지 나옴 ,너비61
     total = len(data)
     out_table = []
     print('Getting real time data')
