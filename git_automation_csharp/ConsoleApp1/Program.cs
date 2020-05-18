@@ -6,19 +6,17 @@ using System.Timers;
 본 App 동작설명
     최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다(사용자에게 선택권을 줘야함)
 # 2nd round는 무조건 커밋 
-
 #기능 #UI
 Todo:
-    # 
-    - 1 다른 application 1 .playlist batch(구독자 update)
-    1.암것도안함(이것도테스트필요) 
-    2 코드 정리
-    3 git hub file정리
+    #     
+    1.암것도안함(이것도테스트필요)     
+    2 git hub file정리 -> 코드 정리
+    3 다른 application 1 .playlist batch(구독자 update)
     4 git 정리 + 밑에할차례?
-        git rebase HEAD~8 -i
+        git rebase HEAD~9 -i
         git push --force
     5 기능향상: file이용? tick간격조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
-    6 release note
+    6 release note    
 Release note
     C#화
 */
@@ -28,9 +26,9 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 19;
-        static readonly int work        = 319;
+        static readonly int work        = 320;
         static readonly int tick        = 11;        
-        static readonly int RANDOM_MAX  = 4 * 60 + 47 + 1;//real mode
+        static readonly int RANDOM_MAX  = 4 * 60 + 48 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
