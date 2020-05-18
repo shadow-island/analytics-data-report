@@ -86,9 +86,8 @@ namespace gitA
             DateTime now = DateTime.Now;
             sTime = now.ToString("HH:mm:ss");
             
-            Console.WriteLine("현재시간={0}", sTime);
             DateTime target = now.AddMinutes(randomResult);
-            Console.WriteLine("randomResult {0}/{1},{0}분후=>{2}", randomResult, RANDOM_MAX, target);            
+            Console.WriteLine("현재시간={0} ~{0}/{1},{0}분후=>{2}", randomResult, RANDOM_MAX, target, sTime);
         }
 
         private static void Timer_Elapsed(object state)
