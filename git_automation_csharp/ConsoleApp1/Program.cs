@@ -13,7 +13,7 @@ Todo:
     2 git hub file정리 -> 코드 정리
     3 release note    
     4 git 정리 + 밑에할차례?
-        git rebase HEAD~9 -i
+        git rebase HEAD~10 -i
         git push --force
     5 기능향상: file이용? tick간격조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
     6 다른 application ?
@@ -27,9 +27,9 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 19;
-        static readonly int work        = 322;
+        static readonly int work        = 323;
         static readonly int tick        = 11;        
-        static readonly int RANDOM_MAX  = 4 * 60 + 49 + 1;//real mode
+        static readonly int RANDOM_MAX  = 4 * 60 + 50 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
@@ -89,6 +89,7 @@ namespace gitA
             
             DateTime target = now.AddMinutes(randomResult);
             Console.WriteLine("현재시간={3} ~{0}/{1},{0}분후=>{2}", randomResult, RANDOM_MAX, target, sTime);
+            Console.WriteLine("Round {0}--------------------------------", round);
         }
 
         private static void Timer_Elapsed(object state)
