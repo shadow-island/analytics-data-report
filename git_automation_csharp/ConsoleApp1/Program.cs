@@ -27,7 +27,7 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 19;
-        static readonly int work        = 323;
+        static readonly int work        = 324round++;;
         static readonly int tick        = 11;        
         static readonly int RANDOM_MAX  = 4 * 60 + 50 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
@@ -71,8 +71,7 @@ namespace gitA
                 Console.WriteLine("사고방지용 안전히 종료");
                 Environment.Exit(0);
             }
-            round++;
-
+            
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);  
             //int randomResult = r.Next(1, 3 + 1);      
@@ -90,6 +89,7 @@ namespace gitA
             DateTime target = now.AddMinutes(randomResult);
             Console.WriteLine("현재시간={3} ~{0}/{1},{0}분후=>{2}", randomResult, RANDOM_MAX, target, sTime);
             Console.WriteLine("Round {0}--------------------------------", round);
+            round++;
         }
 
         private static void Timer_Elapsed(object state)
