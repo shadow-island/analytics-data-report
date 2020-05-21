@@ -1,7 +1,0 @@
-D:\my\eugene_data\code\Python\eclipse_workspace\git\analytics-data-report\git_automation_csharp\ConsoleApp1\bin\Debug\gc.exe.config
-D:\my\eugene_data\code\Python\eclipse_workspace\git\analytics-data-report\git_automation_csharp\ConsoleApp1\bin\Debug\gc.exe
-D:\my\eugene_data\code\Python\eclipse_workspace\git\analytics-data-report\git_automation_csharp\ConsoleApp1\bin\Debug\gc.pdb
-D:\my\eugene_data\code\Python\eclipse_workspace\git\analytics-data-report\git_automation_csharp\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
-D:\my\eugene_data\code\Python\eclipse_workspace\git\analytics-data-report\git_automation_csharp\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
-D:\my\eugene_data\code\Python\eclipse_workspace\git\analytics-data-report\git_automation_csharp\ConsoleApp1\obj\Debug\gc.exe
-D:\my\eugene_data\code\Python\eclipse_workspace\git\analytics-data-report\git_automation_csharp\ConsoleApp1\obj\Debug\gc.pdb
