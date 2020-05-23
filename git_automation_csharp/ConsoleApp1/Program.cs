@@ -17,8 +17,8 @@ Todo:
         git reset HEAD~1 --hard
     5 기능향상: file이용 = RANDOM_MAX 조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
     6 다른 application ?    
-Release note
-    C#화함
+Release note    
+    2020.5.12 C#화함
     2020.2.12 python버전 시작
 */
 namespace gitA
@@ -27,10 +27,10 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 19;
-        static readonly int work        = 336;
+        static readonly int work        = 338;
         static readonly int tick        = 11;
-        //static readonly int RANDOM_MAX  = 4 * 60 + 57 + 1;//real mode
-        static readonly int RANDOM_MAX = 2;// for test
+        static readonly int RANDOM_MAX  = 4 * 60 + 57 + 1;//real mode
+        //static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
         static int round = 1;
