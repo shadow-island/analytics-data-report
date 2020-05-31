@@ -26,8 +26,8 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 19;
-        static readonly int work        = 340;
-        static readonly int tick        = 12;
+        static readonly int work        = 341;
+        static readonly int tick        = 13;
         static readonly int RANDOM_MAX  = 4 * 60 + 59 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
