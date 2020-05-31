@@ -2,10 +2,10 @@
 using System.IO;
 using System.Text;
 using System.Timers;
-/*
-본 App 동작설명
-    최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다(사용자에게 선택권을 줘야함)
-# 2nd round는 무조건 커밋 
+/* 본 App 동작설명
+    최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다
+    (사용자에게 선택권을 줘야함)
+    2nd round는 무조건 커밋 
 #기능 #UI
 Todo:
     1.암것도안함(이것도테스트필요)     
@@ -28,7 +28,7 @@ namespace gitA
         static readonly int roundMax    = 19;
         static readonly int work        = 339;
         static readonly int tick        = 12;
-        static readonly int RANDOM_MAX  = 4 * 60 + 58 + 1;//real mode
+        static readonly int RANDOM_MAX  = 4 * 60 + 59 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
