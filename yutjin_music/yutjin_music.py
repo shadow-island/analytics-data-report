@@ -381,9 +381,9 @@ if __name__ == '__main__':
         print ('[Menu]')
         print ('''
             1:Check time
-            2:After new songs create, create new rate DB 
-            3:After new songs,and create_selected_playlist
-            4:Create new playlist using the current rate
+            2:After new songs create, create new rate just "DB.xls"
+            3:After new songs,and create_selected_playlist => m3u
+            4:Create new playlist using the current rate => m3u
             5:Print time
             ''')
         
