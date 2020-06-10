@@ -11,7 +11,7 @@ Todo:
     1.암것도안함(이것도테스트필요)     
     2 license, release note =>코드 정리
     4 git 정리 + 밑에할차례?
-        git rebase HEAD~12 -i
+        git rebase HEAD~13 -i
         git push --force
         git reset HEAD~1 --hard
     5 기능향상: random number 보이기? file이용 = RANDOM_MAX 조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
@@ -26,9 +26,9 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 19;
-        static readonly int work        = 344;
+        static readonly int work        = 345;
         static readonly int tick        = 14;
-        static readonly int RANDOM_MAX  = 5 * 60 + 1 + 1;//real mode
+        static readonly int RANDOM_MAX  = 5 * 60 + 2 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
