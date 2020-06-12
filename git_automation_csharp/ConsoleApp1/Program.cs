@@ -10,12 +10,14 @@ using System.Timers;
 Todo:
     1.암것도안함(이것도테스트필요)     
     2 license, release note =>코드 정리
+    3 다른 application?
     4 git 정리 + 밑에할차례?
         git rebase HEAD~13 -i
         git push --force
-        git reset HEAD~1 --hard
+        git push origin master --force
+        회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
     5 기능향상: random number 보이기? file이용 = RANDOM_MAX 조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
-    6 다른 application?
+    
 Release note    
     2020.5.12 C#화함
     2020.2.12 python버전 시작
@@ -57,12 +59,16 @@ namespace gitA
 
         static void RunGit()
         {
+            Random r = new Random();
+            int randomResult = r.Next(1, RANDOM_MAX + 1);
+            //int randomResult = r.Next(1, 3 + 1);      
+
             string sTime = DateTime.Now.ToString("_HH:mm:ss");
 
             Console.WriteLine("Round {0}--------------------------------", round);
-
+                      
             RunCommand("git status");
-            RunCommand("git commit --all -m cShar_v0_r" + Convert.ToString(round) + sTime);
+            RunCommand("git commit --all -m cShar_v1_r" + Convert.ToString(round) + sTime);
             RunCommand("git push");
 
             if (round >= roundMax)
@@ -71,9 +77,6 @@ namespace gitA
                 Environment.Exit(0);
             }
 
-            Random r = new Random();
-            int randomResult = r.Next(1, RANDOM_MAX + 1);
-            //int randomResult = r.Next(1, 3 + 1);      
 
             // 알람 타이머 생성 및 시작
 
