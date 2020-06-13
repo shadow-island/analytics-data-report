@@ -6,8 +6,12 @@
 '''
 
 def runSubs():
+    #왼쪽모니터사용(세로수많음_)
     is_right = True
     #is_right = False
+    #is_sub_sort = True
+    is_sub_sort = False #조회수
+    
     (key, data) = load(is_right)
     
     is_debug_mode = True
@@ -74,7 +78,19 @@ def runSubs():
     print()    
     print()    
     print()    
-    print()    
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    
     print(' Real Time Data!')
     
     import datetime
@@ -91,8 +107,7 @@ def runSubs():
         is_reverse = True 
     # reverse는 감소방향 true는 감소방향(print용) false는 증가방향(real time용)
     
-    is_sub_sort = True
-    #is_sub_sort = False
+    
     
     if is_sub_sort == True:
         #out_table = sorted(out_table, key=lambda item: item[1], reverse = False)       
