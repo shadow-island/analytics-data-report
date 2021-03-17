@@ -27,9 +27,9 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다.
-        static readonly int roundMax    = 19;
-        static readonly int work        = 347;
-        static readonly int tick        = 14;
+        static readonly int roundMax    = 20;
+        static readonly int work        = 348;
+        static readonly int tick        = 14; //초에 한번씩 찍기
         static readonly int RANDOM_MAX  = 5 * 60 + 5 + 1;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
@@ -61,7 +61,7 @@ namespace gitA
         {
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);
-            //int randomResult = r.Next(1, 3 + 1);      
+            //int randomResult = r.Next(1, 3 + 1);
 
             string sTime = DateTime.Now.ToString("_HH:mm:ss");
 
