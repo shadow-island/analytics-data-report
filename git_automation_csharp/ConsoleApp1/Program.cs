@@ -12,9 +12,9 @@ Todo:
     2 license, release note =>코드 정리
     3 다른 application?
     4 git 정리 + 밑에할차례?
-        git rebase HEAD~13 -i
+        git rebase HEAD~12 -i
         git push --force
-        git push origin master --force
+        git push origin master --force(필요시)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
     5 기능향상: random number 보이기? file이용 = RANDOM_MAX 조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
     
