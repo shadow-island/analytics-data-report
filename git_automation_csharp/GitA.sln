@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{42AC892C-D5BA-4A3C-A0A6-E39E25C06E1D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCS", "..\metawiki\ConsoleCS\ConsoleCS.csproj", "{A717DA13-CBE9-4D96-9754-B9CBC514B562}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{42AC892C-D5BA-4A3C-A0A6-E39E25C06E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42AC892C-D5BA-4A3C-A0A6-E39E25C06E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42AC892C-D5BA-4A3C-A0A6-E39E25C06E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42AC892C-D5BA-4A3C-A0A6-E39E25C06E1D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A717DA13-CBE9-4D96-9754-B9CBC514B562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A717DA13-CBE9-4D96-9754-B9CBC514B562}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A717DA13-CBE9-4D96-9754-B9CBC514B562}.Release|Any CPU.ActiveCfg = Release|Any CPU
