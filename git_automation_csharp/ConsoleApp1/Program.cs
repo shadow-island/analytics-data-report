@@ -3,13 +3,13 @@ using System.IO;
 using System.Text;
 using System.Timers;
 /* 본 App 동작설명
-    최초는 내가 커밋하고싶어서 일부로 고치지않는이상 안일어나야한다
+    최초는 commit없음: 내가 커밋하고싶어서 일부로 고치지 않는이상 안일어나야한다
     (사용자에게 선택권을 줘야함)
     2nd round는 무조건 커밋 
 #기능 #UI
 Todo:
     1.암것도안함(이것도테스트필요)     
-    2 숫자증가, license, release note =>코드 정리
+    2 숫자증가, release note =>코드 정리
     3 다른 application?
     4 git 정리 + 밑에할차례?
         git rebase HEAD~13 -i
@@ -28,9 +28,9 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 21;
-        static readonly int work        = 349;
+        static readonly int work        = 350;
         static readonly int tick        = 14; //초에 한번씩 찍기
-        static readonly int RANDOM_MAX  = 5 * 60 + 7;//real mode
+        static readonly int RANDOM_MAX  = 5 * 60 + 8;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
