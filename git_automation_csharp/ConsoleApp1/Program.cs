@@ -10,13 +10,13 @@ using System.Timers;
 Todo:
     1.암것도안함(이것도테스트필요)     
     2 숫자증가, release note =>코드 정리
-    3 다른 application?
+    3 기능향상: random number 보이기? file이용 = RANDOM_MAX 조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
     4 git 정리 + 밑에할차례?
         git rebase HEAD~13 -i
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-    5 기능향상: random number 보이기? file이용 = RANDOM_MAX 조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
+    5 다른 application?    
     
 Release note    
     2020.5.12 C#화함
@@ -28,7 +28,7 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 21;
-        static readonly int work        = 350;
+        static readonly int work        = 351;
         static readonly int tick        = 14; //초에 한번씩 찍기
         static readonly int RANDOM_MAX  = 5 * 60 + 8;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
@@ -63,12 +63,13 @@ namespace gitA
             int randomResult = r.Next(1, RANDOM_MAX + 1);
             //int randomResult = r.Next(1, 3 + 1);
 
-            string sTime = DateTime.Now.ToString("_HH:mm:ss");
+            string sTime = DateTime.Now.ToString("_HH:mm:ss_");
 
             Console.WriteLine("Round {0}--------------------------------", round);
                       
             RunCommand("git status");
-            RunCommand("git commit --all -m cShar_v1_r" + Convert.ToString(round) + sTime);
+            RunCommand("git commit --all -m CSha_v2_r" + 
+                Convert.ToString(round) + sTime + Convert.ToString(randomResult));
             RunCommand("git push");
 
             if (round >= roundMax)
