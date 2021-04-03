@@ -16,7 +16,7 @@ Todo:
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-    5 다른 application?    
+    5 다른 application?(미리내javascrpit?->정치)
     
 Release note    
     2020.5.12 C#화함
@@ -28,9 +28,9 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다.
         static readonly int roundMax    = 21;
-        static readonly int work        = 351;
+        static readonly int work        = 352;
         static readonly int tick        = 14; //초에 한번씩 찍기
-        static readonly int RANDOM_MAX  = 5 * 60 + 8;//real mode
+        static readonly int RANDOM_MAX  = 5 * 60 + 9;//real mode
         //static readonly int RANDOM_MAX = 2;// for test
 
         static readonly string fileGit = "eukm.log";
@@ -66,7 +66,7 @@ namespace gitA
             string sTime = DateTime.Now.ToString("_HH:mm:ss_");
 
             Console.WriteLine("Round {0}--------------------------------", round);
-                      
+            RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m CSha_v2_r" + 
                 Convert.ToString(round) + sTime + Convert.ToString(randomResult));
