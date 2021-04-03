@@ -33,9 +33,10 @@ namespace gitA
     {        
         static readonly int roundMax    = 21;
         static readonly int work        = 352;
-        static readonly int tick        = 14; //초에 한번씩 찍기
+        //static readonly int tick        = 14; //초에 한번씩 찍기
+        static readonly int tick = 1; //초에 한번씩 찍기
         //static readonly int RANDOM_MAX  = 5 * 60 + 9;//real mode
-        static readonly int RANDOM_MAX = 2;// for test
+        static readonly int RANDOM_MAX = 1;// for test
 
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string fileGit = "eukm.log";
