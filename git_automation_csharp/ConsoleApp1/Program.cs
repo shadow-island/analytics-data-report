@@ -32,15 +32,19 @@ namespace gitA
     class Program
     {        
         static readonly int roundMax    = 21;
-        static readonly int work        = 354;
-        //static readonly int tick        = 14; //초에 한번씩 찍기
+        static readonly int work        = 355;
+        static readonly int tick        = 14; //초에 한번씩 찍기
+        static readonly int RANDOM_MAX  = 5 * 60 + 9;//real mode
+        /* debugging mode
         static readonly int tick = 1; //초에 한번씩 찍기
-        //static readonly int RANDOM_MAX  = 5 * 60 + 9;//real mode
         static readonly int RANDOM_MAX = 1;// for test
+        */
 
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string fileGit = "eukm.log";
         static int round = 1;
+
+        // timer 2개 
         static readonly Timer timerTick = new System.Timers.Timer();
         static System.Threading.Timer myTimer = null;
 
@@ -67,7 +71,6 @@ namespace gitA
         {
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);
-            //int randomResult = r.Next(1, 3 + 1);
 
             string sTime = DateTime.Now.ToString("_HH:mm:ss_");
 
