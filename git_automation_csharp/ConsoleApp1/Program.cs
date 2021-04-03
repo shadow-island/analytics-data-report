@@ -32,7 +32,7 @@ namespace gitA
     class Program
     {        
         static readonly int roundMax    = 21;
-        static readonly int work        = 353;
+        static readonly int work        = 354;
         //static readonly int tick        = 14; //초에 한번씩 찍기
         static readonly int tick = 1; //초에 한번씩 찍기
         //static readonly int RANDOM_MAX  = 5 * 60 + 9;//real mode
@@ -78,7 +78,7 @@ namespace gitA
                 Convert.ToString(round) + sTime + Convert.ToString(randomResult));
             RunCommand("git push");
 
-            int randomStopMax = 3;
+            int randomStopMax = 2;
             int randomStop = r.Next(1, randomStopMax + 1);
 
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
