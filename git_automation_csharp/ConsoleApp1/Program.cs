@@ -8,15 +8,20 @@ using System.Timers;
     2nd round는 무조건 커밋 
 #기능 #UI
 Todo:
-    1.암것도안함(이것도테스트필요)     
-    2 숫자증가, release note =>코드 정리
-    3 기능향상: random number 보이기? file이용 = RANDOM_MAX 조정? commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
+    1.암것도안함 (이것도테스트필요)
+    2 숫자증가만: release note => 코드 정리
+    3 기능향상: 
+        random 종료 기능 필요할듯?
+        RANDOM_MAX를 version에 보이기(아니 지금도 보이는것같고)
+        random number 보이기-> 다음 시간으로 표시
+        file이용 = RANDOM_MAX 조정? 
+        commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
     4 git 정리 + 밑에할차례?
-        git rebase HEAD~13 -i
+        git rebase HEAD~13 -i //하기전에 숫자바꾸고 저장함?
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-    5 다른 application?(미리내javascrpit?->정치)
+    5 다른 application?(미리내javascript?->정치)
     
 Release note    
     2020.5.12 C#화함
@@ -25,14 +30,14 @@ Release note
 namespace gitA
 {
     class Program
-    {
-        // 읽어올 text file 의 경로를 지정 합니다.
+    {        
         static readonly int roundMax    = 21;
         static readonly int work        = 352;
         static readonly int tick        = 14; //초에 한번씩 찍기
-        static readonly int RANDOM_MAX  = 5 * 60 + 9;//real mode
-        //static readonly int RANDOM_MAX = 2;// for test
+        //static readonly int RANDOM_MAX  = 5 * 60 + 9;//real mode
+        static readonly int RANDOM_MAX = 2;// for test
 
+        // 읽어올 text file 의 경로를 지정 합니다
         static readonly string fileGit = "eukm.log";
         static int round = 1;
         static readonly Timer timerTick = new System.Timers.Timer();
@@ -48,12 +53,12 @@ namespace gitA
                 Update();
             }
             RunGit();
-            Console.WriteLine("Press Enter to exit");
-
-            timerTick.Interval = 1000 * tick; // 단위 milisec
+            
+            timerTick.Interval = 1000 * tick; // 단위 milisec라서
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
 
+            Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
         }
 
@@ -71,6 +76,16 @@ namespace gitA
             RunCommand("git commit --all -m CSha_v2_r" + 
                 Convert.ToString(round) + sTime + Convert.ToString(randomResult));
             RunCommand("git push");
+
+            int randomStopMax = 2;
+            int randomStop = r.Next(1, randomStopMax + 1);
+
+            Console.WriteLine("randomStop{0}/{1}", randomStop, randomStopMax);
+            if (randomStop == 1)
+            {                
+                Environment.Exit(0);
+            }
+
 
             if (round >= roundMax)
             {
