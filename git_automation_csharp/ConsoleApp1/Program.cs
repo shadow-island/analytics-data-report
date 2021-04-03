@@ -78,7 +78,7 @@ namespace gitA
                 Convert.ToString(round) + sTime + Convert.ToString(randomResult));
             RunCommand("git push");
 
-            int randomStopMax = 3;
+            int randomStopMax = 4;
             int randomStop = r.Next(1, randomStopMax + 1);
 
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
@@ -106,6 +106,12 @@ namespace gitA
             Console.WriteLine("현재시간={3} ~{0}/{1},{0}분후=>{2}", randomResult, RANDOM_MAX, target, sTime);
             Console.WriteLine("Round {0}--------------------------------", round);
             round++;
+        }
+
+        // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
+        static void Timer_Tick(object sender, ElapsedEventArgs e)
+        {
+            Console.Write(DateTime.Now.ToString("HH:mm:ss "));
         }
 
         private static void Timer_Elapsed(object state)
@@ -157,13 +163,6 @@ namespace gitA
             pro.Close();
             // 결과 값을 확인 합니다.
             Console.WriteLine(resultValue);
-        }
-
-
-        // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
-        static void Timer_Tick(object sender, ElapsedEventArgs e)
-        {
-            Console.Write(DateTime.Now.ToString("HH:mm:ss "));
         }
     }
 }
