@@ -82,11 +82,10 @@ namespace gitA
             int randomStop = r.Next(1, randomStopMax + 1);
 
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
-            if (randomStop == 1)
+            if (round != 1 && randomStop == 1)
             {                
                 Environment.Exit(0);
             }
-
 
             if (round >= roundMax)
             {
