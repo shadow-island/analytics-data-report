@@ -78,10 +78,10 @@ namespace gitA
                 Convert.ToString(round) + sTime + Convert.ToString(randomResult));
             RunCommand("git push");
 
-            int randomStopMax = 2;
+            int randomStopMax = 3;
             int randomStop = r.Next(1, randomStopMax + 1);
 
-            Console.WriteLine("randomStop{0}/{1}", randomStop, randomStopMax);
+            Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
             if (randomStop == 1)
             {                
                 Environment.Exit(0);
