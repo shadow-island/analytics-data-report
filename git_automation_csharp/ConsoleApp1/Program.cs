@@ -5,6 +5,7 @@ using System.Timers;
 /* 본 App 동작설명
     최초는 commit없음: 내가 커밋하고싶어서 일부로 고치지 않는이상 안일어나야한다
     (사용자에게 선택권을 줘야함)
+    commit 강제로하려면 log숫자 초기화~
     2nd round는 무조건 커밋 
 #기능 #UI
 Todo:
@@ -21,7 +22,7 @@ Todo:
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-    5 다른 application?(미리내javascript?->정치)
+    5 숫자증가만+다른 application?(미리내javascript?->정치)
     
 Release note    
     2020.5.12 C#화함
@@ -31,10 +32,11 @@ namespace gitA
 {
     class Program
     {        
-        static readonly int roundMax    = 21;
-        static readonly int work        = 355;
-        static readonly int tick        = 14; //초에 한번씩 찍기
-        static readonly int RANDOM_MAX  = 5 * 60 + 9;//real mode
+        static readonly int roundMax        = 21;
+        static readonly int work            = 355;
+        static readonly int tick            = 14; //초에 한번씩 찍기
+        static readonly int RANDOM_MAX      = 5 * 60 + 10;//real mode
+        static readonly int randomStopMax   = 3;
         /* debugging mode
         static readonly int tick = 1; //초에 한번씩 찍기
         static readonly int RANDOM_MAX = 1;// for test
@@ -72,16 +74,15 @@ namespace gitA
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);
 
-            string sTime = DateTime.Now.ToString("_HH:mm:ss_");
+            string sTime = DateTime.Now.ToString("HH:mm:ss");
 
             Console.WriteLine("Round {0}--------------------------------", round);
             RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m CSha_v2_r" + 
-                Convert.ToString(round) + sTime + Convert.ToString(randomResult));
+                Convert.ToString(round) + "_"+ sTime + "_" + Convert.ToString(randomResult));
             RunCommand("git push");
-
-            int randomStopMax = 2;
+                        
             int randomStop = r.Next(1, randomStopMax + 1);
 
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
@@ -102,10 +103,10 @@ namespace gitA
             myTimer = new System.Threading.Timer(Timer_Elapsed, null, 1000 * randomResult * 60, 60 * 1000 * 3);
 
             DateTime now = DateTime.Now;
-            sTime = now.ToString("HH:mm:ss");
-
+            sTime = now.ToString("HH:mm:ss");            
             DateTime target = now.AddMinutes(randomResult);
-            Console.WriteLine("현재시간={3} ~{0}/{1},{0}분후=>{2}", randomResult, RANDOM_MAX, target, sTime);
+
+            Console.WriteLine("현재시간={3} ~{0}/{1}=>{2}", randomResult, RANDOM_MAX, target, sTime);
             Console.WriteLine("Round {0}--------------------------------", round);
             round++;
         }
