@@ -10,19 +10,19 @@ using System.Timers;
 #기능 #UI
 Todo:
     1.암것도안함 (이것도테스트필요)
-    2 숫자증가만: release note => 코드 정리
+    2 숫자증가만: release note random 종료 기능  => 코드 정리
     3 기능향상: 
-        random 종료 기능 필요할듯?
         RANDOM_MAX를 version에 보이기(아니 지금도 보이는것같고)
-        random number 보이기-> 다음 시간으로 표시
+        commit이름 바꾸기: random number 보이기-> 다음 시간으로 표시
+        ip추가?
         file이용 = RANDOM_MAX 조정? 
-        commit이름 바꾸기->  EMAIL?, (제자리 출력? -> 한번더 멈춘현상발생시)
+        EMAIL? later하루에 1-2개씩일때만 (제자리 출력? -> 한번더 멈춘현상발생시)
     4 git 정리 + 밑에할차례?
         git rebase HEAD~13 -i //하기전에 숫자바꾸고 저장함?
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-    5 숫자증가만+다른 application?(미리내javascript?->정치)
+    5 숫자증가만+다른 application?(미리내 지리-> 엑셀 -> javascript?->정치)
     
 Release note    
     2020.5.12 C#화함
@@ -33,10 +33,12 @@ namespace gitA
     class Program
     {        
         static readonly int roundMax        = 21;
-        static readonly int work            = 355;
-        static readonly int tick            = 14; //초에 한번씩 찍기
-        static readonly int RANDOM_MAX      = 5 * 60 + 10;//real mode
-        static readonly int randomStopMax   = 3;
+        static readonly int work            = 356;
+        //real mode
+        static readonly int tick            = 14;           //초에 한번씩 찍기
+        static readonly int RANDOM_MAX      = 5 * 60 + 11;  
+        static readonly int randomStopMax   = 4;
+
         /* debugging mode
         static readonly int tick = 1; //초에 한번씩 찍기
         static readonly int RANDOM_MAX = 1;// for test
@@ -74,13 +76,17 @@ namespace gitA
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);
 
-            string sTime = DateTime.Now.ToString("HH:mm:ss");
+            //string sTime = DateTime.Now.ToString("HH:mm:ss");
+            DateTime now = DateTime.Now;
+            string sTime = now.ToString("HH:mm:ss");
+            DateTime target = now.AddMinutes(randomResult);
+            string sTarget = now.ToString("HH:mm:ss");
 
             Console.WriteLine("Round {0}--------------------------------", round);
             RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m CSha_v2_r" + 
-                Convert.ToString(round) + "_"+ sTime + "_" + Convert.ToString(randomResult));
+                Convert.ToString(round) + "_"+ sTime + "~" + sTarget);
             RunCommand("git push");
                         
             int randomStop = r.Next(1, randomStopMax + 1);
@@ -97,17 +103,13 @@ namespace gitA
                 Environment.Exit(0);
             }
 
+            // run next round
+            Console.WriteLine("현재시간={3} ~{0}/{1} => {2}", randomResult, RANDOM_MAX, target, sTime);
+            Console.WriteLine("in Round {0}--------------------------------", round);
 
             // 알람 타이머 생성 및 시작
-
             myTimer = new System.Threading.Timer(Timer_Elapsed, null, 1000 * randomResult * 60, 60 * 1000 * 3);
-
-            DateTime now = DateTime.Now;
-            sTime = now.ToString("HH:mm:ss");            
-            DateTime target = now.AddMinutes(randomResult);
-
-            Console.WriteLine("현재시간={3} ~{0}/{1}=>{2}", randomResult, RANDOM_MAX, target, sTime);
-            Console.WriteLine("Round {0}--------------------------------", round);
+            //logic
             round++;
         }
 
