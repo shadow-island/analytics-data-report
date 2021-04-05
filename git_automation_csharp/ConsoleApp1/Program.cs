@@ -33,7 +33,7 @@ namespace gitA
     class Program
     {        
         static readonly int roundMax        = 21;
-        static readonly int work            = 356;
+        static readonly int work            = 357;
         //real mode
         static readonly int tick            = 14;           //초에 한번씩 찍기
         static readonly int RANDOM_MAX      = 5 * 60 + 11;  
@@ -80,7 +80,7 @@ namespace gitA
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm:ss");
             DateTime target = now.AddMinutes(randomResult);
-            string sTarget = now.ToString("HH:mm:ss");
+            string sTarget = target.ToString("HH:mm:ss");
 
             Console.WriteLine("Round {0}--------------------------------", round);
             RunCommand("git pull");
