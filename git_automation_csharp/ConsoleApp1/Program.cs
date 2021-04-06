@@ -132,16 +132,27 @@ namespace gitA
         }
 
         static void Update()
-        {
-            // text file 의 전체 text 를 읽어 옵니다.
-            string textValue = System.IO.File.ReadAllText(fileGit);
-            int numVal = 0;
-            bool isTest = int.TryParse(textValue, out numVal);
-            numVal++;
+        {            
+            FileInfo fi = new FileInfo(fileGit);
+            //FileInfo.Exists로 파일 존재유무 확인 "
+            int iNum = 0;
+            string textNum;
+            if (fi.Exists)
+            {   //"파일존재"
+                // text file 의 전체 text 를 읽어 옵니다.
+                textNum = System.IO.File.ReadAllText(fileGit);
+                bool isTest = int.TryParse(textNum, out iNum);
+                iNum++;
+            }
+            else { // "파일부재" 
+                //그대로 0
+                Console.WriteLine("\n파일부재");
+            }
+            
             // Text 파일 생성 및 text 를 입력 합니다.
-            textValue = Convert.ToString(numVal);
-            System.IO.File.WriteAllText(fileGit, textValue, Encoding.Default);
-            Console.WriteLine("\nUpdating git file================={0}", textValue);
+            textNum = Convert.ToString(iNum);
+            System.IO.File.WriteAllText(fileGit, textNum, Encoding.Default);
+            Console.WriteLine("\nUpdating git file================={0}", textNum);
         }
 
         static void RunCommand(string command)
