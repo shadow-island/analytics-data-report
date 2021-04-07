@@ -35,7 +35,7 @@ namespace gitA
     class Program
     {        
         static readonly int roundMax        = 21;
-        static readonly int work            = 358;
+        static readonly int work            = 359;
         //real mode
         static readonly int tick            = 15;           //초에 한번씩 찍기
         static readonly int RANDOM_MAX      = 5 * 60 + 13;  
@@ -70,9 +70,9 @@ namespace gitA
             timerTick.Start();
             
             Console.WriteLine("Press Enter to exit");
-            Console.ReadLine();
-
             Timer_Tick(null, null);
+
+            Console.ReadLine();
         }
 
         static void RunGit()
