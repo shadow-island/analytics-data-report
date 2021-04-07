@@ -13,8 +13,8 @@ Todo:
     2 숫자증가만: release note   => 코드 정리
     3 기능향상: 
         RANDOM_MAX를 version에 보이기(아니 지금도 보이는것같고)
-        강제시작 옵션만들기 <- file지울때?
-        commit이름 바꾸기: random number 보이기-> 다음 시간으로 표시
+        강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!
+        commit이름 바꾸기: Random number 보이기-> 다음 시간으로 표시
         ip추가?
         file이용 = RANDOM_MAX 조정? 
         EMAIL? later하루에 1-2개씩일때만 (제자리 출력? -> 한번더 멈춘현상발생시)
@@ -26,7 +26,7 @@ Todo:
     5 숫자증가만+다른 application?(미리내 지리-> 엑셀 -> javascript?->정치)
     
 Release note    
-    2021.       random 종료 기능
+    2021.       Random 종료 기능
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 */
@@ -38,8 +38,8 @@ namespace gitA
         static readonly int work            = 357;
         //real mode
         static readonly int tick            = 14;           //초에 한번씩 찍기
-        static readonly int RANDOM_MAX      = 5 * 60 + 12;  
-        static readonly int randomStopMax   = 5;
+        static readonly int RANDOM_MAX      = 5 * 60 + 13;  
+        static readonly int randomStopMax   = 6;
 
         /* debugging mode
         static readonly int tick = 1; //초에 한번씩 찍기
@@ -95,7 +95,8 @@ namespace gitA
 
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
             if (round != 1 && randomStop == 1)
-            {                
+            {
+                Console.WriteLine("사고방지용 Random 종료");
                 Environment.Exit(0);
             }
 
