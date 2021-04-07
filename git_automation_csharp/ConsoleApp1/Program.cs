@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Timers;
+
 /* 본 App 동작설명
     최초는 commit없음: 내가 커밋하고싶어서 일부로 고치지 않는이상 안일어나야한다
     (사용자에게 선택권을 줘야함)
@@ -35,7 +36,7 @@ namespace gitA
     class Program
     {        
         static readonly int roundMax        = 21;
-        static readonly int work            = 359;
+        static readonly int work            = 360;
         //real mode
         static readonly int tick            = 15;           //초에 한번씩 찍기
         static readonly int RANDOM_MAX      = 5 * 60 + 13;  
@@ -65,11 +66,11 @@ namespace gitA
             }
             RunGit();
             
-            timerTick.Interval = 1000 * tick; // 단위 milisec라서
-            timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
-            timerTick.Start();
-            
             Console.WriteLine("Press Enter to exit");
+
+            timerTick.Interval = 1000 * tick; // 단위 milisec라서
+            timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);            
+            timerTick.Start();
             Timer_Tick(null, null);
 
             Console.ReadLine();
