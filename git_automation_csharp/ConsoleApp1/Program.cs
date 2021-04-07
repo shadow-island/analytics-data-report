@@ -37,7 +37,7 @@ namespace gitA
         static readonly int roundMax        = 21;
         static readonly int work            = 357;
         //real mode
-        static readonly int tick            = 14;           //초에 한번씩 찍기
+        static readonly int tick            = 15;           //초에 한번씩 찍기
         static readonly int RANDOM_MAX      = 5 * 60 + 13;  
         static readonly int randomStopMax   = 6;
 
@@ -68,6 +68,7 @@ namespace gitA
             timerTick.Interval = 1000 * tick; // 단위 milisec라서
             timerTick.Elapsed += new ElapsedEventHandler(Timer_Tick);
             timerTick.Start();
+            Timer_Tick(null, null);
 
             Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
