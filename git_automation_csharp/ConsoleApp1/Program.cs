@@ -11,15 +11,16 @@ using System.Timers;
 #기능 #UI
 Todo:
     1.암것도안함 (이것도테스트필요)
-    2 숫자증가만: release note   => 코드 정리
+    2 숫자증가만: release note 다음 시간으로 표시  => 코드 정리
     3 기능향상:         
         a. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!
-        b. commit이름 바꾸기: Random number 보이기-> 다음 시간으로 표시
-        ip추가?
+        b. commit이름 바꾸기: Random 종료 number 보이기 -> 종료시 EMAIL? 
+        c. ip추가?
         file이용 = RANDOM_MAX 조정? 
-        EMAIL? later하루에 1-2개씩일때만 (제자리 출력? -> 한번더 멈춘현상발생시)
+		(제자리 출력? -> 한번더 멈춘현상발생시)
+        later하루에 1-2개씩일때만 email? 
     4 git 정리 + 밑에할차례?
-        git rebase HEAD~13 -i //하기전에 숫자바꾸고 저장함?
+        git rebase HEAD~14 -i //하기전에 숫자바꾸고 저장함?
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
@@ -37,7 +38,7 @@ namespace gitA
         static readonly int work            = 361;
         //real mode
         static readonly int tick            = 16;           //초에 한번씩 찍기
-        static readonly int RANDOM_MAX      = 5 * 60 + 13;
+        static readonly int RANDOM_MAX      = 5 * 60 + 14;
         static readonly int roundMax        = 21;
         static readonly int randomStopMax   = 7;
 
@@ -86,7 +87,7 @@ namespace gitA
             DateTime target = now.AddMinutes(randomResult);
             string sTarget = target.ToString("HH:mm:ss");
 
-            Console.WriteLine("Round {0}--------------------------------", round);
+            Console.WriteLine("Round {0} try--------------------------------", round);
             RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m CSha_v2_r" + 
@@ -106,12 +107,12 @@ namespace gitA
 
             if (round >= roundMax)
             {
-                Console.WriteLine("사고방지용 완전히 종료");
+                Console.WriteLine("사고방지용 Max 종료");
                 Environment.Exit(0);
             }
 
             // run next round
-            Console.WriteLine("현재시간={3} ~{0}/{1} => {2}", randomResult, RANDOM_MAX, target, sTime);
+            Console.WriteLine("현재시간={3} => {0}/{1} => {2}", randomResult, RANDOM_MAX, target, sTime);
             Console.WriteLine("in Round {0}--------------------------------", round);
 
             // 알람 타이머 생성 및 시작
@@ -157,7 +158,7 @@ namespace gitA
             // Text 파일 생성 및 text 를 입력 합니다.
             textNum = Convert.ToString(iNum);
             System.IO.File.WriteAllText(fileGit, textNum, Encoding.Default);
-            Console.WriteLine("\nUpdating git file================={0}", textNum);
+            Console.WriteLine("\nUpdating git file value================={0}", textNum);
         }
 
         static void RunCommand(string command)
