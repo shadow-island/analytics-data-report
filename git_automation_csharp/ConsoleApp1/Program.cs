@@ -24,6 +24,7 @@ Todo:
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
+        또는 gitk에서 hard로
     5 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치)
     
 Release note    
@@ -37,10 +38,10 @@ namespace gitA
     {   
         static readonly int work            = 361;
         //real mode
-        static readonly int tick            = 16;           //초에 한번씩 찍기
+        static readonly int tick            = 17;           //초에 한번씩 찍기
         static readonly int RANDOM_MAX      = 5 * 60 + 14;
         static readonly int roundMax        = 21;
-        static readonly int randomStopMax   = 7;
+        static readonly int randomStopMax   = 8;
 
         /* debugging mode
         static readonly int tick = 1; //초에 한번씩 찍기
@@ -78,23 +79,24 @@ namespace gitA
 
         static void RunGit()
         {
+            Console.WriteLine("Round {0} try--------------------------------", round);
+            // Junbi
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);
 
-            //string sTime = DateTime.Now.ToString("HH:mm:ss");
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm:ss");
             DateTime target = now.AddMinutes(randomResult);
             string sTarget = target.ToString("HH:mm:ss");
 
-            Console.WriteLine("Round {0} try--------------------------------", round);
+            int randomStop = r.Next(1, randomStopMax + 1);
+            //~
+
             RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m CSha_v2_r" + 
-                Convert.ToString(round) + "_"+ sTime + "~" + sTarget);
+                Convert.ToString(round) + "_"+ sTime + "~" + sTarget + "_randomStop?" + Convert.ToString(randomStop));
             RunCommand("git push");
-                        
-            int randomStop = r.Next(1, randomStopMax + 1);
 
             
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
