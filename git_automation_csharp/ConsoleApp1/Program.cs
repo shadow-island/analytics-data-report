@@ -5,17 +5,17 @@ using System.Timers;
 
 /* 본 App 동작설명
     최초는 commit없음: 내가 커밋하고싶어서 일부로 고치지 않는이상 안일어나야한다
-    (사용자에게 선택권을 줘야함)
-    commit 강제로하려면 log숫자 초기화~
+        (사용자에게 선택권을 줘야함)
+        commit 강제로하려면 log숫자 초기화~
     2nd round는 무조건 커밋 
 #기능 #UI
 Todo:
-    1.암것도안함 (이것도테스트필요)
-    2 숫자증가만: release note 다음 시간으로 표시  => 코드 정리
+    1 암것도안함 (이것도테스트필요)
+    2 숫자증가만: release note   => 코드 정리
     3 기능향상:         
         a. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!
         b. commit이름 바꾸기: Random 종료 number 보이기 -> 종료시 EMAIL? 
-        c. ip추가?
+        c. home위치확인:exe update표시, 일단 file식으로 쉽게 -> ip추가?
         file이용 = RANDOM_MAX 조정? 
 		(제자리 출력? -> 한번더 멈춘현상발생시)
         later하루에 1-2개씩일때만 email? 
@@ -24,11 +24,10 @@ Todo:
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-        또는 gitk에서 hard로
     5 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치)
     
 Release note    
-    2021.       Random 종료 기능
+    2021.       다음 시간으로 표시, Random 종료 기능
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 */
@@ -36,12 +35,12 @@ namespace gitA
 {
     class Program
     {   
-        static readonly int work            = 361;
+        static readonly int WORK            = 361;
         //real mode
-        static readonly int tick            = 17;           //초에 한번씩 찍기
-        static readonly int RANDOM_MAX      = 5 * 60 + 14;
+        static readonly int tick            = 16;           //초에 한번씩 찍기
+        static readonly int RANDOM_MAX      = 5 * 60 + 15;
         static readonly int roundMax        = 21;
-        static readonly int randomStopMax   = 8;
+        static readonly int randomStopMax   = 7;
 
         /* debugging mode
         static readonly int tick = 1; //초에 한번씩 찍기
@@ -58,7 +57,7 @@ namespace gitA
 
         static void Main()
         {
-            Console.WriteLine("작업분ver{0}", work);
+            Console.WriteLine("작업분ver{0}", WORK);
             var info = new FileInfo(fileGit);
             if (info.LastWriteTime.Day != DateTime.Now.Day)
             {
@@ -79,24 +78,21 @@ namespace gitA
 
         static void RunGit()
         {
-            Console.WriteLine("Round {0} try--------------------------------", round);
-            // Junbi
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);
-
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm:ss");
             DateTime target = now.AddMinutes(randomResult);
             string sTarget = target.ToString("HH:mm:ss");
 
-            int randomStop = r.Next(1, randomStopMax + 1);
-            //~
-
+            Console.WriteLine("Round {0} try--------------------------------", round);
             RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m CSha_v2_r" + 
-                Convert.ToString(round) + "_"+ sTime + "~" + sTarget + "_randomStop?" + Convert.ToString(randomStop));
+                Convert.ToString(round) + "_"+ sTime + "~" + sTarget);
             RunCommand("git push");
+                        
+            int randomStop = r.Next(1, randomStopMax + 1);
 
             
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
