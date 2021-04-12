@@ -34,25 +34,23 @@ Release note
 namespace gitA
 {
     class Program
-    {   
+    {
+        // 읽어올 text file 의 경로를 지정 합니다
+        static readonly string fileGit       = "eukm.log";
         static readonly int WORK            = 361;
-        static readonly int roundMax = 21;
-        static readonly int randomStopMax = 1;//8
+        static readonly int roundMax        = 21;
+        static readonly int randomStopMax   = 8;
 
         //real mode
-        //static readonly int tick            = 16;           //초에 한번씩 찍기
-        //static readonly int RANDOM_MAX      = 5 * 60 + 16;
+        static readonly int tick            = 16;           //초에 한번씩 찍기
+        static readonly int RANDOM_MAX      = 5 * 60 + 16;
 
-        /* debugging mode
-         * */
-        static readonly int tick = 1; //초에 한번씩 찍기
-        static readonly int RANDOM_MAX = 1;// for test
-        
+        /* debugging mode         * */
+        //static readonly int tick = 1; //초에 한번씩 찍기
+        //static readonly int RANDOM_MAX = 1;// for test        
 
-        // 읽어올 text file 의 경로를 지정 합니다
-        static readonly string fileGit = "eukm.log";
+        // global
         static int round = 1;
-
         // timer 2개 
         static readonly Timer timerTick = new System.Timers.Timer();
         static System.Threading.Timer myTimer = null;
@@ -93,7 +91,7 @@ namespace gitA
             string sGoStop = "";
             if (round != 1 && randomStop == 1)
             {
-                sGoStop = "_randomStop?" + Convert.ToString(randomStop);
+                sGoStop = "_randomStop!!_";
             }            
 
             RunCommand("git pull");
