@@ -12,20 +12,19 @@ using System.Timers;
 Todo:
     1 암것도안함 (이것도테스트필요)
     2 숫자증가만: release note   => 코드 정리
-    3 기능향상:         
-        a. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!
-        b. commit이름 바꾸기: Random 종료 number 보이기 -> 종료시 EMAIL? 
+    3 기능향상:                 
+        b. commit이름 바꾸기: Random 종료 number보이기 -> 종료시 EMAIL?  -> *. later하루에 1-2개씩 commit일때만 email? 
         c. home위치확인:exe update표시, 일단 file식으로 쉽게 -> ip추가?
-        file이용 = RANDOM_MAX 조정? 
-		(제자리 출력? -> 한번더 멈춘현상발생시)
-        later하루에 1-2개씩일때만 email? 
+        d. 숫자증가만? file이용 = RANDOM_MAX 조정? 
+        a. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
+		*. (제자리 출력? -> 한번더 멈춘현상발생시)         
     4 git 정리 + 밑에할차례?
         git rebase HEAD~14 -i //하기전에 숫자바꾸고 저장함?
         git push --force
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
         또는 gitk에서 hard로
-    5 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치)
+    5 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치or투자)
     
 Release note    
     2021.       다음 시간으로 표시, Random 종료 기능
@@ -39,9 +38,9 @@ namespace gitA
         static readonly int WORK            = 361;
         //real mode
         static readonly int tick            = 16;           //초에 한번씩 찍기
-        static readonly int RANDOM_MAX      = 5 * 60 + 15;
+        static readonly int RANDOM_MAX      = 5 * 60 + 16;
         static readonly int roundMax        = 21;
-        static readonly int randomStopMax   = 7;
+        static readonly int randomStopMax   = 8;
 
         /* debugging mode
         static readonly int tick = 1; //초에 한번씩 찍기
@@ -88,21 +87,23 @@ namespace gitA
             DateTime target = now.AddMinutes(randomResult);
             string sTarget = target.ToString("HH:mm:ss");
             int randomStop = r.Next(1, randomStopMax + 1);
-                        
+
+            string sGoStop = "";
+            if (round != 1 && randomStop == 1)
+            {
+                sGoStop = "_randomStop?" + Convert.ToString(randomStop);
+            }            
+
             RunCommand("git pull");
             RunCommand("git status");
-            RunCommand("git commit --all -m CSha_v2_r" +
-                Convert.ToString(round) + "_" + sTime + "~" + sTarget + "_randomStop?" + Convert.ToString(randomStop));
-            //Convert.ToString(round) + "_"+ sTime + "~" + sTarget);
-
-
-            RunCommand("git push");
-                        
+            RunCommand("git commit --all -m CSha_v2_r" + 
+                Convert.ToString(round) + "_" + sTime + sGoStop + "~" + sTarget);
             
-
+            RunCommand("git push");
             
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
             Console.WriteLine("현재시간={0}", sTime);
+
             if (round != 1 && randomStop == 1)
             {
                 Console.WriteLine("사고방지용 Random 종료");
