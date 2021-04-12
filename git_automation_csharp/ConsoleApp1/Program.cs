@@ -40,7 +40,7 @@ namespace gitA
         static readonly int tick            = 16;           //초에 한번씩 찍기
         static readonly int RANDOM_MAX      = 5 * 60 + 16;
         static readonly int roundMax        = 21;
-        static readonly int randomStopMax   = 8;
+        static readonly int randomStopMax   = 1;//8
 
         /* debugging mode
         static readonly int tick = 1; //초에 한번씩 찍기
