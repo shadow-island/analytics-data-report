@@ -20,12 +20,12 @@ Todo:
         a. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
     4 git 정리 + 1/1할차례? 
         git rebase HEAD~15 -i //하기전에 숫자바꾸고 저장함?
-        git push --force(이것도됨)
+        git push --force(이것도됨)*. home위치확인:exe update표시, 일단 file식으로 쉽게 -> ip추가?
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
         또는 gitk에서 hard로
         또는 rebase하는 명령어찾기
-    5 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치or투자)
+    5 이건 studio열지않고, 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치or투자)
     
 Release note    
     2021.       다음 시간 표시, Random 종료 기능
