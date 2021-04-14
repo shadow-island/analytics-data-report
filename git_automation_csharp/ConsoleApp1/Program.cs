@@ -12,18 +12,19 @@ using System.Timers;
 Todo:
     1 암것도안함 (이것도테스트필요)
     2 숫자증가만: release note   => 코드 정리
-    3 기능향상:                 
-        b. commit이름 바꾸기: Random 종료 number보이기 -> 종료시 EMAIL?  -> *. later하루에 1-2개씩 commit일때만 email? 
-        c. home위치확인:exe update표시, 일단 file식으로 쉽게 -> ip추가?
+    3 기능향상:                         
+        *. cls, gc새시작할대하기, -> 제자리 출력? -> 한번더 멈춘현상발생시)         
+        *. commit이름 바꾸기: 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email? 
+        *. home위치확인:exe update표시, 일단 file식으로 쉽게 -> ip추가?        
         d. 숫자증가만? file이용 = RANDOM_MAX 조정? 
         a. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
-		*. cls, gc새시작할대하기, -> 제자리 출력? -> 한번더 멈춘현상발생시)         
-    4 git 정리 + 밑에할차례?
-        git rebase HEAD~14 -i //하기전에 숫자바꾸고 저장함?
-        git push --force
+    4 git 정리 + 1/1할차례? 
+        git rebase HEAD~15 -i //하기전에 숫자바꾸고 저장함?
+        git push --force(이것도됨)
         git push origin master --force(필요)
         회사컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
         또는 gitk에서 hard로
+        또는 rebase하는 명령어찾기
     5 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치or투자)
     
 Release note    
@@ -39,9 +40,9 @@ namespace gitA
         static readonly string fileGit = "eukm.log";
         static readonly int WORK = 361;
         static readonly int roundMax = 21;
-        static int randomStopMax = 9;
-        static int tick;
-        static int RANDOM_MAX;        
+        static int          randomStopMax = 9;
+        static int          tick;
+        static int          RANDOM_MAX = 5 * 60 + 18;        
         static readonly bool debuggingMode = true;  //real mode true false    
 
         // global
@@ -55,7 +56,6 @@ namespace gitA
             if (debuggingMode)
             {
                 tick = 17; //초에 한번씩 찍기
-                RANDOM_MAX = 5 * 60 + 17;
             }
             else
             {
