@@ -13,10 +13,12 @@ Todo:
     1 암것도안함 (이것도테스트필요)
     2 숫자증가만: release note   => 코드 정리
     3 기능향상:                         
-        *. cls, gc새시작할대하기, -> 제자리 출력? -> 한번더 멈춘현상발생시)         
-        *. commit이름 바꾸기: 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email? 
-        *. home위치확인:exe update표시, 일단 file식으로 쉽게 -> ip추가?
-        *. 숫자증가만? file이용 = RANDOM_MAX 조정? 
+        *. -> 제자리 출력? -> 한번더 멈춘현상발생시)         
+        * home위치확인:exe update표시, 일단 file식으로 쉽게 
+            -> [home]commit(squshed등, new) + 수도이름random화 + round+시간?
+            (ip추가? 별로일듯)
+        *. 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
+        *. commit이름 바꾸기: 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?                 
         *. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
     4 git 정리 + 1/2할차례? 
         git rebase HEAD~15 -i //하기전에 숫자바꾸고 저장함?
@@ -29,7 +31,7 @@ Todo:
     5 이건 studio열지않고, 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치or투자)
     
 Release note    
-    2021.       다음 시간 표시, Random 종료 기능
+    2021.       다음시간표시, Random종료기능,
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 */
@@ -38,13 +40,13 @@ namespace gitA
     class Program
     {
         // 읽어올 text file 의 경로를 지정 합니다
-        static readonly string fileGit = "eukm.log";
-        static readonly int WORK = 361;
-        static readonly int roundMax = 21;
-        static int          randomStopMax = 9;
-        static int          tick;
-        static int          RANDOM_MAX = 5 * 60 + 18;        
-        static readonly bool debuggingMode = true;  //real mode true false    
+        static readonly string  fileGit = "eukm.log";
+        static readonly int     WORK = 361;
+        static readonly int     roundMax = 21;
+        static          int     randomStopMax = 9;
+        static          int     tick = 18; //초에 한번씩 찍기
+        static          int     RANDOM_MAX = 5 * 60 + 18;        
+        static readonly bool    debuggingMode = true;  //real mode true false    
 
         // global
         static int round = 1;
@@ -54,11 +56,7 @@ namespace gitA
 
         static void Main()
         {
-            if (debuggingMode)
-            {
-                tick = 17; //초에 한번씩 찍기
-            }
-            else
+            if (!debuggingMode)
             {
                 randomStopMax = 1;
                 tick = 1; //초에 한번씩 찍기
@@ -88,6 +86,14 @@ namespace gitA
         {
             Console.WriteLine("Round {0} try--------------------------------", round);
             // Junbi
+            string sLocation = "";
+            FileInfo fi = new FileInfo("gc_home.cfg");
+            //FileInfo.Exists로 파일 존재유무 확인 "
+            if (fi.Exists)
+            {
+                sLocation = "[home]";
+            }
+
             Random r = new Random();
             int randomResult = r.Next(1, RANDOM_MAX + 1);
             DateTime now = DateTime.Now;
@@ -104,7 +110,7 @@ namespace gitA
 
             RunCommand("git pull");
             RunCommand("git status");
-            RunCommand("git commit --all -m CSha_v2_r" + 
+            RunCommand("git commit --all -m " + sLocation +"_CSha_v2_r" + 
                 Convert.ToString(round) + "_" + sTime + "~" + sTarget);
             
             RunCommand("git push");
@@ -152,10 +158,11 @@ namespace gitA
 
         static void Update()
         {            
-            FileInfo fi = new FileInfo(fileGit);
-            //FileInfo.Exists로 파일 존재유무 확인 "
+
             int iNum = 0;
             string textNum;
+            FileInfo fi = new FileInfo(fileGit);
+            //FileInfo.Exists로 파일 존재유무 확인 "
             if (fi.Exists)
             {   //"파일존재"
                 // text file 의 전체 text 를 읽어 옵니다.
