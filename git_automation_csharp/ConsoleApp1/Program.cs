@@ -10,17 +10,18 @@ using System.Timers;
     2nd round는 무조건 커밋 
 #기능 #UI
 Todo:
+    0.* commit command(squashed등, new), random(1전체소문자,2전체대문자3첫자대문자) => ini file
+      * 수도추가?
     1 암것도안함 (이것도테스트필요)
     2 숫자증가만: release note   => 코드 정리
     3 기능향상:                         
-		* 더 사람 commit같이 공백 등...1개만수정        
-		* commit command(squashed등, new), random(1전체소문자,2전체대문자3첫자대문자) => ini file
-        * 수도추가?
+		* 더 사람 commit같이 공백 등...1개만수정        		
 		* ini file 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
 		*. -> 제자리 출력? -> 한번더 멈춘현상발생시)                      
         * * exe update표시?
         *. 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?                 
-        *. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
+        *. 회사 round1일때는 굳이 종료하지말자, 강제시작 옵션만들기 <- file지울때?, 
+        * 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
     4 git 정리 + 1/2할차례? 
         git rebase HEAD~15 -i //하기전에 숫자바꾸고 저장함?
         git push --force(이것도됨)
@@ -103,7 +104,8 @@ namespace gitA
             string sMingling = mingling[i].ToUpper();
 
             // https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)
-            string[] capital = new string[] {"USHAV3","Nigeria","Abuja","Kazakhstan","NurSultan"};
+            string[] capital = new string[] 
+                {"USHAV3","Eugene","Nigeria","Abuja","Kazakhstan","NurSultan","Slovakia","Bratislava"};
 
             i = r.Next(0, capital.Length);
             string sCapital = capital[i];
