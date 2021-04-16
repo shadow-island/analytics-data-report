@@ -14,8 +14,8 @@ Todo:
     2 숫자증가만: release note   => 코드 정리
     3 기능향상:                         
         *. -> 제자리 출력? -> 한번더 멈춘현상발생시)         
-        * :exe update표시, 
-            -> commit command(squshed등, new) + 수도이름random화 + round+시간?
+        * -> commit command(squashed등, new) +  + round+시간?
+        * exe update표시?
         *. 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
         *. commit이름 바꾸기: 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?                 
         *. 강제시작 옵션만들기 <- file지울때?, 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
@@ -30,7 +30,7 @@ Todo:
     5 이건 studio열지않고, 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치or투자)
     
 Release note    
-    2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게)
+    2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), 수도이름random화
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 */
@@ -41,10 +41,10 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
         static readonly int     WORK          = 363;
-        static          int     randomStopMax = 10;
+        static          int     randomStopMax = 11;
         static readonly int     roundMax      = 21;        
         static          int     tick          = 18;  //초에 한번씩 찍기
-        static          int     RANDOM_MAX    = 5 * 60 + 19;
+        static          int     RANDOM_MAX    = 5 * 60 + 20;
         static readonly bool    debuggingMode = false;  //real mode true false    
 
         // global
@@ -94,8 +94,15 @@ namespace gitA
             }
 
             Random r = new Random();
-            string[] capital = new string[] {"USHAV3", "Abuja"};
-            int i = r.Next(0, 2);
+            int i;
+
+            string[] mingling = new string[] { "Update", "New" };            
+            i = r.Next(0, 2);
+            string sMingling = mingling[i];
+
+            // https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)
+            string[] capital = new string[] {"USHAV3", "Abuja", "NurSultan"};
+            i = r.Next(0, capital.Length);
             string sCapital = capital[i];
 
             int randomResult = r.Next(1, RANDOM_MAX + 1);
@@ -113,8 +120,8 @@ namespace gitA
 
             RunCommand("git pull");
             RunCommand("git status");
-            RunCommand("git commit --all -m " + 
-                sLocation + sCapital + "_r" + Convert.ToString(round) + "_" + sTime + "~" + sTarget);
+            RunCommand("git commit --all -m " +
+                sLocation + sMingling + "_" + sCapital + "_r" + Convert.ToString(round) + "_" + sTime + "~" + sTarget);
             
             RunCommand("git push");
             
