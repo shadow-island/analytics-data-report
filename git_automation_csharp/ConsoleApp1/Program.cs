@@ -119,16 +119,18 @@ namespace gitA
             RunCommand("git push");
             
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
-            Console.WriteLine("현재시간={0}", sTime);
+            
 
             if (round != 1 && randomStop == 1)
             {
+                Console.WriteLine("현재시간={0}", sTime);
                 Console.WriteLine("사고방지용 Random 종료");
                 Environment.Exit(0);
             }
 
             if (round >= roundMax)
             {
+                Console.WriteLine("현재시간={0}", sTime);
                 Console.WriteLine("사고방지용 Max 종료");
                 Environment.Exit(0);
             }
