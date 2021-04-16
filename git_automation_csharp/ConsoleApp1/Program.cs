@@ -14,7 +14,7 @@ Todo:
     2 숫자증가만: release note   => 코드 정리
     3 기능향상:                         
         *. -> 제자리 출력? -> 한번더 멈춘현상발생시)         
-        * -> commit command(squashed등, new) +  + round+시간?
+        * commit command(squashed등, new), random(1전체소문자,2전체대문자3첫자대문자)
         * exe update표시?
         *. 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
         *. commit이름 바꾸기: 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?                 
@@ -30,7 +30,7 @@ Todo:
     5 이건 studio열지않고, 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치or투자)
     
 Release note    
-    2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), 수도이름random화
+    2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), command, 수도이름random화
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 */
@@ -48,7 +48,7 @@ namespace gitA
         static readonly bool    debuggingMode = false;  //real mode true false    
 
         // global
-        static int round = 1;
+        static int round = 0;
         // timer 2개 
         static readonly Timer timerTick = new System.Timers.Timer();
         static System.Threading.Timer myTimer = null;          
@@ -96,14 +96,17 @@ namespace gitA
             Random r = new Random();
             int i;
 
-            string[] mingling = new string[] { "Update", "New" };            
+            string[] mingling = new string[] { "update", "new" };            
             i = r.Next(0, 2);
             string sMingling = mingling[i];
 
             // https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)
-            string[] capital = new string[] {"USHAV3", "Abuja", "NurSultan"};
+            string[] capital = new string[] {"USHAV3","Nigeria","Abuja", "NurSultan"};
             i = r.Next(0, capital.Length);
             string sCapital = capital[i];
+
+            //logic
+            round++;
 
             int randomResult = r.Next(1, RANDOM_MAX + 1);
             DateTime now = DateTime.Now;
@@ -121,8 +124,10 @@ namespace gitA
             RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m " +
-                sLocation + sMingling + "_" + sCapital + "_r" + Convert.ToString(round) + "_" + sTime + "~" + sTarget);
-            
+                "\"" + 
+                sLocation + sMingling + "_from " + sCapital + "_r" + Convert.ToString(round) + "_" + sTime + "~" + sTarget 
+                + "\"");
+
             RunCommand("git push");
             
             Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
@@ -148,8 +153,7 @@ namespace gitA
 
             // 알람 타이머 생성 및 시작
             myTimer = new System.Threading.Timer(Timer_Elapsed, null, 1000 * randomResult * 60, 60 * 1000 * 3);
-            //logic
-            round++;
+           
         }
 
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
