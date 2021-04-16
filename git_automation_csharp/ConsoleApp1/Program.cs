@@ -40,11 +40,11 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
-        static readonly int     WORK        = 362;
-        static readonly int     roundMax    = 21;
-        static          int     randomStopMax   = 10;
-        static          int     tick            = 18;  //초에 한번씩 찍기
-        static          int     RANDOM_MAX      = 5 * 60 + 19;
+        static readonly int     WORK          = 363;
+        static          int     randomStopMax = 10;
+        static readonly int     roundMax      = 21;        
+        static          int     tick          = 18;  //초에 한번씩 찍기
+        static          int     RANDOM_MAX    = 5 * 60 + 19;
         static readonly bool    debuggingMode = false;  //real mode true false    
 
         // global
@@ -94,7 +94,7 @@ namespace gitA
             }
 
             Random r = new Random();
-            string[] capital = new string[] {"CShav3_r", "Abuja_new"};
+            string[] capital = new string[] {"USHAV3", "Abuja"};
             int i = r.Next(0, 2);
             string sCapital = capital[i];
 
