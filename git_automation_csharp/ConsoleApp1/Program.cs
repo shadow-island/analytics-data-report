@@ -102,7 +102,7 @@ namespace gitA
             Random r = new Random();
             int i;
 
-            string[] mingling = new string[] { "","update", "commit", "new" };
+            string[] mingling = new string[] { "", "commit", "command", "update", "new" };
             i = r.Next(0, mingling.Length);
             string sMingling = mingling[i];
             if (r.Next(0, 2) == 0)
@@ -128,7 +128,7 @@ namespace gitA
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm:ss");
             DateTime target = now.AddMinutes(randomResult);
-            string sTarget = target.ToString("HH.mm");
+            string sTarget = target.ToString(".HH.mm");
             int randomStop = r.Next(1, randomStopMax + 1);
 
             //string sGoStop = "";
@@ -140,9 +140,7 @@ namespace gitA
             RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m " +
-                "\"" + 
-                sLocation + sMingling + " from " + sCapital + " r" + Convert.ToString(round) + " " + sTarget 
-                + "\"");
+                "\"" + sLocation + sMingling + " from " + sCapital + " r" + Convert.ToString(round) + sTarget + "\"");
 
             RunCommand("git push");
             
