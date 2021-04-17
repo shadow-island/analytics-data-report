@@ -25,8 +25,8 @@ Todo:
         *. 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?                 
         *. 회사 round1일때는 굳이 종료하지말자, 강제시작 옵션만들기 <- file지울때?, 
         * 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
-    4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/3할차례?
-        git rebase HEAD~16 -i 
+    4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례?
+        git rebase HEAD~17 -i 
         git push --force(이것도됨)
         git push origin master --force(필요)
         remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
@@ -50,7 +50,7 @@ namespace gitA
         static          int     randomStopMax = 12;
         static readonly int     roundMax      = 21;
         static          int     tick          = 19;  //초에 한번씩 찍기
-        static          int     RANDOM_MAX    = 5 * 60 + 21;
+        static          int     RANDOM_MAX    = 5 * 60 + 23; //주말에도해야하면 ++2
         static readonly bool    debuggingMode = false;  //real mode true false    
 
         // global
@@ -89,14 +89,14 @@ namespace gitA
 
         static void RunGit()
         {
-            Console.WriteLine("Round {0} try--------------------------------", round);
+            
             // Junbi
             string sLocation = "";
             FileInfo fi = new FileInfo("gc_home.cfg");
             //FileInfo.Exists로 파일 존재유무 확인 "
             if (fi.Exists)
             {
-                sLocation = "[home]";
+                sLocation = "[home] ";
             }
 
             Random r = new Random();
@@ -113,19 +113,22 @@ namespace gitA
 
             // https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)
             string[] capital = new string[] 
-                {"Gushav3","Eugene","Nigeria","Abuja","Kazakhstan","NurSultan","Slovakia","Bratislava","Puerto Rico","San Juan"};
+                {"Gushav3","Eugene",
+                "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
+                "Dominican Republic","Santo Domingo"};
 
             i = r.Next(0, capital.Length);
             string sCapital = capital[i];
 
             //logic
             round++;
+            Console.WriteLine("Round {0} try--------------------------------", round);
 
             int randomResult = r.Next(1, RANDOM_MAX + 1);
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm:ss");
             DateTime target = now.AddMinutes(randomResult);
-            string sTarget = target.ToString("HH:mm:ss");
+            string sTarget = target.ToString("HH.mm");
             int randomStop = r.Next(1, randomStopMax + 1);
 
             //string sGoStop = "";
