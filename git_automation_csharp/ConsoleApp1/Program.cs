@@ -11,43 +11,43 @@ using System.Timers;
 #기능 #UI
 Todo:
     0. 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-		* 근무시간또는 매일 1회->1/6
+		* 근무시간또는 매일 1회->1/7
 		* 멈췄을때 1/5
-		* small new -> command(squashed등), 
-		* 수도추가?
+	
 		
     1   1-0 1/3->암것도안함 (이것도테스트필요)   
-        1-1기능향상:                         		
-		매번: 더 사람 commit같이 공백 등..1개만수정
-		
-		* 일단 이렇게했는데, 0이라 commit안되는경우있었다. 이제는 날짜또는 옵션으로하자?
-		
-		* random(1전체소문자,2전체대문자3첫자대문자) 		
-		* => ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
-		*. -> 제자리 출력? -> 한번더 멈춘현상발생시)		
-        * exe check필요할듯 -exe빠지는경우 있음 update표시?
-        *. 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?                 
-        *. 회사 round1일때는 굳이 종료하지말자, 강제시작 옵션만들기 <- file지울때?, 
+        1-1기능향상:       
+            
+		    매번: 
+            	* small new -> command(squashed등), 
+		        * 수도추가?
+                더 사람 commit같이 공백 등..1개만수정						
+		    * random(1전체소문자,2전체대문자3첫자대문자) 		
+		    * 안중요:=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
+		    *. -> 제자리 출력? -> 한번더 멈춘현상발생시)		
+            * exe check필요할듯 -exe빠지는경우 있음 update표시?
+            *. 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+            *. 회사 round1일때는 굳이 종료하지말자,  <- file지울때?, 
         
-        1-2숫자증가만: release note  *  => 코드 정리
-		1-3
-        git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례?
-        git rebase HEAD~16 -i 
-        git push --force(이것도됨)
-        git push origin master --force(필요)
+        1-2 1)release note 2)코드 정리
+		1-3 git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례?            
+            git rebase HEAD~16 -i 
+            git push --force(이것도됨)
+            git push origin master --force(필요)
         
-        remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-        또는 gitk에서 hard로
-        gpd하지않고 rebase하는 명령어찾기
+            remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
+            또는 gitk에서 hard로
+            gpd하지않고 rebase하는 명령어찾기
 		
-        https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
+            https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
 		
     2 이건 studio열지않고, 다른 application?(
 		quiz 맞은거 random숫자조정으로 잘안나오게!->정치or투자)
 		미린 지리-> 엑셀 -> javascript?
     
 Release note    
-    2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), command,수도이름
+    2021.4      강제시작 옵션만들기 eu, 0이라 commit안되는경우있었다
+    2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 */
@@ -133,7 +133,7 @@ namespace gitA
             string[] capital = new string[] 
                 {"Gushav3","Eugene",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
-                "Dominican Republic","Santo Domingo","Guatemala","Guatemala City"};
+                "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar", "Naypyidaw"};
 
             i = r.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
