@@ -11,8 +11,8 @@ using System.Timers;
 #기능 #UI
 Todo:
     0. 이제 office컴 연결시만,즉근무시간에만 coding작업할것,근무시간첫회1/3
-		* 멈췄을때 1/4
-		* new-> command(squashed등, ), 
+		* 멈췄을때 1/5
+		* small new -> command(squashed등), 
 		* 수도추가?
     1 암것도안함 (이것도테스트필요)
     2 숫자증가만: release note   => 코드 정리
@@ -26,14 +26,18 @@ Todo:
         *. 회사 round1일때는 굳이 종료하지말자, 강제시작 옵션만들기 <- file지울때?, 
         * 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
     4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례?
-        git rebase HEAD~17 -i 
+        git rebase HEAD~16 -i 
         git push --force(이것도됨)
         git push origin master --force(필요)
+        
         remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
         또는 gitk에서 hard로
-        또는 rebase하는 명령어찾기
+        gpd하지않고 rebase하는 명령어찾기
+        
         https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
-    5 이건 studio열지않고, 다른 application?(미리내 지리-> 엑셀 -> javascript?->정치or투자)
+    5 이건 studio열지않고, 다른 application?(
+		quiz 맞은거 random숫자조정으로 잘안나오게!->정치or투자)
+		미린 지리-> 엑셀 -> javascript?
     
 Release note    
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), command,수도이름
@@ -46,11 +50,11 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
-        static readonly int     WORK          = 363;
-        static          int     randomStopMax = 12;
+        static readonly int     WORK          = 375;
+        static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
-        static          int     tick          = 19;  //초에 한번씩 찍기
-        static          int     RANDOM_MAX    = 5 * 60 + 23; //주말에도해야하면 ++2
+        static          int     tick          = 19;     //초에 한번씩 찍기
+        static          int     RANDOM_MAX    = 6 * 60; //일일 commit개수 줄여보기 -> 1시간단위
         static readonly bool    debuggingMode = false;  //real mode true false    
 
         // global
@@ -88,8 +92,7 @@ namespace gitA
         }
 
         static void RunGit()
-        {
-            
+        {            
             // Junbi
             string sLocation = "";
             FileInfo fi = new FileInfo("gc_home.cfg");
@@ -115,14 +118,15 @@ namespace gitA
             string[] capital = new string[] 
                 {"Gushav3","Eugene",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
-                "Dominican Republic","Santo Domingo"};
+                "Dominican Republic","Santo Domingo","Guatemala","Guatemala City"};
 
             i = r.Next(0, capital.Length);
             string sCapital = capital[i];
 
-            //logic
+            //round
             round++;
             Console.WriteLine("Round {0} try--------------------------------", round);
+            //
 
             int randomResult = r.Next(1, RANDOM_MAX + 1);
             DateTime now = DateTime.Now;
