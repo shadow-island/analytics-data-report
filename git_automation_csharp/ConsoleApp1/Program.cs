@@ -21,7 +21,7 @@ Todo:
 		* random(1전체소문자,2전체대문자3첫자대문자) => ini file
 		* ini file 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
 		*. -> 제자리 출력? -> 한번더 멈춘현상발생시)                      
-        * exe update표시?
+        * exe check필요할듯 -exe빠지는경우 있음 update표시?
         *. 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?                 
         *. 회사 round1일때는 굳이 종료하지말자, 강제시작 옵션만들기 <- file지울때?, 
         * 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
@@ -50,7 +50,7 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
-        static readonly int     WORK          = 375;
+        static readonly int     WORK          = 377;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
         static          int     tick          = 19;     //초에 한번씩 찍기
