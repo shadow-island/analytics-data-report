@@ -10,22 +10,28 @@ using System.Timers;
     2nd round는 무조건 커밋 
 #기능 #UI
 Todo:
-    0. 이제 office컴 연결시만,즉근무시간에만 coding작업할것,근무시간첫회1/3
+    0. 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
+		* 근무시간또는 매일 1회->1/6
 		* 멈췄을때 1/5
 		* small new -> command(squashed등), 
 		* 수도추가?
-    1 암것도안함 (이것도테스트필요)
-    2 숫자증가만: release note   => 코드 정리
-    3 기능향상:                         		
-		* 더 사람 commit같이 공백 등..1개만수정        		
-		* random(1전체소문자,2전체대문자3첫자대문자) => ini file
-		* ini file 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
-		*. -> 제자리 출력? -> 한번더 멈춘현상발생시)                      
+		
+    1   1-0 1/3->암것도안함 (이것도테스트필요)   
+        1-1기능향상:                         		
+		매번: 더 사람 commit같이 공백 등..1개만수정
+		
+		* 일단 이렇게했는데, 0이라 commit안되는경우있었다. 이제는 날짜또는 옵션으로하자?
+		
+		* random(1전체소문자,2전체대문자3첫자대문자) 		
+		* => ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? => 이게되면 다른 app도?
+		*. -> 제자리 출력? -> 한번더 멈춘현상발생시)		
         * exe check필요할듯 -exe빠지는경우 있음 update표시?
         *. 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?                 
         *. 회사 round1일때는 굳이 종료하지말자, 강제시작 옵션만들기 <- file지울때?, 
-        * 일단 이렇게했는데, 0이라 commit안되는경우있으면 이제는 날짜로하자~!        
-    4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례?
+        
+        1-2숫자증가만: release note  *  => 코드 정리
+		1-3
+        git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례?
         git rebase HEAD~16 -i 
         git push --force(이것도됨)
         git push origin master --force(필요)
@@ -33,9 +39,10 @@ Todo:
         remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
         또는 gitk에서 hard로
         gpd하지않고 rebase하는 명령어찾기
-        
+		
         https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
-    5 이건 studio열지않고, 다른 application?(
+		
+    2 이건 studio열지않고, 다른 application?(
 		quiz 맞은거 random숫자조정으로 잘안나오게!->정치or투자)
 		미린 지리-> 엑셀 -> javascript?
     
@@ -53,7 +60,7 @@ namespace gitA
         static readonly int     WORK          = 378;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
-        static          int     tick          = 19;     //초에 한번씩 찍기
+        static          int     tick          = 20;     //초에 한번씩 찍기
         static          int     RANDOM_MAX    = 6 * 60; //일일 commit개수 줄여보기 -> 1시간단위
         static readonly bool    debuggingMode = false;  //real mode true false    
 
@@ -63,8 +70,16 @@ namespace gitA
         static readonly Timer timerTick = new System.Timers.Timer();
         static System.Threading.Timer myTimer = null;          
 
-        static void Main()
+        static void Main(string[] args)
         {
+            int argsCount = args.Length;          
+            if (argsCount >= 1)
+            {
+                string inputFile = args[0];
+                Console.WriteLine("Force Mode: {0}", inputFile);
+            }                
+
+
             if (debuggingMode)
             {
                 randomStopMax = 1;
@@ -72,9 +87,9 @@ namespace gitA
                 RANDOM_MAX = 1;// for test        
             } //debugging mode    
 
-            Console.WriteLine("작업분ver{0}", WORK);
+            
             var info = new FileInfo(fileGit);
-            if (info.LastWriteTime.Day != DateTime.Now.Day)
+            if (info.LastWriteTime.Day != DateTime.Now.Day || argsCount >= 1 )
             {
                 Console.WriteLine("하루지나!");
                 Update();
@@ -121,11 +136,12 @@ namespace gitA
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City"};
 
             i = r.Next(0, capital.Length);
-            string sCapital = capital[i];
+            string sCapital = capital[i] + " ";
 
             //round
             round++;
             Console.WriteLine("Round {0} try--------------------------------", round);
+            Console.WriteLine("작업분ver{0}", WORK);
             //
 
             int randomResult = r.Next(1, RANDOM_MAX + 1);
@@ -143,12 +159,12 @@ namespace gitA
 
             RunCommand("git pull");
             RunCommand("git status");
-            RunCommand("git commit --all -m " +
-                "\"" + sLocation + sMingling + " from " + sCapital + " r" + Convert.ToString(round) + sTarget + "\"");
+            RunCommand("git commit --all -m " + 
+                "\"" + sLocation + sMingling + " from " + sCapital + Convert.ToString(round) + sTarget + "\"");
 
             RunCommand("git push");
             
-            Console.Write("randomStop={0}/{1}", randomStop, randomStopMax);            
+            Console.Write("randomStop={0}/{1} ", randomStop, randomStopMax);            
 
             if (round != 1 && randomStop == 1)
             {
