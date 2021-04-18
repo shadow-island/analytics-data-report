@@ -50,7 +50,7 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
-        static readonly int     WORK          = 377;
+        static readonly int     WORK          = 378;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
         static          int     tick          = 19;     //초에 한번씩 찍기
@@ -148,8 +148,7 @@ namespace gitA
 
             RunCommand("git push");
             
-            Console.WriteLine("randomStop={0}/{1}", randomStop, randomStopMax);
-            
+            Console.Write("randomStop={0}/{1}", randomStop, randomStopMax);            
 
             if (round != 1 && randomStop == 1)
             {
