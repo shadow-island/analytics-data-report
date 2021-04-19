@@ -20,12 +20,11 @@ Todo:
 		    매번: 
             	- small new -> command(squashed등), 
 		        - 수도추가: (새것 들어온후?)
-		    * "", from, in, by  => (1전체소문자,2전체대문자3첫자대문자) 		
+			* "", from, in, by  => (1전체소문자,2전체대문자3첫자대문자) 		
             * 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
-		    * 안중요:=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 
-		    *. -> 제자리 출력? -> 한번더 멈춘현상발생시)		
-            * exe check필요할듯 -exe빠지는경우 있음 update표시?            
-            *. 회사 round1일때는 굳이 종료하지말자,  <- file지울때?, 
+            * *. 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
+		    * 안중요:=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
+            * exe check필요할듯 -exe빠지는경우 있음 update표시?    
         
         1-2 1)release note 2)코드 정리
 		1-3 git 정리 + //하기전에 숫자바꾸고 저장함? 1/3할차례?            
@@ -44,7 +43,8 @@ Todo:
 		미린 지리-> 엑셀 -> javascript?
     
 Release note    
-    2021.4      강제시작 옵션만들기 eu, 0이라 commit안되는경우있었다, 시간에서0빼기
+    2021.4.19   시간에서0빼기, Force Mode: 한줄로 처리 for office
+    2021.4      강제시작 옵션만들기 eu, 0이라 commit안되는경우있었다, 
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
     2020.5.12   C#화함
     2020.2.12   python버전 시작
@@ -55,7 +55,7 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
-        static readonly int     WORK          = 390;
+        static readonly int     WORK          = 392;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
         static          int     tick          = 20;     //초에 한번씩 찍기
@@ -70,12 +70,7 @@ namespace gitA
 
         static void Main(string[] args)
         {
-            int argsCount = args.Length;          
-            if (argsCount >= 1)
-            {
-                string inputFile = args[0];
-                Console.WriteLine("Force Mode: {0}", inputFile);
-            }                
+                        
 
             if (debuggingMode)
             {
@@ -84,13 +79,17 @@ namespace gitA
                 RANDOM_MAX = 1;// for test        
             } //debugging mode    
 
-            
-            var info = new FileInfo(fileGit);
-            if (info.LastWriteTime.Day != DateTime.Now.Day || argsCount >= 1 )
+
+            //var info = new FileInfo(fileGit);
+            //if (info.LastWriteTime.Day != DateTime.Now.Day 
+            // Console.WriteLine("하루지나!"); force모드 생겨 딱히 필요없을듯
+            int argsCount = args.Length;
+            if (argsCount >= 1)
             {
-                Console.WriteLine("하루지나!");
+                string inputFile = args[0];
+                Console.WriteLine("Force Mode: {0}", inputFile);
                 Update();
-            }
+            }            
             RunGit();
             
             Console.WriteLine("Press Enter to exit");
