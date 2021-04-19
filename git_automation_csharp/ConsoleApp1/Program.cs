@@ -11,17 +11,20 @@ using System.Timers;
 #기능 #UI
 Todo:
     0. 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-		* 근무시간또는 매일 1회->1/7
+		* 근무시간또는 매일 1회->1/8
 		* 멈췄을때 1/5	
 	0. com고치기	
     1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
 		1-0 1/3->암것도안함 (이것도테스트필요)   
         1-1기능향상:                  
-		    매번: 
-            	- small new -> command(squashed등), 
+		    매번:
 		        - 수도추가: (새것 들어온후?)
-			* "", from, in, by  => (1전체소문자,2전체대문자3첫자대문자) 		
-            * 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+                - "" new -> command(squashed등),
+			* Cong,   => (1전체소문자,2전체대문자3첫자대문자) 		
+			* 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+			
+			후순위:
+			* log에 분단위까지 적고 -> commit에는 시간으로 해서 2.20(이렇게 간락하게~, 누굴위해서?일단 후순위)            
             * *. 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
 		    * 안중요:=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
             * exe check필요할듯 -exe빠지는경우 있음 update표시?    
@@ -55,11 +58,11 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
-        static readonly int     WORK          = 392;
+        static readonly int     WORK          = 393;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
         static          int     tick          = 20;     //초에 한번씩 찍기
-        static          int     RANDOM_MAX    = 6 * 60; //일일 commit개수 줄여보기 -> 1시간단위
+        static          int     RANDOM_MAX    = 6 * 60 + 1; //일일 commit개수 줄여보기 -> 1시간단위
         static readonly bool    debuggingMode = false;  //real mode true false    
 
         // global
@@ -69,8 +72,7 @@ namespace gitA
         static System.Threading.Timer myTimer = null;          
 
         static void Main(string[] args)
-        {
-                        
+        {                        
 
             if (debuggingMode)
             {
@@ -116,14 +118,18 @@ namespace gitA
             Random r = new Random();
             int i;
 
-            string[] mingling = new string[] { "", "commit", "command", "update", "new" };
+            string[] mingling = new string[] {"", "commit", "command", "update", "new" };
             i = r.Next(0, mingling.Length);
             string sMingling = mingling[i];
             if (r.Next(0, 2) == 0)
             {
                 sMingling = sMingling.ToUpper();
             }
-                
+
+            string[] cong = new string[] { "", "from", "in", "by", "of" };
+            i = r.Next(0, cong.Length);
+            string sCong = " " + cong[i] + " ";            
+
             // https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)
             string[] capital = new string[] 
                 {"Gushav3","Eugene",
@@ -156,8 +162,8 @@ namespace gitA
 
             RunCommand("git pull");
             RunCommand("git status");
-            RunCommand("git commit --all -m " + 
-                "\"" + sLocation + sMingling + " from " + sCapital + Convert.ToString(round) + sTarget + "\"");
+            RunCommand("git commit --all -m " 
+                + "\"" + sLocation + sMingling + sCong + sCapital + Convert.ToString(round) + sTarget + "\"");
 
             RunCommand("git push");
             
