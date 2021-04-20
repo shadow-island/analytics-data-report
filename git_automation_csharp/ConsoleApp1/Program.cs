@@ -10,27 +10,28 @@ using System.Timers;
     2nd round는 무조건 커밋 
 #기능 #UI
 Todo:
+    0. com고치기	
     0. 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-		* 근무시간또는 매일 1회->1/8
+		* 근무시간또는 매일 1회->1/9
 		* 멈췄을때 1/5	
-	0. com고치기	
     1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
-		1-0 1/3->암것도안함 (이것도테스트필요)   
-        1-1기능향상:                  
+		1-1 1/4->암것도안함 (이것도테스트필요)   
+        1-2기능향상:                  
 		    매번:
 		        - 수도추가: (새것 들어온후?)
-                - "" new -> command(squashed등),
+                - "" 일때 -> command( 등),
 			* Cong,   => (1전체소문자,2전체대문자3첫자대문자) 		
 			* 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
 			
 			후순위:
 			* log에 분단위까지 적고 -> commit에는 시간으로 해서 2.20(이렇게 간락하게~, 누굴위해서?일단 후순위)            
-            * *. 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
+            * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
 		    * 안중요:=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
             * exe check필요할듯 -exe빠지는경우 있음 update표시?    
+        1-3 1)release note 2)코드 정리
+            이후 build할것 
         
-        1-2 1)release note 2)코드 정리
-		1-3 git 정리 + //하기전에 숫자바꾸고 저장함? 1/3할차례?            
+		1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/3할차례?            
             git rebase HEAD~16 -i 
             git push --force(이것도됨)
             git push origin master --force(필요)
@@ -58,12 +59,12 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
-        static readonly int     WORK          = 393;
+        static readonly int     WORK          = 415;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
-        static          int     tick          = 20;     //초에 한번씩 찍기
+        static          int     tick          = 21;         //초에 한번씩 찍기
         static          int     RANDOM_MAX    = 6 * 60 + 1; //일일 commit개수 줄여보기 -> 1시간단위
-        static readonly bool    debuggingMode = false;  //real mode true false    
+        static readonly bool    debuggingMode = false;      //real mode true false    
 
         // global
         static int round = 0;
@@ -108,36 +109,35 @@ namespace gitA
         {            
             // Junbi
             string sLocation = "";
-            FileInfo fi = new FileInfo("gc_home.cfg");
             //FileInfo.Exists로 파일 존재유무 확인 "
+            FileInfo fi = new FileInfo("gc_home.cfg");            
             if (fi.Exists)
-            {
                 sLocation = "[home] ";
-            }
 
-            Random r = new Random();
-            int i;
+            Random random = new Random();
+            int i; //for random
 
-            string[] mingling = new string[] {"", "commit", "command", "update", "new" };
-            i = r.Next(0, mingling.Length);
+            string[] mingling = new string[] {"", "command","commit","squash", "update", "new" };
+            i = random.Next(0, mingling.Length);
             string sMingling = mingling[i];
-            if (r.Next(0, 2) == 0)
+            int c = random.Next(0, 2);
+            if (c == 0)
             {
                 sMingling = sMingling.ToUpper();
             }
 
             string[] cong = new string[] { "", "from", "in", "by", "of" };
-            i = r.Next(0, cong.Length);
+            i = random.Next(0, cong.Length);
             string sCong = " " + cong[i] + " ";            
 
             // https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)
             string[] capital = new string[] 
-                {"Gushav3","Eugene",
+                {"GushavApp","Eugene",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro"};
 
-            i = r.Next(0, capital.Length);
+            i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
 
             //round
@@ -149,12 +149,12 @@ namespace gitA
             // random Target
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm:ss");            
-            int randomResult = r.Next(1, RANDOM_MAX + 1);            
+            int randomResult = random.Next(1, RANDOM_MAX + 1);            
             DateTime target = now.AddMinutes(randomResult);
             string sTarget = target.ToString(".H.m");
 
             //sGoStop
-            int randomStop = r.Next(1, randomStopMax + 1);
+            int randomStop = random.Next(1, randomStopMax + 1);
             if (round != 1 && randomStop == 1)
             {
                 sTarget = "RandomStop!!!!";
@@ -230,7 +230,7 @@ namespace gitA
             // Text 파일 생성 및 text 를 입력 합니다.
             textNum = Convert.ToString(iNum);
             System.IO.File.WriteAllText(fileGit, textNum, Encoding.Default);
-            Console.WriteLine("\nUpdating git file value================={0}", textNum);
+            Console.WriteLine("Updating git file value================={0}", textNum);
         }
 
         static void RunCommand(string command)
