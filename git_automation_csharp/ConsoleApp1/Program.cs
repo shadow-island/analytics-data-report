@@ -167,8 +167,9 @@ namespace gitA
                 + "\"" + sLocation + sMingling + sCong + sCapital + Convert.ToString(round) + sTarget + "\"");
 
             RunCommand("git push");
-            
-            Console.Write("randomStop={0}/{1} ", randomStop, randomStopMax);            
+
+            Console.Write(sMingling);
+            Console.Write(" randomStop={0}/{1} ", randomStop, randomStopMax);            
 
             if (round != 1 && randomStop == 1)
             {
