@@ -12,19 +12,20 @@ using System.Timers;
 Todo:
     0. com고치기	
     0. 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-		* 근무시간또는 매일 1회->1/9
+		* 근무시간 또는 매일 1회->1/11
 		* 멈췄을때 1/5	
     1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
-		1-1 1/4->암것도안함 (이것도테스트필요)   
+		1-1 1/5->암것도안함 (이것도테스트필요)   
         1-2기능향상:                  
 		    매번:
 		        - 수도추가: (새것 들어온후?)
-                - "" 일때 -> command( 등),
-			* Cong,   => (1전체소문자,2전체대문자3첫자대문자) 		
+                - "" 일때 -> command( 등)
+			=> 파일에는 실제 시작 기입 시간+target  log에 분단위까지 적고
+            -> commit에는 시간으로 해서 2.20(1시간뒤에확인하면되니 괜찮을듯?)
+			=> 앞round숫자 스페인어로?					
 			* 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
 			
-			후순위:
-			* log에 분단위까지 적고 -> commit에는 시간으로 해서 2.20(이렇게 간락하게~, 누굴위해서?일단 후순위)            
+			후순위:			
             * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
 		    * 안중요:=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
             * exe check필요할듯 -exe빠지는경우 있음 update표시?    
@@ -47,7 +48,7 @@ Todo:
 		미린 지리-> 엑셀 -> javascript?
     
 Release note    
-    2021.4.19   시간에서0빼기, Force Mode: 한줄로 처리 for office
+    2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리 , from(조사)추가, 1전체소문자로.2첫자대문자(default)
     2021.4      강제시작 옵션만들기 eu, 0이라 commit안되는경우있었다, 
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
     2020.5.12   C#화함
@@ -59,7 +60,7 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit = "eukm.log";
-        static readonly int     WORK          = 415;
+        static readonly int     WORK          = 418;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
         static          int     tick          = 21;         //초에 한번씩 찍기
@@ -117,13 +118,13 @@ namespace gitA
             Random random = new Random();
             int i; //for random
 
-            string[] mingling = new string[] {"", "command","commit","squash", "update", "new" };
+            string[] mingling = new string[] {"", "Command","Commit","Squash", "Update", "New" };
             i = random.Next(0, mingling.Length);
             string sMingling = mingling[i];
             int c = random.Next(0, 2);
             if (c == 0)
             {
-                sMingling = sMingling.ToUpper();
+                sMingling = sMingling.ToLower();
             }
 
             string[] cong = new string[] { "", "from", "in", "by", "of" };
@@ -135,7 +136,7 @@ namespace gitA
                 {"GushavApp","Eugene",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
-                "Ivory Coast","Yamoussoukro"};
+                "Ivory Coast","Yamoussoukro","Angola","Luanda"};
 
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
