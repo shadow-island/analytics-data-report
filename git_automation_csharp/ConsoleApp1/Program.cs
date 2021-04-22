@@ -9,7 +9,7 @@ using System.Timers;
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    2021.4.21   국가수 표시 
+    2021.4.21   국가수 표시,스페인어숫자
     2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리 , from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
     2021.4      강제시작 옵션만들기 eu, 0이라 commit안되는경우있었다, 
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
@@ -25,11 +25,12 @@ Release note
 Todo:
     0. com고치기	
     0. 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-		* 근무시간 또는 매일 1회->1/12
+		* 근무시간 또는 매일 1회->1/14
 		* 멈췄을때 1/5	
     1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
 		1-1 1/5->암것도안함 (이것도테스트필요)   
         1-2기능향상:                  
+            -home mode push없는거부터
 		    매번:
                 - 수도추가: (새것 들어온후?)
                 - 앞round숫자 스페인어로?
@@ -44,7 +45,8 @@ Todo:
                 * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
 		        * 안중요:=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
                 * exe check필요할듯 -exe빠지는경우 있음 update표시?    
-        1-3 1)release note 2)코드 정리
+        1-3 -release note 필요할때 무조건
+            -코드 정리
             이후 build할것 
         
 		1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례         
@@ -54,8 +56,7 @@ Todo:
         
             remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
             또는 gitk에서 hard로
-            rebase하는 명령어찾기
-		
+            rebase하는 명령어찾기		
             https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
 		
     2 이건 studio열지않고, 다른 application?(
@@ -70,7 +71,7 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly int     WORK          = 466;
+        static readonly int     WORK          = 484 / 60;   //hour
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
         static          int     tick          = 21;         //초에 한번씩 찍기
@@ -103,7 +104,7 @@ namespace gitA
                 Console.WriteLine("Force Mode: {0}", inputFile);
                 Update();
             }            
-            RunGit(args);
+            RunGit();
             
             Console.WriteLine("Press Enter to exit");
 
@@ -114,18 +115,17 @@ namespace gitA
 
             Console.ReadLine();
         }
-
-        static void RunGit(string[] args)
+        static void RunGit()
         {
             // Junbi
+            Random random = new Random();
+            int i; //for random
+
             //* home mode확인 
             string sLocation = "";            
             FileInfo fi = new FileInfo("gc_home.cfg");            
             if (fi.Exists)
                 sLocation = "[home] ";
-
-            Random random = new Random();
-            int i; //for random
 
             string[] mingling = new string[] {"", "GushavApp", "Eugene", "Command","Commit", "New", "Squash", "Update"};
             i = random.Next(0, mingling.Length);
@@ -143,7 +143,7 @@ namespace gitA
             string[] capital = new string[] {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
-                "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma"};
+                "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb"};
 
             Console.WriteLine("작업분ver{0}", WORK);
             Console.WriteLine("국가수: " + Convert.ToString(capital.Length/2));
@@ -155,15 +155,15 @@ namespace gitA
             round++;
             string sRound;
             if      (round == 1)
-                sRound = "Uno";
+                sRound = "Uno ";
             else if (round == 2)
-                sRound = "Dos";
+                sRound = "Dos ";
             else if (round == 3)
-                sRound = "Tres";
+                sRound = "Tres ";
             else if (round == 4)
-                sRound = "Cuatro";            
+                sRound = "Cuatro ";            
             else
-                sRound = Convert.ToString(round);
+                sRound = Convert.ToString(round) + ".";
 
             Console.WriteLine("Round {0} try--------------------------------", round);            
             //
@@ -173,7 +173,7 @@ namespace gitA
             string sTime = now.ToString("HH:mm:ss");            
             int randomResult = random.Next(1, RANDOM_MAX + 1);            
             DateTime target = now.AddMinutes(randomResult);
-            string sTarget = target.ToString(".H.m");
+            string sTarget = target.ToString("H.m");
 
             //sGoStop
             int randomStop = random.Next(1, randomStopMax + 1);
@@ -187,8 +187,9 @@ namespace gitA
             RunCommand("git commit --all -m " 
                 + "\"" + sLocation + sMingling + sCong + sCapital + sRound + sTarget + "\"");
 
-            //home mode? 
-            RunCommand("git push");
+            //home mode아닐때만
+            if (sLocation == "")
+                RunCommand("git push");
 
             Console.Write(sMingling);
             Console.Write(" randomStop={0}/{1} ", randomStop, randomStopMax);            
@@ -228,7 +229,7 @@ namespace gitA
                 myTimer.Dispose();
             timerTick.Stop();
             Update();
-            RunGit(null);
+            RunGit();
             timerTick.Start();
         }
 
