@@ -187,7 +187,8 @@ namespace gitA
             RunCommand("git commit --all -m " 
                 + "\"" + sLocation + sMingling + sCong + sCapital + sRound + sTarget + "\"");
 
-            //eekk home mode? RunCommand("git push");
+            //home mode? 
+            RunCommand("git push");
 
             Console.Write(sMingling);
             Console.Write(" randomStop={0}/{1} ", randomStop, randomStopMax);            
