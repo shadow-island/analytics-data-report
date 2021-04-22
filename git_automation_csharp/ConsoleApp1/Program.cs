@@ -16,8 +16,8 @@ Release note
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 
-	
-    최초는 commit없음: 내가 커밋하고싶어서 일부로 고치지 않는이상 안일어나야한다(test시용이)
+* 내부설명  
+	최초는 commit없음: 내가 커밋하고싶어서 일부로 고치지 않는이상 안일어나야한다(test시용이)
         (사용자에게 선택권을 줘야함)
         commit 강제로하려면 log숫자 초기화~
     2nd round는 무조건 커밋 
@@ -31,12 +31,12 @@ Todo:
 		1-1 1/5->암것도안함 (이것도테스트필요)   
         1-2기능향상:                  
 		    매번:
-                - "" 일때 -> command( 등)
                 - 수도추가: (새것 들어온후?)
-				- 국가수 표시 잘안되네!
                 - 앞round숫자 스페인어로?
+                - "" 일때 -> command( 등),국가도 소문자?               
             ---------------            
-			* 파일에는 실제 시작 기입 시간+ target  log에 분단위까지 적고
+			* 하는중! 파일에는 target부터 log에 분단위까지 적고
+            -> 실제 시작 기입 시간+ target  
             -> commit에는 시간으로 해서 2.20(1시간뒤에확인하면되니 괜찮을듯?)			
 			* 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
 			
@@ -47,7 +47,7 @@ Todo:
         1-3 1)release note 2)코드 정리
             이후 build할것 
         
-		1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/3할차례         
+		1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례         
             git rebase HEAD~16 -i 
             git push --force(이것도됨)
             git push origin master --force(필요)
@@ -70,12 +70,12 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly int     WORK          = 447;
+        static readonly int     WORK          = 466;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
-        static          int     tick          = 21;     //초에 한번씩 찍기
-        static          int     RANDOM_MAX    = 7 * 60; //일일 commit개수 줄여보기 -> 1시간단위
-        static readonly bool    debuggingMode = false;  //real mode true false    
+        static          int     tick          = 21;         //초에 한번씩 찍기
+        static          int     RANDOM_MAX    = 7 * 60 + 2; //수요일에 변경됨, 일일 commit개수 줄여보기 -> 1시간단위
+        static readonly bool    debuggingMode = false;       // true false if real mode    
 
         // global
         static int round = 0;
@@ -85,10 +85,9 @@ namespace gitA
 
         static void Main(string[] args)
         {                        
-
             if (debuggingMode)
             {
-                randomStopMax = 1;
+                randomStopMax = 3;
                 tick = 1; //초에 한번씩 찍기
                 RANDOM_MAX = 1;// for test        
             } //debugging mode    
@@ -104,7 +103,7 @@ namespace gitA
                 Console.WriteLine("Force Mode: {0}", inputFile);
                 Update();
             }            
-            RunGit();
+            RunGit(args);
             
             Console.WriteLine("Press Enter to exit");
 
@@ -116,11 +115,11 @@ namespace gitA
             Console.ReadLine();
         }
 
-        static void RunGit()
-        {            
+        static void RunGit(string[] args)
+        {
             // Junbi
-            string sLocation = "";
-            //FileInfo.Exists로 파일 존재유무 확인 "
+            //* home mode확인 
+            string sLocation = "";            
             FileInfo fi = new FileInfo("gc_home.cfg");            
             if (fi.Exists)
                 sLocation = "[home] ";
@@ -137,9 +136,9 @@ namespace gitA
                 sMingling = sMingling.ToLower();
             }
 
-            string[] cong = new string[] { "", "from", "in", "by", ".","-"};
+            string[] cong = new string[] { "", " from", " in", " by", "."," -"};
             i = random.Next(0, cong.Length);
-            string sCong = " " + cong[i] + " ";
+            string sCong = cong[i] + " ";
 
             string[] capital = new string[] {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
@@ -147,7 +146,7 @@ namespace gitA
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma"};
 
             Console.WriteLine("작업분ver{0}", WORK);
-            Console.WriteLine("국가수: " + Convert.ToString(capital.Length));
+            Console.WriteLine("국가수: " + Convert.ToString(capital.Length/2));
 
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
@@ -155,12 +154,14 @@ namespace gitA
             //round
             round++;
             string sRound;
-            if (round == 1)
+            if      (round == 1)
                 sRound = "Uno";
             else if (round == 2)
                 sRound = "Dos";
             else if (round == 3)
-                sRound = "Tres";            
+                sRound = "Tres";
+            else if (round == 4)
+                sRound = "Cuatro";            
             else
                 sRound = Convert.ToString(round);
 
@@ -186,7 +187,7 @@ namespace gitA
             RunCommand("git commit --all -m " 
                 + "\"" + sLocation + sMingling + sCong + sCapital + sRound + sTarget + "\"");
 
-            RunCommand("git push");
+            //eekk home mode? RunCommand("git push");
 
             Console.Write(sMingling);
             Console.Write(" randomStop={0}/{1} ", randomStop, randomStopMax);            
@@ -226,13 +227,12 @@ namespace gitA
                 myTimer.Dispose();
             timerTick.Stop();
             Update();
-            RunGit();
+            RunGit(null);
             timerTick.Start();
         }
 
         static void Update()
-        {            
-
+        {   
             int iNum = 0;
             string textNum;
             FileInfo fi = new FileInfo(fileGit);
