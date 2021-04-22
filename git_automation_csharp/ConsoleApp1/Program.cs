@@ -6,7 +6,7 @@ using System.Timers;
 /* 본 App 동작설명
 #기능
 	1 자동 commit 및 random 종료시 email 알림
-	2  암기기능, (수도 스페인어 숫자 )
+	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
     2021.4.21   국가수 표시 
@@ -25,7 +25,7 @@ Release note
 Todo:
     0. com고치기	
     0. 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-		* 근무시간 또는 매일 1회->1/11
+		* 근무시간 또는 매일 1회->1/12
 		* 멈췄을때 1/5	
     1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
 		1-1 1/5->암것도안함 (이것도테스트필요)   
@@ -33,11 +33,11 @@ Todo:
 		    매번:
                 - "" 일때 -> command( 등)
                 - 수도추가: (새것 들어온후?)
-            ---------------
-            => 앞round숫자 스페인어로?
+				- 국가수 표시 잘안되네!
+                - 앞round숫자 스페인어로?
+            ---------------            
 			* 파일에는 실제 시작 기입 시간+ target  log에 분단위까지 적고
-            -> commit에는 시간으로 해서 2.20(1시간뒤에확인하면되니 괜찮을듯?)
-			
+            -> commit에는 시간으로 해서 2.20(1시간뒤에확인하면되니 괜찮을듯?)			
 			* 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
 			
 			후순위:			
@@ -70,7 +70,7 @@ namespace gitA
     {
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly int     WORK          = 431;
+        static readonly int     WORK          = 447;
         static          int     randomStopMax = 13;
         static readonly int     roundMax      = 21;
         static          int     tick          = 21;     //초에 한번씩 찍기
@@ -128,7 +128,7 @@ namespace gitA
             Random random = new Random();
             int i; //for random
 
-            string[] mingling = new string[] {"", "Command","Commit", "New", "Squash", "Update"};
+            string[] mingling = new string[] {"", "GushavApp", "Eugene", "Command","Commit", "New", "Squash", "Update"};
             i = random.Next(0, mingling.Length);
             string sMingling = mingling[i];
             int c = random.Next(0, 2);
@@ -137,17 +137,17 @@ namespace gitA
                 sMingling = sMingling.ToLower();
             }
 
-            string[] cong = new string[] { "", "from", "in", "by", "of","-"};
+            string[] cong = new string[] { "", "from", "in", "by", ".","-"};
             i = random.Next(0, cong.Length);
             string sCong = " " + cong[i] + " ";
 
-            // "GushavApp","Eugene"
             string[] capital = new string[] {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
-                "Ivory Coast","Yamoussoukro","Angola","Luanda"};
+                "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma"};
 
-            Console.Write(capital.Length);
+            Console.WriteLine("작업분ver{0}", WORK);
+            Console.WriteLine("국가수: " + Convert.ToString(capital.Length));
 
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
@@ -157,11 +157,14 @@ namespace gitA
             string sRound;
             if (round == 1)
                 sRound = "Uno";
+            else if (round == 2)
+                sRound = "Dos";
+            else if (round == 3)
+                sRound = "Tres";            
             else
                 sRound = Convert.ToString(round);
 
-            Console.WriteLine("Round {0} try--------------------------------", round);
-            Console.WriteLine("작업분ver{0}", WORK);
+            Console.WriteLine("Round {0} try--------------------------------", round);            
             //
 
             // random Target
@@ -169,7 +172,7 @@ namespace gitA
             string sTime = now.ToString("HH:mm:ss");            
             int randomResult = random.Next(1, RANDOM_MAX + 1);            
             DateTime target = now.AddMinutes(randomResult);
-            string sTarget = target.ToString(" H.m");
+            string sTarget = target.ToString(".H.m");
 
             //sGoStop
             int randomStop = random.Next(1, randomStopMax + 1);
