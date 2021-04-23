@@ -10,7 +10,7 @@ using System.Timers;
 	
 Release note    
     2021.4.21   1국가수표시,스페인어숫자, 2 home mode push없음
-    2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리 , from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
+    2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리, from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
     2021.4      강제시작 옵션만들기 eu, 0이라 commit안되는경우있었다, 
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
     2020.5.12   C#화함
@@ -21,60 +21,64 @@ Release note
         (사용자에게 선택권을 줘야함)
         commit 강제로하려면 log숫자 초기화~
     2nd round는 무조건 커밋 
- #UI
+    */
+/*
 Todo:
-    0. com고치기	
-    0. 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-		* 근무시간 또는 매일 1회->1/14
-		* 멈췄을때 1/6	
-    1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
-		1-1 1/5->암것도안함 (이것도테스트필요)   
-        1-2기능향상:                  
-		    매번:
-                - 수도추가: 새것 들어온후?
-                - 앞round숫자 스페인어로?
-                - "" 일때 -> command( 등),국가도 소문자?               
-            ---------------            
-			* 하는중!! 파일에는 target부터 log에 분단위까지 적고
-            -> 실제 시작 기입 시간+ target  
-            -> commit에는 시간으로 해서 2.20(1시간뒤에확인하면되니 괜찮을듯?)			
-			* 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
-			
-			후순위:			
-                * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
-		        * 안중요:=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
-                * exe check필요할듯 -exe빠지는경우 있음 update표시?    
-        1-3 -release note 필요할때 무조건
-            -코드 정리 이후 build할것 
-        
-		1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/4할차례         
-            git rebase HEAD~16 -i 
-            git push --force(이것도됨)
-            git push origin master --force(필요)
-        
-            remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-            또는 gitk에서 hard로
-            rebase하는 명령어찾기		
-            https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
-		
-    2 이건 studio열지않고, 다른 application?(
-		quiz 맞은거 random숫자조정으로 잘안나오게!->정치or투자)
-		미린 엑셀 -> javascript?
-    
+0. com고치기	
+0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
+    * 근무시간 또는 매일 1회->1/16
+    * 멈췄을때 1/6	
+1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
+    1-1 1/5->암것도안함 (이것도테스트필요)   
+    1-2기능향상:                  
+        매번:
+            - 수도추가: 새것 들어온후?
+            - 앞round숫자 스페인어로? 
+            - 소문자화?
+            - "" 일때 -> command or cong 추가?
+        ---------------            
+        -> commit에는 시간으로 해서 2.20(1시간뒤에확인하면되니 괜찮을듯?-
+        - 하는중!! 파일에는 target부터 log에 분단위까지 적고
+        -> 실제 시작 기입 시간 + target
+        * 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+        후순위:			
+            * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
+            * 안중요=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
+            * exe check필요할듯 -exe빠지는경우 있음 update표시?    
+    1-3 -release note 필요할때 무조건
+        -코드정리 => 이후 build할것 
 
+    1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/5할차례         
+        git rebase HEAD~16 -i 
+        git push --force(이것도됨)
+        git push origin master --force(필요)
+
+        remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
+        또는 gitk에서 hard로
+        rebase하는 명령어찾기		
+        https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
+
+2 이건 studio열지않고, 다른 application?(
+    quiz 맞은거 random숫자조정으로 잘안나오게!->정치or투자)
+    미린 엑셀 -> javascript?
 */
+
 namespace gitA
 {
     class Program
     {
+        static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly int     WORK          = 504 / 60 / 7;   //days
+        static readonly float    WORK          = 535 / 60 / 7;   //days
         static          int     randomStopMax = 14;
         static readonly int     roundMax      = 21;
         static          int     tick          = 21;             //초에 한번씩 찍기
-        static          int     RANDOM_MAX    = 7 * 60 + 5;     //3분씩 증가 //금요일에 변경됨, 일일 commit개수 줄여보기 ->
-        static readonly bool    debuggingMode = false;          // true false if real mode    
+
+        //금요일에 변경됨, 일일 commit개수 줄여보기 -> 실패시 3분++씩 증가, 성공 및 한화면안차면 1++
+        static int     RANDOM_MAX    = 7 * 60 + 7;        
+
+        
 
         // global
         static int round = 0;
@@ -89,8 +93,7 @@ namespace gitA
                 randomStopMax = 3;
                 tick = 1; //초에 한번씩 찍기
                 RANDOM_MAX = 1;// for test        
-            } //debugging mode    
-
+            } //debugging mode
 
             //var info = new FileInfo(fileGit);
             //if (info.LastWriteTime.Day != DateTime.Now.Day 
@@ -117,12 +120,9 @@ namespace gitA
         }
         static void RunGit()
         {
-            //우선 매번~
-            Update();
-
             // Junbi
             Random random = new Random();
-            int i; //for random
+            int i; //for random index
 
             //1 home mode확인 
             string sLocation = "";            
@@ -131,12 +131,13 @@ namespace gitA
                 sLocation = "[home] ";
 
             //2 Command 만들기
-            string[] mingling = new string[] {"", "GushavApp", "Eugene", "Command","Commit", "New", "Squash", "Update"};
+            string[] mingling = new string[] {"Eugene","", "GushavApp",  "Command","Commit", "Commits","New", "Squash", "Update"};
             i = random.Next(0, mingling.Length);
             string sMingling = mingling[i];
-            int c = random.Next(0, 2);
-            if (c == 0)
+            //소문자 함수화?
+            if (0 == random.Next(0, 2))
                 sMingling = sMingling.ToLower();
+            //~
 
             string[] cong = new string[] { "", " from", " in", " by", "."," -"};
             i = random.Next(0, cong.Length);
@@ -146,10 +147,9 @@ namespace gitA
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
-                "Lithuania","Vilnius"};
+                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San José"};
 
-            Console.WriteLine("작업분ver{0}", WORK);
-            Console.WriteLine("국가수: " + Convert.ToString(capital.Length/2));
+            Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
 
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
@@ -164,9 +164,16 @@ namespace gitA
             else if (round == 3)
                 sRound = "Tres ";
             else if (round == 4)
-                sRound = "Cuatro ";            
+                sRound = "Cuatro ";
+            else if (round == 5)
+                sRound = "Cinco ";
             else
                 sRound = Convert.ToString(round) + ".";
+
+            //소문자 함수화?
+            if (0 == random.Next(0, 2))
+                sRound = sRound.ToLower();
+            //~
 
             Console.WriteLine("Round {0} try--------------------------------", round);            
             //
@@ -176,7 +183,12 @@ namespace gitA
             string sTime = now.ToString("HH:mm:ss");            
             int randomResult = random.Next(1, RANDOM_MAX + 1);            
             DateTime target = now.AddMinutes(randomResult);
-            string sTarget = target.ToString("H.m");
+            string sTarget = target.Hour.ToString();
+            string sUpdate = target.Minute.ToString();
+
+            //우선 매번~
+            Update(sUpdate);
+            //~
 
             //sGoStop
             int randomStop = random.Next(1, randomStopMax + 1);
@@ -236,12 +248,13 @@ namespace gitA
             timerTick.Start();
         }
 
-        static void Update()
+        static void Update(string sUpdate)
         {   
             int iNum = 0;
             string textNum;
             FileInfo fi = new FileInfo(fileGit);
             //FileInfo.Exists로 파일 존재유무 확인 "
+
             if (fi.Exists)
             {   //"파일존재"
                 // text file 의 전체 text 를 읽어 옵니다.
@@ -256,8 +269,9 @@ namespace gitA
             
             // Text 파일 생성 및 text 를 입력 합니다.
             textNum = Convert.ToString(iNum);
-            System.IO.File.WriteAllText(fileGit, textNum, Encoding.Default);
-            Console.WriteLine("Updating git file value================={0}", textNum);
+
+            System.IO.File.WriteAllText(fileGit, sUpdate, Encoding.Default);
+            Console.WriteLine("Updating git file value================={0}", sUpdate);
         }
 
         static void RunCommand(string command)
