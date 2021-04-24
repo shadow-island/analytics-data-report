@@ -131,7 +131,7 @@ namespace gitA
                 sLocation = "[home] ";
 
             //2 Command 만들기
-            string[] mingling = new string[] {"Eugene","", "GushavApp",  "Command","Commit", "Commits","New", "Squash", "Update"};
+            string[] mingling = new string[] {"Eugene","", "GushavApp","Command","Commit", "Commits","New","Squash", "Update"};
             i = random.Next(0, mingling.Length);
             string sMingling = mingling[i];
             //소문자 함수화?
