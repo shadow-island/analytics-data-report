@@ -9,7 +9,7 @@ using System.Timers;
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    2021.4.21   1국가수표시,스페인어숫자, 2 home mode push없음
+    2021.4.21   1국가수표시,스페인어숫자, 2 home mode push없음, 소문자화
     2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리, from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
     2021.4      강제시작 옵션만들기 eu, 0이라 commit안되는경우있었다, 
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
@@ -26,21 +26,20 @@ Release note
 Todo:
 0. com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-    * 근무시간 또는 매일 1회->1/16
+    * 근무시간 또는 매일 1회->1/17
     * 멈췄을때 1/6	
 1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/5->암것도안함 (이것도테스트필요)   
     1-2기능향상:                  
-        매번:
-            - 수도추가: 새것 들어온후?
-            - 앞round숫자 스페인어로? 
-            - 소문자화?
-            - "" 일때 -> command or cong 추가?
-        ---------------            
+		todo:command, cong 1/2확률로 빈칸출력(수도 집중용)
+        매번:    - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
+                - 0 round추가 -> new스페인어? cero추가?
+                - eugene 일때 -> command or cong 추가?
+        ---------------         
+		*하루7commit이하나, 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?		
         -> commit에는 시간으로 해서 2.20(1시간뒤에확인하면되니 괜찮을듯?-
         - 하는중!! 파일에는 target부터 log에 분단위까지 적고
-        -> 실제 시작 기입 시간 + target
-        * 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+        -> 실제 시작 기입 시간 + target        
         후순위:			
             * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
             * 안중요=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
@@ -48,10 +47,10 @@ Todo:
     1-3 -release note 필요할때 무조건
         -코드정리 => 이후 build할것 
 
-    1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/5할차례         
+    1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/6할차례
         git rebase HEAD~16 -i 
         git push --force(이것도됨)
-        git push origin master --force(필요)
+        git push origin master --force(필요?)
 
         remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
         또는 gitk에서 hard로
@@ -70,7 +69,7 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 535 / 60 / 7;   //days
+        static readonly float    WORK          = 563 / 60 / 7;   //days
         static          int     randomStopMax = 14;
         static readonly int     roundMax      = 21;
         static          int     tick          = 21;             //초에 한번씩 찍기
@@ -131,23 +130,31 @@ namespace gitA
                 sLocation = "[home] ";
 
             //2 Command 만들기
-            string[] mingling = new string[] {"Eugene","", "GushavApp","Command","Commit", "Commits","New","Squash", "Update"};
-            i = random.Next(0, mingling.Length);
-            string sMingling = mingling[i];
-            //소문자 함수화?
-            if (0 == random.Next(0, 2))
-                sMingling = sMingling.ToLower();
-            //~
+            string sMingling = "";
+            i = random.Next(0, 2);
+            Console.WriteLine("sMingling {0}", i);
+            if (0 == i)
+            {
+                string[] mingling = new string[] { "Eugene", "GushavApp", "Command", "Commit", "Commits", "New", "Squash", "Update" };
+                i = random.Next(0, mingling.Length);
+                sMingling = mingling[i];
+                //소문자 함수화?
+                if (0 == random.Next(0, 2))
+                    sMingling = sMingling.ToLower();
+                //~
+            }
 
+            //3.조사 만들기 
             string[] cong = new string[] { "", " from", " in", " by", "."," -"};
             i = random.Next(0, cong.Length);
             string sCong = cong[i] + " ";
 
+            //4.국가 만들기
             string[] capital = new string[] {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
-                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San José"};
+                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San José","Slovenia","Ljubljana"};
 
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
 
@@ -175,7 +182,7 @@ namespace gitA
                 sRound = sRound.ToLower();
             //~
 
-            Console.WriteLine("Round {0} try--------------------------------", round);            
+            Console.WriteLine("Round {0} try--------------------------------", round);
             //
 
             // random Target
