@@ -9,9 +9,10 @@ using System.Timers;
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    2021.4.21   1국가수표시,스페인어숫자, 2 home mode push없음, 소문자화
+    4.24        commit에는 시간만, 파일에는 target 분단위까지 적음
+    2021.4.21   1국가수표시,스페인어숫자, 2 home mode push없음, 소문자화, command, cong 1/2확률로 빈칸출력(수도 집중용)
     2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리, from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
-    2021.4      강제시작 옵션만들기 eu, 0이라 commit안되는경우있었다, 
+    2021.4      강제시작 옵션만들기 eu: 0이라 commit안되는경우있었다, 
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
     2020.5.12   C#화함
     2020.2.12   python버전 시작
@@ -27,21 +28,20 @@ Todo:
 0. com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
     * 근무시간 또는 매일 1회->1/18
-    * 멈췄을때 1/6	
+    * 멈췄을때 1/7	
 1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/5->암것도안함 (이것도테스트필요)   
-    1-2기능향상:                  
-		todo:command, cong 1/2확률로 빈칸출력(수도 집중용)
+    1-2기능향상: 
+        - 0 round추가
         매번:    - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - randomMax도 1은 늘리고~
-                - 0 round추가 -> new스페인어? cero추가?
+                -> new스페인어? cero추가?
                 - eugene 일때 -> command or cong 추가?
         ---------------         
-		*하루7commit이하나, 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?		
-        -> commit에는 시간으로 해서 2.20(1시간뒤에확인하면되니 괜찮을듯?-
-        - 하는중!! 파일에는 target부터 log에 분단위까지 적고
-        -> 실제 시작 기입 시간 + target        
-        후순위:			
+        후순위
+		    *하루7commit이하나, 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+        필요여부 미지수:			
+            * 실제 시작 기입 시간도 필요? + target        
             * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
             * 안중요=> ini file, ini file 숫자증가만? file이용 = RANDOM_MAX 조정? 		    
             * exe check필요할듯 -exe빠지는경우 있음 update표시?    
@@ -71,13 +71,13 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 572 / 60 / 7;   //days
-        static          int     randomStopMax = 14;
+        static readonly float    WORK          = 582 / 60 / 7;   //days
+        static          int     randomStopMax = 15;
         static readonly int     roundMax      = 21;
         static          int     tick          = 21;             //초에 한번씩 찍기
 
-        //금요일에 변경됨, 일일 commit개수 줄여보기 -> 실패시 3분++씩 증가, 성공 및 한화면안차면 1++
-        static int     RANDOM_MAX    = 7 * 60 + 8;        
+        //금요일에 변경됨, 일일 commit개수 줄여보기 -> 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
+        static int     RANDOM_MAX    = 7 * 60 + 12;        
 
         
 
@@ -144,14 +144,20 @@ namespace gitA
                 if (0 == random.Next(0, 2))
                     sMingling = sMingling.ToLower();
                 //~
-                //postfix?
-                //".",
+                //postfix?//".",
             }
+            sMingling += " ";
 
             //3.조사 만들기 
-            string[] cong = new string[] { "", " from", " in", " by", " -"};
-            i = random.Next(0, cong.Length);
-            string sCong = cong[i] + " ";
+            string sCong = "";
+            i = random.Next(0, 2);
+            Console.WriteLine("sCong {0}", i);
+            if (0 == i)
+            {
+                string[] cong = new string[] {"from", "in", "by", "-" };
+                i = random.Next(0, cong.Length);
+                sCong = cong[i] + " ";
+            }
 
             //4.국가 만들기
             string[] capital = new string[] 
@@ -159,15 +165,14 @@ namespace gitA
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
-                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San José","Slovenia","Ljubljana",
-                "Turkmenistan","Ashgabat"
+                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
+                "Turkmenistan","Ashgabat","Cameroon","Yaounde"
             };
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
 
             //5. round
-            round++;
             string sRound;
             if      (round == 1)
                 sRound = "Uno ";
@@ -203,9 +208,11 @@ namespace gitA
 
             //sGoStop
             int randomStop = random.Next(1, randomStopMax + 1);
-            if (round != 1 && randomStop == 1)
+            bool isStopped = false;
+            if (round != 0 && randomStop == 1)
             {
-                sTarget = "random stop!!!!";
+                isStopped = true;
+                sTarget = "random forked!!!";
             }            
 
             RunCommand("git pull");
@@ -220,7 +227,7 @@ namespace gitA
             Console.Write(sMingling);
             Console.Write(" randomStop={0}/{1} ", randomStop, randomStopMax);            
 
-            if (round != 1 && randomStop == 1)
+            if (isStopped)
             {
                 Console.WriteLine("현재시간={0}", sTime);
                 Console.WriteLine("사고방지용 Random 종료");
@@ -240,7 +247,8 @@ namespace gitA
 
             // 알람 타이머 생성 및 시작
             myTimer = new System.Threading.Timer(Timer_Elapsed, null, 1000 * randomResult * 60, 60 * 1000 * 3);
-           
+
+            round++;
         }
 
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
