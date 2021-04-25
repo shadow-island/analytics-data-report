@@ -28,14 +28,14 @@ Todo:
 0. com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
     * 근무시간 또는 매일 1회->1/18
-    * 멈췄을때 1/7	
+    * 멈췄을때 1/8	
 1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/5->암것도안함 (이것도테스트필요)   
     1-2기능향상: 
         - 0 round추가
         매번:    - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - randomMax도 1은 늘리고~
-                -> new스페인어? cero추가?
+                -> new스페인어? cero추가? => postfix추가 
                 - eugene 일때 -> command or cong 추가?
         ---------------         
         후순위
@@ -71,15 +71,13 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 582 / 60 / 7;   //days
-        static          int     randomStopMax = 15;
+        static readonly float    WORK          = 609 / 60 / 7;   //days
+        static          int     randomStopMax = 16;
         static readonly int     roundMax      = 21;
         static          int     tick          = 21;             //초에 한번씩 찍기
 
-        //금요일에 변경됨, 일일 commit개수 줄여보기 -> 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
-        static int     RANDOM_MAX    = 7 * 60 + 12;        
-
-        
+        //토요일24에 변경됨, 일일 commit개수 줄여보기 -> 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
+        static int     RANDOM_MAX    = 7 * 60 + 13;        
 
         // global
         static int round = 0;
@@ -121,6 +119,7 @@ namespace gitA
         }
         static void RunGit()
         {
+            Console.WriteLine("Round {0} try--------------------------------", round);
             // Junbi
             Random random = new Random();
             int i; //for random index
@@ -137,7 +136,7 @@ namespace gitA
             Console.WriteLine("sMingling {0}", i);
             if (0 == i)
             {
-                string[] mingling = new string[] {"Eugene", "GushavApp", "Command", "Commit", "Commits", "New", "Squash", "Update" };
+                string[] mingling = new string[] {"Eugene", "App", "Command", "Commit", "Commits", "New", "Squash", "Update" };
                 i = random.Next(0, mingling.Length);
                 sMingling = mingling[i];
                 //소문자 함수화?
@@ -166,15 +165,17 @@ namespace gitA
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
-                "Turkmenistan","Ashgabat","Cameroon","Yaounde"
+                "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis"
             };
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
 
             //5. round
-            string sRound;
-            if      (round == 1)
+            string sRound;            
+            if (round == 0)
+                sRound = "Cero ";
+            else if (round == 1)
                 sRound = "Uno ";
             else if (round == 2)
                 sRound = "Dos ";
@@ -190,9 +191,6 @@ namespace gitA
             if (0 == random.Next(0, 2))
                 sRound = sRound.ToLower();
             //~
-
-            Console.WriteLine("Round {0} try--------------------------------", round);
-            //
 
             // random Target
             DateTime now = DateTime.Now;
@@ -212,7 +210,7 @@ namespace gitA
             if (round != 0 && randomStop == 1)
             {
                 isStopped = true;
-                sTarget = "random forked!!!";
+                sTarget = " forked!!!";
             }            
 
             RunCommand("git pull");
