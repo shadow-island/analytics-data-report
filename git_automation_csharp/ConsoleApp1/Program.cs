@@ -26,13 +26,14 @@ Release note
 Todo:
 0. com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-    * 근무시간 또는 매일 1회->1/17
+    * 근무시간 또는 매일 1회->1/18
     * 멈췄을때 1/6	
 1  하루 exe했으면 그다음날 exe update없이 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/5->암것도안함 (이것도테스트필요)   
     1-2기능향상:                  
 		todo:command, cong 1/2확률로 빈칸출력(수도 집중용)
         매번:    - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
+                - randomMax도 1은 늘리고~
                 - 0 round추가 -> new스페인어? cero추가?
                 - eugene 일때 -> command or cong 추가?
         ---------------         
@@ -48,6 +49,7 @@ Todo:
         -코드정리 => 이후 build할것 
 
     1-4 git 정리 + //하기전에 숫자바꾸고 저장함? 1/6할차례
+        웬만하면 새 git이 하나로되게해보자~
         git rebase HEAD~16 -i 
         git push --force(이것도됨)
         git push origin master --force(필요?)
@@ -69,13 +71,13 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 563 / 60 / 7;   //days
+        static readonly float    WORK          = 572 / 60 / 7;   //days
         static          int     randomStopMax = 14;
         static readonly int     roundMax      = 21;
         static          int     tick          = 21;             //초에 한번씩 찍기
 
         //금요일에 변경됨, 일일 commit개수 줄여보기 -> 실패시 3분++씩 증가, 성공 및 한화면안차면 1++
-        static int     RANDOM_MAX    = 7 * 60 + 7;        
+        static int     RANDOM_MAX    = 7 * 60 + 8;        
 
         
 
@@ -135,33 +137,36 @@ namespace gitA
             Console.WriteLine("sMingling {0}", i);
             if (0 == i)
             {
-                string[] mingling = new string[] { "Eugene", "GushavApp", "Command", "Commit", "Commits", "New", "Squash", "Update" };
+                string[] mingling = new string[] {"Eugene", "GushavApp", "Command", "Commit", "Commits", "New", "Squash", "Update" };
                 i = random.Next(0, mingling.Length);
                 sMingling = mingling[i];
                 //소문자 함수화?
                 if (0 == random.Next(0, 2))
                     sMingling = sMingling.ToLower();
                 //~
+                //postfix?
+                //".",
             }
 
             //3.조사 만들기 
-            string[] cong = new string[] { "", " from", " in", " by", "."," -"};
+            string[] cong = new string[] { "", " from", " in", " by", " -"};
             i = random.Next(0, cong.Length);
             string sCong = cong[i] + " ";
 
             //4.국가 만들기
-            string[] capital = new string[] {
+            string[] capital = new string[] 
+            {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
-                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San José","Slovenia","Ljubljana"};
-
+                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San José","Slovenia","Ljubljana",
+                "Turkmenistan","Ashgabat"
+            };
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
-
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
 
-            //round
+            //5. round
             round++;
             string sRound;
             if      (round == 1)
@@ -176,7 +181,6 @@ namespace gitA
                 sRound = "Cinco ";
             else
                 sRound = Convert.ToString(round) + ".";
-
             //소문자 함수화?
             if (0 == random.Next(0, 2))
                 sRound = sRound.ToLower();
