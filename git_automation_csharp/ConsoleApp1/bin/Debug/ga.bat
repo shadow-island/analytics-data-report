@@ -1,1 +1,2 @@
+git pull
 gitk --all
