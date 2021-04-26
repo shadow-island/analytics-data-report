@@ -27,8 +27,8 @@ Release note
 Todo:
 0. com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-    * 근무시간 또는 매일 1회->1/19
-    * 멈췄을때 1/9	
+    * 근무시간 또는 매일 1회->1/19 => 1/2 - gc, 기타 
+    * 멈췄을때 1/10
 1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/5->암것도안함 (이것도테스트필요)   
     1-2기능향상:         
@@ -36,6 +36,7 @@ Todo:
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
         이하는 1개만 더 사람답게 깔끔하게?
+				0 round에서는 round없이 command를 cero 또는 git reset으로 표기!
                 -> new스페인어? else => postfix추가 
                 - eugene 일때 -> command or sPrefix 추가?
                 - 시간은 issue # number화 ticket? jira, bugzilla
@@ -51,6 +52,7 @@ Todo:
         -코드정리 => 이후 build할것 !
 
     1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/7할차례(기능안까먹는 용도)
+        아니면 or ^B
         웬만하면 새 git이 하나로되게해보자~
         git rebase HEAD~16 -i
         git push --force(이것도됨)
@@ -73,13 +75,13 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 651 / 60 / 7;   //days
-        static          int     randomStopMax = 16;
+        static readonly float    WORK          = 687 / 60 / 7;   //days
+        static          int     randomStopMax = 17;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 21;             //초에 한번씩 찍기
 
-        //토요일24에 변경됨, 일일 commit개수 줄여보기 -> 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 15;        
+        //토요일24에 변경됨, 일일 commit개수 줄여보기 -> 같으면 성공, 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
+        static int     TARGET_MAX    = 7 * 60 + 16;        
 
         // global
         static int round = 0;
@@ -121,8 +123,7 @@ namespace gitA
         }
         static void RunGit()
         {
-            Console.WriteLine("Round {0} try--------------------------------", round);
-            // Junbi
+            Console.WriteLine("준비! Round {0} try--------------------------------", round);
             Random random = new Random();
             int i; //for random index
 
@@ -141,8 +142,7 @@ namespace gitA
                 i = random.Next(0, mingling.Length);
                 sMingling = mingling[i];
                 //소문자 함수화?
-                if (0 == random.Next(0, 2))
-                    sMingling = sMingling.ToLower();
+                sMingling = sMingling.ToLower();
                 //~
                 //postfix?//".",, "-"
                 sMingling += " ";
@@ -175,7 +175,13 @@ namespace gitA
             //5. round
             string sRound;            
             if (round == 0)
-                sRound = "Cero ";
+            {
+                i = random.Next(0, 2);                
+                if (0 == i)
+                    sRound = "Cero ";
+                else
+                    sRound = "git reset ";                
+            }                
             else if (round == 1)
                 sRound = "Uno ";
             else if (round == 2)
@@ -188,7 +194,7 @@ namespace gitA
                 sRound = "Cinco ";
             else
                 sRound = Convert.ToString(round) + ".";
-            //소문자 함수화
+            //모두 소문자화
             sRound = sRound.ToLower();
             //~
 
