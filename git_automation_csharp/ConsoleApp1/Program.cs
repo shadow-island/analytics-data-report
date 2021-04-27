@@ -30,11 +30,12 @@ Todo:
     * 근무시간 또는 매일 1회->1/19 => 1/2 - gc, 기타 
     * 멈췄을때 1/10
 1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
-    1-1 1/5->암것도안함 (이것도테스트필요)   
+    1-1 1/6->암것도안함 (이것도테스트필요)   
     1-2기능향상:         
         매번:   - 작업시간 체크 
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
+		* 실제 시작 기입 시간도 필요! + target(하루 처음 시작위치를 알아야함)      
         이하는 1개만 더 사람답게 깔끔하게?
 				0 round에서는 round없이 command를 cero 또는 git reset으로 표기!
                 -> new스페인어? else => postfix추가 
@@ -43,8 +44,7 @@ Todo:
         ---------------         
         후순위
 		    *하루7commit이하 or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
-        필요여부 미지수:			
-            * 실제 시작 기입 시간도 필요? + target        
+        필요여부 미지수:			            
             * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
             * 안중요=> ini file, ini file 숫자증가만? 		    
             * exe check필요할듯 -exe빠지는경우 있음 update표시?    
@@ -75,13 +75,13 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 687 / 60 / 7;   //days
+        static readonly float    WORK          = 706 / 60 / 7;   //days
         static          int     randomStopMax = 17;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 21;             //초에 한번씩 찍기
 
         //토요일24에 변경됨, 일일 commit개수 줄여보기 -> 같으면 성공, 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 16;        
+        static int     TARGET_MAX    = 7 * 60 + 17;        
 
         // global
         static int round = 0;
@@ -135,8 +135,7 @@ namespace gitA
 
             //2 Command 만들기-절반은 패스(공백)
             string sMingling = "";
-            i = random.Next(0, 2);
-            if (0 == i)
+            if (0 == random.Next(0, 2))
             {
                 string[] mingling = new string[] {"Eugene", "App", "Command", "Commit", "Commits", "New", "Squash", "Update" };
                 i = random.Next(0, mingling.Length);
@@ -166,14 +165,15 @@ namespace gitA
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
-                "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala"
+                "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga"
             };
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
 
             //5. round
-            string sRound;            
+            string sRound = "";     
+            
             if (round == 0)
             {
                 i = random.Next(0, 2);                
@@ -182,32 +182,38 @@ namespace gitA
                 else
                     sRound = "git reset ";                
             }                
-            else if (round == 1)
-                sRound = "Uno ";
-            else if (round == 2)
-                sRound = "Dos ";
-            else if (round == 3)
-                sRound = "Tres ";
-            else if (round == 4)
-                sRound = "Cuatro ";
-            else if (round == 5)
-                sRound = "Cinco ";
             else
-                sRound = Convert.ToString(round) + ".";
-            //모두 소문자화
-            sRound = sRound.ToLower();
+            {
+                if (0 == random.Next(0, 2))
+                {
+                    if (round == 1)
+                        sRound = "Uno ";
+                    else if (round == 2)
+                        sRound = "Dos ";
+                    else if (round == 3)
+                        sRound = "Tres ";
+                    else if (round == 4)
+                        sRound = "Cuatro ";
+                    else if (round == 5)
+                        sRound = "Cinco ";
+                    else
+                        sRound = Convert.ToString(round) + ".";
+                    //모두 소문자화            
+                    sRound = sRound.ToLower();
+                }
+            }
             //~
 
             // random Target
             DateTime now = DateTime.Now;
-            string sTime = now.ToString("HH:mm:ss");            
+            string sTime = now.ToString("HH:mm");
             int randomResult = random.Next(1, TARGET_MAX + 1);            
             DateTime target = now.AddMinutes(randomResult);
             string sTarget = target.Hour.ToString();
             string sUpdate = target.Minute.ToString();
 
             //우선 매번~
-            Update(sUpdate);
+            Update(sTime + " " + sUpdate);
             //~
 
             //sGoStop
@@ -266,7 +272,6 @@ namespace gitA
             if (myTimer != null)
                 myTimer.Dispose();
             timerTick.Stop();
-            //Update();
             RunGit();
             timerTick.Start();
         }
