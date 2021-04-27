@@ -9,7 +9,8 @@ using System.Timers;
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    4.24        commit에는 시간만, 파일에는 target 분단위까지 적음, 0 round추가
+    4.27        실제 시작 기입 시간도 필요! (하루 처음 시작위치를 알아야함)
+    4.24        commit에는 시간만, 파일에는 target 분단위까지 적음, 0 round추가, 
     2021.4.21   1국가수표시,스페인어숫자, 2 home mode push없음, 소문자화, command, cong 1/2확률로 빈칸출력(수도 집중용)
     2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리, from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
     2021.4      강제시작 옵션만들기 eu: 0이라 commit안되는경우있었다, 
@@ -17,7 +18,8 @@ Release note
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 
-* 내부설명  
+내부설명  
+    실제 시작 기입 시간도 필요! (하루 처음 시작위치를 알아야함)
 	최초는 commit없음: 내가 커밋하고싶어서 일부로 고치지 않는이상 안일어나야한다(test시용이)
         (사용자에게 선택권을 줘야함)
         commit 강제로하려면 log숫자 초기화~
@@ -27,7 +29,7 @@ Release note
 Todo:
 0. com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-    * 근무시간 또는 매일 1회->1/19 => 1/2 - gc, 기타 
+    * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
     * 멈췄을때 1/10
 1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/6->암것도안함 (이것도테스트필요)   
@@ -35,15 +37,15 @@ Todo:
         매번:   - 작업시간 체크 
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
-		* 실제 시작 기입 시간도 필요! + target(하루 처음 시작위치를 알아야함)      
         이하는 1개만 더 사람답게 깔끔하게?
 				0 round에서는 round없이 command를 cero 또는 git reset으로 표기!
-                -> new스페인어? else => postfix추가 
-                - eugene 일때 -> command or sPrefix 추가?
+                -> new스페인어? else => postfix추가
+                - eugene 일때 -> command or sPrefix(new) 추가?
                 - 시간은 issue # number화 ticket? jira, bugzilla
+        ga -> p?
         ---------------         
         후순위
-		    *하루7commit이하 or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+		    *하루7commit이하(2회이상) or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
         필요여부 미지수:			            
             * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
             * 안중요=> ini file, ini file 숫자증가만? 		    
@@ -75,13 +77,13 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 706 / 60 / 7;   //days
+        static readonly float    WORK          = 731 / 60 / 7;   //days
         static          int     randomStopMax = 17;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 21;             //초에 한번씩 찍기
 
         //토요일24에 변경됨, 일일 commit개수 줄여보기 -> 같으면 성공, 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 17;        
+        static int     TARGET_MAX    = 7 * 60 + 18;        
 
         // global
         static int round = 0;
@@ -137,12 +139,11 @@ namespace gitA
             string sMingling = "";
             if (0 == random.Next(0, 2))
             {
-                string[] mingling = new string[] {"Eugene", "App", "Command", "Commit", "Commits", "New", "Squash", "Update" };
+                string[] mingling 
+                    = new string[] {"Eugene", "App", "Command", "New", "Squash", "Update", "Commit", "Commits", "push"};
                 i = random.Next(0, mingling.Length);
-                sMingling = mingling[i];
-                //소문자 함수화?
-                sMingling = sMingling.ToLower();
-                //~
+                sMingling = mingling[i];                
+                sMingling = sMingling.ToLower();    //소문자화
                 //postfix?//".",, "-"
                 sMingling += " ";
             }
@@ -178,7 +179,7 @@ namespace gitA
             {
                 i = random.Next(0, 2);                
                 if (0 == i)
-                    sRound = "Cero ";
+                    sRound = "cero ";
                 else
                     sRound = "git reset ";                
             }                
@@ -207,10 +208,11 @@ namespace gitA
             // random Target
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm");
-            int randomResult = random.Next(1, TARGET_MAX + 1);            
-            DateTime target = now.AddMinutes(randomResult);
-            string sTarget = target.Hour.ToString();
-            string sUpdate = target.Minute.ToString();
+
+            int randomResult = random.Next(1, TARGET_MAX);
+            DateTime targetTime = now.AddMinutes(randomResult);
+            string sTargetHour = targetTime.Hour.ToString();
+            string sUpdate = targetTime.ToString("HH:mm");
 
             //우선 매번~
             Update(sTime + " " + sUpdate);
@@ -222,13 +224,13 @@ namespace gitA
             if (round != 0 && randomStop == 1)
             {
                 isStopped = true;
-                sTarget = " forked!!!";
+                sTargetHour = " forked!!!";
             }            
 
             RunCommand("git pull");
             RunCommand("git status");
             RunCommand("git commit --all -m " 
-                + "\"" + sLocation + sMingling + sPrefix + sCapital + sRound + sTarget + "\"");
+                + "\"" + sLocation + sMingling + sPrefix + sCapital + sRound + sTargetHour + "\"");
 
             //home mode아닐때만
             if (sLocation == "")
@@ -252,7 +254,7 @@ namespace gitA
             }
 
             // run next round
-            Console.WriteLine("현재시간={3} => {0}/{1} => {2}", randomResult, TARGET_MAX, target, sTime);
+            Console.WriteLine("현재시간={3} => {0}/{1} => {2}", randomResult, TARGET_MAX, targetTime, sTime);
             Console.WriteLine("in Round {0}--------------------------------", round);
 
             // 알람 타이머 생성 및 시작
