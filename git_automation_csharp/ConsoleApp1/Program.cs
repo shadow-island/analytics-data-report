@@ -34,13 +34,14 @@ Todo:
 1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/6->암것도안함 (이것도테스트필요)   
     1-2기능향상:         
-        매번:   - 작업시간 체크 
+	    home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함
+        매번:    - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
         이하는 1개만 더 사람답게 깔끔하게?
-				0 round에서는 round없이 command를 cero 또는 git reset으로 표기!
+				0 round에서는 round없이 command를 cero 또는 git reset으로 표기!,0와 "."도 추가!
                 -> new스페인어? else => postfix추가
-                - eugene 일때 -> command or sPrefix(new) 추가?
+                - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
                 - 시간은 issue # number화 ticket? jira, bugzilla
         ga -> p?
         ---------------         
@@ -77,13 +78,13 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 731 / 60 / 7;   //days
+        static readonly float    WORK          = 759 / 60 / 7;   //days
         static          int     randomStopMax = 17;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 21;             //초에 한번씩 찍기
 
         //토요일24에 변경됨, 일일 commit개수 줄여보기 -> 같으면 성공, 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 18;        
+        static int     TARGET_MAX    = 7 * 60 + 19;        
 
         // global
         static int round = 0;
@@ -129,11 +130,15 @@ namespace gitA
             Random random = new Random();
             int i; //for random index
 
-            //1 home mode확인 
+            //1 home mode확인
+            bool isHomeMode = false;
             string sLocation = "";            
             FileInfo fi = new FileInfo("gc_home.cfg");            
             if (fi.Exists)
+            {             
                 sLocation = "[home] ";
+            }
+                
 
             //2 Command 만들기-절반은 패스(공백)
             string sMingling = "";
@@ -160,13 +165,14 @@ namespace gitA
             }
 
             //4.국가 만들기
-            string[] capital = new string[] 
+            string[] capital = new string[]
             {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
-                "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga"
+                "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
+                "Zimbabwe","Harare"
             };
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
             i = random.Next(0, capital.Length);
@@ -185,7 +191,7 @@ namespace gitA
             }                
             else
             {
-                if (0 == random.Next(0, 2))
+                if (0 != random.Next(0, 3))
                 {
                     if (round == 1)
                         sRound = "Uno ";
@@ -215,7 +221,8 @@ namespace gitA
             string sUpdate = targetTime.ToString("HH:mm");
 
             //우선 매번~
-            Update(sTime + " " + sUpdate);
+            if (sLocation == "")
+                Update(sTime + " " + sUpdate);
             //~
 
             //sGoStop
