@@ -9,7 +9,8 @@ using System.Timers;
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    4.27        실제 시작 기입 시간도 필요! (하루 처음 시작위치를 알아야함)
+    4.30        home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함
+    4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
     4.24        commit에는 시간만, 파일에는 target 분단위까지 적음, 0 round추가, 
     2021.4.21   1국가수표시,스페인어숫자, 2 home mode push없음, 소문자화, command, cong 1/2확률로 빈칸출력(수도 집중용)
     2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리, from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
@@ -30,17 +31,17 @@ Todo:
 0. com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
     * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
-    * 멈췄을때 1/10
+    * 멈췄을때 1/11
 1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/6->암것도안함 (이것도테스트필요)   
-    1-2기능향상:         
-	    home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함
+    1-2기능향상:         	            
         매번:    - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
         이하는 1개만 더 사람답게 깔끔하게?
-				0 round에서는 round없이 command를 cero 또는 git reset으로 표기!,0와 "."도 추가!
-                -> new스페인어? else => postfix추가
+                -> new스페인어 숫자? else => postfix추가
+                0 round에서는 round없이 command를 cero 또는 git reset으로 표기!, <= 0와 "."도 추가!
+                log에 round도 추가? 수도추가?
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
                 - 시간은 issue # number화 ticket? jira, bugzilla
         ga -> p?
@@ -78,13 +79,13 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 759 / 60 / 7;   //days
-        static          int     randomStopMax = 17;
+        static readonly float    WORK          = 788 / 60 / 7;   //days
+        static          int     randomStopMax = 18;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 21;             //초에 한번씩 찍기
 
         //토요일24에 변경됨, 일일 commit개수 줄여보기 -> 같으면 성공, 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 19;        
+        static int     TARGET_MAX    = 7 * 60 + 20;        
 
         // global
         static int round = 0;
@@ -134,11 +135,8 @@ namespace gitA
             bool isHomeMode = false;
             string sLocation = "";            
             FileInfo fi = new FileInfo("gc_home.cfg");            
-            if (fi.Exists)
-            {             
-                sLocation = "[home] ";
-            }
-                
+            if (fi.Exists)         
+                sLocation = "[home] ";                
 
             //2 Command 만들기-절반은 패스(공백)
             string sMingling = "";
@@ -172,7 +170,7 @@ namespace gitA
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
-                "Zimbabwe","Harare"
+                "Zimbabwe","Harare", "Haiti", "Port-au-Prince"
             };
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
             i = random.Next(0, capital.Length);
@@ -203,6 +201,8 @@ namespace gitA
                         sRound = "Cuatro ";
                     else if (round == 5)
                         sRound = "Cinco ";
+                    else if (round == 6)
+                        sRound = "seis ";                    
                     else
                         sRound = Convert.ToString(round) + ".";
                     //모두 소문자화            
@@ -231,7 +231,7 @@ namespace gitA
             if (round != 0 && randomStop == 1)
             {
                 isStopped = true;
-                sTargetHour = " forked!!!";
+                sTargetHour = " forked!!";
             }            
 
             RunCommand("git pull");
