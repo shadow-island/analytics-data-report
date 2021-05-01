@@ -9,12 +9,12 @@ using System.Timers;
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    4.30        home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함
+    4.30        home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함, ga.bat -> p.bat
     4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
     4.24        commit에는 시간만, 파일에는 target 분단위까지 적음, 0 round추가, 
-    2021.4.21   1국가수표시,스페인어숫자, 2 home mode push없음, 소문자화, command, cong 1/2확률로 빈칸출력(수도 집중용)
-    2021.4.19   시간에서0빼기, Force Mode:office용 한줄로 처리, from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
-    2021.4      강제시작 옵션만들기 eu: 0이라 commit안되는경우있었다, 
+    4.21        1.국가수표시,스페인어숫자, 2.home mode push없음, 소문자화, command, cong 1/2확률로 빈칸출력(수도 집중용)
+    4.19        시간에서0빼기, Force Mode:office용 한줄로 처리, from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
+    4.1         강제시작 옵션만들기 eu: 0이라 commit안되는경우있었다, 
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
     2020.5.12   C#화함
     2020.2.12   python버전 시작
@@ -35,16 +35,17 @@ Todo:
 1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/6->암것도안함 (이것도테스트필요)   
     1-2기능향상:         	            
-        매번:    - 작업시간 체크
+        매번:   
+                - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
         이하는 1개만 더 사람답게 깔끔하게?
                 -> new스페인어 숫자? else => postfix추가
-                0 round에서는 round없이 command를 cero 또는 git reset으로 표기!, <= 0와 "."도 추가!
+                ! 0 round에서는 round없이 command를 cero 또는 git reset으로 표기!, <= 0와 "."도 추가!
+
                 log에 round도 추가? 수도추가?
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
-                - 시간은 issue # number화 ticket? jira, bugzilla
-        ga -> p?
+                - 시간은 issue # number화 ticket? jira, bugzilla        
         ---------------         
         후순위
 		    *하루7commit이하(2회이상) or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
@@ -79,13 +80,15 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 788 / 60 / 7;   //days
+        static readonly float    WORK          = 807 / 60 / 7;   //days
         static          int     randomStopMax = 18;
         static readonly int     roundMax      = 21;             //같은숫자로?
-        static          int     tick          = 21;             //초에 한번씩 찍기
+        static          int     tick          = 22;             //초에 한번씩 찍기
 
-        //토요일24에 변경됨, 일일 commit개수 줄여보기 -> 같으면 성공, 실패시 4분++씩 증가, 성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 20;        
+        // 목표 일일 commit개수 줄여보기 -> 같으면 성공,
+        //실패시4분씩 증가면 괜찮은듯 토요일5/1 중에 변경됨 
+        //성공 및 한화면안차면 1++
+        static int     TARGET_MAX    = 7 * 60 + 24;        
 
         // global
         static int round = 0;
@@ -131,8 +134,7 @@ namespace gitA
             Random random = new Random();
             int i; //for random index
 
-            //1 home mode확인
-            bool isHomeMode = false;
+            //1 home mode확인 as sLocation
             string sLocation = "";            
             FileInfo fi = new FileInfo("gc_home.cfg");            
             if (fi.Exists)         
@@ -145,7 +147,7 @@ namespace gitA
                 string[] mingling 
                     = new string[] {"Eugene", "App", "Command", "New", "Squash", "Update", "Commit", "Commits", "push"};
                 i = random.Next(0, mingling.Length);
-                sMingling = mingling[i];                
+                sMingling = mingling[i];
                 sMingling = sMingling.ToLower();    //소문자화
                 //postfix?//".",, "-"
                 sMingling += " ";
@@ -170,7 +172,7 @@ namespace gitA
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
-                "Zimbabwe","Harare", "Haiti", "Port-au-Prince"
+                "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo"
             };
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
             i = random.Next(0, capital.Length);
@@ -181,11 +183,9 @@ namespace gitA
             
             if (round == 0)
             {
-                i = random.Next(0, 2);                
-                if (0 == i)
-                    sRound = "cero ";
-                else
-                    sRound = "git reset ";                
+                string[] cero = new string[] {"git reset", "cero", "0" };
+                i = random.Next(0, cero.Length);
+                sRound = cero[i] + " ";
             }                
             else
             {
