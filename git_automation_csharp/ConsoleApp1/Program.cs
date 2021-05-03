@@ -36,8 +36,9 @@ Todo:
 	5/1토에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 	이렇게 메모넣는기능도있어야하나?
 1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
-    1-1 1/6->암것도안함 (이것도테스트필요)   
-    1-2기능향상:         	            
+    1-1 1/8-> 암것도안함(이것도테스트필요)
+    1-2기능향상:         	          
+        * log에  수도추가!이제 찾기힘듬~ㅠㅜㅜ
         *    출력멈춤현상,bat말고 exe로  실행할것, => 하지만매번 cmd여는게 귀찮으니 이거방법 강구
         매번:   
                 - 작업시간 체크
@@ -48,7 +49,7 @@ Todo:
                 else => postfix추가
                 ! 0 round에서는 round없이 command를 cero 또는 git reset으로 표기!, <= 0.와 "."도 추가!
 
-                log에 round도 추가? 수도추가?
+                 round도 추가?
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
                 - 시간은 issue # number화 ticket? jira, bugzilla        
         ---------------         
@@ -85,7 +86,7 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 826 / 60 / 7;   //days
+        static readonly float    WORK          = 838 / 60 / 7;   //days
         static          int     randomStopMax = 18;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 22;             //초에 한번씩 찍기
@@ -178,7 +179,9 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako"
             };
-            Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
+            
+            
+
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
 
@@ -239,6 +242,9 @@ namespace gitA
             }            
 
             RunCommand("git pull");
+
+            Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
+
             RunCommand("git status");
             RunCommand("git commit --all -m " 
                 + "\"" + sLocation + sMingling + sPrefix + sCapital + sRound + sTargetHour + "\"");
