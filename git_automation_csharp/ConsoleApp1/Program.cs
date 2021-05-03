@@ -83,7 +83,7 @@ namespace gitA
 {
     class Program
     {
-        static readonly bool debuggingMode = false;          // true false if real mode    
+        static readonly bool debuggingMode = true;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
         static readonly float    WORK          = 838 / 60 / 7;   //days
