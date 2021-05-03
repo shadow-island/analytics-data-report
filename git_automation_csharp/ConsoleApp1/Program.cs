@@ -38,8 +38,8 @@ Todo:
 1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/8-> 암것도안함(이것도테스트필요)
     1-2기능향상:         	          
-        * log에  수도추가!이제 찾기힘듬~ㅠㅜㅜ
-        *    출력멈춤현상,bat말고 exe로  실행할것, => 하지만매번 cmd여는게 귀찮으니 이거방법 강구
+        *   log에  수도추가!이제 찾기힘듬~ㅠㅜㅜ
+        *   출력멈춤현상,bat말고 exe로  실행할것, => 하지만매번 cmd여는게 귀찮으니 이거방법 강구
         매번:   
                 - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
@@ -83,10 +83,10 @@ namespace gitA
 {
     class Program
     {
-        static readonly bool debuggingMode = true;          // true false if real mode    
+        static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 838 / 60 / 7;   //days
+        static readonly float    WORK          = 849 / 60 / 7;   //days
         static          int     randomStopMax = 18;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 22;             //초에 한번씩 찍기
@@ -94,7 +94,7 @@ namespace gitA
         // 목표 일일 commit개수 줄여보기 -> 같으면 성공,
         //실패시4분씩 증가면 괜찮은듯 토요일5/1 중에 변경됨 
         //성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 25;
+        static int     TARGET_MAX    = 7 * 60 + 26;
 
         // global
         static int round = 0;
@@ -151,7 +151,7 @@ namespace gitA
             if (0 == random.Next(0, 2))
             {
                 string[] mingling 
-                    = new string[] {"eugene", "App", "Command", "New", "Squash", "Update", "Commit", "Commits", "push"};
+                    = new string[] {"eugene", "App", "Command", "New", "Squash", "Update", "Commit", "commits", "push"};
                 i = random.Next(0, mingling.Length);
                 sMingling = mingling[i];
                 sMingling += " ";
@@ -177,13 +177,18 @@ namespace gitA
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
-                "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako"
-            };
-            
-            
+                "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
+                "Zambia","Lusaka"
+            };        
 
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
+            string sAnswer;
+            if (i % 2 == 0)
+                sAnswer = capital[i + 1];
+            else
+                sAnswer = capital[i - 1];
+
 
             //5. round
             string sRound = "";     
@@ -223,13 +228,13 @@ namespace gitA
             string sTime = now.ToString("HH:mm");
 
             int randomResult = random.Next(1, TARGET_MAX);
-            DateTime targetTime = now.AddMinutes(randomResult);
+            DateTime targetTime = now.AddMinutes(randomResult);            
+            string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour = targetTime.Hour.ToString();
-            string sUpdate = targetTime.ToString("HH:mm");
 
             //우선 매번~
             if (sLocation == "")
-                Update(sTime + " " + sUpdate);
+                Update(sAnswer + " " + sTime + " " + sTarget);
             //~
 
             //sGoStop
