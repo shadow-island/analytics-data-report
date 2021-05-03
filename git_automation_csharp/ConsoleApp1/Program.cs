@@ -94,7 +94,7 @@ namespace gitA
         // 목표 일일 commit개수 줄여보기 -> 같으면 성공,
         //실패시4분씩 증가면 괜찮은듯 토요일5/1 중에 변경됨 
         //성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 25;        
+        static int     TARGET_MAX    = 7 * 60 + 25;
 
         // global
         static int round = 0;
@@ -106,7 +106,7 @@ namespace gitA
         {                        
             if (debuggingMode)
             {
-                randomStopMax = 3;
+                randomStopMax = 1;
                 tick = 1; //초에 한번씩 찍기
                 TARGET_MAX = 1;// for test        
             } //debugging mode
