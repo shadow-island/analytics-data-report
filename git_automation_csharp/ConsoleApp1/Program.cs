@@ -3,32 +3,35 @@ using System.IO;
 using System.Text;
 using System.Timers;
 /*
-Todo:
-0. com고치기	
+Todo: com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
-    * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
+    * 근무시간(backup drive먼저) 또는 매일 1회(3회맥스)->1/19 => 기타 
     * 멈췄을때 1/12	
 	5/1토에 bat file실행도 위험한거같으니 무조건 gc로 실행!
-	이렇게 메모넣는기능도있어야하나?
-1  하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
+1   전날 사고발생하면 훗날은 사고없이 exe만 기도
+    하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/8-> 암것도안함(이것도테스트필요)
-    1-2기능향상:         	    
-        *   출력멈춤현상, bat(exe+ cmd이거 안되면)=> exe로 실행할것
+    1-2 기능향상:         	    
+        *   home 컴 cmd실행 편하게하는중..
+		*   TARGET_MAX가 round시 1분씩 증가하는것은 어떨까?
+        *   출력멈춤현상, bat(exe+ cmd이거 안되면) 이것도 문제 생김
+			일단 cmd열고 수동으로 gc실행하면서 
+           => 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
+		   => exe로 바로 실행준비하자
         매번:   
                 - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
         이하는 1개만 더 사람답게 깔끔하게?
-                -> new스페인어 숫자 다음숫자없으면 확률 늘리기 :)=> log에 round도 추가?
+                new스페인어 숫자 다음숫자없으면 확률 늘리기 :)=> log에 round도 추가?
+                prefix 추가 new
                 else => postfix추가
                 최근시작하나만보기 =>  0 round에서는 round없이 command를 cero 또는 git reset으로 표기!, <= 0.와 "."도 추가!                
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
-                - 시간은 issue # number화 ticket? jira, bugzilla                        
-        ---------------         
+                - 시간은 issue # number화 jira, bugzilla
         후순위
 		    *하루7commit이하(2회이상) or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
-        필요여부 미지수:			            
-            * 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)            
+        필요여부 미지수:		
             * 안중요=> ini file, ini file 숫자증가만? 		    
             * exe check필요할듯 -exe빠지는경우 있음 update표시?    
     1-3 -release note 필요할때 무조건
@@ -58,7 +61,7 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 873 / 60 / 7;   //days
+        static readonly float    WORK          = 925 / 60 / 7;   //days 420이 1일
         static          int     randomStopMax = 18;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 22;             //초에 한번씩 찍기
@@ -66,7 +69,7 @@ namespace gitA
         // 목표 일일 commit개수 줄여보기 -> 같으면 성공,
         //실패시4분씩 증가면 괜찮은듯 토요일5/1 중에 변경됨 
         //성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 27;
+        static int     TARGET_MAX    = 7 * 60 + 29;
 
         // global
         static int round = 0;
@@ -113,17 +116,20 @@ namespace gitA
             int i; //for random index
 
             //1 home mode확인 as sLocation
-            string sLocation = makeLocation();
+            string sLocation = "";
+            makeLocation(ref sLocation);
 
             //2 Command 만들기-절반은 패스(공백)
             string sMingling = "";
             if (0 == random.Next(0, 2))
             {
                 string[] mingling
-                    = new string[] { "eugene", "App", "Command", "New", "Squash", "Update", "Commit", "commits", "push" };
+                    = new string[] {"", "eugene", "app", "Command", "Squash", "Update", "Commit", "commits", "push" };
                 i = random.Next(0, mingling.Length);
-                sMingling = mingling[i];
-                sMingling += " ";
+                if (0 == random.Next(0, 2))
+                    sMingling = mingling[i] + " ";
+                else
+                    sMingling = "new " + mingling[i] + " ";
                 //postfix?//".",, "-"
             }
 
@@ -147,7 +153,7 @@ namespace gitA
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                "Zambia","Lusaka","Burkina Faso","Ouagadougou"
+                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone"
             };
             i = random.Next(0, capital.Length);
             string sCapital = capital[i] + " ";
@@ -181,6 +187,8 @@ namespace gitA
                         sRound = "Cinco ";
                     else if (round == 6)
                         sRound = "seis ";
+                    else if (round == 7)
+                        sRound = "siete ";                    
                     else
                         sRound = Convert.ToString(round) + ".";
                     //모두 소문자화            
@@ -193,7 +201,7 @@ namespace gitA
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm");
 
-            int randomResult = random.Next(1, TARGET_MAX);
+            int randomResult = random.Next(1, TARGET_MAX + round);
             DateTime targetTime = now.AddMinutes(randomResult);
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
@@ -221,8 +229,11 @@ namespace gitA
 
             //실제 작업들...
             RunCommand("git pull");
-            Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
             RunCommand("git status");
+
+            //좀 가까이 잘보이게 
+            Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
+
             RunCommand("git commit --all -m "
                 + "\"" + sLocation + sMingling + sPrefix + sCapital + sRound + sTargetHour4Commit + "\"");
 
@@ -257,9 +268,9 @@ namespace gitA
             round++;
         }
 
-        private static string makeLocation()
+        private static string makeLocation(ref string sLocation)
         {
-            string sLocation = "";
+            //string sLocation = "";
             FileInfo fi = new FileInfo("gc_home.cfg");
             if (fi.Exists)
                 sLocation = "[home] ";
