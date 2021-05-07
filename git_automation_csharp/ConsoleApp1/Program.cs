@@ -238,6 +238,7 @@ namespace gitA
                 + "\"" + sLocation + sMingling + sPrefix + sCapital + sRound + sTargetHour4Commit + "\"");
 
             //home mode아닐때만
+            Console.WriteLine("sLocation={0}", sLocation);
             if (sLocation == "")
                 RunCommand("git push");
 
