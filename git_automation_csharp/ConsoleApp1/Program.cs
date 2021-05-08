@@ -6,27 +6,28 @@ using System.Timers;
 Todo: com고치기	
 0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
     * 근무시간(backup drive먼저) 또는 매일 1회(3회맥스)->1/19 => 기타 
-    * 멈췄을때 1/12	
+    * 멈췄을때 1/13
 	5/1토에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/8-> 암것도안함(이것도테스트필요)
     1-2 기능향상:         	    
-        *   home 컴 cmd실행 편하게하는중..
-		*   TARGET_MAX가 round시 1분씩 증가하는것은 어떨까?
+        *   TARGET_MAX가 round시 1분씩 증가하는것은 어떨까? 학인필요
+        *   home 컴 cmd실행 편하게함!		
         *   출력멈춤현상, bat(exe+ cmd이거 안되면) 이것도 문제 생김
 			일단 cmd열고 수동으로 gc실행하면서 
            => 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
-		   => exe로 바로 실행준비하자
+		   => exe로 바로 실행준비하자(장기plan)
         매번:   
                 - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
         이하는 1개만 더 사람답게 깔끔하게?
-                new스페인어 숫자 다음숫자없으면 확률 늘리기 :)=> log에 round도 추가?
+                최근시작하나만보기 =>  
+                new스페인어 숫자12까지() 다음숫자없으면 확률 늘리기 :)=> log에 round도 추가?
                 prefix 추가 new
                 else => postfix추가
-                최근시작하나만보기 =>  0 round에서는 round없이 command를 cero 또는 git reset으로 표기!, <= 0.와 "."도 추가!                
+                0 round에서는 round없이 command를 cero 또는 git reset으로 표기!, <= 0.와 "."도 추가!                
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
                 - 시간은 issue # number화 jira, bugzilla
         후순위
@@ -37,10 +38,10 @@ Todo: com고치기
     1-3 -release note 필요할때 무조건
         -코드정리 => 이후 build할것 !
 
-    1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/7할차례(기능안까먹는 용도)
+    1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/8할차례(기능안까먹는 용도)
         아니면 or ^B
         웬만하면 새 git이 하나로되게해보자~
-        git rebase HEAD~16 -i
+        git rebase HEAD~17 -i
         git push --force(이것도됨)
         git push origin master --force(필요?)
 
@@ -61,7 +62,7 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 925 / 60 / 7;   //days 420이 1일
+        static readonly float    WORK          = 949 / 60 / 7;   //days 420이 1일
         static          int     randomStopMax = 18;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 22;             //초에 한번씩 찍기
@@ -69,7 +70,7 @@ namespace gitA
         // 목표 일일 commit개수 줄여보기 -> 같으면 성공,
         //실패시4분씩 증가면 괜찮은듯 토요일5/1 중에 변경됨 
         //성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 29;
+        static int     TARGET_MAX    = 7 * 60 + 30;
 
         // global
         static int round = 0;
@@ -115,12 +116,12 @@ namespace gitA
             Random random = new Random();
             int i; //for random index
 
-            //1 home mode확인 as sLocation
             string sLocation = "";
+            string sMingling = "";
+            //1 home mode확인 as sLocation
             makeLocation(ref sLocation);
 
-            //2 Command 만들기-절반은 패스(공백)
-            string sMingling = "";
+            //2 Command 만들기-절반은 패스(공백)            
             if (0 == random.Next(0, 2))
             {
                 string[] mingling
@@ -188,7 +189,9 @@ namespace gitA
                     else if (round == 6)
                         sRound = "seis ";
                     else if (round == 7)
-                        sRound = "siete ";                    
+                        sRound = "siete ";
+                    else if (round == 8)
+                        sRound = "ocho ";                    
                     else
                         sRound = Convert.ToString(round) + ".";
                     //모두 소문자화            
