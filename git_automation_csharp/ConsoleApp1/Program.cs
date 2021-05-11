@@ -4,16 +4,16 @@ using System.Text;
 using System.Timers;
 /*
 Todo: com고치기	
-0. #UI 평일은:이제 office컴 연결시만,즉근무시간에만 coding작업할것
+0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
     * 근무시간(backup drive먼저) 또는 매일 1회(3회맥스)->1/19 => 기타 
-    * 멈췄을때 1/13
+    * 초과했을때 1/3 => TARGET_MAX도 늘리고..
+	* 멈췄을때 1/13 => randomStopMax도 늘리고..
 	5/1토에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
-    1-1 1/8-> 암것도안함(이것도테스트필요)
+    1-1 1/9-> 암것도안함(이것도테스트필요)
     1-2 기능향상:         	    
-        *   TARGET_MAX가 round시 1분씩 증가하는것은 어떨까? 학인필요
-        *   home 컴 cmd실행 편하게함!		
+        *   TARGET_MAX가 round시 1분씩 증가하는것은 어떨까? 출력시도 보내기
         *   출력멈춤현상, bat(exe+ cmd이거 안되면) 이것도 문제 생김
 			일단 cmd열고 수동으로 gc실행하면서 
            => 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
@@ -22,10 +22,8 @@ Todo: com고치기
                 - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 1은 늘리고~
-        이하는 1개만 더 사람답게 깔끔하게?
-                최근시작하나만보기 =>  
-                new스페인어 숫자12까지() 다음숫자없으면 확률 늘리기 :)=> log에 round도 추가?
-                prefix 추가 new
+        최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?                
+                new스페인어 숫자12까지() 다음숫자없으면 확률 늘리기 :)=> log에 round도 추가?                
                 else => postfix추가
                 0 round에서는 round없이 command를 cero 또는 git reset으로 표기!, <= 0.와 "."도 추가!                
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
@@ -62,15 +60,15 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 949 / 60 / 7;   //days 420이 1일
-        static          int     randomStopMax = 18;
+        static readonly float    WORK          = 975 / 60 / 7;   //days 420이 1일
+        static          int     randomStopMax = 19;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 22;             //초에 한번씩 찍기
 
         // 목표 일일 commit개수 줄여보기 -> 같으면 성공,
-        //실패시4분씩 증가면 괜찮은듯 토요일5/1 중에 변경됨 
+        //실패시4분씩 증가면 괜찮은듯 
         //성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 30;
+        static int     TARGET_MAX    = 7 * 60 + 34;
 
         // global
         static int round = 0;
@@ -119,7 +117,7 @@ namespace gitA
             string sLocation = "";
             string sMingling = "";
             //1 home mode확인 as sLocation
-            makeLocation(ref sLocation);
+            makeTexts(ref sLocation);
 
             //2 Command 만들기-절반은 패스(공백)            
             if (0 == random.Next(0, 2))
@@ -168,9 +166,10 @@ namespace gitA
             string sRound = "";
             if (round == 0)
             {
-                string[] cero = new string[] { "git reset ", "cero ", "0." };
+                string[] cero = new string[] { "git reset ", "cero ", "0 " };
                 i = random.Next(0, cero.Length);
-                sRound = cero[i];
+                //sRound = cero[i];
+                sMingling = cero[i];
             }
             else
             {
@@ -204,7 +203,8 @@ namespace gitA
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm");
 
-            int randomResult = random.Next(1, TARGET_MAX + round);
+            int thisRoundTarget = TARGET_MAX + round;
+            int randomResult = random.Next(1, thisRoundTarget);
             DateTime targetTime = now.AddMinutes(randomResult);
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
@@ -227,7 +227,7 @@ namespace gitA
             if (round != 0 && randomStop == 1)
             {
                 isStopped = true;
-                sTargetHour4Commit = " forked!!";
+                sTargetHour4Commit = " forked!";
             }
 
             //실제 작업들...
@@ -263,7 +263,7 @@ namespace gitA
             }
 
             // run next round
-            Console.WriteLine("현재시간={3} => {0}/{1} => {2}", randomResult, TARGET_MAX, targetTime, sTime);
+            Console.WriteLine("현재시간={3} => {0}/{1} => {2}", randomResult, thisRoundTarget, targetTime, sTime);
             Console.WriteLine("in Round {0}--------------------------------", round);
 
             // 알람 타이머 생성 및 시작
@@ -272,7 +272,7 @@ namespace gitA
             round++;
         }
 
-        private static string makeLocation(ref string sLocation)
+        private static string makeTexts(ref string sLocation)
         {
             //string sLocation = "";
             FileInfo fi = new FileInfo("gc_home.cfg");
@@ -358,7 +358,7 @@ namespace gitA
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    5.          log에 수도추가
+    5.          log에 수도추가, prefix 추가 new
     4.30        343 lines: home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함, ga.bat -> p.bat
     4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
     4.24        commit에는 시간만, 파일에는 target 분단위까지 적음, 0 round추가, 
