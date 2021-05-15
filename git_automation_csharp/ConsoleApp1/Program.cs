@@ -7,24 +7,24 @@ Todo: com고치기
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
     * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
     * 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.
-	* 멈췄을때 1/18 => randomStopMax도 늘리고..
+	* 멈췄을때 1/15 => randomStopMax도 늘리고..
 	5/1토에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/9-> 암것도안함(이것도테스트필요)
     1-2 기능향상:         	    
-        *   TARGET_MAX가 round시 1분씩 증가하는것은 어떨까? 출력시도 보내기
-        *   출력멈춤현상, bat(exe+ cmd이거 안되면) 이것도 문제 생김
-			일단 cmd열고 수동으로 gc실행하면서 
-           => 출력멈춤현상(일단매번 cmd여는걸로)-> 제자리 출력? <- 한번더 멈춘현상발생시)
+        *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
+            , bat(exe + cmd이거 안되면) 이것도 문제 생김			
+            제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
         매번:   
                 - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
-                - TARGET_MAX도 1은 늘리고~
+                - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?                
-                new스페인어 숫자12까지() 다음숫자없으면 확률 늘리기 :)=> log에 round도 추가?                
+                new스페인어 숫자12까지() 다음숫자없으면 확률 늘리기                 
                 else => postfix추가
+                => log에 round도 추가?
                 0 round에서<= 0.와 "."도 추가?        
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
                 - 시간은 issue # number화 jira, bugzilla
@@ -60,15 +60,15 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 993 / 60 / 7;   //days 420이 1일
-        static          int     randomStopMax = 20;
+        static readonly float    WORK          = 1015 / 60 / 7;   //days 420이 1일
+        static          int     randomStopMax = 21;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 23;             //초에 한번씩 찍기
 
         // 목표 일일 commit개수 줄여보기 -> 같으면 성공,
         //실패시4분씩 증가면 괜찮은듯 
-        //성공 및 한화면안차면 1++
-        static int     TARGET_MAX    = 7 * 60 + 40; //계산하기좋게 10단위로
+        //성공 및 한화면안차면 10++
+        static int     TARGET_MAX    = 7 * 60 + 50; //계산하기좋게 10단위로
 
         // global
         static int round = 0;
@@ -110,7 +110,7 @@ namespace gitA
         }
         static void RunGit()
         {
-            Console.WriteLine("준비! Round {0} try--------------------------------", round);
+            Console.WriteLine("\n준비! Round {0} try--------------------------------", round);
             Random random = new Random();
             int i; //for random index
 
@@ -190,7 +190,9 @@ namespace gitA
                     else if (round == 7)
                         sRound = "siete ";
                     else if (round == 8)
-                        sRound = "ocho ";                    
+                        sRound = "ocho ";
+                    else if (round == 9)
+                        sRound = "nueve ";                    
                     else
                         sRound = Convert.ToString(round) + ".";
                     //모두 소문자화            
@@ -357,6 +359,7 @@ namespace gitA
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
+    5.17        TARGET_MAX가 round시 1분씩 증가
     5.          log에 수도추가, prefix 추가 new, 0 round에서는 command를 cero 또는 git reset으로 표기!
     4.30        343 lines: home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함, ga.bat -> p.bat
     4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
