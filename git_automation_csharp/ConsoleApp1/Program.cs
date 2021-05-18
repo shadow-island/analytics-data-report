@@ -7,12 +7,13 @@ Todo: com고치기
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
     * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
     * 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.
-	* 멈췄을때 1/15 => randomStopMax도 늘리고..
-	5/1토에 bat file실행도 위험한거같으니 무조건 gc로 실행!
+	* random멈췄을때 1/16 => randomStopMax도 늘리고..
+1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/9-> 암것도안함(이것도테스트필요)
     1-2 기능향상:         	    
+        *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
             , bat(exe + cmd이거 안되면) 이것도 문제 생김			
             제자리 출력? <- 한번더 멈춘현상발생시)
@@ -24,17 +25,16 @@ Todo: com고치기
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?                
                 new스페인어 숫자12까지() 다음숫자없으면 확률 늘리기                 
                 else => postfix추가
-                => log에 round도 추가?
-                0 round에서<= 0.와 "."도 추가?        
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
-                - 시간은 issue # number화 jira, bugzilla
+                - 시간은 issue # number화 jira, bugzilla                
+                => log에 round도 추가?
         후순위
 		    *하루7commit이하(2회이상) or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
         필요여부 미지수:		
             * 안중요=> ini file, ini file 숫자증가만? 		    
-            * exe check필요할듯 -exe빠지는경우 있음 update표시?    
     1-3 -release note 필요할때 무조건
         -코드정리 => 이후 build할것 !
+        -rebase로 어제 commit횟수로 올릴수도있다
 
     1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/8할차례(기능안까먹는 용도)
         아니면 or ^B
@@ -60,15 +60,15 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 1015 / 60 / 7;   //days 420이 1일
-        static          int     randomStopMax = 21;
+        static readonly float    WORK          = 1026 / 60 / 7;   //days 420이 1일
+        static          int     randomStopMax = 22;
         static readonly int     roundMax      = 21;             //같은숫자로?
         static          int     tick          = 23;             //초에 한번씩 찍기
 
         // 목표 일일 commit개수 줄여보기 -> 같으면 성공,
         //실패시4분씩 증가면 괜찮은듯 
         //성공 및 한화면안차면 10++
-        static int     TARGET_MAX    = 7 * 60 + 50; //계산하기좋게 10단위로
+        static int     TARGET_MAX    = 8 * 60; //계산하기좋게 10단위로
 
         // global
         static int round = 0;
@@ -112,7 +112,7 @@ namespace gitA
         {
             Console.WriteLine("\n준비! Round {0} try--------------------------------", round);
             Random random = new Random();
-            int i; //for random index
+            int r; //for random index
 
             string sLocation = "";
             string sMingling = "";
@@ -124,23 +124,23 @@ namespace gitA
             {
                 string[] mingling
                     = new string[] {"", "eugene", "app", "Command", "Squash", "Update", "Commit", "commits", "push" };
-                i = random.Next(0, mingling.Length);
+                r = random.Next(0, mingling.Length);
                 if (0 == random.Next(0, 2))
-                    sMingling = mingling[i] + " ";
+                    sMingling = mingling[r] + " ";
                 else
-                    sMingling = "new " + mingling[i] + " ";
+                    sMingling = "new " + mingling[r] + " ";
                 //postfix?//".",, "-"
             }
 
             //3.조사 만들기-절반은 패스(공백)
             string sPrefix = "";
-            i = random.Next(0, 2);
-            Console.WriteLine("sCong {0}", i);
-            if (0 == i)
+            r = random.Next(0, 2);
+            Console.WriteLine("sCong {0}", r);
+            if (0 == r)
             {
                 string[] cong = new string[] { "by", "from", "in" };
-                i = random.Next(0, cong.Length);
-                sPrefix = cong[i] + " ";
+                r = random.Next(0, cong.Length);
+                sPrefix = cong[r] + " ";
             }
 
             //4.국가 만들기
@@ -154,22 +154,22 @@ namespace gitA
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone"
             };
-            i = random.Next(0, capital.Length);
-            string sCapital = capital[i] + " ";
+            r = random.Next(0, capital.Length);
+            string sCapital = capital[r] + " ";
             string sAnswer;
-            if (i % 2 == 0)
-                sAnswer = capital[i + 1];
+            if (r % 2 == 0)
+                sAnswer = capital[r + 1];
             else
-                sAnswer = capital[i - 1];
+                sAnswer = capital[r - 1];
 
             //5. round
             string sRound = "";
             if (round == 0)
             {
-                string[] cero = new string[] { "git reset ", "cero ", "0 " };
-                i = random.Next(0, cero.Length);
+                string[] cero = new string[] { "git reset ", "cero ", "0 ", ". " };
+                r = random.Next(0, cero.Length);
                 //sRound = cero[i];
-                sMingling = cero[i];
+                sMingling = cero[r];
             }
             else
             {
@@ -211,9 +211,9 @@ namespace gitA
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
 
-            i = random.Next(0, 2);
-            Console.WriteLine("sTargetHour4Commit {0}", i);
-            if (0 == i)
+            r = random.Next(0, 2);
+            Console.WriteLine("sTargetHour4Commit {0}", r);
+            if (0 == r)
             {
                 sTargetHour4Commit = "ticket" + sTargetHour4Commit;
             }
@@ -349,6 +349,8 @@ namespace gitA
             pro.Close();
             // 결과 값을 확인 합니다.
             Console.WriteLine(resultValue);
+            if (resultValue.Contains("exe"))
+                Console.WriteLine("실행파일 변경");
         }
     }
 }
