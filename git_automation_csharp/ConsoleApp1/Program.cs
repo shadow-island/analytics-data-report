@@ -19,14 +19,15 @@ Todo: com고치기
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
         매번:   
-                - 작업시간 체크
+                1) 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
-        최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?                
+        최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?
+                spanish 12까지
                 다음숫자없으면 확률 늘리기
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
-                - 시간은 issue # number화 jira, bugzilla                
+                - 시간은 issue # number화 jira, bugzilla or spanish
                 => log에 round도 추가?
         후순위
 		    *하루7commit이하(2회이상) or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
@@ -60,14 +61,14 @@ namespace gitA
         static readonly bool debuggingMode = false;          // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 1044 / 60 / 7;   //days 420이 1일
-        static          int     randomStopMax = 22;
-        static readonly int     roundMax      = 21;             //같은숫자로?
+        static readonly float    WORK          = 1067 / 60 / 7;   //days 420이 1일
+        static          int     randomStopMax = 23;
+        static readonly int     roundMax      = 20;             //같은숫자로?
         static          int     tick          = 23;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공
         //  성공 및 한화면안차면 10++
-        static int     TARGET_MAX    = 8 * 60 + 10; //490, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 8 * 60 + 20; //490, 계산하기좋게 10단위로
 
         // global
         static int round = 0;
@@ -118,19 +119,6 @@ namespace gitA
            
             makeTexts(ref sLocation, ref sMingling);
 
-            //2 Command 만들기-절반은 패스(공백)            
-            if (0 == random.Next(0, 2))
-            {
-                string[] mingling
-                    = new string[] {"", "eugene", "app", "Command", "Squash", "Update", "Commit", "commits", "push" };
-                r = random.Next(0, mingling.Length);
-                if (0 == random.Next(0, 2))
-                    sMingling = mingling[r] + " ";
-                else
-                    sMingling = "new " + mingling[r] + " ";
-                //postfix?//".",, "-"
-            }
-
             //3.조사 만들기-절반은 패스(공백)
             string sPrefix = "";
             r = random.Next(0, 2);
@@ -151,7 +139,7 @@ namespace gitA
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone"
+                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville"
             };
             r = random.Next(0, capital.Length);
             string sCapital = capital[r] + " ";
@@ -233,7 +221,7 @@ namespace gitA
                 sTargetHour4Commit = " forked";
             }
             if (round >= roundMax)
-                sTargetHour4Commit = " branch";
+                sTargetHour4Commit = " finished";
 
             //실제 작업들...
             RunCommand("git pull");
@@ -254,16 +242,16 @@ namespace gitA
             Console.Write(" randomStop={0}/{1} ", randomStop, randomStopMax);
 
             if (isStopped)
-            {
-                Console.WriteLine("현재시간={0}", sTime);
+            {                
                 Console.WriteLine("사고방지용 Random 종료");
+				Console.WriteLine("현재시간={0}", sTime);
                 Environment.Exit(0);
             }
 
             if (round >= roundMax)
-            {
-                Console.WriteLine("현재시간={0}", sTime);
+            {                
                 Console.WriteLine("사고방지용 Max 종료");
+				Console.WriteLine("현재시간={0}", sTime);
                 Environment.Exit(0);
             }
 
@@ -279,10 +267,26 @@ namespace gitA
 
         private static void makeTexts(ref string sLocation, ref string sMingling)
         {
+            Random random = new Random();
+            int r; //for random index
+
             //1 home mode확인 as sLocation
             FileInfo fi = new FileInfo("gc_home.cfg");
             if (fi.Exists)
                 sLocation = "[home] ";
+
+            //2 Command 만들기-절반은 패스(공백)            
+            if (0 == random.Next(0, 2))
+            {
+                string[] mingling
+                    = new string[] { "eugene", "app", "Command", "Squash", "Update", "Commit", "commits", "push", "branch" };
+                r = random.Next(0, mingling.Length);
+                if (0 == random.Next(0, 2))
+                    sMingling = mingling[r] + " ";
+                else
+                    sMingling = "new " + mingling[r] + " ";
+                //postfix?//".",, "-"
+            }
         }
 
         // 작업쓰레드가 지정된 시간 간격으로 아래 이벤트 핸들러 실행
