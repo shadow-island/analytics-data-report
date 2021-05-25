@@ -23,10 +23,9 @@ Todo: com고치기
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?
-                spanish 12까지
-                다음숫자없으면 확률 늘리기
+                spanish 12까지, 다음숫자없으면 확률 늘리기
                 else => postfix추가
-                - eugene 일때 -> command ,e.g. rewrite, or sPrefix(new) 추가?
+                - eugene 일때 -> command ,e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or spanish
                 => log에 round도 추가?
         후순위
@@ -34,9 +33,8 @@ Todo: com고치기
         필요여부 미지수:		
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
-        -코드정리 => 이후 build할것 !
-        -rebase로 어제 commit횟수로 올릴수도있다
-
+        -코드정리 => 이후 build할것 !        
+    1-4 1/2확률로 어제로 돌림 -rebase로 어제 commit횟수로 올릴수도있다
     1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/8할차례(기능안까먹는 용도)
         아니면 or ^B
         웬만하면 새 git이 하나로되게해보자~
@@ -58,17 +56,17 @@ namespace gitA
 {
     class Program
     {
-        static readonly bool debuggingMode = false;          // true false if real mode    
+        static readonly bool debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 1067 / 60 / 7;   //days 420이 1일
+        static readonly float    WORK          = 1081 / 60 / 7;  //days 420이 1일
         static          int     randomStopMax = 23;
         static readonly int     roundMax      = 20;             //같은숫자로?
         static          int     tick          = 23;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공
         //  성공 및 한화면안차면 10++
-        static int     TARGET_MAX    = 8 * 60 + 20; //490, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 8 * 60 + 30; //510, 계산하기좋게 10단위로
 
         // global
         static int round = 0;
@@ -108,6 +106,7 @@ namespace gitA
 
             Console.ReadLine();
         }
+		
         static void RunGit()
         {
             Console.WriteLine("\n준비! Round {0} try--------------------------------", round);
@@ -122,7 +121,6 @@ namespace gitA
             //3.조사 만들기-절반은 패스(공백)
             string sPrefix = "";
             r = random.Next(0, 2);
-            Console.WriteLine("sCong {0}", r);
             if (0 == r)
             {
                 string[] cong = new string[] { "by", "from", "in" };
@@ -139,7 +137,7 @@ namespace gitA
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville"
+                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville","Guinea","Conakry"
             };
             r = random.Next(0, capital.Length);
             string sCapital = capital[r] + " ";
@@ -200,13 +198,13 @@ namespace gitA
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
 
-            r = random.Next(0, 2);
-            Console.WriteLine("sTargetHour4Commit {0}", r);
-            if (0 == r)
-            {
-                sTargetHour4Commit = "ticket" + sTargetHour4Commit;
-            }
-
+            //r = random.Next(0, 2);
+            //Console.WriteLine("sTargetHour4Commit {0}", r);
+            string[] bug = new string[] { "", "ticket " };
+            r = random.Next(0, bug.Length);
+            //sRound = cero[i];
+            sTargetHour4Commit = bug[r] + sTargetHour4Commit;
+            
             //우선 매번~
             if (sLocation == "")
                 Update(sAnswer + " " + sTime + " " + sTarget);
