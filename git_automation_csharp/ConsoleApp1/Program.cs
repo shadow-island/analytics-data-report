@@ -22,19 +22,17 @@ Todo: com고치기
                 1) 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
-        최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?
-                spanish 12까지, 다음숫자없으면 확률 늘리기
+        최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
+                1.시간도 spanish? 2.스반어맞추면 줄이기 => log에 round도 추가?
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
-                - 시간은 issue # number화 jira, bugzilla or spanish
-                => log에 round도 추가?
+                - 시간은 issue # number화 jira, bugzilla or                 
         후순위
-		    *하루7commit이하(2회이상) or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+		    *하루6commit이하 (2회이상) or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
         필요여부 미지수:		
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
-        -코드정리 => 이후 build할것 !        
-    1-4 1/2확률로 어제로 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+        -코드정리 => 이후 build할것!
     1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/8할차례(기능안까먹는 용도)
         아니면 or ^B
         웬만하면 새 git이 하나로되게해보자~
@@ -46,6 +44,7 @@ Todo: com고치기
         또는 gitk에서 hard로
         rebase하는 명령어찾기		
         https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
+    1-5 1/3확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
 
 2 이건 studio열지않고, 다른 application?(
     quiz 맞은거 random숫자조정으로 잘안나오게!->정치or투자)
@@ -59,14 +58,14 @@ namespace gitA
         static readonly bool debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 1081 / 60 / 7;  //days 420이 1일
+        static readonly float    WORK          = 1082 / 60 / 7;  //days 420이 1일
         static          int     randomStopMax = 23;
         static readonly int     roundMax      = 20;             //같은숫자로?
         static          int     tick          = 23;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공
         //  성공 및 한화면안차면 10++
-        static int     TARGET_MAX    = 8 * 60 + 30; //510, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 8 * 60 + 40; //510, 계산하기좋게 10단위로
 
         // global
         static int round = 0;
@@ -113,9 +112,9 @@ namespace gitA
             Random random = new Random();
             int r; //for random index
 
+            //makeTexts
             string sLocation = "";
-            string sMingling = "";
-           
+            string sMingling = "";           
             makeTexts(ref sLocation, ref sMingling);
 
             //3.조사 만들기-절반은 패스(공백)
@@ -137,7 +136,8 @@ namespace gitA
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville","Guinea","Conakry"
+                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
+                "Guinea","Conakry","Haiti","Port-au-Prince"
             };
             r = random.Next(0, capital.Length);
             string sCapital = capital[r] + " ";
@@ -179,7 +179,11 @@ namespace gitA
                     else if (round == 9)
                         sRound = "nueve ";
                     else if (round == 10)
-                        sRound = "diez ";                    
+                        sRound = "diez ";
+                    else if (round == 11)
+                        sRound = "ONCE ";
+                    else if (round == 12)
+                        sRound = "DOCE ";                    
                     else
                         sRound = Convert.ToString(round) + ".";
                     //모두 소문자화            
@@ -200,7 +204,7 @@ namespace gitA
 
             //r = random.Next(0, 2);
             //Console.WriteLine("sTargetHour4Commit {0}", r);
-            string[] bug = new string[] { "", "ticket " };
+            string[] bug = new string[] { "", " ticket " };
             r = random.Next(0, bug.Length);
             //sRound = cero[i];
             sTargetHour4Commit = bug[r] + sTargetHour4Commit;
@@ -366,12 +370,12 @@ namespace gitA
 	2  암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    5.17        TARGET_MAX가 round시 1분씩 증가
+    5.17        TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지
     5.          log에 수도추가, prefix 추가 new, 0 round에서는 command를 cero 또는 git reset으로 표기!
     4.30        343 lines: home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함, ga.bat -> p.bat
     4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
     4.24        commit에는 시간만, 파일에는 target 분단위까지 적음, 0 round추가, 
-    4.21        1.국가수표시,스페인어숫자, 2.home mode push없음, 소문자화, command, cong 1/2확률로 빈칸출력(수도 집중용)
+    4.21        1.국가수표시 2.home mode push없음, 소문자화, command, cong 1/2확률로 빈칸출력(수도 집중용)
     4.19        시간에서0빼기, Force Mode:office용 한줄로 처리, from(조사)추가, 명령어 1전체소문자로.2첫자대문자(default)
     4.1         강제시작 옵션만들기 eu: 0이라 commit안되는경우있었다, 
     2021.       다음시간표시, Random종료기능, home위치확인(file식으로 쉽게), random화(command,수도), 
