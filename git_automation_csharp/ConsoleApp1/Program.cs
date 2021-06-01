@@ -58,14 +58,14 @@ namespace gitA
         static readonly bool debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 1082 / 60 / 7;  //days 420이 1일
+        static readonly float    WORK          = 1084 / 60 / 7;  //days 420이 1일
         static          int     randomStopMax = 23;
         static readonly int     roundMax      = 20;             //같은숫자로?
         static          int     tick          = 23;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공
         //  성공 및 한화면안차면 10++
-        static int     TARGET_MAX    = 8 * 60 + 40; //510, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 8 * 60 + 50; //520, 계산하기좋게 10단위로
 
         // global
         static int round = 0;
@@ -118,13 +118,12 @@ namespace gitA
             makeTexts(ref sLocation, ref sMingling);
 
             //3.조사 만들기-절반은 패스(공백)
-            string sPrefix = "";
-            r = random.Next(0, 2);
-            if (0 == r)
+            string sIchiMae = "";
+            if (0 == random.Next(0, 2))
             {
                 string[] cong = new string[] { "by", "from", "in" };
                 r = random.Next(0, cong.Length);
-                sPrefix = cong[r] + " ";
+                sIchiMae = cong[r] + " ";
             }
 
             //4.국가 만들기
@@ -158,7 +157,7 @@ namespace gitA
             }
             else
             {
-                if (0 != random.Next(0, 4))
+                if (round <= 12)
                 {
                     if (round == 1)
                         sRound = "Uno ";
@@ -184,11 +183,12 @@ namespace gitA
                         sRound = "ONCE ";
                     else if (round == 12)
                         sRound = "DOCE ";                    
-                    else
-                        sRound = Convert.ToString(round) + ".";
+                 
                     //모두 소문자화            
                     sRound = sRound.ToLower();
                 }
+                else
+                    sRound = Convert.ToString(round) + ".";
             }
             //~
 
@@ -233,7 +233,7 @@ namespace gitA
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
 
             RunCommand("git commit --all -m "
-                + "\"" + sLocation + sMingling + sPrefix + sCapital + sRound + sTargetHour4Commit + "\"");
+                + "\"" + sLocation + sMingling + sIchiMae + sCapital + sRound + sTargetHour4Commit + "\"");
 
             //home mode아닐때만
             Console.WriteLine("sLocation={0}", sLocation);
