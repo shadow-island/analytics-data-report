@@ -23,7 +23,7 @@ Todo: com고치기
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
-                1.시간도 spanish? 2.스반어맞추면 줄이기 => log에 round도 추가?
+                1.시간도 spanish? => 2.스반어맞추면 줄이기 => log에 round도 추가?
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or                 
@@ -58,14 +58,14 @@ namespace gitA
         static readonly bool debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 1084 / 60 / 7;  //days 420이 1일
+        static readonly float    WORK          = 1112 / 60 / 7;  //days 420이 1일
         static          int     randomStopMax = 23;
         static readonly int     roundMax      = 20;             //같은숫자로?
         static          int     tick          = 23;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공
         //  성공 및 한화면안차면 10++
-        static int     TARGET_MAX    = 8 * 60 + 50; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 9 * 60 + 0; //520, 계산하기좋게 10단위로
 
         // global
         static int round = 0;
@@ -127,6 +127,7 @@ namespace gitA
             }
 
             //4.국가 만들기
+            string sCapital;
             string[] capital = new string[]
             {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
@@ -139,7 +140,7 @@ namespace gitA
                 "Guinea","Conakry","Haiti","Port-au-Prince"
             };
             r = random.Next(0, capital.Length);
-            string sCapital = capital[r] + " ";
+            sCapital = capital[r] + " ";
             string sAnswer;
             if (r % 2 == 0)
                 sAnswer = capital[r + 1];
@@ -155,41 +156,38 @@ namespace gitA
                 //sRound = cero[i];
                 sMingling = cero[r];
             }
-            else
+            else if (round <= 12)
             {
-                if (round <= 12)
-                {
-                    if (round == 1)
-                        sRound = "Uno ";
-                    else if (round == 2)
-                        sRound = "Dos ";
-                    else if (round == 3)
-                        sRound = "Tres ";
-                    else if (round == 4)
-                        sRound = "Cuatro ";
-                    else if (round == 5)
-                        sRound = "Cinco ";
-                    else if (round == 6)
-                        sRound = "seis ";
-                    else if (round == 7)
-                        sRound = "siete ";
-                    else if (round == 8)
-                        sRound = "ocho ";
-                    else if (round == 9)
-                        sRound = "nueve ";
-                    else if (round == 10)
-                        sRound = "diez ";
-                    else if (round == 11)
-                        sRound = "ONCE ";
-                    else if (round == 12)
-                        sRound = "DOCE ";                    
+                if (round == 1)
+                    sRound = "Uno ";
+                else if (round == 2)
+                    sRound = "Dos ";
+                else if (round == 3)
+                    sRound = "Tres ";
+                else if (round == 4)
+                    sRound = "Cuatro ";
+                else if (round == 5)
+                    sRound = "Cinco ";
+                else if (round == 6)
+                    sRound = "seis ";
+                else if (round == 7)
+                    sRound = "siete ";
+                else if (round == 8)
+                    sRound = "ocho ";
+                else if (round == 9)
+                    sRound = "nueve ";
+                else if (round == 10)
+                    sRound = "diez ";
+                else if (round == 11)
+                    sRound = "ONCE ";
+                else if (round == 12)
+                    sRound = "DOCE ";                    
                  
-                    //모두 소문자화            
-                    sRound = sRound.ToLower();
-                }
-                else
-                    sRound = Convert.ToString(round) + ".";
+                //모두 소문자화            
+                sRound = sRound.ToLower();
             }
+            else
+                sRound = Convert.ToString(round) + ".";
             //~
 
             // 6.random Target with ticket 
@@ -204,7 +202,7 @@ namespace gitA
 
             //r = random.Next(0, 2);
             //Console.WriteLine("sTargetHour4Commit {0}", r);
-            string[] bug = new string[] { "", " ticket " };
+            string[] bug = new string[] { "", " ticket ", " bug " };
             r = random.Next(0, bug.Length);
             //sRound = cero[i];
             sTargetHour4Commit = bug[r] + sTargetHour4Commit;
