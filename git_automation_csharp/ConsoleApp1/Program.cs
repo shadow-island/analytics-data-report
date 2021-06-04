@@ -18,17 +18,17 @@ Todo: com고치기
             , bat(exe + cmd이거 안되면) 이것도 문제 생김			
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
-        매번:   
-                1) 작업시간 체크
+        매번-----------------------   
+                - 작업시간 체크
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
-                1.시간도 spanish? => 2.스반어맞추면 줄이기 => log에 round도 추가?
+                0.스반어맞추면 줄이기, 안나와서 줄일거없으면 => 1.시간도 spanish? =>  => log에 round도 추가?
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or                 
         후순위
-		    *하루6commit이하 (2회이상) or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
+		    *하루 2~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
         필요여부 미지수:		
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
@@ -44,7 +44,8 @@ Todo: com고치기
         또는 gitk에서 hard로
         rebase하는 명령어찾기		
         https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
-    1-5 1/3확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+    1-5 1/4확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+        git rebase HEAD~7 -i
 
 2 이건 studio열지않고, 다른 application?(
     quiz 맞은거 random숫자조정으로 잘안나오게!->정치or투자)
@@ -58,14 +59,13 @@ namespace gitA
         static readonly bool debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 1112 / 60 / 7;  //days 420이 1일
+        static readonly float    WORK          = 1132 / 60 / 7;  //days 420이 1일
         static          int     randomStopMax = 23;
         static readonly int     roundMax      = 20;             //같은숫자로?
         static          int     tick          = 23;             //초에 한번씩 찍기
 
-        //  목표 일일 commit개수 줄여보기 -> 같으면 성공
-        //  성공 및 한화면안차면 10++
-        static int     TARGET_MAX    = 9 * 60 + 0; //520, 계산하기좋게 10단위로
+        //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  성공 및 한화면안차면 10++
+        static int     TARGET_MAX    = 9 * 60 + 10; //520, 계산하기좋게 10단위로
 
         // global
         static int round = 0;
@@ -137,7 +137,7 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
-                "Guinea","Conakry","Haiti","Port-au-Prince"
+                "Guinea","Conakry","Haiti","Port-au-Prince","Mali","Bamako"
             };
             r = random.Next(0, capital.Length);
             sCapital = capital[r] + " ";
@@ -153,7 +153,6 @@ namespace gitA
             {
                 string[] cero = new string[] { "git reset ", "cero ", "0 ", ". " };
                 r = random.Next(0, cero.Length);
-                //sRound = cero[i];
                 sMingling = cero[r];
             }
             else if (round <= 12)
@@ -364,11 +363,11 @@ namespace gitA
 
 /* 본 App 동작설명
 #기능
-	1 자동 commit 및 random 종료시 email 알림?
-	2  암기기능 (수도, 스페인어 숫자 )
+	1 자동 commit 및 random 종료
+	2 암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    5.17        TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지
+    5.17        390lines, TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지
     5.          log에 수도추가, prefix 추가 new, 0 round에서는 command를 cero 또는 git reset으로 표기!
     4.30        343 lines: home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함, ga.bat -> p.bat
     4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
