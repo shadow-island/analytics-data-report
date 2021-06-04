@@ -33,3 +33,10 @@ D:\my\eugene_data\douki\code\git\analytics-data-report\git_automation_csharp\Con
 D:\my\eugene_data\douki\code\git\analytics-data-report\git_automation_csharp\ConsoleApp1\obj\Debug\G.csproj.CoreCompileInputs.cache
 D:\my\eugene_data\douki\code\git\analytics-data-report\git_automation_csharp\ConsoleApp1\obj\Debug\gc.exe
 D:\my\eugene_data\douki\code\git\analytics-data-report\git_automation_csharp\ConsoleApp1\obj\Debug\gc.pdb
+D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\bin\Debug\gc.exe.config
+D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\bin\Debug\gc.exe
+D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\bin\Debug\gc.pdb
+D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\G.csprojAssemblyReference.cache
+D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\G.csproj.CoreCompileInputs.cache
+D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\gc.exe
+D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\gc.pdb

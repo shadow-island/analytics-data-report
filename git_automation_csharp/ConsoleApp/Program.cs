@@ -24,7 +24,8 @@ Todo: com고치기
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
-                0. 스반어맞추면 줄이기, 안나와서 줄일거없으면 => 1.시간도 spanish? =>  => log에 round도 추가?
+                0. 12까지한후 스반어맞추면 줄이기, 
+                1. 안나와서 줄일거없으면 => 1.시간도 spanish? => log에 round도 추가?
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or                 
@@ -57,19 +58,19 @@ namespace gitA
 {
     class Program
     {
-        static readonly bool debuggingMode = false;             // true false if real mode    
+        static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
         static readonly float    WORK          = 1161 / 60 / 7;  //days 420이 1일
-        static          int     randomStopMax = 23;
+        static          int     randomStopMax = 24;
         static readonly int     roundMax      = 20;             //같은숫자로?
-        static          int     tick          = 23;             //초에 한번씩 찍기
+        static          int     tick          = 24;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         static int     TARGET_MAX    = 9 * 60 + 20; //520, 계산하기좋게 10단위로
 
         // global
-        static int round = 0;
+        static int _round = 0;
         // timer 2개 
         static readonly Timer timerTick = new System.Timers.Timer();
         static System.Threading.Timer myTimer = null;          
@@ -109,7 +110,7 @@ namespace gitA
 		
         static void RunGit()
         {
-            Console.WriteLine("\n준비! Round {0} try--------------------------------", round);
+            Console.WriteLine("\n준비! Round {0} try--------------------------------", _round);
             Random random = new Random();
             int r; //for random index
 
@@ -150,53 +151,53 @@ namespace gitA
 
             //5. round
             string sRound = "";
-            if (round == 0)
+            if (_round == 0)
             {
                 string[] cero = new string[] { "git reset ", "cero ", "0 ", ". " };
                 r = random.Next(0, cero.Length);
                 sMingling = cero[r];
             }
-            else if (round <= 12)
+            else if (_round <= 12)
             {
                 if (0 == random.Next(0, 2))
                 {
-                    if (round == 1)
+                    if (_round == 1)
                         sRound = "Uno ";
-                    else if (round == 2)
+                    else if (_round == 2)
                         sRound = "Dos ";
-                    else if (round == 3)
+                    else if (_round == 3)
                         sRound = "Tres ";
-                    else if (round == 4)
+                    else if (_round == 4)
                         sRound = "Cuatro ";
-                    else if (round == 5)
+                    else if (_round == 5)
                         sRound = "Cinco ";
-                    else if (round == 6)
+                    else if (_round == 6)
                         sRound = "seis ";
-                    else if (round == 7)
+                    else if (_round == 7)
                         sRound = "siete ";
-                    else if (round == 8)
+                    else if (_round == 8)
                         sRound = "ocho ";
-                    else if (round == 9)
+                    else if (_round == 9)
                         sRound = "nueve ";
-                    else if (round == 10)
+                    else if (_round == 10)
                         sRound = "diez ";
-                    else if (round == 11)
+                    else if (_round == 11)
                         sRound = "ONCE ";
-                    else if (round == 12)
+                    else if (_round == 12)
                         sRound = "DOCE ";
                     //모두 소문자화            
                     sRound = sRound.ToLower();
                 }               
             }
             else
-                sRound = Convert.ToString(round) + ".";
+                sRound = Convert.ToString(_round) + ".";
             //~
 
             // 6.random Target with ticket 
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm");
 
-            int thisRoundTarget = TARGET_MAX + round;
+            int thisRoundTarget = TARGET_MAX + _round;
             int randomResult = random.Next(1, thisRoundTarget);
             DateTime targetTime = now.AddMinutes(randomResult);
             string sTarget = targetTime.ToString("HH:mm");
@@ -217,12 +218,12 @@ namespace gitA
             //sGoStop
             int randomStop = random.Next(1, randomStopMax + 1);
             bool isStopped = false;
-            if (round != 0 && randomStop == 1)
+            if (_round != 0 && randomStop == 1)
             {
                 isStopped = true;
                 sTargetHour4Commit = " forked";
             }
-            if (round >= roundMax)
+            if (_round >= roundMax)
                 sTargetHour4Commit = " finished";
 
             //실제 작업들...
@@ -250,7 +251,7 @@ namespace gitA
                 Environment.Exit(0);
             }
 
-            if (round >= roundMax)
+            if (_round >= roundMax)
             {                
                 Console.WriteLine("사고방지용 Max 종료");
 				Console.WriteLine("현재시간={0}", sTime);
@@ -259,12 +260,12 @@ namespace gitA
 
             // run next round
             Console.WriteLine("현재시간={3} => {0}/{1} => {2}", randomResult, thisRoundTarget, targetTime, sTime);
-            Console.WriteLine("in Round {0}--------------------------------", round);
+            Console.WriteLine("in Round {0}--------------------------------", _round);
 
             // 알람 타이머 생성 및 시작
             myTimer = new System.Threading.Timer(Timer_Elapsed, null, 1000 * randomResult * 60, 60 * 1000 * 3);
 
-            round++;
+            _round++;
         }
 
         private static void makeTexts(ref string sLocation, ref string sMingling)
@@ -284,9 +285,12 @@ namespace gitA
                     = new string[] { "eugene", "app", "Command", "Squash", "Update", "Commit", "commits", "push", "branch" };
                 r = random.Next(0, mingling.Length);
                 if (0 == random.Next(0, 2))
-                    sMingling = mingling[r] + " ";
+                    sMingling = mingling[r];
                 else
-                    sMingling = "new " + mingling[r] + " ";
+                    sMingling = "new " + mingling[r];
+                if (0 == random.Next(0, 2))
+                    sMingling = sMingling + ",";
+                sMingling = sMingling + " ";
                 //postfix?//".",, "-"
             }
         }
