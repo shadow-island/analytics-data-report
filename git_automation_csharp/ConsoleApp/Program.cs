@@ -7,7 +7,7 @@ Todo: com고치기
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
     * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
     * 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.
-	* random멈췄을때 1/16 => randomStopMax도 늘리고..
+	* random멈췄을때 1/18 => randomStopMax도 늘리고..
 1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
@@ -20,11 +20,10 @@ Todo: com고치기
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
         매번-----------------------   
-                - 작업시간 체크
-                - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
+                - 작업시간 체크? 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
-                0. 12까지한후 스반어맞추면 줄이기, 
+                0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 => 1.시간도 spanish? => log에 round도 추가?
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
@@ -48,26 +47,25 @@ Todo: com고치기
         https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
     1-5 1/4확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
         git rebase HEAD~7 -i
-
-2 이건 studio열지않고, 다른 application?(
-    quiz 맞은거 random숫자조정으로 잘안나오게!->정치or투자)
-    미린 엑셀 -> javascript?
 */
 
 namespace gitA
 {
     class Program
     {
+        //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
+        static readonly float    WORK = 1200 / 60 / 7;        
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";
-        static readonly float    WORK          = 1161 / 60 / 7;  //days 420이 1일
+                
+
         static          int     randomStopMax = 24;
-        static readonly int     roundMax      = 20;             //같은숫자로?
+        static readonly int     roundMax      = 21;             //위의 배수?
         static          int     tick          = 24;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 9 * 60 + 20; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 9 * 60 + 40; //520, 계산하기좋게 10단위로
 
         // global
         static int _round = 0;
@@ -107,7 +105,46 @@ namespace gitA
 
             Console.ReadLine();
         }
-		
+
+        static string Espanol(int n)
+        {
+            string r = "";
+            if (n == 1)
+                r = "uno ";
+            else if (n == 2)
+                r = "Dos ";
+            else if (n == 3)
+                r = "Tres ";
+            else if (n == 4)
+                r = "Cuatro ";
+            else if (n == 5)
+                r = "Cinco ";
+            else if (n == 6)
+                r = "seis ";
+            else if (n == 7)
+                r = "siete ";
+            else if (n == 8)
+                r = "ocho ";
+            else if (n == 9)
+                r = "nueve ";
+            else if (n == 10)
+                r = "diez ";
+            else if (n == 11)
+                r = "ONCE ";
+            else if (n == 12)
+                r = "DOCE ";
+            return r;
+        }
+
+        static string RandomString(string[] stringList)
+        {
+            Random random = new Random();
+            int r; //for random index
+
+            r = random.Next(0, stringList.Length);
+            return stringList[r];
+        }
+
         static void RunGit()
         {
             Console.WriteLine("\n준비! Round {0} try--------------------------------", _round);
@@ -121,11 +158,11 @@ namespace gitA
 
             //3.조사 만들기-절반은 패스(공백)
             string sIchiMae = "";
-            if (0 == random.Next(0, 2))
+            //if (0 == random.Next(0, 2))
             {
                 string[] cong = new string[] { "by", "from", "in" };
-                r = random.Next(0, cong.Length);
-                sIchiMae = cong[r] + " ";
+                sIchiMae = RandomString(cong);
+                sIchiMae = sIchiMae + " ";
             }
 
             //4.국가 만들기
@@ -139,7 +176,7 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
-                "Guinea","Conakry","Haiti","Port-au-Prince","Mali","Bamako"
+                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako"
             };
             r = random.Next(0, capital.Length);
             sCapital = capital[r] + " ";
@@ -153,7 +190,7 @@ namespace gitA
             string sRound = "";
             if (_round == 0)
             {
-                string[] cero = new string[] { "git reset ", "cero ", "0 ", ". " };
+                string[] cero = new string[] { "git reset ", "cero ", "0 ", "." };
                 r = random.Next(0, cero.Length);
                 sMingling = cero[r];
             }
@@ -161,32 +198,8 @@ namespace gitA
             {
                 if (0 == random.Next(0, 2))
                 {
-                    if (_round == 1)
-                        sRound = "Uno ";
-                    else if (_round == 2)
-                        sRound = "Dos ";
-                    else if (_round == 3)
-                        sRound = "Tres ";
-                    else if (_round == 4)
-                        sRound = "Cuatro ";
-                    else if (_round == 5)
-                        sRound = "Cinco ";
-                    else if (_round == 6)
-                        sRound = "seis ";
-                    else if (_round == 7)
-                        sRound = "siete ";
-                    else if (_round == 8)
-                        sRound = "ocho ";
-                    else if (_round == 9)
-                        sRound = "nueve ";
-                    else if (_round == 10)
-                        sRound = "diez ";
-                    else if (_round == 11)
-                        sRound = "ONCE ";
-                    else if (_round == 12)
-                        sRound = "DOCE ";
-                    //모두 소문자화            
-                    sRound = sRound.ToLower();
+                    //모두 소문자화?
+                    sRound = Espanol(_round);                    
                 }               
             }
             else
@@ -284,10 +297,12 @@ namespace gitA
                 string[] mingling
                     = new string[] { "eugene", "app", "Command", "Squash", "Update", "Commit", "commits", "push", "branch" };
                 r = random.Next(0, mingling.Length);
+
                 if (0 == random.Next(0, 2))
-                    sMingling = mingling[r];
+                    sMingling = "new " + mingling[r];                
                 else
-                    sMingling = "new " + mingling[r];
+                    sMingling = mingling[r];
+
                 if (0 == random.Next(0, 2))
                     sMingling = sMingling + ",";
                 sMingling = sMingling + " ";
