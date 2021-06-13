@@ -158,7 +158,7 @@ namespace gitA
 
             //3.조사 만들기-절반은 패스(공백)
             string sIchiMae = "";
-            //if (0 == random.Next(0, 2))
+            if (0 == random.Next(0, 2))
             {
                 string[] cong = new string[] { "by", "from", "in" };
                 sIchiMae = RandomString(cong);
