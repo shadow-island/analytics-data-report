@@ -20,7 +20,8 @@ Todo: com고치기
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
         매번-----------------------   
-                - 작업시간 체크? 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
+                - 작업시간 체크version개념1++ 
+                - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 0. 12까지한후 스반어맞추면 줄이기
@@ -34,10 +35,10 @@ Todo: com고치기
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
         -코드정리 => 이후 build할것!
-    1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/8할차례(기능안까먹는 용도)
+    1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/9할차례(기능안까먹는 용도)
         아니면 or ^B
         웬만하면 새 git이 하나로되게해보자~
-        git rebase HEAD~17 -i
+        git rebase HEAD~18 -i
         git push --force(이것도됨)
         git push origin master --force(필요?)
 
@@ -54,18 +55,17 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 1200 / 60 / 7;        
+        static readonly float    WORK = 1201 / 60 / 7;        
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
-        static readonly string  fileGit        = "eukm.log";
-                
+        static readonly string  fileGit        = "eukm.log";                
 
         static          int     randomStopMax = 24;
         static readonly int     roundMax      = 21;             //위의 배수?
         static          int     tick          = 24;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 9 * 60 + 40; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 9 * 60 + 50; //520, 계산하기좋게 10단위로
 
         // global
         static int _round = 0;
@@ -167,8 +167,7 @@ namespace gitA
 
             //4.국가 만들기
             string sCapital;
-            string[] capital 
-            = new string[] {
+            string[] capital = new string[] {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
@@ -176,7 +175,7 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
-                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako"
+                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo"
             };
             r = random.Next(0, capital.Length);
             sCapital = capital[r] + " ";
@@ -295,7 +294,7 @@ namespace gitA
             if (0 == random.Next(0, 2))
             {
                 string[] mingling
-                    = new string[] { "eugene", "app", "Command", "Squash", "Update", "Commit", "commits", "push", "branch" };
+                    = new string[] { "eugene", "app", "Command", "Squash", "update", "Commit", "commits", "push", "branch" };
                 r = random.Next(0, mingling.Length);
 
                 if (0 == random.Next(0, 2))
