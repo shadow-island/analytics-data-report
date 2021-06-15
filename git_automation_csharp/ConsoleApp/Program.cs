@@ -62,7 +62,7 @@ namespace gitA
 
         static          int     randomStopMax = 24;
         static readonly int     roundMax      = 21;             //위의 배수?
-        static          int     tick          = 24;             //초에 한번씩 찍기
+        static          int     tick          = 25;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         static int     TARGET_MAX    = 9 * 60 + 50; //520, 계산하기좋게 10단위로
