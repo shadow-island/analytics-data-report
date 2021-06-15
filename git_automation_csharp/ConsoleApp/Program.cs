@@ -25,7 +25,7 @@ Todo: com고치기
                 - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 0. 12까지한후 스반어맞추면 줄이기
-                1. 안나와서 줄일거없으면 => 1.시간도 spanish? => log에 round도 추가?
+                1. 안나와서 줄일거없으면 => => log에 round도 추가=> 1.시간도 spanish? 
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or                 
@@ -55,7 +55,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 1201 / 60 / 7;        
+        static readonly float    WORK = 1202 / 60 / 7;        
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -167,7 +167,7 @@ namespace gitA
 
             //4.국가 만들기
             string sCapital;
-            string[] capital = new string[] {
+            string[] capitalList = new string[] {
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
@@ -177,13 +177,13 @@ namespace gitA
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
                 "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo"
             };
-            r = random.Next(0, capital.Length);
-            sCapital = capital[r] + " ";
+            r = random.Next(0, capitalList.Length);
+            sCapital = capitalList[r] + " ";
             string sAnswer;
             if (r % 2 == 0)
-                sAnswer = capital[r + 1];
+                sAnswer = capitalList[r + 1];
             else
-                sAnswer = capital[r - 1];
+                sAnswer = capitalList[r - 1];
 
             //5. round
             string sRound = "";
@@ -222,9 +222,9 @@ namespace gitA
             //sRound = cero[i];
             sTargetHour4Commit = bug[r] + sTargetHour4Commit;
             
-            //우선 매번~
-            if (sLocation == "")
-                Update(sAnswer + " " + sTime + " " + sTarget);
+            //file 
+            //if (sLocation == "")
+            Update("round." + _round + " " + sAnswer + " " + sTime + " " + sTarget);
             //~
 
             //sGoStop
@@ -243,7 +243,7 @@ namespace gitA
             RunCommand("git status");
 
             //좀 가까이 잘보이게 
-            Console.WriteLine("작업{0}일 국가수:{1}", WORK, capital.Length / 2);
+            Console.WriteLine("작업{0}일 국가수:{1}", WORK, capitalList.Length / 2);
 
             RunCommand("git commit --all -m "
                 + "\"" + sLocation + sMingling + sIchiMae + sCapital + sRound + sTargetHour4Commit + "\"");
