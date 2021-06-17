@@ -16,7 +16,7 @@ Todo: com고치기
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/9-> 암것도안함(이것도테스트필요)
     1-2 기능향상:         	   
-		*   need update 표시 
+		*   
         *  	git pull 제대로 동작하나?
         *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
@@ -33,9 +33,8 @@ Todo: com고치기
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or                 
-        후순위
-		    *하루 2~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
-        필요여부 미지수:		
+        후순위 & 필요여부 미지수:		
+		    * 하루 2~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?        
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
         -코드정리 => 이후 build할것!
@@ -44,14 +43,17 @@ Todo: com고치기
         웬만하면 새 git이 하나로되게해보자~
         git rebase HEAD~18 -i
         git push --force(이것도됨)
-        git push origin master --force(필요?)
-
-        remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-        또는 gitk에서 hard로
-        rebase하는 명령어찾기		
-        https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
-    1-5 1/4확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
-        git rebase HEAD~7 -i
+        */
+/*
+git push origin master --force(필요?)
+remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
+또는 gitk에서 hard로
+rebase하는 명령어찾기		
+https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
+*/
+/*
+1-5 1/4확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+git rebase HEAD~7 -i
 */
 
 namespace gitA
@@ -59,7 +61,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 1203;        
+        static readonly float    WORK = 1204;        
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -69,10 +71,12 @@ namespace gitA
         static          int     tick          = 25;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 10 * 60 + 0; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 10 * 60 + 10; //520, 계산하기좋게 10단위로
 
         // global
-        static int _round = 0;
+        static int  _round = 0;
+        static bool _isNeedUpdate = false;
+
         // timer 2개 
         static readonly Timer timerTick = new System.Timers.Timer();
         static System.Threading.Timer myTimer = null;          
@@ -150,15 +154,19 @@ namespace gitA
         }
 
         static void RunGit()
-        {
+        {            
             Console.WriteLine("\n준비! Round {0} try--------------------------------", _round);
             Random random = new Random();
             int r; //for random index
 
-            //makeTexts
+            //makeTexts            
             string sNeedUpdate = "";
-            if (0 == random.Next(0, 2))
-                sNeedUpdate = "need Update! ";
+            if (!_isNeedUpdate)
+                if (0 == random.Next(0, 2))
+                {
+                    _isNeedUpdate = true;
+                    sNeedUpdate = "need Update! ";
+                }              
 
             string sLocation = "";
             string sMingling = "";           
@@ -183,7 +191,7 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
-                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo"
+                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo","Niger","Niamey"
             };
             
             r = random.Next(0, capitalList.Length);
@@ -254,7 +262,7 @@ namespace gitA
             RunCommand("git status");
 
             //좀 가까이 잘보이게 
-            Console.WriteLine("작업{0}일 국가수:{1}", WORK, capitalList.Length / 2);
+            Console.WriteLine("작업ver{0} 국가수:{1}", WORK, capitalList.Length / 2);
 
             RunCommand("git commit --all -m "
                 + "\"" + sNeedUpdate + sLocation + sMingling + sIchiMae + sCapital + sRound + sTargetHour4Commit + "\"");
@@ -399,7 +407,7 @@ namespace gitA
 	2 암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    5.17        390lines, TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지
+    5.17        390lines, TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지, need update 표시 
     5.          log에 수도추가, prefix 추가 new, 0 round에서는 command를 cero 또는 git reset으로 표기!
     4.30        343 lines: home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함, ga.bat -> p.bat
     4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
