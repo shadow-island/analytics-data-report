@@ -5,6 +5,9 @@ using System.Timers;
 /*
 Todo: com고치기	
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
+
+0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
+
     * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
     * 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.
 	* random멈췄을때 1/18 => randomStopMax도 늘리고..
@@ -12,7 +15,8 @@ Todo: com고치기
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/9-> 암것도안함(이것도테스트필요)
-    1-2 기능향상:         	    
+    1-2 기능향상:         	   
+		*   need update 표시 
         *  	git pull 제대로 동작하나?
         *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
@@ -20,7 +24,7 @@ Todo: com고치기
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
         매번-----------------------   
-                - 작업시간 체크version개념1++ 
+                - 작업시간 체크version개념1++
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
@@ -55,7 +59,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 1202 / 60 / 7;        
+        static readonly float    WORK = 1203;        
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -65,7 +69,7 @@ namespace gitA
         static          int     tick          = 25;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 9 * 60 + 50; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 10 * 60 + 0; //520, 계산하기좋게 10단위로
 
         // global
         static int _round = 0;
@@ -152,6 +156,10 @@ namespace gitA
             int r; //for random index
 
             //makeTexts
+            string sNeedUpdate = "";
+            if (0 == random.Next(0, 2))
+                sNeedUpdate = "need Update! ";
+
             string sLocation = "";
             string sMingling = "";           
             makeTexts(ref sLocation, ref sMingling);
@@ -177,8 +185,11 @@ namespace gitA
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
                 "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo"
             };
+            
             r = random.Next(0, capitalList.Length);
-            sCapital = capitalList[r] + " ";
+            sCapital = capitalList[r];
+
+            sCapital = sCapital + " ";
             string sAnswer;
             if (r % 2 == 0)
                 sAnswer = capitalList[r + 1];
@@ -246,7 +257,7 @@ namespace gitA
             Console.WriteLine("작업{0}일 국가수:{1}", WORK, capitalList.Length / 2);
 
             RunCommand("git commit --all -m "
-                + "\"" + sLocation + sMingling + sIchiMae + sCapital + sRound + sTargetHour4Commit + "\"");
+                + "\"" + sNeedUpdate + sLocation + sMingling + sIchiMae + sCapital + sRound + sTargetHour4Commit + "\"");
 
             //home mode아닐때만
             Console.WriteLine("sLocation={0}", sLocation);
