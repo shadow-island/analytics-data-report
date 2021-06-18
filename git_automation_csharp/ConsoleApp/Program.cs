@@ -16,7 +16,9 @@ Todo: com고치기
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/9-> 암것도안함(이것도테스트필요)
     1-2 기능향상:         	   
-		*   
+
+		*   exe 만들때 test모드 만들까?실수할때도 생각보다있네. 보통때는 무조건 push하게
+        
         *  	git pull 제대로 동작하나?
         *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
@@ -61,7 +63,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 1204;        
+        static readonly float    WORK = 0;        
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -71,7 +73,7 @@ namespace gitA
         static          int     tick          = 25;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 10 * 60 + 10; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 10 * 60 + 20; //520, 계산하기좋게 10단위로
 
         // global
         static int  _round = 0;
@@ -154,7 +156,7 @@ namespace gitA
         }
 
         static void RunGit()
-        {            
+        {
             Console.WriteLine("\n준비! Round {0} try--------------------------------", _round);
             Random random = new Random();
             int r; //for random index
@@ -162,11 +164,15 @@ namespace gitA
             //makeTexts            
             string sNeedUpdate = "";
             if (!_isNeedUpdate)
+            {
                 if (0 == random.Next(0, 2))
                 {
                     _isNeedUpdate = true;
                     sNeedUpdate = "need Update! ";
-                }              
+                }
+            }
+            else //update is set
+                sNeedUpdate = "! ";
 
             string sLocation = "";
             string sMingling = "";           
@@ -191,13 +197,15 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
-                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo","Niger","Niamey"
+                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo","Niger","Niamey",
+                "Mozambique","Maputo"
             };
             
+            //답지 때문에 r 필요함 
             r = random.Next(0, capitalList.Length);
             sCapital = capitalList[r];
-
             sCapital = sCapital + " ";
+
             string sAnswer;
             if (r % 2 == 0)
                 sAnswer = capitalList[r + 1];
