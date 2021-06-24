@@ -5,20 +5,16 @@ using System.Timers;
 /*
 Todo: com고치기	
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
-
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
 
     * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
     * 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.
-	* random멈췄을때 1/18 => randomStopMax도 늘리고..
+	* random 또는 멈췄을때 1/10(random클릭도안하게) => randomStopMax도 늘리고..
 1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/9-> 암것도안함(이것도테스트필요)
-    1-2 기능향상:         	   
-
-		*   exe 만들때 test모드 만들까?실수할때도 생각보다있네. 보통때는 무조건 push하게
-        
+    1-2 기능향상:         	               
         *  	git pull 제대로 동작하나?
         *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
@@ -46,15 +42,15 @@ Todo: com고치기
         git rebase HEAD~18 -i
         git push --force(이것도됨)
         */
+        /*
+        git push origin master --force(필요?)
+        remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
+        또는 gitk에서 hard로
+        rebase하는 명령어찾기		
+        https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
+        */      
 /*
-git push origin master --force(필요?)
-remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-또는 gitk에서 hard로
-rebase하는 명령어찾기		
-https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
-*/
-/*
-1-5 1/4확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+1-5 1/5확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
 git rebase HEAD~7 -i
 */
 
@@ -63,14 +59,13 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 0;        
+        static readonly float    WORK = 1;        
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
         static          int     randomStopMax = 24;
-        static readonly int     roundMax      = 21;             //위의 배수?
-        static          int     tick          = 25;             //초에 한번씩 찍기
+        static          int     tick          = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         static int     TARGET_MAX    = 10 * 60 + 20; //520, 계산하기좋게 10단위로
@@ -161,18 +156,20 @@ namespace gitA
             Random random = new Random();
             int r; //for random index
 
-            //makeTexts            
-            string sNeedUpdate = "";
+            //makeTexts    
+            
+            //1.need_update
+            string sNeedUpdate = "¿ ";
             if (!_isNeedUpdate)
             {
-                if (0 == random.Next(0, 2))
+                if (0 == random.Next(0, 3))
                 {
                     _isNeedUpdate = true;
                     sNeedUpdate = "need Update! ";
                 }
             }
             else //update is set
-                sNeedUpdate = "! ";
+                sNeedUpdate = "";
 
             string sLocation = "";
             string sMingling = "";           
@@ -262,6 +259,7 @@ namespace gitA
                 isStopped = true;
                 sTargetHour4Commit = " forked";
             }
+            int roundMax = randomStop;
             if (_round >= roundMax)
                 sTargetHour4Commit = " finished";
 
