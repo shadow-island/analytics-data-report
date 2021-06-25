@@ -14,7 +14,7 @@ Todo: com고치기
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/9-> 암것도안함(이것도테스트필요)
-    1-2 기능향상:         	               
+    1-2 기능향상:
         *  	git pull 제대로 동작하나?
         *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
@@ -160,9 +160,9 @@ namespace gitA
             
             //1.need_update
             string sNeedUpdate = "¿ ";
-            if (!_isNeedUpdate)
+            if (_round != 0 && !_isNeedUpdate)
             {
-                if (0 == random.Next(0, 3))
+                if (0 == random.Next(0, 2))
                 {
                     _isNeedUpdate = true;
                     sNeedUpdate = "need Update! ";
@@ -170,6 +170,7 @@ namespace gitA
             }
             else //update is set
                 sNeedUpdate = "";
+            //~
 
             string sLocation = "";
             string sMingling = "";           
@@ -195,12 +196,13 @@ namespace gitA
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
                 "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo","Niger","Niamey",
-                "Mozambique","Maputo"
+                "Mozambique","Maputo","Namibia","Windhoek윈드후크"
             };
             
             //답지 때문에 r 필요함 
             r = random.Next(0, capitalList.Length);
             sCapital = capitalList[r];
+            //~
             sCapital = sCapital + " ";
 
             string sAnswer;
