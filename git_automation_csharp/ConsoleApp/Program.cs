@@ -7,9 +7,9 @@ Todo: com고치기
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
 
-    * 근무시간 또는 매일 1회(3회맥스)->1/19 => 기타 
-    * 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.
-	* random 또는 멈췄을때 1/10(random클릭도안하게) => randomStopMax도 늘리고..
+    * 근무시간 또는 매일 1회(3회맥스)->=> randomStopMax도 늘리고..
+    * 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
+	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) 
 1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
@@ -64,11 +64,11 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     randomStopMax = 24;
+        static          int     RANDOM_STOP_MAX = 24;
         static          int     tick          = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 10 * 60 + 20; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 10 * 60 + 30; //520, 계산하기좋게 10단위로
 
         // global
         static int  _round = 0;
@@ -82,7 +82,7 @@ namespace gitA
         {                        
             if (debuggingMode)
             {
-                randomStopMax = 1;
+                RANDOM_STOP_MAX = 1;
                 tick = 1; //초에 한번씩 찍기
                 TARGET_MAX = 1;// for test        
             } //debugging mode
@@ -117,7 +117,7 @@ namespace gitA
             if (n == 1)
                 r = "uno ";
             else if (n == 2)
-                r = "Dos ";
+                r = "dos ";
             else if (n == 3)
                 r = "Tres ";
             else if (n == 4)
@@ -223,7 +223,6 @@ namespace gitA
             {
                 if (0 == random.Next(0, 2))
                 {
-                    //모두 소문자화?
                     sRound = Espanol(_round);                    
                 }               
             }
@@ -254,14 +253,14 @@ namespace gitA
             //~
 
             //sGoStop
-            int randomStop = random.Next(1, randomStopMax + 1);
+            int randomStop = random.Next(1, RANDOM_STOP_MAX + 1);
             bool isStopped = false;
             if (_round != 0 && randomStop == 1)
             {
                 isStopped = true;
                 sTargetHour4Commit = " forked";
             }
-            int roundMax = randomStop;
+            int roundMax = RANDOM_STOP_MAX;
             if (_round >= roundMax)
                 sTargetHour4Commit = " finished";
 
@@ -281,7 +280,7 @@ namespace gitA
                 RunCommand("git push");
 
             Console.Write(sMingling);
-            Console.Write(" randomStop={0}/{1} ", randomStop, randomStopMax);
+            Console.Write(" randomStop={0}/{1} ", randomStop, RANDOM_STOP_MAX);
 
             if (isStopped)
             {                
