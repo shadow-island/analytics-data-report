@@ -68,7 +68,7 @@ namespace gitA
         static          int     tick          = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 10 * 60 + 30; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 10 * 60 + 40; //520, 계산하기좋게 10단위로
 
         // global
         static int  _round = 0;
@@ -196,7 +196,7 @@ namespace gitA
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
                 "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo","Niger","Niamey",
-                "Mozambique","Maputo","Namibia","Windhoek윈드후크"
+                "Mozambique","Maputo","Namibia","Windhoek윈드후크","Georgia","Tbilisi"
             };
             
             //답지 때문에 r 필요함 
@@ -216,6 +216,7 @@ namespace gitA
             if (_round == 0)
             {
                 string[] cero = new string[] { "git reset ", "cero ", "0 ", "." };
+                //코드정리 필요!!
                 r = random.Next(0, cero.Length);
                 sMingling = cero[r];
             }
@@ -240,11 +241,8 @@ namespace gitA
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
 
-            //r = random.Next(0, 2);
-            //Console.WriteLine("sTargetHour4Commit {0}", r);
             string[] bug = new string[] { "", " ticket ", " bug " };
             r = random.Next(0, bug.Length);
-            //sRound = cero[i];
             sTargetHour4Commit = bug[r] + sTargetHour4Commit;
             
             //file 
@@ -320,7 +318,7 @@ namespace gitA
             if (0 == random.Next(0, 2))
             {
                 string[] mingling
-                    = new string[] { "eugene", "app", "Command", "Squash", "update", "Commit", "commits", "push", "branch" };
+                    = new string[] { "eugene", "app", "Command", "squash", "update", "Commit", "commits", "push", "branch" };
                 r = random.Next(0, mingling.Length);
 
                 if (0 == random.Next(0, 2))
