@@ -7,9 +7,8 @@ Todo: com고치기
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
 
-    * 근무시간 또는 매일 1회(3회맥스)->=> randomStopMax도 늘리고..
-    * 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
-	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) 
+    * 근무시간 또는 매일 1회(3회맥스), 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
+	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) => randomStopMax도 늘리고..
 1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
@@ -42,13 +41,13 @@ Todo: com고치기
         git rebase HEAD~18 -i
         git push --force(이것도됨)
         */
-        /*
-        git push origin master --force(필요?)
-        remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
-        또는 gitk에서 hard로
-        rebase하는 명령어찾기		
-        https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
-        */      
+/*
+git push origin master --force(필요?)
+remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
+또는 gitk에서 hard로
+rebase하는 명령어찾기		
+https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
+*/
 /*
 1-5 1/5확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
 git rebase HEAD~7 -i
@@ -64,11 +63,11 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 24;
-        static          int     tick          = 26;             //초에 한번씩 찍기
+        static          int     RANDOM_STOP_MAX = 25;
+        static          int     tick            = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 10 * 60 + 50; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 11 * 60; //520, 계산하기좋게 10단위로
 
         // global
         static int  _round = 0;
@@ -119,11 +118,11 @@ namespace gitA
             else if (n == 2)
                 r = "dos ";
             else if (n == 3)
-                r = "Tres ";
+                r = "tres ";
             else if (n == 4)
                 r = "Cuatro ";
             else if (n == 5)
-                r = "Cinco ";
+                r = "cinco ";
             else if (n == 6)
                 r = "seis ";
             else if (n == 7)
@@ -156,7 +155,7 @@ namespace gitA
             Random random = new Random();
             int r; //for random index
 
-            //makeTexts    
+            //makeTexts
             
             //1.need_update
             string sNeedUpdate = "¿ ";
@@ -165,7 +164,7 @@ namespace gitA
                 if (0 == random.Next(0, 2))
                 {
                     _isNeedUpdate = true;
-                    sNeedUpdate = "need Update! ";
+                    sNeedUpdate = "need Update even if ongoing! ";
                 }
             }
             else //update is set
@@ -182,7 +181,7 @@ namespace gitA
             {
                 string[] cong = new string[] { "by", "from", "in" };
                 sIchiMae = RandomString(cong);
-                sIchiMae = sIchiMae + " ";
+                sIchiMae += " ";
             }
 
             //4.국가 만들기
