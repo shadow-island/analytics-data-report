@@ -38,7 +38,7 @@ Todo: com고치기
     1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/9할차례(기능안까먹는 용도)
         아니면 or ^B
         웬만하면 새 git이 하나로되게해보자~
-        git rebase HEAD~18 -i
+        git rebase HEAD~19 -i 함
         git push --force(이것도됨)
         */
 /*
@@ -67,7 +67,7 @@ namespace gitA
         static          int     tick            = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 11 * 60; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 11 * 60 + 10; //520, 계산하기좋게 10단위로
 
         // global
         static int  _round = 0;
@@ -158,14 +158,16 @@ namespace gitA
             //makeTexts
             
             //1.need_update
-            string sNeedUpdate = "¿ ";
+            string sNeedUpdate;
             if (_round != 0 && !_isNeedUpdate)
             {
-                if (0 == random.Next(0, 2))
+                if (0 == random.Next(0, 3))
                 {
                     _isNeedUpdate = true;
-                    sNeedUpdate = "need Update even if ongoing! ";
+                    sNeedUpdate = "need Update even ongoing! ";
                 }
+                else
+                    sNeedUpdate = "¿ ";
             }
             else //update is set
                 sNeedUpdate = "";
@@ -187,13 +189,14 @@ namespace gitA
             //4.국가 만들기
             string sCapital;
             string[] capitalList = new string[] {
+                "Botswana","Gaborone",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Botswana","Gaborone","Gabon","Libreville",
+                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Gabon","Libreville",
                 "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo","Niger","Niamey",
                 "Mozambique","Maputo","Namibia","Windhoek윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
@@ -222,12 +225,13 @@ namespace gitA
             else if (_round <= 12)
             {
                 if (0 == random.Next(0, 2))
-                {
-                    sRound = Espanol(_round);                    
-                }               
+                    sRound = Espanol(_round);
             }
             else
-                sRound = Convert.ToString(_round) + ".";
+            {
+                if (0 == random.Next(0, 2))
+                    sRound = Convert.ToString(_round) + ".";
+            }
             //~
 
             // 6.random Target with ticket 
@@ -426,8 +430,10 @@ Release note
     2020.5.12   C#화함
     2020.2.12   python버전 시작
 
-내부설명  
+내부 logic 설명      
     실제 시작 기입 시간도 필요! (하루 처음 시작위치를 알아야함)
+
+    이하에서 그냥 무조건 commit으로 바꿈(언제 다음 commit을 github에서 알기위해)
 	최초는 commit없음: 내가 커밋하고싶어서 일부로 고치지 않는이상 안일어나야한다(test시용이)
         (사용자에게 선택권을 줘야함)
         commit 강제로하려면 log숫자 초기화~
