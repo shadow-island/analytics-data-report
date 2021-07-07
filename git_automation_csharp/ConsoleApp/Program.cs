@@ -35,8 +35,10 @@ Todo: com고치기
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
         -코드정리 => 이후 build할것!
-    1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 1/9할차례(기능안까먹는 용도)
+    1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 차례(기능안까먹는 용도)
         아니면 or ^B
+        1-5 1/5확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+        git rebase HEAD~7 -i
         웬만하면 새 git이 하나로되게해보자~
         git rebase HEAD~19 -i 함
         git push --force(이것도됨)
@@ -49,8 +51,7 @@ rebase하는 명령어찾기
 https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
 */
 /*
-1-5 1/5확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
-git rebase HEAD~7 -i
+
 */
 
 namespace gitA
@@ -67,7 +68,7 @@ namespace gitA
         static          int     tick            = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 11 * 60 + 10; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 11 * 60 + 20; //520, 계산하기좋게 10단위로
 
         // global
         static int  _round = 0;
@@ -161,7 +162,7 @@ namespace gitA
             string sNeedUpdate;
             if (_round != 0 && !_isNeedUpdate)
             {
-                if (0 == random.Next(0, 3))
+                if (0 == random.Next(0, 4))
                 {
                     _isNeedUpdate = true;
                     sNeedUpdate = "need Update even ongoing! ";
@@ -190,6 +191,7 @@ namespace gitA
             string sCapital;
             string[] capitalList = new string[] {
                 "Botswana","Gaborone",
+                "Mozambique","Maputo",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
@@ -198,7 +200,7 @@ namespace gitA
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Gabon","Libreville",
                 "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo","Niger","Niamey",
-                "Mozambique","Maputo","Namibia","Windhoek윈드후크","Georgia","Tbilisi","Albania","Tirana"
+                "Namibia","Windhoek윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
             
             //답지 때문에 r 필요함 
@@ -320,11 +322,8 @@ namespace gitA
             //2 Command 만들기-절반은 패스(공백)            
             if (0 == random.Next(0, 2))
             {
-                string[] mingling
-                    = new string[] {"eugene", "app", "Command", "squash", "update", "Commit", "commits", 
-                                    "push", "branch" };
-                r = random.Next(0, mingling.Length);
-                sMingling = "new " + mingling[r];
+                string[] mingling = new string[] {"eugene", "app", "Command", "squash", "update", "Commit", "commits", "push", "branch" };                
+                sMingling = RandomString(mingling);
 
                 if (0 == random.Next(0, 2))
                     sMingling = "new " + sMingling;
