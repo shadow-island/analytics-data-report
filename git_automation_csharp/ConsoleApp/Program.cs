@@ -20,13 +20,13 @@ Todo: com고치기
             , bat(exe + cmd이거 안되면) 이것도 문제 생김			
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
-        매번-----------------------   
-                - 작업시간 체크version개념1++
+        매번-----------------------                   
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
+        작업시간 체크version개념1++
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 0. 12까지한후 스반어맞추면 줄이기
-                1. 안나와서 줄일거없으면 => => log에 round도 추가=> 1.시간도 spanish? 
+                1. 안나와서 줄일거없으면 => =>  1.시간도 spanish? 
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or                 
@@ -68,7 +68,7 @@ namespace gitA
         static          int     tick            = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 11 * 60 + 20; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 11 * 60 + 30; //520, 계산하기좋게 10단위로
 
         // global
         static int  _round = 0;
@@ -246,7 +246,7 @@ namespace gitA
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
 
-            string[] bug = new string[] { "", " ticket ", " bug " };
+            string[] bug = new string[] { "", " #", " ticket ", " bug " };
             r = random.Next(0, bug.Length);
             sTargetHour4Commit = bug[r] + sTargetHour4Commit;
             
@@ -312,7 +312,6 @@ namespace gitA
         private static void makeTexts(ref string sLocation, ref string sMingling)
         {
             Random random = new Random();
-            int r; //for random index
 
             //1 home mode확인 as sLocation
             FileInfo fi = new FileInfo("gc_home.cfg");
@@ -417,7 +416,7 @@ namespace gitA
 	2 암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    5.17        390lines, TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지, need update 표시 
+    5.17        390lines, TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지, need update 표시, log에 round도 추가
     5.          log에 수도추가, prefix 추가 new, 0 round에서는 command를 cero 또는 git reset으로 표기!
     4.30        343 lines: home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함, ga.bat -> p.bat
     4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
