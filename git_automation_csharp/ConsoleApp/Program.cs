@@ -23,6 +23,7 @@ Todo: com고치기
         매번-----------------------                   
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
                 - TARGET_MAX도 10은 늘리고~
+                - sNeedUpdate 
         작업시간 체크version개념1++
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 0. 12까지한후 스반어맞추면 줄이기
@@ -68,7 +69,8 @@ namespace gitA
         static          int     tick            = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 11 * 60 + 30; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 11 * 60 + 40; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX = 5;
 
         // global
         static int  _round = 0;
@@ -162,10 +164,10 @@ namespace gitA
             string sNeedUpdate;
             if (_round != 0 && !_isNeedUpdate)
             {
-                if (0 == random.Next(0, 4))
+                if (0 == random.Next(0, NeedUpdate_MAX))
                 {
                     _isNeedUpdate = true;
-                    sNeedUpdate = "need Update even ongoing! ";
+                    sNeedUpdate = "need Update even ongoing! wait one more";
                 }
                 else
                     sNeedUpdate = "¿ ";
@@ -190,6 +192,7 @@ namespace gitA
             //4.국가 만들기
             string sCapital;
             string[] capitalList = new string[] {
+                "Benin","Porto-Novo",
                 "Botswana","Gaborone",
                 "Mozambique","Maputo",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
@@ -199,7 +202,7 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Gabon","Libreville",
-                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Benin","Porto-Novo","Niger","Niamey",
+                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Niger","Niamey",
                 "Namibia","Windhoek윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
             
