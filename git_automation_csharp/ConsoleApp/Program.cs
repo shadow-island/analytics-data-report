@@ -38,7 +38,7 @@ Todo: com고치기
         -코드정리 => 이후 build할것!
     1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 차례(기능안까먹는 용도)
         아니면 or ^B
-        1-5 1/5확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+        1/6확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
         git rebase HEAD~7 -i
         웬만하면 새 git이 하나로되게해보자~
         git rebase HEAD~19 -i 함
