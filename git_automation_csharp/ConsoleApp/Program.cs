@@ -65,11 +65,11 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 25;
+        static          int     RANDOM_STOP_MAX = 26;
         static          int     tick            = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 11 * 60 + 40; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 11 * 60 + 50; //520, 계산하기좋게 10단위로
         static int     NeedUpdate_MAX = 5;
 
         // global
@@ -167,7 +167,7 @@ namespace gitA
                 if (0 == random.Next(0, NeedUpdate_MAX))
                 {
                     _isNeedUpdate = true;
-                    sNeedUpdate = "need Update even ongoing! wait one more";
+                    sNeedUpdate = "need Update even ongoing! wait one more.";
                 }
                 else
                     sNeedUpdate = "¿ ";
@@ -195,6 +195,7 @@ namespace gitA
                 "Benin","Porto-Novo",
                 "Botswana","Gaborone",
                 "Mozambique","Maputo",
+                "Niger","Niamey",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
@@ -202,7 +203,7 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Gabon","Libreville",
-                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako","Niger","Niamey",
+                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako",
                 "Namibia","Windhoek윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
             
