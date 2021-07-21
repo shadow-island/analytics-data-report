@@ -6,7 +6,6 @@ using System.Timers;
 Todo: com고치기	
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
-
     * 근무시간 또는 매일 1회(3회맥스), 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
 	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) => randomStopMax도 늘리고..
 1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
@@ -65,11 +64,11 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 26;
+        static          int     RANDOM_STOP_MAX = 27;
         static          int     tick            = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 11 * 60 + 50; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 12 * 60 + 0; //520, 계산하기좋게 10단위로
         static int     NeedUpdate_MAX = 5;
 
         // global
@@ -177,11 +176,12 @@ namespace gitA
             //~
 
             string sLocation = "";
-            string sMingling = "";           
+            string sMingling = "";
+            string sIchiMae = "";
+
             makeTexts(ref sLocation, ref sMingling);
 
-            //3.조사 만들기-절반은 패스(공백)
-            string sIchiMae = "";
+            //3.조사 만들기-절반은 패스(공백)            
             if (0 == random.Next(0, 2))
             {
                 string[] cong = new string[] { "by", "from", "in" };
@@ -194,6 +194,7 @@ namespace gitA
             string[] capitalList = new string[] {
                 "Benin","Porto-Novo",
                 "Botswana","Gaborone",
+                "Mauritius","Port Louis",
                 "Mozambique","Maputo",
                 "Niger","Niamey",
                 "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
@@ -328,8 +329,8 @@ namespace gitA
                 string[] mingling = new string[] {"eugene", "app", "Command", "squash", "update", "Commit", "commits", "push", "branch" };                
                 sMingling = RandomString(mingling);
 
-                if (0 == random.Next(0, 2))
-                    sMingling = "new " + sMingling;
+                if (0 == random.Next(0, 3))
+                    sMingling = "New " + sMingling;
 
                 if (0 == random.Next(0, 2))
                 {
