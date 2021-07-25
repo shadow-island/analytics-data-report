@@ -25,11 +25,12 @@ Todo: com고치기
                 - sNeedUpdate 
         작업시간 체크version개념1++
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
-                0. 12까지한후 스반어맞추면 줄이기
+                이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 => =>  1.시간도 spanish? 
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
-                - 시간은 issue # number화 jira, bugzilla or                 
+                - 시간은 issue # number화 jira, bugzilla or
+                명령은 나중에?
         후순위 & 필요여부 미지수:		
 		    * 하루 2~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?        
             * 안중요=> ini file, ini file 숫자증가만? 		    
@@ -326,7 +327,7 @@ namespace gitA
             */
 
             //2 Command 만들기-과반은 패스(공백)            
-            if (0 == random.Next(0, 3))
+            if (0 == random.Next(0, 2))
             {
                 string[] mingling = new string[] {"eugene", "app", "Command", "squash", "update", "Commit", "commits", "push", "branch" };                
                 sMingling = RandomString(mingling);
