@@ -64,11 +64,11 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 27;
+        static          int     RANDOM_STOP_MAX = 28;
         static          int     tick            = 26;             //초에 한번씩 찍기
 
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 12 * 60 + 0; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX    = 12 * 60 + 10; //520, 계산하기좋게 10단위로
         static int     NeedUpdate_MAX = 5;
 
         // global
@@ -318,13 +318,15 @@ namespace gitA
         {
             Random random = new Random();
 
-            //1 home mode확인 as sLocation
+            //1 home mode확인 as sLocation 집에서 작업 당분간 안함?
+            /* 
             FileInfo fi = new FileInfo("gc_home.cfg");
             if (fi.Exists)
                 sLocation = "[home] ";
+            */
 
-            //2 Command 만들기-절반은 패스(공백)            
-            if (0 == random.Next(0, 2))
+            //2 Command 만들기-과반은 패스(공백)            
+            if (0 == random.Next(0, 3))
             {
                 string[] mingling = new string[] {"eugene", "app", "Command", "squash", "update", "Commit", "commits", "push", "branch" };                
                 sMingling = RandomString(mingling);
