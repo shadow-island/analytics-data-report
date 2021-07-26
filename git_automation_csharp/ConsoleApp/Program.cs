@@ -19,11 +19,11 @@ Todo: com고치기
             , bat(exe + cmd이거 안되면) 이것도 문제 생김			
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
-        매번-----------------------                   
-                - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
+        * 작업시간 체크version개념 1++
+        매번-----------------------                                   
                 - TARGET_MAX도 10은 늘리고~
                 - sNeedUpdate 
-        작업시간 체크version개념1++
+                - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯        
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 => =>  1.시간도 spanish? 
@@ -35,7 +35,7 @@ Todo: com고치기
 		    * 하루 2~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?        
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
-        -코드정리 => 이후 build할것!
+        -font, 코드정리 => 이후 build할것!
     1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 차례(기능안까먹는 용도)
         아니면 or ^B
         1/6확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
@@ -67,10 +67,9 @@ namespace gitA
 
         static          int     RANDOM_STOP_MAX = 28;
         static          int     tick            = 26;             //초에 한번씩 찍기
-
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX    = 12 * 60 + 10; //520, 계산하기좋게 10단위로
-        static int     NeedUpdate_MAX = 5;
+        static int     TARGET_MAX       = 12 * 60 + 20; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX   = 6;
 
         // global
         static int  _round = 0;
@@ -251,10 +250,13 @@ namespace gitA
             DateTime targetTime = now.AddMinutes(randomResult);
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
+            string sRound2 = "";
+            if (sRound == "")
+                sRound2 = Convert.ToString(_round) + ".";
 
             string[] bug = new string[] { "", " #", " ticket ", " bug " };
             r = random.Next(0, bug.Length);
-            sTargetHour4Commit = bug[r] + sTargetHour4Commit;
+            sTargetHour4Commit = bug[r] + sRound2 + sTargetHour4Commit;
             
             //file 
             //if (sLocation == "")
