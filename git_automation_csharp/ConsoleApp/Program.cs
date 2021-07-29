@@ -5,7 +5,7 @@ using System.Timers;
 /*
 Todo: com고치기	
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
-0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
+
     * 근무시간 또는 매일 1회(3회맥스), 초과했을때 1/3 => TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
 	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) => randomStopMax도 늘리고..
 1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
@@ -13,7 +13,8 @@ Todo: com고치기
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-1 1/9-> 암것도안함(이것도테스트필요)
     1-2 기능향상:
-        *  	git pull 제대로 동작하나?
+        *   git push 안하는 옵션 만들기
+        *  	git pull 제대로 동작하나?-> git push시 쉬어야할듯?
         *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
             , bat(exe + cmd이거 안되면) 이것도 문제 생김			
@@ -38,7 +39,7 @@ Todo: com고치기
         -font, 코드정리 => 이후 build할것!
     1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 차례(기능안까먹는 용도)
         아니면 or ^B
-        1/6확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+        1/7확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
         git rebase HEAD~7 -i
         웬만하면 새 git이 하나로되게해보자~
         git rebase HEAD~19 -i 함
@@ -65,11 +66,11 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 28;
+        static          int     RANDOM_STOP_MAX = 29;
         static          int     tick            = 26;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 12 * 60 + 20; //520, 계산하기좋게 10단위로
-        static int     NeedUpdate_MAX   = 6;
+        static int     TARGET_MAX       = 12 * 60 + 40; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX   = 7;
 
         // global
         static int  _round = 0;
@@ -166,7 +167,7 @@ namespace gitA
                 if (0 == random.Next(0, NeedUpdate_MAX))
                 {
                     _isNeedUpdate = true;
-                    sNeedUpdate = "need Update even ongoing! wait one more.";
+                    sNeedUpdate = "need Update even ongoing! wait one more. ";
                 }
                 else
                     sNeedUpdate = "¿ ";
@@ -252,11 +253,11 @@ namespace gitA
             string sTargetHour4Commit = targetTime.Hour.ToString();
             string sRound2 = "";
             if (sRound == "")
-                sRound2 = Convert.ToString(_round) + ".";
+                sRound2 = "." + Convert.ToString(_round);
 
             string[] bug = new string[] { "", " #", " ticket ", " bug " };
             r = random.Next(0, bug.Length);
-            sTargetHour4Commit = bug[r] + sRound2 + sTargetHour4Commit;
+            sTargetHour4Commit = bug[r] + sTargetHour4Commit + sRound2;
             
             //file 
             //if (sLocation == "")
@@ -281,6 +282,12 @@ namespace gitA
 
             //좀 가까이 잘보이게 
             Console.WriteLine("작업ver{0} 국가수:{1}", WORK, capitalList.Length / 2);
+
+            //
+            DateTime now1 = DateTime.Now;
+            string sTimeSecond = now1.ToString("HH:mm:ss");
+            Console.WriteLine(sTimeSecond);
+            //~
 
             RunCommand("git commit --all -m "
                 + "\"" + sNeedUpdate + sLocation + sMingling + sIchiMae + sCapital + sRound + sTargetHour4Commit + "\"");
@@ -322,17 +329,18 @@ namespace gitA
             Random random = new Random();
 
             //1 home mode확인 as sLocation 집에서 작업 당분간 안함?
-            /* 
             FileInfo fi = new FileInfo("gc_home.cfg");
             if (fi.Exists)
                 sLocation = "[home] ";
-            */
 
             //2 Command 만들기-과반은 패스(공백)            
             if (0 == random.Next(0, 2))
             {
-                string[] mingling = new string[] {"eugene", "app", "Command", "squash", "update", "Commit", "commits", "push", "branch" };                
-                sMingling = RandomString(mingling);
+                string[] mingling = new string[] {"app", "Command", "squash", "update", "Commit", "commits", "push", "branch" };
+                if (0 == random.Next(0, 2))
+                    sMingling = "eugene";
+                else
+                    sMingling = RandomString(mingling);
 
                 if (0 == random.Next(0, 3))
                     sMingling = "New " + sMingling;
