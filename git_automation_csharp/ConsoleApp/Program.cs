@@ -68,10 +68,10 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 29;
+        static          int     RANDOM_STOP_MAX = 30;
         static          int     tick            = 26;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 12 * 60 + 40; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX       = 12 * 60 + 50; //520, 계산하기좋게 10단위로
         static int     NeedUpdate_MAX   = 7;
 
         // global
@@ -261,10 +261,7 @@ namespace gitA
             r = random.Next(0, bug.Length);
             sTargetHour4Commit = bug[r] + sTargetHour4Commit + sRound2;
             
-            //file 
-            //if (sLocation == "")
-            Update("round." + _round + " " + sAnswer + " " + sTime + " " + sTarget);
-            //~
+         
 
             //sGoStop
             int randomStop = random.Next(1, RANDOM_STOP_MAX + 1);
@@ -279,6 +276,11 @@ namespace gitA
                 sTargetHour4Commit = " finished";
 
             //실제 작업들...
+            //file 
+            //if (sLocation == "")
+            Update("round." + _round + " " + sAnswer + " " + sTime + " " + sTarget);
+            //~
+
             RunCommand("git pull");
             RunCommand("git status");
 
@@ -345,7 +347,7 @@ namespace gitA
                     sMingling = RandomString(mingling);
 
                 if (0 == random.Next(0, 3))
-                    sMingling = "New " + sMingling;
+                    sMingling = "new " + sMingling;
 
                 if (0 == random.Next(0, 2))
                 {
