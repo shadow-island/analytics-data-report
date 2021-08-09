@@ -12,7 +12,7 @@ Todo: com고치기
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     
-    1-1 1/9-> 암것도안함(이것도테스트필요)
+    
 
     1-2 기능향상:
         *   git push 안하는 옵션 만들기
@@ -23,7 +23,8 @@ Todo: com고치기
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
         * 작업시간 체크version개념 1++
-        매번-----------------------                                   
+        매번-----------------------              
+                - 1/9-> 암것도안함(이것도테스트필요)
                 - TARGET_MAX도 10은 늘리고~
                 - sNeedUpdate 
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯        
@@ -71,8 +72,8 @@ namespace gitA
         static          int     RANDOM_STOP_MAX = 30;
         static          int     tick            = 26;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 12 * 60 + 50; //520, 계산하기좋게 10단위로
-        static int     NeedUpdate_MAX   = 7;
+        static int     TARGET_MAX       = 13 * 60 + 0; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX   = 8;
 
         // global
         static int  _round = 0;
@@ -236,11 +237,6 @@ namespace gitA
             {
                 if (0 == random.Next(0, 2))
                     sRound = Espanol(_round);
-            }
-            else
-            {
-                if (0 == random.Next(0, 2))
-                    sRound = Convert.ToString(_round) + ".";
             }
             //~
 
