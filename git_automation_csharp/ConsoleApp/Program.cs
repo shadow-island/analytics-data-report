@@ -11,9 +11,7 @@ Todo: com고치기
 1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
-    
-    
-
+        
     1-2 기능향상:
         *   git push 안하는 옵션 만들기
         *  	git pull 제대로 동작하나?-> git push시 쉬어야할듯?
@@ -26,7 +24,7 @@ Todo: com고치기
         매번-----------------------              
                 - 1/9-> 암것도안함(이것도테스트필요)
                 - TARGET_MAX도 10은 늘리고~
-                - sNeedUpdate 
+                - sNeedUpdate++
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯        
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
@@ -70,10 +68,10 @@ namespace gitA
         static readonly string  fileGit        = "eukm.log";                
 
         static          int     RANDOM_STOP_MAX = 30;
-        static          int     tick            = 26;             //초에 한번씩 찍기
+        static          int     tick            = 27;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 13 * 60 + 0; //520, 계산하기좋게 10단위로
-        static int     NeedUpdate_MAX   = 8;
+        static int     TARGET_MAX       = 13 * 60 + 10; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX   = 9;
 
         // global
         static int  _round = 0;
@@ -161,8 +159,7 @@ namespace gitA
             Random random = new Random();
             int r; //for random index
 
-            //makeTexts
-            
+            //makeTexts-------------------------------------            
             //1.need_update
             string sNeedUpdate;
             if (_round != 0 && !_isNeedUpdate)
@@ -209,7 +206,7 @@ namespace gitA
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou","Gabon","Libreville",
                 "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako",
-                "Namibia","Windhoek윈드후크","Georgia","Tbilisi","Albania","Tirana"
+                "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
             
             //답지 때문에 r 필요함 
@@ -342,7 +339,7 @@ namespace gitA
                 else
                     sMingling = RandomString(mingling);
 
-                if (0 == random.Next(0, 3))
+                if (0 == random.Next(0, 4))
                     sMingling = "new " + sMingling;
 
                 if (0 == random.Next(0, 2))
