@@ -28,7 +28,7 @@ Todo: com고치기
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯        
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
-                1. 안나와서 줄일거없으면 => =>  1.시간도 spanish? 
+                1. 안나와서 줄일거없으면 => >  1.시간도 spanish? 
                 else => postfix추가
                 - eugene 일때 -> command ,e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or
@@ -53,9 +53,6 @@ remote컴에서는 git reset HEAD~1 --hard로 후퇴한후 다시 git pull한다
 rebase하는 명령어찾기		
 https://superuser.com/questions/273172/how-do-i-reset-master-to-origin-master
 */
-/*
-
-*/
 
 namespace gitA
 {
@@ -70,8 +67,8 @@ namespace gitA
         static          int     RANDOM_STOP_MAX = 30;
         static          int     tick            = 27;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 13 * 60 + 10; //520, 계산하기좋게 10단위로
-        static int     NeedUpdate_MAX   = 9;
+        static int     TARGET_MAX       = 13 * 60 + 20; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX   = 10;
 
         // global
         static int  _round = 0;
@@ -333,7 +330,7 @@ namespace gitA
             //2 Command 만들기-과반은 패스(공백)            
             if (0 == random.Next(0, 2))
             {
-                string[] mingling = new string[] {"app", "Command", "squash", "update", "Commit", "commits", "push", "branch" };
+                string[] mingling = new string[] {"app", "command", "squash", "update", "Commit", "commits", "push", "branch" };
                 if (0 == random.Next(0, 2))
                     sMingling = "eugene";
                 else
