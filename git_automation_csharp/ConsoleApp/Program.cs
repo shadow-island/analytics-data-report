@@ -38,9 +38,9 @@ Todo: com고치기
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
         -font, 코드정리 => 이후 build할것!
-    1-4 git 정리 + 하기전에 숫자바꾸고 저장함? 차례(기능안까먹는 용도)
-        아니면 or ^B
-        1/7확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+    1-4 1/7확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+        git 정리 + 저장함? 차례(기능안까먹는 용도)
+        아니면 or ^B        
         git rebase HEAD~7 -i
         웬만하면 새 git이 하나로되게해보자~
         git rebase HEAD~19 -i 함
@@ -67,8 +67,8 @@ namespace gitA
         static          int     RANDOM_STOP_MAX = 30;
         static          int     tick            = 27;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 13 * 60 + 20; //520, 계산하기좋게 10단위로
-        static int     NeedUpdate_MAX   = 10;
+        static int     TARGET_MAX       = 13 * 60 + 30; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX   = 11;
 
         // global
         static int  _round = 0;
@@ -177,15 +177,9 @@ namespace gitA
             string sMingling = "";
             string sIchiMae = "";
 
-            makeTexts(ref sLocation, ref sMingling);
+            makeTexts(ref sLocation, ref sMingling, ref sIchiMae);
 
-            //3.조사 만들기-절반은 패스(공백)            
-            if (0 == random.Next(0, 2))
-            {
-                string[] cong = new string[] { "by", "from", "in" };
-                sIchiMae = RandomString(cong);
-                sIchiMae += " ";
-            }
+        
 
             //4.국가 만들기
             string sCapital;
@@ -318,7 +312,7 @@ namespace gitA
             _round++;
         }
 
-        private static void makeTexts(ref string sLocation, ref string sMingling)
+        private static void makeTexts(ref string sLocation, ref string sMingling, ref string sIchiMae)
         {
             Random random = new Random();
 
@@ -346,6 +340,14 @@ namespace gitA
                     sMingling = sMingling + RandomString(postfix);
                 }                    
                 sMingling = sMingling + " ";                
+            }
+
+            //3.조사 만들기-절반은 패스(공백)            
+            if (0 == random.Next(0, 2))
+            {
+                string[] cong = new string[] { "by", "from", "in" };
+                sIchiMae = RandomString(cong);
+                sIchiMae += " ";
             }
         }
 
