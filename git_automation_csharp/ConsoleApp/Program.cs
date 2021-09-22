@@ -67,8 +67,8 @@ namespace gitA
         static          int     RANDOM_STOP_MAX = 30;
         static          int     tick            = 27;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 13 * 60 + 30; //520, 계산하기좋게 10단위로
-        static int     NeedUpdate_MAX   = 11;
+        static int     TARGET_MAX       = 13 * 60 + 40; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX   = 12;
 
         // global
         static int  _round = 0;
@@ -176,10 +176,7 @@ namespace gitA
             string sLocation = "";
             string sMingling = "";
             string sIchiMae = "";
-
-            makeTexts(ref sLocation, ref sMingling, ref sIchiMae);
-
-        
+            makeTexts(ref sLocation, ref sMingling, ref sIchiMae);        
 
             //4.국가 만들기
             string sCapital;
@@ -237,7 +234,7 @@ namespace gitA
             DateTime targetTime = now.AddMinutes(randomResult);
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
-            string sRound2 = "";
+            string sRound2 = sRound;
             if (sRound == "")
                 sRound2 = "." + Convert.ToString(_round);
 
@@ -278,7 +275,7 @@ namespace gitA
             //~
 
             RunCommand("git commit --all -m "
-                + "\"" + sNeedUpdate + sLocation + sMingling + sIchiMae + sCapital + sRound + sTargetHour4Commit + "\"");
+                + "\"" + sNeedUpdate + sLocation + sMingling + sIchiMae + sCapital + sTargetHour4Commit + "\"");
 
             //home mode아닐때만
             Console.WriteLine("sLocation={0}", sLocation);
