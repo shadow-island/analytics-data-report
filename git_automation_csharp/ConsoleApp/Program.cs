@@ -38,7 +38,7 @@ Todo: com고치기
             * 안중요=> ini file, ini file 숫자증가만? 		    
     1-3 -release note 필요할때 무조건
         -font, 코드정리 => 이후 build할것!
-    1-4 1/7확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+    1-4 1/8확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
         git 정리 + 저장함? 차례(기능안까먹는 용도)
         아니면 or ^B        
         git rebase HEAD~7 -i
