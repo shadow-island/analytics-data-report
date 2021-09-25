@@ -189,7 +189,8 @@ namespace gitA
                 "Mauritius","Port Louis",
                 "Mozambique","Maputo",
                 "Niger","Niamey",
-                "Nigeria","Abuja","Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
+                "Nigeria","Abuja",
+                "Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
@@ -200,7 +201,7 @@ namespace gitA
                 "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
             
-            //답지 때문에 r 필요함 
+            //답지 때문에 변수 r 필요함 
             r = random.Next(0, capitalList.Length);
             sCapital = capitalList[r];
             //~
@@ -214,8 +215,7 @@ namespace gitA
 
             //5. round
             string sRound = "";
-            //if (_round == 0)
-            if (_round < 0)
+            if (_round == 0)
             {
                 string[] cero = new string[] { "git reset ", "cero ", "0 ", "." };
                 //코드정리 필요!!
