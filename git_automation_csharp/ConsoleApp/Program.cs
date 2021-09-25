@@ -140,6 +140,7 @@ namespace gitA
                 r = "ONCE ";
             else if (n == 12)
                 r = "DOCE ";
+            r = " " + r;
             return r;
         }
 
