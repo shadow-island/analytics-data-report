@@ -64,10 +64,10 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 30;
+        static          int     RANDOM_STOP_MAX = 31;
         static          int     tick            = 27;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 13 * 60 + 40; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX       = 13 * 60 + 50; //520, 계산하기좋게 10단위로
         static int     NeedUpdate_MAX   = 12;
 
         // global
@@ -114,7 +114,9 @@ namespace gitA
         static string Espanol(int n)
         {
             string r = "";
-            if (n == 1)
+            if (n == 0)
+                r = "cero ";
+            else if (n == 1)
                 r = "uno ";
             else if (n == 2)
                 r = "dos ";
@@ -211,7 +213,8 @@ namespace gitA
 
             //5. round
             string sRound = "";
-            if (_round == 0)
+            //if (_round == 0)
+            if (_round < 0)
             {
                 string[] cero = new string[] { "git reset ", "cero ", "0 ", "." };
                 //코드정리 필요!!
@@ -220,8 +223,8 @@ namespace gitA
             }
             else if (_round <= 12)
             {
-                if (0 == random.Next(0, 2))
-                    sRound = Espanol(_round);
+                //if (0 == random.Next(0, 2))
+                sRound = Espanol(_round);
             }
             //~
 
