@@ -35,7 +35,7 @@ Todo: com고치기
                 명령은 나중에?
         후순위 & 필요여부 미지수:		
 		    * 하루 2~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?        
-            * 안중요=> ini file, ini file 숫자증가만? 		    
+            * 안중요=> ini file, ini file 숫자증가만?
     1-3 -release note 필요할때 무조건
         -font, 코드정리 => 이후 build할것!
     1-4 1/8확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
@@ -179,7 +179,7 @@ namespace gitA
             string sLocation = "";
             string sMingling = "";
             string sIchiMae = "";
-            makeTexts(ref sLocation, ref sMingling, ref sIchiMae);        
+            makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);        
 
             //4.국가 만들기
             string sCapital;
@@ -242,11 +242,10 @@ namespace gitA
             if (sRound == "")
                 sRound2 = "." + Convert.ToString(_round);
 
-            string[] bug = new string[] { "", " #", " ticket ", " bug " };
+            string[] bug = new string[] { "", "", " #", " ticket ", " bug " };
             r = random.Next(0, bug.Length);
             sTargetHour4Commit = bug[r] + sTargetHour4Commit + sRound2;
-            
-         
+            //~
 
             //sGoStop
             int randomStop = random.Next(1, RANDOM_STOP_MAX + 1);
@@ -313,7 +312,7 @@ namespace gitA
             _round++;
         }
 
-        private static void makeTexts(ref string sLocation, ref string sMingling, ref string sIchiMae)
+        private static void makeTexts(ref string sNeedUpdate, ref string sLocation, ref string sMingling, ref string sIchiMae)
         {
             Random random = new Random();
 
