@@ -24,13 +24,13 @@ Todo: com고치기
         매번-----------------------              
                 - 1/9-> 암것도안함(이것도테스트필요)
                 - TARGET_MAX도 10은 늘리고~
-                - sNeedUpdate++
+                - sNeedUpdate++?
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯        
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
-                1. 안나와서 줄일거없으면 => >  1.시간도 spanish? 
+                1. 안나와서 줄일거없으면 =>   1.시간도 spanish? 
                 else => postfix추가
-                - eugene 일때 -> command ,e.g. rewrite, 
+                - eugene 일때 -> command e.g. rewrite, 
                 - 시간은 issue # number화 jira, bugzilla or
                 명령은 나중에?
         후순위 & 필요여부 미지수:		
@@ -64,10 +64,10 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 31;
+        static          int     RANDOM_STOP_MAX = 32;
         static          int     tick            = 27;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 13 * 60 + 50; //520, 계산하기좋게 10단위로
+        static int     TARGET_MAX       = 14 * 60 + 0; //520, 계산하기좋게 10단위로
         static int     NeedUpdate_MAX   = 12;
 
         // global
@@ -325,7 +325,7 @@ namespace gitA
             if (0 == random.Next(0, 2))
             {
                 string[] mingling = new string[] {"app", "command", "squash", "update", "Commit", "commits", "push", "branch" };
-                if (0 == random.Next(0, 2))
+                if (0 == random.Next(0, 3))
                     sMingling = "eugene";
                 else
                     sMingling = RandomString(mingling);
