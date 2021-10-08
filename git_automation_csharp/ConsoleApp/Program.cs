@@ -23,7 +23,7 @@ Todo: com고치기
         * 작업시간 체크version개념 1++
         매번-----------------------              
                 - 1/9-> 암것도안함(이것도테스트필요)
-                - TARGET_MAX도 10은 늘리고~
+                - ONE_ROUND_SIZE 도 10은 늘리고~
                 - sNeedUpdate++?
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯        
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
@@ -67,8 +67,8 @@ namespace gitA
         static          int     RANDOM_STOP_MAX = 32;
         static          int     tick            = 27;             //초에 한번씩 찍기
         //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     TARGET_MAX       = 14 * 60 + 0; //520, 계산하기좋게 10단위로
-        static int     NeedUpdate_MAX   = 12;
+        static int     ONE_ROUND_SIZE   = 14 * 60 + 10; //520, 계산하기좋게 10단위로
+        static int     NeedUpdate_MAX   = 13;
 
         // global
         static int  _round = 0;
@@ -84,7 +84,7 @@ namespace gitA
             {
                 RANDOM_STOP_MAX = 1;
                 tick = 1; //초에 한번씩 찍기
-                TARGET_MAX = 1;// for test        
+                ONE_ROUND_SIZE = 1;// for test        
             } //debugging mode
 
             //var info = new FileInfo(fileGit);
@@ -233,7 +233,7 @@ namespace gitA
             DateTime now = DateTime.Now;
             string sTime = now.ToString("HH:mm");
 
-            int thisRoundTarget = TARGET_MAX + _round;
+            int thisRoundTarget = ONE_ROUND_SIZE + _round;
             int randomResult = random.Next(1, thisRoundTarget);
             DateTime targetTime = now.AddMinutes(randomResult);
             string sTarget = targetTime.ToString("HH:mm");
@@ -330,7 +330,7 @@ namespace gitA
                 else
                     sMingling = RandomString(mingling);
 
-                if (0 == random.Next(0, 4))
+                if (0 == random.Next(0, 5))
                     sMingling = "new " + sMingling;
 
                 if (0 == random.Next(0, 2))
