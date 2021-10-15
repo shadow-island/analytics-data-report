@@ -31,7 +31,7 @@ Todo: com고치기
                 1. 안나와서 줄일거없으면 =>   1.시간도 spanish? 
                 else => postfix추가
                 - eugene 일때 -> command e.g. rewrite, 
-                - 시간은 issue # number화 jira, bugzilla or
+                - 시간은 issue # number화 
                 명령은 나중에?
         후순위 & 필요여부 미지수:		
 		    * 하루 2~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?        
@@ -64,11 +64,14 @@ namespace gitA
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
 
-        static          int     RANDOM_STOP_MAX = 32;
-        static          int     tick            = 28;             //초에 한번씩 찍기
-        //  목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
-        static int     ONE_ROUND_SIZE   = 14 * 60 + 20; //520, 계산하기좋게 10단위로
+        
+        static int     tick             = 28;           //초에 한번씩 찍기        
+
+        //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
+        //무조건  늘리지말고 일일 commit개수에 따라 늘림?
+        static int     ONE_ROUND_SIZE   = 14 * 60 + 20; //520, 계산하기좋게 20분단위로--1년안에는 결과 나오게, 
         static int     NeedUpdate_MAX   = 14;
+        static int     RANDOM_STOP_MAX  = 32;
 
         // global
         static int  _round = 0;
@@ -242,7 +245,7 @@ namespace gitA
             if (sRound == "")
                 sRound2 = "." + Convert.ToString(_round);
 
-            string[] bug = new string[] { "", "", " #", " ticket ", " bug " };
+            string[] bug = new string[] { "", "", " #", " ticket ", " bug ", "commit " };//fix, update, ver, random, release, jira, bugzilla
             r = random.Next(0, bug.Length);
             sTargetHour4Commit = bug[r] + sTargetHour4Commit + sRound2;
             //~
