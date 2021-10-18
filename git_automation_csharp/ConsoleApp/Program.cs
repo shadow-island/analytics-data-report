@@ -269,9 +269,8 @@ namespace gitA
 
             RunCommand("git pull");
             RunCommand("git status");
-
-            //좀 가까이 잘보이게 
-            Console.WriteLine("작업ver{0} 국가수:{1}", WORK, capitalList.Length / 2);
+                        
+            Console.WriteLine("작업ver{0} 국가수:{1}---------------------------", WORK, capitalList.Length / 2); //좀 가까이 잘보이게 
 
             //
             DateTime now1 = DateTime.Now;
