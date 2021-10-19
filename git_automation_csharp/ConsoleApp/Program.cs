@@ -25,7 +25,7 @@ Todo: com고치기
                 - 1/9-> 암것도안함(이것도테스트필요)
                 - ONE_ROUND_SIZE 도 10은 늘리고~
                 - sNeedUpdate++?
-                - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯        
+                - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 =>   1.시간도 spanish? 
@@ -38,7 +38,7 @@ Todo: com고치기
             * 안중요=> ini file, ini file 숫자증가만?
     1-3 -release note 필요할때 무조건
         -font, 코드정리 => 이후 build할것!
-    1-4 1/8확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴수도있다
+    1-4 1/8확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴 수도있다
         git 정리 + 저장함? 차례(기능안까먹는 용도)
         아니면 or ^B        
         git rebase HEAD~7 -i
@@ -59,7 +59,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 3;
+        static readonly float    WORK = 4;
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -68,9 +68,9 @@ namespace gitA
 
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int     ONE_ROUND_SIZE   = 14 * 60 + 20; //520, 계산하기좋게 20분단위로--1년안에는 결과 나오게, 
-        static int     NeedUpdate_MAX   = 14;
-        static int     RANDOM_STOP_MAX  = 32;
+        static int  ONE_ROUND_SIZE   = 14 * 60 + 40; //520, 계산하기좋게 20분단위로--1년안에는 결과 나오게, 
+        static int  NEED_UPDATE_MAX  = 15;
+        static int  RANDOM_STOP_MAX  = 32;
 
         // global
         static int  _round = 0;
@@ -170,7 +170,7 @@ namespace gitA
             //1.need_update
             if (_round != 0 && !_isNeedUpdate)
             {
-                if (0 == random.Next(0, NeedUpdate_MAX))
+                if (0 == random.Next(0, NEED_UPDATE_MAX))
                 {
                     _isNeedUpdate = true;
                     sNeedUpdate = "need Update even ongoing! wait one more. ";
@@ -188,6 +188,7 @@ namespace gitA
             string[] capitalList = new string[] {
                 "Benin","Porto-Novo",
                 "Botswana","Gaborone",
+                "Gabon","Libreville",
                 "Mauritius","Port Louis",
                 "Mozambique","Maputo",
                 "Niger","Niamey",
@@ -198,7 +199,7 @@ namespace gitA
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                "Zambia","Lusaka","Burkina Faso","Ouagadougou","Gabon","Libreville",
+                "Zambia","Lusaka","Burkina Faso","Ouagadougou",
                 "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako",
                 "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
@@ -352,7 +353,7 @@ namespace gitA
             //3.조사 만들기-절반은 패스(공백)            
             if (0 == random.Next(0, 2))
             {
-                string[] cong = new string[] { "by", "from", "in" };
+                string[] cong = new string[] { "by", "from", "in", "of" };
                 sIchiMae = RandomString(cong);
                 sIchiMae += " ";
             }
