@@ -23,14 +23,14 @@ Todo: com고치기
         * 작업시간 체크version개념 1++
         매번-----------------------              
                 - 1/9-> 암것도안함(이것도테스트필요)
-                - ONE_ROUND_SIZE 도 10은 늘리고~
+                - ONE_ROUND_SIZE도 필요시 늘리고~
                 - sNeedUpdate++?
                 - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 =>   1.시간도 spanish? 
                 else => postfix추가
-                - eugene 일때 -> command e.g. rewrite, 
+                - eugene 일때 -> command추가 e.g. rewrite, 
                 - 시간은 issue # number화 
                 명령은 나중에?
         후순위 & 필요여부 미지수:		
@@ -59,7 +59,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 4;
+        static readonly float    WORK = 5;
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -68,7 +68,7 @@ namespace gitA
 
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 14 * 60 + 40; //520, 계산하기좋게 20분단위로--1년안에는 결과 나오게, 
+        static int  ONE_ROUND_SIZE   = 14 * 60 + 50; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
         static int  NEED_UPDATE_MAX  = 15;
         static int  RANDOM_STOP_MAX  = 32;
 
@@ -162,25 +162,12 @@ namespace gitA
             int r; //for random index
 
             //makeTexts-------------------------------------                     
-            string sNeedUpdate;
+            string sNeedUpdate = "";
             string sLocation = "";
             string sMingling = "";
             string sIchiMae = "";
 
-            //1.need_update
-            if (_round != 0 && !_isNeedUpdate)
-            {
-                if (0 == random.Next(0, NEED_UPDATE_MAX))
-                {
-                    _isNeedUpdate = true;
-                    sNeedUpdate = "need Update even ongoing! wait one more. ";
-                }
-                else
-                    sNeedUpdate = "¿ ";
-            }
-            else //update is set
-                sNeedUpdate = "";
-            //~
+     
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);        
 
             //4.국가 만들기
@@ -189,6 +176,7 @@ namespace gitA
                 "Benin","Porto-Novo",
                 "Botswana","Gaborone",
                 "Gabon","Libreville",
+                "Guinea","Conakry",
                 "Mauritius","Port Louis",
                 "Mozambique","Maputo",
                 "Niger","Niamey",
@@ -200,7 +188,7 @@ namespace gitA
                 "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                 "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                 "Zambia","Lusaka","Burkina Faso","Ouagadougou",
-                "Guinea","Conakry","Haiti","Port-au-Prince", "Mali","Bamako",
+                "Haiti","Port-au-Prince", "Mali","Bamako",
                 "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
             
@@ -323,6 +311,21 @@ namespace gitA
             if (fi.Exists)
                 sLocation = "[home] ";
 
+            //1.need_update
+            if (_round != 0 && !_isNeedUpdate)
+            {
+                if (0 == random.Next(0, NEED_UPDATE_MAX))
+                {
+                    _isNeedUpdate = true;
+                    sNeedUpdate = "need Update even ongoing! wait one more. ";
+                }
+                else
+                    sNeedUpdate = "¿ ";
+            }
+            else //update is set
+                sNeedUpdate = "";
+            //~
+
             //2 Command 만들기-과반은 패스(공백)            
             if (0 == random.Next(0, 2))
             {
@@ -334,11 +337,8 @@ namespace gitA
 
                 if (0 == random.Next(0, 2))
                 {
-                    if (0 == random.Next(0, 2))
-                        sMingling = "new " + sMingling;
-                    else
-                        sMingling = "good " + sMingling;
-                    //just
+                    string[] qianbian = new string[] { "new ", "good ", "+ "}; // //just
+                    sMingling = RandomString(qianbian) + sMingling;                    
                 }                    
 
                 if (0 == random.Next(0, 2))
