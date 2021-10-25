@@ -59,7 +59,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly float    WORK = 5;
+        static readonly float    WORK = 2.0f; //앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -68,8 +68,8 @@ namespace gitA
 
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 14 * 60 + 50; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
-        static int  NEED_UPDATE_MAX  = 15;
+        static int  ONE_ROUND_SIZE   = 15 * 60 + 0; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
+        static int  NEED_UPDATE_MAX  = 16;
         static int  RANDOM_STOP_MAX  = 32;
 
         // global
@@ -165,9 +165,7 @@ namespace gitA
             string sNeedUpdate = "";
             string sLocation = "";
             string sMingling = "";
-            string sIchiMae = "";
-
-     
+            string sIchiMae = "";                 
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);        
 
             //4.국가 만들기
@@ -175,6 +173,7 @@ namespace gitA
             string[] capitalList = new string[] {
                 "Benin","Porto-Novo",
                 "Botswana","Gaborone",
+                "Burundi","Bujumbura",
                 "Gabon","Libreville",
                 "Guinea","Conakry",
                 "Mauritius","Port Louis",
@@ -330,7 +329,7 @@ namespace gitA
             if (0 == random.Next(0, 2))
             {
                 string[] mingling = new string[] {"app", "command", "squash", "update", "Commit", "commits", "push", "branch" };
-                if (0 == random.Next(0, 4))
+                if (0 == random.Next(0, 5)) //무조건증가++
                     sMingling = "eugene";
                 else
                     sMingling = RandomString(mingling);
