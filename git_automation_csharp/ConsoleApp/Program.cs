@@ -8,7 +8,7 @@ Todo: com고치기
 
     * 근무시간에만 함, TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
 	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) => randomStopMax도 늘리고..
-1.  5/1토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
+1.  5월1일 토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
         
@@ -68,9 +68,9 @@ namespace gitA
 
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 15 * 60 + 10; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
+        static int  ONE_ROUND_SIZE   = 15 * 60 + 20; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
         static int  NEED_UPDATE_MAX  = 16;
-        static int  RANDOM_STOP_MAX  = 33;
+        static int  RANDOM_STOP_MAX  = 34;
 
         // global
         static int  _round = 0;
@@ -176,12 +176,13 @@ namespace gitA
                 "Burundi","Bujumbura",
                 "Gabon","Libreville",
                 "Guinea","Conakry",
+                "Kazakhstan","Nur Sultan",
                 "Marshall Islands","Majuro",
                 "Mauritius","Port Louis",
                 "Mozambique","Maputo",
                 "Niger","Niamey",
                 "Nigeria","Abuja",
-                "Kazakhstan","Nur Sultan","Slovakia","Bratislava","Puerto Rico","San Juan",
+                "Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                 "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
@@ -194,9 +195,8 @@ namespace gitA
             
             //답지 때문에 변수 r 필요함 
             r = random.Next(0, capitalList.Length);
-            sQuiz = capitalList[r];
+            sQuiz = capitalList[r] + " ";
             //~
-            sQuiz = sQuiz + " ";
 
             string sAnswer;
             if (r % 2 == 0)
@@ -335,9 +335,9 @@ namespace gitA
                 else
                     sMingling = RandomString(mingling);
 
-                if (0 == random.Next(0, 2))
+                if (0 == random.Next(0, 3))
                 {
-                    string[] qianbian = new string[] { "new ", "good ", "+ "}; // //just
+                    string[] qianbian = new string[] { "new ", "good ", "+ "}; //+나오면 새것추가? //just
                     sMingling = RandomString(qianbian) + sMingling;                    
                 }                    
 
