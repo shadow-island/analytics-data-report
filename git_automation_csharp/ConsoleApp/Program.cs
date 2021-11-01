@@ -14,7 +14,7 @@ Todo: com고치기
         
     1-2 기능향상:
         *   git push 안하는 옵션 만들기
-        *  	git pull 제대로 동작하나?-> git push시 쉬어야할듯?
+        *  	git pull 제대로 동작하나???-> git push시 쉬어야할듯?
         *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
             , bat(exe + cmd이거 안되면) 이것도 문제 생김			
