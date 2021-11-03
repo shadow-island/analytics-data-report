@@ -25,7 +25,7 @@ Todo: com고치기
                 - 1/9-> 암것도안함(이것도테스트필요)
                 - ONE_ROUND_SIZE도 필요시 늘리고~
                 - sNeedUpdate++?
-                - 수도추가: 이제 플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행
+                - 수도추가: 플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 =>   1.시간도 spanish? 
@@ -182,6 +182,7 @@ namespace gitA
                 "Mozambique","Maputo",
                 "Niger","Niamey",
                 "Nigeria","Abuja",
+                "Tonga","Nukualofa",
                 "Slovakia","Bratislava","Puerto Rico","San Juan",
                 "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                 "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
@@ -198,11 +199,11 @@ namespace gitA
             sQuiz = capitalList[r] + " ";
             //~
 
-            string sAnswer;
+            string sAnswerForLog;
             if (r % 2 == 0)
-                sAnswer = capitalList[r + 1];
+                sAnswerForLog = capitalList[r + 1];
             else
-                sAnswer = capitalList[r - 1];
+                sAnswerForLog = capitalList[r - 1];
 
             //5. round
             string sRound = "";
@@ -253,7 +254,7 @@ namespace gitA
             //실제 작업들...
             //file 
             //if (sLocation == "")
-            Update("round." + _round + " " + sAnswer + " " + sTime + " " + sTarget);
+            Update("round." + _round + " " + sAnswerForLog + " " + sTime + " " + sTarget);
             //~
 
             RunCommand("git pull");
@@ -353,8 +354,16 @@ namespace gitA
             //3.조사 만들기-절반은 패스(공백)            
             if (0 == random.Next(0, 2))
             {
-                string[] cong = new string[] { "by", "from", "in", "of", "/" };
-                sIchiMae = RandomString(cong);
+                if (sMingling == "")
+                {
+                    string[] cong = new string[] { "by", "from", "in"};
+                    sIchiMae = RandomString(cong);                    
+                }
+                else
+                {
+                    string[] cong = new string[] { "by", "from", "in", "of", "/" };
+                    sIchiMae = RandomString(cong);
+                }                
                 sIchiMae += " ";
             }
         }
