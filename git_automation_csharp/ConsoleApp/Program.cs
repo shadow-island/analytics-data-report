@@ -24,8 +24,8 @@ Todo: com고치기
         매번-----------------------   
                 - 1/9-> 암것도안함(이것도테스트필요)
                 - ONE_ROUND_SIZE도 필요시 늘리고~
-                - sNeedUpdate++?
-                - 수도추가: 플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행
+                - 걸리면 sNeedUpdate++?
+                - 수도추가: 플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
         최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 =>   1.시간도 spanish? 
@@ -59,7 +59,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.1"; //앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.2"; //앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -68,7 +68,7 @@ namespace gitA
 
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 15 * 60 + 30; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
+        static int  ONE_ROUND_SIZE   = 15 * 60 + 40; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
         static int  NEED_UPDATE_MAX  = 16;
         static int  RANDOM_STOP_MAX  = 35;
 
@@ -170,6 +170,8 @@ namespace gitA
 
             //4.국가 만들기
             string sQuiz;
+            string sAnswerForLog;
+
             string[] capitalList = new string[] {
                 "Benin","Porto-Novo",
                 "Botswana","Gaborone",
@@ -197,13 +199,12 @@ namespace gitA
             //답지 때문에 변수 r 필요함 
             r = random.Next(0, capitalList.Length);
             sQuiz = capitalList[r] + " ";
-            //~
-
-            string sAnswerForLog;
+            
             if (r % 2 == 0)
                 sAnswerForLog = capitalList[r + 1];
             else
                 sAnswerForLog = capitalList[r - 1];
+            //~~
 
             //5. round
             string sRound = "";
@@ -353,7 +354,7 @@ namespace gitA
             }
 
             //3.조사 만들기-절반은 패스(공백)            
-            if (0 == random.Next(0, 2))
+            if (0 == random.Next(0, 3))
             {
                 if (sMingling == "")
                 {
