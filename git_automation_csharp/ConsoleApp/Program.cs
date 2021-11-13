@@ -26,7 +26,8 @@ Todo: com고치기
                 - ONE_ROUND_SIZE도 필요시 늘리고~
                 - 걸리면 sNeedUpdate++?
                 - 수도추가: 플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
-        최근시작하나만보기 =>  이하는 1개만 더 사람답게 깔끔하게?        
+                - 1개만 더 사람답게 깔끔하게? 
+        최근시작하나만보기 =>  이하는        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 =>   1.시간도 spanish? 
                 else => postfix추가
@@ -68,8 +69,8 @@ namespace gitA
 
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 15 * 60 + 40; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
-        static int  NEED_UPDATE_MAX  = 16;
+        static int  ONE_ROUND_SIZE   = 15 * 60 + 50; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
+        static int  NEED_UPDATE_MAX  = 17;
         static int  RANDOM_STOP_MAX  = 35;
 
         // global
@@ -182,6 +183,7 @@ namespace gitA
                 "Marshall Islands","Majuro",
                 "Mauritius","Port Louis",
                 "Mozambique","Maputo",
+                "Nicaragua","Managua",
                 "Niger","Niamey",
                 "Nigeria","Abuja",
                 "Tonga","Nukualofa",
@@ -218,9 +220,11 @@ namespace gitA
             }
             else if (_round <= 12)
             {
-                //if (0 == random.Next(0, 2))
-                sRound = Espanol(_round);
+                if (0 == random.Next(0, 2))
+                    sRound = Espanol(_round);
             }
+            if (sRound == "")
+                sRound = "." + Convert.ToString(_round);
             //~
 
             // 6.random Target with ticket 
@@ -232,13 +236,11 @@ namespace gitA
             DateTime targetTime = now.AddMinutes(randomResult);
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
-            string sRound2 = sRound;
-            if (sRound == "")
-                sRound2 = "." + Convert.ToString(_round);
+  
 
-            string[] bug = new string[] { "", "", " #", " ticket ", " bug ", "commit " };//fix, update, ver, random, release, jira, bugzilla
+            string[] bug = new string[] { "", "", " #", " ticket ", " bug ", "commit " }; //fix, update, ver, random, release, jira, bugzilla
             r = random.Next(0, bug.Length);
-            sTargetHour4Commit = bug[r] + sTargetHour4Commit + sRound2;
+            sTargetHour4Commit = bug[r] + sTargetHour4Commit + sRound;
             //~
 
             //sGoStop
