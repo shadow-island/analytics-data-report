@@ -21,11 +21,13 @@ Todo: com고치기
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
         * 작업시간 체크version개념 1++
-        매번-----------------------   
+        매번
+        -----------------------
                 - 1/9-> 암것도안함(이것도테스트필요)
                 - ONE_ROUND_SIZE도 필요시 늘리고~
                 - 걸리면 sNeedUpdate++?
                 - 수도추가: 플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
+                - 영어추가중
                 - 1개만 더 사람답게 깔끔하게? 
                 - 제자리출력?
         최근시작하나만보기 =>  이하는        
@@ -61,7 +63,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.3"; //앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.4"; //앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -167,46 +169,54 @@ namespace gitA
             string sLocation = "";
             string sMingling = "";
             string sIchiMae = "";                 
-            makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);        
+            makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);
 
-            //4.국가 만들기
+            //4.Quiz 
             string sQuiz;
             string sAnswerForLog;
+            if (0 == random.Next(0, 2))
+            {
+                //국가 만들기
+                string[] capitalList = new string[] {
+                    "Benin","Porto-Novo",
+                    "Botswana","Gaborone",
+                    "Burundi","Bujumbura",
+                    "Gabon","Libreville",
+                    "Guinea","Conakry",
+                    "Kazakhstan","Nur Sultan",
+                    "Marshall Islands","Majuro",
+                    "Mauritius","Port Louis",
+                    "Mozambique","Maputo",
+                    "Nicaragua","Managua",
+                    "Niger","Niamey",
+                    "Nigeria","Abuja",
+                    "Tonga","Nukualofa",
+                    "Slovakia","Bratislava","Puerto Rico","San Juan",
+                    "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
+                    "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
+                    "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
+                    "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
+                    "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
+                    "Zambia","Lusaka","Burkina Faso","Ouagadougou",
+                    "Haiti","Port-au-Prince", "Mali","Bamako",
+                    "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
+                };
 
-            string[] capitalList = new string[] {
-                "Benin","Porto-Novo",
-                "Botswana","Gaborone",
-                "Burundi","Bujumbura",
-                "Gabon","Libreville",
-                "Guinea","Conakry",
-                "Kazakhstan","Nur Sultan",
-                "Marshall Islands","Majuro",
-                "Mauritius","Port Louis",
-                "Mozambique","Maputo",
-                "Nicaragua","Managua",
-                "Niger","Niamey",
-                "Nigeria","Abuja",
-                "Tonga","Nukualofa",
-                "Slovakia","Bratislava","Puerto Rico","San Juan",
-                "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
-                "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
-                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
-                "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
-                "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                "Zambia","Lusaka","Burkina Faso","Ouagadougou",
-                "Haiti","Port-au-Prince", "Mali","Bamako",
-                "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
-            };
-            
-            //답지 때문에 변수 r 필요함 
-            r = random.Next(0, capitalList.Length);
-            sQuiz = capitalList[r] + " ";
-            
-            if (r % 2 == 0)
-                sAnswerForLog = capitalList[r + 1];
+                //답지 때문에 변수 r 필요함 
+                r = random.Next(0, capitalList.Length);
+                sQuiz = capitalList[r] + " ";
+
+                if (r % 2 == 0)
+                    sAnswerForLog = capitalList[r + 1];
+                else
+                    sAnswerForLog = capitalList[r - 1];
+                //~~
+            }
             else
-                sAnswerForLog = capitalList[r - 1];
-            //~~
+            {
+                sQuiz = sAnswerForLog = "English";
+            }
+
 
             //5. round
             string sRound = "";
@@ -264,7 +274,7 @@ namespace gitA
             RunCommand("git pull");
             RunCommand("git status");
                         
-            Console.WriteLine("작업ver{0} 국가수:{1}---------------------------", WORK, capitalList.Length / 2); //좀 가까이 잘보이게 
+            Console.WriteLine("작업ver{0} ", WORK); //좀 가까이 잘보이게 
 
             //
             DateTime now1 = DateTime.Now;
@@ -325,10 +335,10 @@ namespace gitA
                     sNeedUpdate = "need Update even ongoing! wait one more. ";
                 }
                 else
-                    sNeedUpdate = "¿ ";
+                    sNeedUpdate = "";
             }
             else //update is set
-                sNeedUpdate = "";
+                sNeedUpdate = "¿";
             //~
 
             //2 Command 만들기-과반은 패스(공백)            
