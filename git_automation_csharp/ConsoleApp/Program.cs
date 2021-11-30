@@ -63,7 +63,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.4"; //앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.5"; //앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -71,8 +71,8 @@ namespace gitA
         static int     tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 16 * 60 + 00; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
-        static int  NEED_UPDATE_MAX  = 18;
+        static int  ONE_ROUND_SIZE   = 16 * 60 + 10; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
+        static int  NEED_UPDATE_MAX  = 19;
         static int  RANDOM_STOP_MAX  = 35;
 
         // global
@@ -168,13 +168,13 @@ namespace gitA
             string sNeedUpdate = "";
             string sLocation = "";
             string sMingling = "";
-            string sIchiMae = "";                 
+            string sIchiMae = "";
+            string sQuiz ="";
+            string sAnswerForLog = "";
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);
 
-            //4.Quiz 
-            string sQuiz;
-            string sAnswerForLog;
-            if (0 == random.Next(0, 2))
+            //4.Quiz            
+            if (0 != random.Next(0, 3))
             {
                 //국가 만들기
                 string[] capitalList = new string[] {
@@ -186,12 +186,14 @@ namespace gitA
                     "Kazakhstan","Nur Sultan",
                     "Marshall Islands","Majuro",
                     "Mauritius","Port Louis",
+                    "Moldova","Chișinău",
                     "Mozambique","Maputo",
                     "Nicaragua","Managua",
                     "Niger","Niamey",
                     "Nigeria","Abuja",
+                    "Puerto Rico","San Juan",
                     "Tonga","Nukualofa",
-                    "Slovakia","Bratislava","Puerto Rico","San Juan",
+                    "Slovakia","Bratislava",
                     "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                     "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                     "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
@@ -214,7 +216,7 @@ namespace gitA
             }
             else
             {
-                sQuiz = sAnswerForLog = "English";
+                sQuiz = sAnswerForLog = "English ";
             }
 
 
