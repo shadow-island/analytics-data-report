@@ -71,8 +71,8 @@ namespace gitA
         static int     tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 16 * 60 + 10; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
-        static int  NEED_UPDATE_MAX  = 19;
+        static int  ONE_ROUND_SIZE   = 16 * 60 + 20; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
+        static int  NEED_UPDATE_MAX  = 20;
         static int  RANDOM_STOP_MAX  = 35;
 
         // global
@@ -174,7 +174,7 @@ namespace gitA
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);
 
             //4.Quiz            
-            if (0 != random.Next(0, 3))
+            if (0 != random.Next(0, 2))
             {
                 //국가 만들기
                 string[] capitalList = new string[] {
@@ -191,9 +191,10 @@ namespace gitA
                     "Nicaragua","Managua",
                     "Niger","Niamey",
                     "Nigeria","Abuja",
-                    "Puerto Rico","San Juan",
-                    "Tonga","Nukualofa",
+                    "Puerto Rico","San Juan",                    
                     "Slovakia","Bratislava",
+                    "Tonga","Nukualofa",
+                    "Tonga","Nukualofa",
                     "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                     "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                     "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
@@ -212,7 +213,6 @@ namespace gitA
                     sAnswerForLog = capitalList[r + 1];
                 else
                     sAnswerForLog = capitalList[r - 1];
-                //~~
             }
             else
             {
@@ -329,7 +329,7 @@ namespace gitA
                 sLocation = "[home] ";
 
             //1.need_update
-            if (_round != 0 && !_isNeedUpdate)
+            if (_round == 0 && !_isNeedUpdate)
             {
                 if (0 == random.Next(0, NEED_UPDATE_MAX))
                 {
