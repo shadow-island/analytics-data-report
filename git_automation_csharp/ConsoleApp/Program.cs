@@ -30,6 +30,7 @@ Todo: com고치기
                 - 영어추가중
                 - 1개만 더 사람답게 깔끔하게? 
                 - 제자리출력?
+                - version up
         최근시작하나만보기 =>  이하는        
                 이게 최우선? 0. 12까지한후 스반어맞추면 줄이기
                 1. 안나와서 줄일거없으면 =>   1.시간도 spanish? 
@@ -63,7 +64,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.5"; //앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.6"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -169,7 +170,7 @@ namespace gitA
             string sLocation = "";
             string sMingling = "";
             string sIchiMae = "";
-            string sQuiz ="";
+            string sQuiz = "";
             string sAnswerForLog = "";
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);
 
@@ -184,6 +185,7 @@ namespace gitA
                     "Gabon","Libreville",
                     "Guinea","Conakry",
                     "Kazakhstan","Nur Sultan",
+                    "Kiribati","Tarawa",
                     "Marshall Islands","Majuro",
                     "Mauritius","Port Louis",
                     "Moldova","Chișinău",
@@ -329,19 +331,24 @@ namespace gitA
                 sLocation = "[home] ";
 
             //1.need_update
-            if (_round == 0 && !_isNeedUpdate)
+            if (_round == 0 )
+                sNeedUpdate = "";
+            else
             {
-                if (0 == random.Next(0, NEED_UPDATE_MAX))
+                if (!_isNeedUpdate)
                 {
-                    _isNeedUpdate = true;
-                    sNeedUpdate = "need Update even ongoing! wait one more. ";
+                    if (0 == random.Next(0, NEED_UPDATE_MAX))
+                    {
+                        _isNeedUpdate = true;
+                        sNeedUpdate = "need Update even ongoing! wait one more. ";
+                    }
+                    else
+                        sNeedUpdate = "";
                 }
-                else
-                    sNeedUpdate = "";
+                else //update is set
+                    sNeedUpdate = "¿";
+                //~
             }
-            else //update is set
-                sNeedUpdate = "¿";
-            //~
 
             //2 Command 만들기-과반은 패스(공백)            
             if (0 == random.Next(0, 2))
