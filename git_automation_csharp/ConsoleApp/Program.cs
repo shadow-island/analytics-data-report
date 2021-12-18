@@ -25,9 +25,9 @@ Todo: com고치기
         -----------------------
                 - 1/9-> 암것도안함(이것도테스트필요)
                 - ONE_ROUND_SIZE도 필요시 늘리고~
-                - 걸리면 sNeedUpdate++?
-                - 수도추가: 플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
-                - 영어추가중
+                - 걸리면 RANDOM_STOP_MAX ++ or sNeedUpdate++?
+                - 수도추가:   플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
+                            영어추가중
                 - 1개만 더 사람답게 깔끔하게? 
                 - 제자리출력?
                 - version up
@@ -39,7 +39,7 @@ Todo: com고치기
                 - 시간은 issue # number화 
                 명령은 나중에?
         후순위 & 필요여부 미지수:		
-		    * 하루 2~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?        
+		    * 하루 1~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?        
             * 안중요=> ONE_ROUND_SIZE도 ini file, ini file 숫자증가만?
     1-3 -release note 필요할때 무조건
         -font, 코드정리 => 이후 build할것!
@@ -64,7 +64,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.6"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.7"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -72,9 +72,9 @@ namespace gitA
         static int     tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 16 * 60 + 20; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
+        static int  ONE_ROUND_SIZE   = 16 * 60 + 30; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
         static int  NEED_UPDATE_MAX  = 20;
-        static int  RANDOM_STOP_MAX  = 35;
+        static int  RANDOM_STOP_MAX  = 36;
 
         // global
         static int  _round = 0;
@@ -170,18 +170,22 @@ namespace gitA
             string sLocation = "";
             string sMingling = "";
             string sIchiMae = "";
+
             string sQuiz = "";
             string sAnswerForLog = "";
+
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);
 
             //4.Quiz            
-            if (0 != random.Next(0, 2))
+            if (0 != random.Next(0, 3))
             {
                 //국가 만들기
                 string[] capitalList = new string[] {
                     "Benin","Porto-Novo",
                     "Botswana","Gaborone",
-                    "Burundi","Bujumbura",
+                    "Burkina Faso","Ouagadougou",
+                    "Burkina Faso","Ouagadougou",
+                    "Burundi","Bujumbura",                    
                     "Gabon","Libreville",
                     "Guinea","Conakry",
                     "Kazakhstan","Nur Sultan",
@@ -202,7 +206,7 @@ namespace gitA
                     "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                     "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                     "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                    "Zambia","Lusaka","Burkina Faso","Ouagadougou",
+                    "Zambia","Lusaka",
                     "Haiti","Port-au-Prince", "Mali","Bamako",
                     "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
                 };
@@ -354,7 +358,7 @@ namespace gitA
             if (0 == random.Next(0, 2))
             {
                 
-                if (0 == random.Next(0, 6)) //무조건증가++
+                if (0 == random.Next(0, 7)) //걸리면 무조건증가++
                     sMingling = "eugene";
                 else
                 {
