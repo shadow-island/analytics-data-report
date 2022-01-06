@@ -24,8 +24,8 @@ Todo: com고치기
         매번
         -----------------------
                 - 1/9-> 암것도안함(이것도테스트필요)
-                - ONE_ROUND_SIZE도 필요시 늘리고~(넉넉할때는 1++로)
-                - 걸리면 RANDOM_STOP_MAX ++ or sNeedUpdate++?
+                - ONE_ROUND_SIZE도 필요시 늘리고
+                - 걸리면 sNeedUpdate++? => RANDOM_STOP_MAX ++ or 
                 - 수도추가:  플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
                             영어추가중
                 - 1개만 더 사람답게 깔끔하게? 
@@ -64,7 +64,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.8"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.9"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -72,8 +72,8 @@ namespace gitA
         static int     tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 16 * 60 + 31; //평소에는 +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
-        static int  NEED_UPDATE_MAX  = 21;
+        static int  ONE_ROUND_SIZE   = 16 * 60 + 40; //~(넉넉할때는 1++로) 평소에는 1or +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
+        static int  NEED_UPDATE_MAX  = 22;
         static int  RANDOM_STOP_MAX  = 36;
 
         // global
@@ -185,6 +185,8 @@ namespace gitA
                     "Burkina Faso","Ouagadougou",
                     "Tonga","Nukualofa",
                     "Tonga","Nukualofa",
+                    "Marshall Islands","Majuro",
+                    "Marshall Islands","Majuro",
 
                     "Benin","Porto-Novo",
                     "Botswana","Gaborone",
@@ -193,8 +195,7 @@ namespace gitA
                     "Guinea","Conakry",
                     "Guyana ","Georgetown",
                     "Kazakhstan","Nur Sultan",
-                    "Kiribati","Tarawa",
-                    "Marshall Islands","Majuro",
+                    "Kiribati","Tarawa",                    
                     "Mauritius","Port Louis",
                     "Moldova","Chișinău",
                     "Mozambique","Maputo",
@@ -376,8 +377,8 @@ namespace gitA
 
                 if (0 == random.Next(0, 2))
                 {
-                    //postfix?/ "-"
-                    string[] postfix = new string[] { ",", "." };
+                    //postfix?/ ":"
+                    string[] postfix = new string[] { ",", ".", " -" };
                     sMingling = sMingling + RandomString(postfix);
                 }                    
                 sMingling = sMingling + " ";                
