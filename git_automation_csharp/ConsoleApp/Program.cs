@@ -5,7 +5,6 @@ using System.Timers;
 /*
 Todo: com고치기	
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
-
     * 근무시간에만 함, TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
 	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) => randomStopMax도 늘리고..
 1.  5월1일 토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
@@ -23,12 +22,12 @@ Todo: com고치기
         * 작업시간 체크version개념 1++
         매번
         -----------------------
-                - 1/3-> 암것도안함(이것도테스트필요)(1/9예전)
+                - 1/2-> 암것도안함(이것도테스트필요)(1/9예전)
                 - ONE_ROUND_SIZE도 필요시 늘리고
                 - 걸리면 sNeedUpdate++? => RANDOM_STOP_MAX ++ or 
                 - 수도추가:  플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
                             영어추가중
-                - 1개만 더 사람답게 깔끔하게? 
+                - 1개만 더 사람답게 깔끔하게?
                 - 제자리출력?
                 - version up
         최근시작하나만보기 =>  이하는
@@ -64,7 +63,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.9"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.12"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -72,8 +71,8 @@ namespace gitA
         static int     tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 16 * 60 + 40; //~(넉넉할때는 1++로) 평소에는 1or +10, 안늘어나면 20분단위로--1년안에는 결과 나오게, 
-        static int  NEED_UPDATE_MAX  = 22;
+        static int  ONE_ROUND_SIZE   = 16 * 60 + 50; //~3개면 늘림 ,(넉넉할때는 1++로) 
+        static int  NEED_UPDATE_MAX  = 24;
         static int  RANDOM_STOP_MAX  = 36;
 
         // global
@@ -142,8 +141,10 @@ namespace gitA
                 r = "nueve ";
             else if (n == 10)
                 r = "diez ";
+
             else if (n == 11)
-                r = "ONCE ";
+                r = "once ";
+
             else if (n == 12)
                 r = "DOCE ";
             r = " " + r;
@@ -177,7 +178,7 @@ namespace gitA
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);
 
             //4.Quiz            
-            if (0 != random.Next(0, 3))
+            if (0 != random.Next(0, 4))
             {
                 //국가 만들기
                 string[] capitalList = new string[] {
@@ -187,13 +188,14 @@ namespace gitA
                     "Tonga","Nukualofa",
                     "Marshall Islands","Majuro",
                     "Marshall Islands","Majuro",
+                    "Guyana ","Georgetown",
+                    "Guyana ","Georgetown",
 
                     "Benin","Porto-Novo",
                     "Botswana","Gaborone",
                     "Burundi","Bujumbura",                    
                     "Gabon","Libreville",
-                    "Guinea","Conakry",
-                    "Guyana ","Georgetown",
+                    "Guinea","Conakry",                    
                     "Kazakhstan","Nur Sultan",
                     "Kiribati","Tarawa",                    
                     "Mauritius","Port Louis",
@@ -285,7 +287,7 @@ namespace gitA
             RunCommand("git pull");
             RunCommand("git status");
                         
-            Console.WriteLine("작업ver{0} ", WORK); //좀 가까이 잘보이게 
+            Console.WriteLine("-- 작업ver{0} ", WORK); //좀 가까이 잘보이게 
 
             //
             DateTime now1 = DateTime.Now;
@@ -365,7 +367,7 @@ namespace gitA
                     sMingling = "eugene";
                 else
                 {
-                    string[] mingling = new string[] { "app", "command", "squash", "update", "Commit", "commits", "push", "branch" };
+                    string[] mingling = new string[] { "No Touch", "app", "command", "squash", "update", "Commit", "commits", "push", "branch" };
                     sMingling = RandomString(mingling);
                 }                    
 
