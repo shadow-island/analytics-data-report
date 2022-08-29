@@ -22,12 +22,14 @@ Todo: com고치기
         * 작업시간 체크version개념 1++
         매번
         -----------------------
+				- 하루에 3개 올라오면 중간이라도 update 가능!
                 - 1/2-> 암것도안함(이것도테스트필요)(1/9예전)
+                - 숫자보고 Espanol 맞추면 늘림
+                  - 1개만 더 사람답게 깔끔하게?
                 - ONE_ROUND_SIZE도 필요시 늘리고
                 - 걸리면 sNeedUpdate++? => RANDOM_STOP_MAX ++ or 
                 - 수도추가:  플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
-                            영어추가중
-                - 1개만 더 사람답게 깔끔하게?
+                            영어추가중                
                 - 제자리출력?
                 - version up
         최근시작하나만보기 =>  이하는
@@ -38,7 +40,7 @@ Todo: com고치기
                 - 시간은 issue # number화 
                 명령은 나중에?
         후순위 & 필요여부 미지수:		
-		    * 하루 1~6commit이하  or 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?        
+		    * 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
             * 안중요=> ONE_ROUND_SIZE도 ini file, ini file 숫자증가만?
     1-3 -release note 필요할때 무조건
         -font, 코드정리 => 이후 build할것!
@@ -63,7 +65,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.12"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.13"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -71,8 +73,9 @@ namespace gitA
         static int     tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-        static int  ONE_ROUND_SIZE   = 16 * 60 + 50; //~3개면 늘림 ,(넉넉할때는 1++로) 
-        static int  NEED_UPDATE_MAX  = 24;
+		// 하루에 3개 올라오면 중간이라도 update 가능!
+        static int  ONE_ROUND_SIZE   = 17 * 60 + 0; //~3개면 늘림 ,(넉넉할때는 1++로) 
+        static int  NEED_UPDATE_MAX  = 25;
         static int  RANDOM_STOP_MAX  = 36;
 
         // global
@@ -128,7 +131,7 @@ namespace gitA
             else if (n == 3)
                 r = "tres ";
             else if (n == 4)
-                r = "Cuatro ";
+                r = "cuatro ";
             else if (n == 5)
                 r = "cinco ";
             else if (n == 6)
@@ -144,7 +147,6 @@ namespace gitA
 
             else if (n == 11)
                 r = "once ";
-
             else if (n == 12)
                 r = "DOCE ";
             r = " " + r;
@@ -190,6 +192,8 @@ namespace gitA
                     "Marshall Islands","Majuro",
                     "Guyana ","Georgetown",
                     "Guyana ","Georgetown",
+                    "Turkmenistan","Ashgabat",
+                    "Turkmenistan","Ashgabat",
 
                     "Benin","Porto-Novo",
                     "Botswana","Gaborone",
@@ -209,7 +213,8 @@ namespace gitA
                     "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
                     "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                     "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
-                    "Turkmenistan","Ashgabat","Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
+                    
+                    "Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                     "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                     "Zambia","Lusaka",
                     "Haiti","Port-au-Prince", "Mali","Bamako",
@@ -235,15 +240,15 @@ namespace gitA
             string sRound = "";
             if (_round == 0)
             {
-                string[] cero = new string[] { "git reset ", "cero ", "0 ", "." };
+                string[] cero = new string[] { "git reset "};
                 //코드정리 필요!!
                 //r = random.Next(0, cero.Length);
                 //sMingling = cero[r];
                 sMingling = RandomString(cero);
             }
-            else if (_round <= 12)
+            else if (_round <= 12) //12까지
             {
-                if (0 == random.Next(0, 2))
+                if (0 != random.Next(0, 3))
                     sRound = Espanol(_round);
             }
             if (sRound == "")
@@ -355,7 +360,7 @@ namespace gitA
                         sNeedUpdate = "";
                 }
                 else //update is set
-                    sNeedUpdate = "¿";
+                    sNeedUpdate = "!important ";
                 //~
             }
 
