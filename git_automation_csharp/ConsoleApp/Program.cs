@@ -43,7 +43,7 @@ Todo: com고치기
 		    * 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
             * 안중요=> ONE_ROUND_SIZE도 ini file, ini file 숫자증가만?
     1-3 -release note 필요할때 무조건
-        -font, 코드정리 => 이후 build할것!
+        -코드정리 => 이후 build할것!
     1-4 1/8확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴 수도있다
         git 정리 + 저장함? 차례(기능안까먹는 용도)
         아니면 or ^B        
@@ -65,7 +65,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.13"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.14"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -74,7 +74,7 @@ namespace gitA
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
 		// 하루에 3개 올라오면 중간이라도 update 가능!
-        static int  ONE_ROUND_SIZE   = 17 * 60 + 0; //~3개면 늘림 ,(넉넉할때는 1++로) 
+        static int  ONE_ROUND_SIZE   = 17 * 60 + 10; //~3개면 늘림 ,(넉넉할때는 1++로) 
         static int  NEED_UPDATE_MAX  = 25;
         static int  RANDOM_STOP_MAX  = 36;
 
@@ -201,7 +201,8 @@ namespace gitA
                     "Gabon","Libreville",
                     "Guinea","Conakry",                    
                     "Kazakhstan","Nur Sultan",
-                    "Kiribati","Tarawa",                    
+                    "Kiribati","Tarawa",
+                    "Kyrgyzstan","Bishkek",
                     "Mauritius","Port Louis",
                     "Moldova","Chișinău",
                     "Mozambique","Maputo",
@@ -210,7 +211,8 @@ namespace gitA
                     "Nigeria","Abuja",
                     "Puerto Rico","San Juan",                    
                     "Slovakia","Bratislava",                    
-                    "Dominican Republic","Santo Domingo","Guatemala","Guatemala City","Myanmar","Naypyidaw",
+                    "Dominican Republic","Santo Domingo",
+                    "Guatemala","Guatemala City","Myanmar","Naypyidaw",
                     "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
                     "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
                     
@@ -248,7 +250,7 @@ namespace gitA
             }
             else if (_round <= 12) //12까지
             {
-                if (0 != random.Next(0, 3))
+                if (0 != random.Next(0, 4))
                     sRound = Espanol(_round);
             }
             if (sRound == "")
@@ -292,7 +294,8 @@ namespace gitA
             RunCommand("git pull");
             RunCommand("git status");
                         
-            Console.WriteLine("-- 작업ver{0} ", WORK); //좀 가까이 잘보이게 
+            Console.WriteLine("-- 작업ver{0} ", WORK); //좀 가까이 잘보이게
+            Console.WriteLine("-- 나라수 ver{0} ", WORK); //좀 가까이 잘보이게
 
             //
             DateTime now1 = DateTime.Now;
