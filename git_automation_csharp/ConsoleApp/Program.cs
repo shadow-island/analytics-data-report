@@ -5,12 +5,11 @@ using System.Timers;
 /*
 Todo: com고치기	
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
-    * 근무시간에만 함, TARGET_MAX도 늘리고..이전것(5)와 비교하여 낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
+    * 근무시간에만 함, TARGET_MAX도 늘리고..낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
 	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) => randomStopMax도 늘리고..
 1.  5월1일 토부터 화면 멈춤체크 -> 에 bat file실행도 위험한거같으니 무조건 gc로 실행!
 1   전날 사고발생하면 훗날은 사고없이 exe만 기도
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
-        
     1-2 기능향상:
         *   git push 안하는 옵션 만들기
         *  	git pull 제대로 동작하나???-> git push시 쉬어야할듯?
@@ -24,9 +23,10 @@ Todo: com고치기
         -----------------------
 				- 하루에 3개 올라오면 중간이라도 update 가능!
                 - 1/2-> 암것도안함(이것도테스트필요)(1/9예전)
+                - 나라수 추가 
                 - 숫자보고 Espanol 맞추면 늘림
                   - 1개만 더 사람답게 깔끔하게?
-                - ONE_ROUND_SIZE도 필요시 늘리고
+                - 하루에 3개 올라오면 > ONE_ROUND_SIZE도 필요시 늘리고
                 - 걸리면 sNeedUpdate++? => RANDOM_STOP_MAX ++ or 
                 - 수도추가:  플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
                             영어추가중                
@@ -43,10 +43,11 @@ Todo: com고치기
 		    * 종료놓칠때?? 종료시 EMAIL?  -> later하루에 1-2개씩 commit일때만 email?
             * 안중요=> ONE_ROUND_SIZE도 ini file, ini file 숫자증가만?
     1-3 -release note 필요할때 무조건
-        -코드정리 => 이후 build할것!
+        -git file 부터 정리중, 코드정리 => 이후 build할것!
     1-4 1/8확률로 어제만큼만 돌림 -rebase로 어제 commit횟수로 올릴 수도있다
-        git 정리 + 저장함? 차례(기능안까먹는 용도)
-        아니면 or ^B        
+        git 정리 + 저장함? 
+        아니면 or ^B      
+        차례(기능안까먹는 용도)
         git rebase HEAD~7 -i
         웬만하면 새 git이 하나로되게해보자~
         git rebase HEAD~19 -i 함
@@ -65,16 +66,16 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.14"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.15"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
                 
-        static int     tick             = 29;           //초에 한번씩 찍기        
+        static int  tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
 		// 하루에 3개 올라오면 중간이라도 update 가능!
-        static int  ONE_ROUND_SIZE   = 17 * 60 + 10; //~3개면 늘림 ,(넉넉할때는 1++로) 
+        static int  ONE_ROUND_SIZE   = 17 * 60 + 20; //~3개면 늘림 ,(넉넉할때는 1++로) 
         static int  NEED_UPDATE_MAX  = 25;
         static int  RANDOM_STOP_MAX  = 36;
 
@@ -194,6 +195,8 @@ namespace gitA
                     "Guyana ","Georgetown",
                     "Turkmenistan","Ashgabat",
                     "Turkmenistan","Ashgabat",
+                    "Mozambique","Maputo",
+                    "Mozambique","Maputo",
 
                     "Benin","Porto-Novo",
                     "Botswana","Gaborone",
@@ -204,8 +207,7 @@ namespace gitA
                     "Kiribati","Tarawa",
                     "Kyrgyzstan","Bishkek",
                     "Mauritius","Port Louis",
-                    "Moldova","Chișinău",
-                    "Mozambique","Maputo",
+                    "Moldova","Chișinău",                    
                     "Nicaragua","Managua",
                     "Niger","Niamey",
                     "Nigeria","Abuja",
@@ -267,8 +269,7 @@ namespace gitA
             string sTarget = targetTime.ToString("HH:mm");
             string sTargetHour4Commit = targetTime.Hour.ToString();
   
-
-            string[] bug = new string[] { "", "", " #", " ticket ", " bug ", "commit " }; //fix, update, ver, random, release, jira, bugzilla
+            string[] bug = new string[] { "", " #", " ticket ", " bug ", "commit ", "jira " }; //fix, update, ver, random, deployment, release, bugzilla
             r = random.Next(0, bug.Length);
             sTargetHour4Commit = bug[r] + sTargetHour4Commit + sRound;
             //~
@@ -375,7 +376,8 @@ namespace gitA
                     sMingling = "eugene";
                 else
                 {
-                    string[] mingling = new string[] { "No Touch", "app", "command", "squash", "update", "Commit", "commits", "push", "branch" };
+                    string[] mingling = new string[] { "no touch", "app", "command", "stash", "update", "Commit", "commits", "push", "branch" };
+                    //code freeze
                     sMingling = RandomString(mingling);
                 }                    
 
