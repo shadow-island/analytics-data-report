@@ -22,14 +22,14 @@ Todo: com고치기
         매번
         -----------------------
 				- 하루에 3개 올라오면 중간이라도 update 가능!
-                - 1/2-> 암것도안함(이것도테스트필요)(1/9예전)
-                - 나라수 추가 
+                - 1/3-> 암것도안함(이것도테스트필요)(예전1/9까지)
+                - 나라 수 표시 추가
                 - 숫자보고 Espanol 맞추면 늘림
                   - 1개만 더 사람답게 깔끔하게?
                 - 하루에 3개 올라오면 > ONE_ROUND_SIZE도 필요시 늘리고
                 - 걸리면 sNeedUpdate++? => RANDOM_STOP_MAX ++ or 
                 - 수도추가:  플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
-                            영어추가중                
+                            영어추가중
                 - 제자리출력?
                 - version up
         최근시작하나만보기 =>  이하는
@@ -66,7 +66,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.15"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.16"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -76,8 +76,8 @@ namespace gitA
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
 		// 하루에 3개 올라오면 중간이라도 update 가능!
         static int  ONE_ROUND_SIZE   = 17 * 60 + 20; //~3개면 늘림 ,(넉넉할때는 1++로) 
-        static int  NEED_UPDATE_MAX  = 25;
-        static int  RANDOM_STOP_MAX  = 36;
+        static int  NEED_UPDATE_MAX  = 26;
+        static int  RANDOM_STOP_MAX  = 37;
 
         // global
         static int  _round = 0;
@@ -192,15 +192,14 @@ namespace gitA
                     "Marshall Islands","Majuro",
                     "Marshall Islands","Majuro",
                     "Guyana ","Georgetown",
-                    "Guyana ","Georgetown",
-                    "Turkmenistan","Ashgabat",
-                    "Turkmenistan","Ashgabat",
+                    "Guyana ","Georgetown",                    
                     "Mozambique","Maputo",
                     "Mozambique","Maputo",
 
                     "Benin","Porto-Novo",
                     "Botswana","Gaborone",
-                    "Burundi","Bujumbura",                    
+                    "Burundi","Bujumbura",
+                    "Federated States of Micronesia","Palikir",
                     "Gabon","Libreville",
                     "Guinea","Conakry",                    
                     "Kazakhstan","Nur Sultan",
@@ -212,12 +211,13 @@ namespace gitA
                     "Niger","Niamey",
                     "Nigeria","Abuja",
                     "Puerto Rico","San Juan",                    
-                    "Slovakia","Bratislava",                    
+                    "Slovakia","Bratislava",
+                    "Turkmenistan","Ashgabat",
+
                     "Dominican Republic","Santo Domingo",
                     "Guatemala","Guatemala City","Myanmar","Naypyidaw",
                     "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
-                    "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
-                    
+                    "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",                    
                     "Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
                     "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
                     "Zambia","Lusaka",
@@ -401,15 +401,15 @@ namespace gitA
             {
                 if (sMingling == "")
                 {
-                    string[] cong = new string[] { "by", "from", "in"};
+                    string[] cong = new string[] { "by ", "from ", "in "};
                     sIchiMae = RandomString(cong);                    
                 }
                 else
                 {
-                    string[] cong = new string[] { "by", "from", "in", "of", "/" };
+                    string[] cong = new string[] { "by ", "from ", "in ", "of ", "/ " };
                     sIchiMae = RandomString(cong);
                 }                
-                sIchiMae += " ";
+                //sIchiMae += " "; coz of @
             }
         }
 
