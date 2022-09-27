@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Timers;
 /*
-Todo: com고치기	
+Todo: com고치기(속도측정)
 0. 평일은:이제 office컴 연결시만,즉 근무시간에만 coding작업할것
     * 근무시간에만 함, TARGET_MAX도 늘리고..낮출수있도록 확 늘려보자~궁극적으로는 매일1-2개가좋은듯 어쩌다가 0개도.	
 	* random 또는 멈췄을때 무조건 1/10(random클릭도안하게) => randomStopMax도 늘리고..
@@ -66,16 +66,16 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.16"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.17"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
                 
         static int  tick             = 29;           //초에 한번씩 찍기        
-        //목표 일일 commit개수 줄여보기 -> 같으면 성공,  실패 및 한화면안차면 10++
+        //목표 일일 commit개수 줄여보기 -> 같으면 성공
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?
 		// 하루에 3개 올라오면 중간이라도 update 가능!
-        static int  ONE_ROUND_SIZE   = 17 * 60 + 20; //~3개면 늘림 ,(넉넉할때는 1++로) 
+        static int  ONE_ROUND_SIZE   = 17 * 60 + 30; //~3개면 늘림 ,(넉넉할때는 1++로) 
         static int  NEED_UPDATE_MAX  = 26;
         static int  RANDOM_STOP_MAX  = 37;
 
@@ -180,50 +180,51 @@ namespace gitA
 
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);
 
-            //4.Quiz            
+            //4.Quiz
+            string[] capitalList = new string[] {
+                "Burkina Faso","Ouagadougou",
+                "Burkina Faso","Ouagadougou",
+                "Tonga","Nukualofa",
+                "Tonga","Nukualofa",
+                "Marshall Islands","Majuro",
+                "Marshall Islands","Majuro",
+                "Guyana ","Georgetown",
+                "Guyana ","Georgetown",
+                "Mozambique","Maputo",
+                "Mozambique","Maputo",
+
+                "Benin","Porto-Novo",
+                "Botswana","Gaborone",
+                "Burundi","Bujumbura",
+                "Federated States of Micronesia","Palikir",
+                "Gabon","Libreville",
+                "Guinea","Conakry",
+                "Kazakhstan","Nur Sultan",
+                "Kiribati","Tarawa",
+                "Kyrgyzstan","Bishkek",
+                "Mauritius","Port Louis",
+                "Moldova","Chișinău",
+                "Nicaragua","Managua",
+                "Niger","Niamey",
+                "Nigeria","Abuja",
+                "Puerto Rico","San Juan",
+                "Slovakia","Bratislava",
+                "Turkmenistan","Ashgabat",
+
+                "Dominican Republic","Santo Domingo",
+                "Guatemala","Guatemala City","Myanmar","Naypyidaw",
+                "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
+                "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",
+                "Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
+                "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
+                "Zambia","Lusaka",
+                "Haiti","Port-au-Prince", "Mali","Bamako",
+                "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
+            };
             if (0 != random.Next(0, 4))
             {
                 //국가 만들기
-                string[] capitalList = new string[] {
-                    "Burkina Faso","Ouagadougou",
-                    "Burkina Faso","Ouagadougou",
-                    "Tonga","Nukualofa",
-                    "Tonga","Nukualofa",
-                    "Marshall Islands","Majuro",
-                    "Marshall Islands","Majuro",
-                    "Guyana ","Georgetown",
-                    "Guyana ","Georgetown",                    
-                    "Mozambique","Maputo",
-                    "Mozambique","Maputo",
-
-                    "Benin","Porto-Novo",
-                    "Botswana","Gaborone",
-                    "Burundi","Bujumbura",
-                    "Federated States of Micronesia","Palikir",
-                    "Gabon","Libreville",
-                    "Guinea","Conakry",                    
-                    "Kazakhstan","Nur Sultan",
-                    "Kiribati","Tarawa",
-                    "Kyrgyzstan","Bishkek",
-                    "Mauritius","Port Louis",
-                    "Moldova","Chișinău",                    
-                    "Nicaragua","Managua",
-                    "Niger","Niamey",
-                    "Nigeria","Abuja",
-                    "Puerto Rico","San Juan",                    
-                    "Slovakia","Bratislava",
-                    "Turkmenistan","Ashgabat",
-
-                    "Dominican Republic","Santo Domingo",
-                    "Guatemala","Guatemala City","Myanmar","Naypyidaw",
-                    "Ivory Coast","Yamoussoukro","Angola","Luanda","Tanzania","Dodoma","Croatia","Zagreb",
-                    "Lithuania","Vilnius","Uzbekistan","Tashkent","Costa Rica","San Jose","Slovenia","Ljubljana",                    
-                    "Cameroon","Yaounde", "Tunisia", "Tunis","Uganda","Kampala","Latvia","Riga",
-                    "Zimbabwe","Harare", "Haiti", "Port-au-Prince","Bosnia and Herzegovina","Sarajevo","Mali","Bamako",
-                    "Zambia","Lusaka",
-                    "Haiti","Port-au-Prince", "Mali","Bamako",
-                    "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
-                };
+                
 
                 //답지 때문에 변수 r 필요함 
                 r = random.Next(0, capitalList.Length);
@@ -296,7 +297,7 @@ namespace gitA
             RunCommand("git status");
                         
             Console.WriteLine("-- 작업ver{0} ", WORK); //좀 가까이 잘보이게
-            Console.WriteLine("-- 나라수 ver{0} ", WORK); //좀 가까이 잘보이게
+            Console.WriteLine("-- 나라수 ver{0} ", capitalList.Length); //좀 가까이 잘보이게
 
             //
             DateTime now1 = DateTime.Now;
