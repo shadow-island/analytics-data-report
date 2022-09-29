@@ -18,14 +18,12 @@ Todo: com고치기(속도측정)
             , bat(exe + cmd이거 안되면) 이것도 문제 생김			
             제자리 출력? <- 한번더 멈춘현상발생시)
 		   => exe로 바로 실행준비하자(장기plan)
-        * 작업시간 체크version개념 1++
-        매번
-        -----------------------
+        * 작업시간 체크version개념 1++        
+        매번-----------------------
 				- 하루에 3개 올라오면 중간이라도 update 가능!
-                - 1/3-> 암것도안함(이것도테스트필요)(예전1/9까지)
-                - 나라 수 표시 추가
-                - 숫자보고 Espanol 맞추면 늘림
-                  - 1개만 더 사람답게 깔끔하게?
+                - 1/4-> 암것도안함(이것도테스트필요)(예전9분의1까지갔음)
+                - Espanol 맞추고 뒤에 숫자나오면 늘림
+                - 1개만 더 사람답게 깔끔하게?
                 - 하루에 3개 올라오면 > ONE_ROUND_SIZE도 필요시 늘리고
                 - 걸리면 sNeedUpdate++? => RANDOM_STOP_MAX ++ or 
                 - 수도추가:  플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
@@ -66,17 +64,16 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.17"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.18"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
                 
         static int  tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공
-        //무조건  늘리지말고 일일 commit개수에 따라 늘림?
-		// 하루에 3개 올라오면 중간이라도 update 가능!
-        static int  ONE_ROUND_SIZE   = 17 * 60 + 30; //~3개면 늘림 ,(넉넉할때는 1++로) 
-        static int  NEED_UPDATE_MAX  = 26;
+        //무조건  늘리지말고 일일 commit개수에 따라 늘림?		
+        static int  ONE_ROUND_SIZE   = 17 * 60 + 30; //// 하루에 3개 올라오면 중간이라도 update 가능!
+        static int  NEED_UPDATE_MAX  = 27;
         static int  RANDOM_STOP_MAX  = 37;
 
         // global
@@ -221,10 +218,9 @@ namespace gitA
                 "Haiti","Port-au-Prince", "Mali","Bamako",
                 "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
-            if (0 != random.Next(0, 4))
+            if (0 != random.Next(0, 5))
             {
                 //국가 만들기
-                
 
                 //답지 때문에 변수 r 필요함 
                 r = random.Next(0, capitalList.Length);
@@ -493,7 +489,8 @@ namespace gitA
 	2 암기기능 (수도, 스페인어 숫자 )
 	
 Release note    
-    5.17        390lines, TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지, need update 표시, log에 round도 추가
+    2022.       총 518 lines: 나라 수 표시 추가
+    5.17        390 lines, TARGET_MAX가 round시 1분씩 증가, 스페인어숫자12까지, need update 표시, log에 round도 추가
     5.          log에 수도추가, prefix 추가 new, 0 round에서는 command를 cero 또는 git reset으로 표기!
     4.30        343 lines: home mode일때 git squash덜하게 test용이므로 update를 실행하지않게함, ga.bat -> p.bat
     4.27        실제시작 기입 시간 필요! (하루 처음 시작위치를 알아야함),
