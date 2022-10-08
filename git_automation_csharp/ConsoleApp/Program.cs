@@ -12,7 +12,7 @@ Todo: com고치기(속도측정)
     하루 exe했으면 그다음날 exe update없이? 얼마나 commit일어나는지 보자(일일 commit개수 줄여보기)
     1-2 기능향상:
         *   git push 안하는 옵션 만들기
-        *  	git pull 제대로 동작하나???-> git push시 쉬어야할듯?
+        -> git push시 쉬어야할듯?
         *   exe check필요할듯 -exe빠지는경우 있음 경고 표시?-> commit안하면더좋고
         *   일단 cmd열고 수동으로 gc실행하면서 출력멈춤현상 있나?
             , bat(exe + cmd이거 안되면) 이것도 문제 생김			
@@ -20,10 +20,11 @@ Todo: com고치기(속도측정)
 		   => exe로 바로 실행준비하자(장기plan)
         * 작업시간 체크version개념 1++        
         매번-----------------------
-				- 하루에 3개 올라오면 중간이라도 update 가능!
-                - 1/4-> 암것도안함(이것도테스트필요)(예전9분의1까지갔음)
+                - git pull 부터하기 
+  	            - 1/4-> 암것도안함(이것도테스트필요)(예전9분의1까지갔음)
+				- 하루에 3개 올라오면 중간이라도 update 가능!                
                 - Espanol 맞추고 뒤에 숫자나오면 늘림
-                - 1개만 더 사람답게 깔끔하게?
+                    1개만 더 사람답게 깔끔하게?
                 - 하루에 3개 올라오면 > ONE_ROUND_SIZE도 필요시 늘리고
                 - 걸리면 sNeedUpdate++? => RANDOM_STOP_MAX ++ or 
                 - 수도추가:  플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
@@ -72,7 +73,7 @@ namespace gitA
         static int  tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?		
-        static int  ONE_ROUND_SIZE   = 17 * 60 + 30; //// 하루에 3개 올라오면 중간이라도 update 가능!
+        static int  ONE_ROUND_SIZE   = 17 * 60 + 50; //// 하루에 3개 올라오면 중간이라도 update 가능!
         static int  NEED_UPDATE_MAX  = 27;
         static int  RANDOM_STOP_MAX  = 37;
 
@@ -180,7 +181,6 @@ namespace gitA
             //4.Quiz
             string[] capitalList = new string[] {
                 "Burkina Faso","Ouagadougou",
-                "Burkina Faso","Ouagadougou",
                 "Tonga","Nukualofa",
                 "Tonga","Nukualofa",
                 "Marshall Islands","Majuro",
@@ -189,6 +189,8 @@ namespace gitA
                 "Guyana ","Georgetown",
                 "Mozambique","Maputo",
                 "Mozambique","Maputo",
+                "Moldova","Chișinău",
+                "Moldova","Chișinău",
 
                 "Benin","Porto-Novo",
                 "Botswana","Gaborone",
@@ -199,8 +201,7 @@ namespace gitA
                 "Kazakhstan","Nur Sultan",
                 "Kiribati","Tarawa",
                 "Kyrgyzstan","Bishkek",
-                "Mauritius","Port Louis",
-                "Moldova","Chișinău",
+                "Mauritius","Port Louis",                
                 "Nicaragua","Managua",
                 "Niger","Niamey",
                 "Nigeria","Abuja",
@@ -249,7 +250,7 @@ namespace gitA
             }
             else if (_round <= 12) //12까지
             {
-                if (0 != random.Next(0, 4))
+                if (0 != random.Next(0, 5))
                     sRound = Espanol(_round);
             }
             if (sRound == "")
@@ -284,16 +285,16 @@ namespace gitA
                 sTargetHour4Commit = " finished";
 
             //실제 작업들...
-            //file 
-            //if (sLocation == "")
-            Update("round." + _round + " " + sAnswerForLog + " " + sTime + " " + sTarget);
+            //home아닐때만?
+            if (sLocation == "")
+                Update("round." + _round + " " + sAnswerForLog + " " + sTime + " " + sTarget);
             //~
 
             RunCommand("git pull");
             RunCommand("git status");
                         
             Console.WriteLine("-- 작업ver{0} ", WORK); //좀 가까이 잘보이게
-            Console.WriteLine("-- 나라수 ver{0} ", capitalList.Length); //좀 가까이 잘보이게
+            Console.WriteLine("-- 나라수 ver{0} ", capitalList.Length/2); //좀 가까이 잘보이게
 
             //
             DateTime now1 = DateTime.Now;
