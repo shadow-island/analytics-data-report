@@ -73,7 +73,7 @@ namespace gitA
         static int  tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?		
-        static int  ONE_ROUND_SIZE   = 17 * 60 + 50; //// 하루에 3개 올라오면 중간이라도 update 가능!
+        static int  ONE_ROUND_SIZE   = 18 * 60 + 0; //// 하루에 3개 올라오면 중간이라도 update 가능!
         static int  NEED_UPDATE_MAX  = 27;
         static int  RANDOM_STOP_MAX  = 37;
 
@@ -179,8 +179,7 @@ namespace gitA
             makeTexts(ref sNeedUpdate, ref sLocation, ref sMingling, ref sIchiMae);
 
             //4.Quiz
-            string[] capitalList = new string[] {
-                "Burkina Faso","Ouagadougou",
+            string[] capitalList = new string[] {                
                 "Tonga","Nukualofa",
                 "Tonga","Nukualofa",
                 "Marshall Islands","Majuro",
@@ -191,9 +190,12 @@ namespace gitA
                 "Mozambique","Maputo",
                 "Moldova","Chișinău",
                 "Moldova","Chișinău",
+                "Niger","Niamey",
+                "Niger","Niamey",
 
                 "Benin","Porto-Novo",
                 "Botswana","Gaborone",
+                "Burkina Faso","Ouagadougou",
                 "Burundi","Bujumbura",
                 "Federated States of Micronesia","Palikir",
                 "Gabon","Libreville",
@@ -202,8 +204,7 @@ namespace gitA
                 "Kiribati","Tarawa",
                 "Kyrgyzstan","Bishkek",
                 "Mauritius","Port Louis",                
-                "Nicaragua","Managua",
-                "Niger","Niamey",
+                "Nicaragua","Managua",                
                 "Nigeria","Abuja",
                 "Puerto Rico","San Juan",
                 "Slovakia","Bratislava",
@@ -368,14 +369,13 @@ namespace gitA
 
             //2 Command 만들기-과반은 패스(공백)            
             if (0 == random.Next(0, 2))
-            {
-                
+            {                
                 if (0 == random.Next(0, 7)) //걸리면 무조건증가++
                     sMingling = "eugene";
                 else
                 {
-                    string[] mingling = new string[] { "no touch", "app", "command", "stash", "update", "Commit", "commits", "push", "branch" };
-                    //code freeze
+                    string[] mingling = new string[] { "no touch", "code freeze", "app", "command", "stash", "update", "Commit", "commits", "push", "branch" };
+                    //1/2로 대문자화?
                     sMingling = RandomString(mingling);
                 }                    
 

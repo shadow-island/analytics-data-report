@@ -47,3 +47,11 @@ C:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\bin\Debug
 C:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\G.csprojAssemblyReference.cache
 D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\G.csproj.AssemblyReference.cache
 D:\my\eugene_data\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\G.csproj.SuggestedBindingRedirects.cache
+D:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\bin\Debug\gc.exe.config
+D:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\bin\Debug\gc.exe
+D:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\bin\Debug\gc.pdb
+D:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\G.csproj.AssemblyReference.cache
+D:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\G.csproj.SuggestedBindingRedirects.cache
+D:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\G.csproj.CoreCompileInputs.cache
+D:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\gc.exe
+D:\douki\my\git\analytics-data-report\git_automation_csharp\ConsoleApp\obj\Debug\gc.pdb
