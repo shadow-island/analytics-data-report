@@ -22,10 +22,11 @@ Todo: com고치기(속도측정)
         매번-----------------------
                 - git pull 부터하기 
   	            - 1/4-> 암것도안함(이것도테스트필요)(예전9분의1까지갔음)
-				- 하루에 3개 올라오면 중간이라도 update 가능!                
-                - Espanol 맞추고 뒤에 숫자나오면 늘림
-                    1개만 더 사람답게 깔끔하게?
-                - 하루에 3개 올라오면 > ONE_ROUND_SIZE도 필요시 늘리고
+				- 하루에 3개 올라오면 중간이라도 update 가능!         
+                    a. 하루에 3개 올라오면 > ONE_ROUND_SIZE도 필요시 늘리고
+                    git reset change
+                    b. Espanol 맞추고 뒤에 숫자나오면 늘림
+                    c. 1개만 더 사람답게 깔끔하게?                
                 - 걸리면 sNeedUpdate++? => RANDOM_STOP_MAX ++ or 
                 - 수도추가:  플밍 자주안하니 거의 매번 넣어야할듯, 게임으로실행->완벽시 영어?
                             영어추가중
@@ -382,7 +383,7 @@ namespace gitA
 
                 if (0 == random.Next(0, 4))
                 {
-                    string[] qianbian = new string[] { "new ", "good ", "+ "}; //+나오면 새것추가? //just
+                    string[] qianbian = new string[] { "new ", "good ", "+ "}; //+나오면 새것추가?
                     sMingling = RandomString(qianbian) + sMingling;                    
                 }                    
 
