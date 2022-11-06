@@ -66,7 +66,7 @@ namespace gitA
     class Program
     {
         //일반개발은 2일걸렸다치고,더이상은 유지보수이므로 큰 의미없음, 이것의 목적은 대략 개발기간추정용으므로
-        static readonly string  WORK = "2.19"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
+        static readonly string  WORK = "2.20"; //1python 2c#, 앞자리는 major 웬만하면 뒷자리로..
         static readonly bool    debuggingMode = false;             // true false if real mode    
         // 읽어올 text file 의 경로를 지정 합니다
         static readonly string  fileGit        = "eukm.log";                
@@ -74,9 +74,9 @@ namespace gitA
         static int  tick             = 29;           //초에 한번씩 찍기        
         //목표 일일 commit개수 줄여보기 -> 같으면 성공
         //무조건  늘리지말고 일일 commit개수에 따라 늘림?		
-        static int  ONE_ROUND_SIZE   = 18 * 60 + 10; //// 하루에 3개 올라오면 중간이라도 update 가능!
+        static int  ONE_ROUND_SIZE   = 18 * 60 + 20; //// 하루에 3개 올라오면 중간이라도 update 가능!
         static int  NEED_UPDATE_MAX  = 27;
-        static int  RANDOM_STOP_MAX  = 37;
+        static int  RANDOM_STOP_MAX  = 38;
 
         // global
         static int  _round = 0;
@@ -222,7 +222,7 @@ namespace gitA
                 "Haiti","Port-au-Prince", "Mali","Bamako",
                 "Namibia","Windhoek 윈드후크","Georgia","Tbilisi","Albania","Tirana"
             };
-            if (0 != random.Next(0, 5))
+            if (0 != random.Next(0, 6))
             {
                 //국가 만들기
 
