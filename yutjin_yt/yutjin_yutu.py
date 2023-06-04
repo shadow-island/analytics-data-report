@@ -6,25 +6,29 @@
 '''
 
 def runSubs():
-    #왼쪽모니터사용(세로수많음_)
+    #왼쪽모니터사용(세로수많음)
+    
     is_right = True
-    #is_right = False
-    #is_sub_sort = True
+    #is_right = False #좌파
+    
+    is_sub_sort = True #이건 ppt로해보자 
     is_sub_sort = False #조회수
+   
+    is_debug_mode = False #run mode
+    #is_debug_mode = True #1sec
     
     (key, data) = load(is_right)
-    
-    is_debug_mode = True
-    is_debug_mode = False
 
-    #글꼴 38로 했을때 7개 까지 나옴 ,너비61
+    #글꼴 39 로 했을때 9개 까지 나옴 ,세27,#너비61 화면조절해서 위에 빈줄나오게만든다
+
     total = len(data)
     out_table = []
     print('Getting real time data')
+    print(total)
     for i in range(total -1 ,-1, -1):
         value = data[i][1]
         le = len(value)
-        #print(le)
+        print(data[i][0])
         if le <= 17:
             channel_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername="+value+"&key="+key).read()
             snippet = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=snippet&forUsername="+value+"&key="+key).read()
@@ -39,7 +43,7 @@ def runSubs():
         #print(json.loads(channel_data))
         #print(json.loads(snippet))
         
-        subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])        
+        subs = int(json.loads(channel_data)["items"][0]["statistics"]["subscriberCount"])
         view = json.loads(channel_data)["items"][0]["statistics"]["viewCount"]
         date = json.loads(snippet)["items"][0]["snippet"]["publishedAt"]
         def get_date(datetime_value):
@@ -90,96 +94,140 @@ def runSubs():
     print()
     print()
     print()
+
     
-    print(' Real Time Data!')
+    # reverse는 감소방향 true는 감소방향(print용) false는 증가방향(real time용)
+    is_reverse = True #1위가 위로 
+    is_reverse = False    #작은구독자가 먼저니, 1위가 나중에      
+    
     
     import datetime
     def time2text(datetime_value):
             txt = str(datetime_value)
             index = txt.find('.')
             return txt[:index]
-    #print("실시간:" + time2text(datetime.datetime.now()))
+        
+    #print(" 실시간:" + time2text(datetime.datetime.now()))
+    print(" 실시간 정보가져오기...")
     print()
     #out_table = sorted(out_table, key=lambda item: item[1], reverse=True) #online?
     
-    is_reverse = False
+
     if is_debug_mode == True:
-        is_reverse = True 
-    # reverse는 감소방향 true는 감소방향(print용) false는 증가방향(real time용)
+        is_reverse = True
     
-    
+        
     
     if is_sub_sort == True:
         #out_table = sorted(out_table, key=lambda item: item[1], reverse = False)       
         out_table = sorted(out_table, key=lambda item: item[1], reverse=is_reverse)
     else:
         out_table = sorted(out_table, key=lambda item: item[2], reverse=is_reverse)        
-    
+
+    printSubscribe(out_table, is_sub_sort, is_reverse, is_debug_mode)
+
+    if is_right == False:
+        out_table = sorted(out_table, key=lambda item: item[2], reverse=is_reverse)
+        printSubscribe(out_table, False, is_reverse, is_debug_mode)
+    return
+
+def printSubscribe(out_table, is_sub_sort, is_reverse, is_debug_mode):        
     total = len(out_table)
     import time
-    for i in range(0,len(out_table)):        
-        if is_debug_mode != True:            
-            time.sleep(2)    
-        
+    for i in range(0,len(out_table)):
+        if is_debug_mode != True:
+            time.sleep(2.1)
+            #time.sleep(1.8)
+        else:
+            time.sleep(1)        
         name = str(out_table[i][0])
         size = len(name)
         if size <= 3:
             column = '\t\t\t\t'
         else:
-            column = '\t'
-            
-        if is_debug_mode == True:
+            column = '\t'            
+        if is_reverse == True:
             num = i + 1
         else:
             num = total - i
-            
-        print(' ' + str(num) + '위:\t' + name)
-        
+        import re
+        def korlen(str):    
+            korP = re.compile('[\u3131-\u3163\uAC00-\uD7A3]+',re.U)    
+            temp = re.findall(korP, str)    
+            temp_len = 0    
+            for item in temp:
+                temp_len = temp_len + len(item)
+            return len(str) + temp_len
+        #####################################################
+        space_n = 21 - korlen(name)
+        strFormat = '%-2s'
         if is_sub_sort == True:
-            print(' \t구독자:' + str(format(out_table[i][1], ',')) +' 총조회수:' +  str(format(out_table[i][2], ','))  +' 개설:' + out_table[i][3])            
-        else:            
-            print(' \t' + '총조회수:' +  str(format(out_table[i][2], ',')) + ' 구독자:' + str(format(out_table[i][1], ',')) +' 개설:' + out_table[i][3])
+            strOut = ' ' + strFormat %(str(num) + '위:') + name + ' '*space_n + '구독자:' + str(format(out_table[i][1], ',')) + ' 총조회수:' + str(format(out_table[i][2], ',')) +' 개설:' + out_table[i][3]
+        else:                        
+            strOut = ' ' + strFormat %(str(num) + '위:') + name + ' '*space_n + '총조회수:' + str(format(out_table[i][2], ',')) + ' 구독자:' + str(format(out_table[i][1], ',')) +' 개설:' + out_table[i][3]
+        print(strOut)
+            #2줄짜리 + '총조회수:' + str(format(out_table[i][2], ',')) + ' 구독자:' + str(format(out_table[i][1], ',')) +' 개설:' + out_table[i][3]            
+            #print(' ' + str(num) + '위:\t' + name + '\t\t' + '총조회수:' + str(format(out_table[i][2], ',')) + ' 구독자:' + str(format(out_table[i][1], ',')) +' 개설:' + out_table[i][3])
         print()
-    print()    
-    time.sleep(5)
+        '''
+        if i +1 == 20: #이숫자 순위까지보여줌 
+            break
+        '''
+    if is_debug_mode != True:
+        time.sleep(6.1)#마지막
+    print()
     return
-
-def runList(list_id):
     
+def runList(list_id):    
     (key,data) = load(None)
-    while(True):    
+    while(True):
         base_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=' + list_id + '&key=' + key
         nextPageToken = ""
 
         total_n = 1
         import datetime
+        datetime_list = []
         datetime_total = datetime.datetime(1,1,1,0,0,0)
         part_mode = False
-        for n in range(3):
+        for n in range(4):
+            #nextPageToken이 몇개인지 모르니 그냥해본거네 
             is_breaker = False
             this_url = base_url + "&pageToken=" + nextPageToken
-            json_data = urllib.request.urlopen(this_url).read()     
-
+            try:
+                json_data = urllib.request.urlopen(this_url).read()
+            except:
+                print('비공개?')
             item_data = json.loads(json_data)["items"]
-            print(len(item_data))
+            print('이번 loop:',len(item_data),'개')
+            
             for i in range(len(item_data)):
                 item_data = json.loads(json_data)["items"][i]['snippet']['title']
-                print(str(total_n) + ":"+ item_data)        
+                print(str(total_n) + ":"+ item_data)
+                if item_data == 'Private video':
+                    print('Private video!!')
+                    continue
                 videoId = json.loads(json_data)["items"][i]['snippet']['resourceId']['videoId']
-                print(videoId)
-                         
+                print(videoId)                         
                 v_json_data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?id=" + str(videoId) + "&part=contentDetails&key=" + key).read()
+
+                #조회수만 처리 
+                v_json_data_statistic = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?id=" + str(videoId) + "&part=statistics&key=" + key).read()
+                #print(v_json_data_statistic)                
+                print('viewCount',json.loads(v_json_data_statistic)["items"][0]["statistics"]['viewCount'])
+                ##
+                
+                
                 v_item_data = json.loads(v_json_data)["items"][0]["contentDetails"]['duration']
                 
                 v_item_data = v_item_data.replace('PT','')        
                 #debug 
-                print(v_item_data)
+                print("v_item_data",v_item_data)
                 h = m = s = 0
-                i = v_item_data.find('H')
-                if i != -1:
-                    h = v_item_data[:i]
+                d = v_item_data.find('H')
+                if d != -1:
+                    h = v_item_data[:d]
                 print(h)
-                v_item_data = v_item_data[i+1:]
+                v_item_data = v_item_data[d+1:]
                 
                 i = v_item_data.find('M')
                 if i != -1:
@@ -190,12 +238,10 @@ def runList(list_id):
                 i = v_item_data.find('S')
                 if i != -1:
                     s = v_item_data[:i]
-                print(s)
-                
+                print(s)                
                 date_time_obj = datetime.datetime(1,1,1,int(h),int(m),int(s))
-            
-                datetime_now = datetime.timedelta(hours = date_time_obj.hour, minutes = date_time_obj.minute, seconds = date_time_obj.second)
-                
+                datetime_list.append(date_time_obj)
+                datetime_now = datetime.timedelta(hours = date_time_obj.hour, minutes = date_time_obj.minute, seconds = date_time_obj.second)                
                 datetime_total += datetime_now
                 print(datetime_now)           
                 print(str(datetime_total.hour) + ":" + str(datetime_total.minute))
@@ -205,19 +251,23 @@ def runList(list_id):
                     print(datetime_total)
                     is_breaker = True
                     break                
-                total_n += 1
-                
+                total_n += 1                
             if is_breaker == True:
-                break
-            
+                break            
             if "nextPageToken" in json.loads(json_data):
                 nextPageToken = json.loads(json_data)["nextPageToken"]
-                print(nextPageToken)
+                print("nextPageToken",nextPageToken)
+                input("nextPageToken!")
                 n += 1
             else:
                 break
-        print(datetime_total)
+        print('총',datetime_total)
+        datetime_list = sorted(datetime_list, reverse=True)
+        for i in range(len(datetime_list)):
+            n = i + 1
+            print(n,datetime_list[i])
         input("do you want to check this list again?")
+        break
     return
 
 def load(is_right):
@@ -289,20 +339,28 @@ is_subs_mode = False
 import sys
 if len(sys.argv) == 1:        
     #print('normmal mode:no argv')
-    print('1)list\n')
+    print('1)video count list\n')
     print('2)channel sub\n')
     input_menu = input('?')
     
     if input_menu == '1' or len(input_menu) > 1:
-        
-        list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
-        list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
-        #list_id = 'PL2efNl7MkFICURkXwsmymaFGg-NIwzj49'
-        
-        if len(input_menu) == 1:
-            list_id = input('list?')
-        else:
-            list_id = input_menu
+
+        list_id = input('list?')
+        if len(list_id) <= 1:
+            list_id = 'UUClVppyt5FlY8rCTLGDgOIA'
+            list_id = 'UC0Fq24M32ruKPcMH2xxxxxx' # UC로 시작하면 채널명임
+            list_id = 'PL2efNl7MkFIDaDfc6KVMtdB1Lm9PnOX8t' #시사와 
+            list_id = 'PL2efNl7MkFICdFoLAq7x9lQq6trDJZ82g' #지분
+            list_id = 'PL2efNl7MkFIDY1dFJ7GTVCgaFvwHIntkZ' #맛있는 
+            
+
+        '''
+        if len(list_id) == 1:
+            list_id
+        else:         list_id = input_menu
+        '''
+        print("list_id",list_id)
+        input()
         runList(list_id)
     else: #enter도 가능
        runSubs()
@@ -310,7 +368,7 @@ else:
     is_subs_mode = True
     #sys.argv
     print(sys.argv[1])    
-    #runSubs()
+    runSubs()
 
     
 exit(0)
